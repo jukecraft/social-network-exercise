@@ -3,10 +3,11 @@ import static java.time.Clock.tick;
 import static java.time.Duration.ofMinutes;
 import static java.time.Instant.now;
 import static java.time.ZoneId.systemDefault;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
 
 import java.time.Clock;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,9 +28,8 @@ public class PublishAcceptanceTest {
         tick(clock, ofMinutes(5));
 
         socialNetworkingApplication.accept("Alice");
-        String output = socialNetworkingApplication.getNextLineOfOutput();
 
-        assertThat(output, is("I love the weather today (5 minutes ago)"));
+        List<String> output = socialNetworkingApplication.getOutput();
+        assertThat(output, contains("I love the weather today (5 minutes ago)"));
     }
-
 }
