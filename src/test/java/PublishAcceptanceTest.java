@@ -12,23 +12,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PublishAcceptanceTest {
-	private SocialNetworkingApplication socialNetworkingApplication;
-	private Clock clock;
+    private SocialNetworkingApplication socialNetworkingApplication;
+    private Clock clock;
 
-	@Before
-	public void setUpApplication() {
-		clock = fixed(now(), systemDefault());
-		socialNetworkingApplication = new SocialNetworkingApplication(clock);
-	}
+    @Before
+    public void setUpApplication() {
+        clock = fixed(now(), systemDefault());
+        socialNetworkingApplication = new SocialNetworkingApplication(clock);
+    }
 
-	@Test
-	public void givenAlicePublishedAMessageWhenSomeoneViewsHerTimelineItIsShownWithTheTimeSincePosted() {
-		socialNetworkingApplication.accept("Alice -> I love the weather today");
-		tick(clock, ofMinutes(5));
+    @Test
+    public void givenAlicePublishedAMessageWhenSomeoneViewsTheirTimelineItIsShownWithTheTimeSincePosted() {
+        socialNetworkingApplication.accept("Alice -> I love the weather today");
+        tick(clock, ofMinutes(5));
 
-		socialNetworkingApplication.accept("Alice");
-		String output = socialNetworkingApplication.getNextLineOfOutput();
+        socialNetworkingApplication.accept("Alice");
+        String output = socialNetworkingApplication.getNextLineOfOutput();
 
-		assertThat(output, is("I love the weather today (5 minutes ago)"));
-	}
+        assertThat(output, is("I love the weather today (5 minutes ago)"));
+    }
+
 }
