@@ -8,15 +8,21 @@ import static org.junit.Assert.assertThat;
 
 import java.time.Clock;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class PublishAcceptanceTest {
+	private SocialNetworkingApplication socialNetworkingApplication;
+	private Clock clock;
+
+	@Before
+	public void setUpApplication() {
+		clock = fixed(now(), systemDefault());
+		socialNetworkingApplication = new SocialNetworkingApplication(clock);
+	}
 
 	@Test
 	public void givenAlicePublishedAMessageWhenSomeoneViewsHerTimelineItIsShownWithTheTimeSincePosted() {
-		Clock clock = fixed(now(), systemDefault());
-		SocialNetworkingApplication socialNetworkingApplication = new SocialNetworkingApplication(
-				clock);
 		socialNetworkingApplication.accept("Alice -> I love the weather today");
 		tick(clock, ofMinutes(5));
 
