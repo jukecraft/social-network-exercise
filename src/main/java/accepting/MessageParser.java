@@ -3,7 +3,10 @@ package accepting;
 public class MessageParser {
 
     public Message parse(String string) {
-        return new Message();
+        String[] messageParts = string.split(" -> ");
+        if (messageParts.length < 2)
+            return new Message("");
+        return new Message(messageParts[1]);
     }
 
 }
