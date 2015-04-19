@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class PostTest {
     @Test
-    public void createdWithAnEmptyMessageItPrintsToEmpty() throws Exception {
+    public void createdWithAnEmptyMessageItPrintsToEmpty() {
         Post post = new Post(emptyMessage());
 
         assertThat(post.toString(), is(""));
