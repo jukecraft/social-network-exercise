@@ -11,8 +11,9 @@ public class MessageParserTest {
     public void givenAnEmptyStringItReturnsAnEmptyMessageObject() {
         MessageParser parser = new MessageParser();
 
-        Message message = parser.parse("Alice -> ");
+        Message message = parser.parse("");
 
         assertThat(message.toString(), is(""));
     }
+
 }
