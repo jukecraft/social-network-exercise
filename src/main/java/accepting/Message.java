@@ -1,5 +1,7 @@
 package accepting;
 
+import java.time.LocalDateTime;
+
 public class Message {
     private String message;
 
@@ -9,6 +11,10 @@ public class Message {
 
     public Message(String message) {
         this.message = message;
+    }
+
+    public Message(String string, LocalDateTime postingTime) {
+        // TODO Auto-generated constructor stub
     }
 
     @Override
