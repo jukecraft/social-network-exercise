@@ -1,6 +1,5 @@
-import static java.util.Arrays.asList;
-
 import java.time.Clock;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SocialNetworkingApplication {
@@ -15,7 +14,7 @@ public class SocialNetworkingApplication {
     }
 
     public List<String> getOutput() {
-        return asList("I love the weather today (5 minutes ago)");
+        return new ArrayList<>();
     }
 
 }
