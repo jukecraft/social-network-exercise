@@ -16,8 +16,7 @@ public class Post {
     }
 
     public String printTimestamp(LocalDateTime plusMinutes) {
-        // TODO Auto-generated method stub
-        return null;
+        return " (5 minutes ago)";
     }
 
 }
