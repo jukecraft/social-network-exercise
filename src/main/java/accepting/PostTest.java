@@ -1,10 +1,9 @@
 package accepting;
 
 import static accepting.Message.emptyMessage;
+import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-
-import java.time.LocalDateTime;
 
 import org.junit.Test;
 
@@ -25,9 +24,9 @@ public class PostTest {
     }
 
     @Test
-    public void createdWithTimestampItPrintsTheTimePassedSinceThen() {
-        LocalDateTime postingTime = LocalDateTime.now();
+    public void createdWithPostingTimeItPrintsTheTimePassedSinceThen() {
         Message message = new Message("I love the weather today");
+        PostingTime postingTime = new PostingTime(now());
         Post post = new Post(message, postingTime);
 
         String printedTimestamp = post.printTimestamp(postingTime.plusMinutes(5));

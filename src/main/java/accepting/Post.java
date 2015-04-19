@@ -1,6 +1,5 @@
 package accepting;
 
-import java.time.LocalDateTime;
 
 public class Post {
 
@@ -10,7 +9,7 @@ public class Post {
         this.message = message;
     }
 
-    public Post(Message message, LocalDateTime postingTime) {
+    public Post(Message message, PostingTime parameterObject) {
     }
 
     @Override
@@ -18,7 +17,7 @@ public class Post {
         return message.toString();
     }
 
-    public String printTimestamp(LocalDateTime currentTime) {
+    public String printTimestamp(PostingTime postingTime) {
         return " (5 minutes ago)";
     }
 
