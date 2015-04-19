@@ -8,11 +8,11 @@ import org.junit.Test;
 public class MessageParserTest {
 
     @Test
-    public void givenAnEmptyStringItReturnsAMessageObjectWithEmptyMessage() {
+    public void givenAnEmptyStringItReturnsAnEmptyMessageObject() {
         MessageParser parser = new MessageParser();
 
         Message message = parser.parse("Alice -> ");
 
-        assertThat(message.getMessageAsString(), is(""));
+        assertThat(message.toString(), is(""));
     }
 }
