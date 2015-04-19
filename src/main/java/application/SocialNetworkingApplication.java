@@ -9,9 +9,6 @@ public class SocialNetworkingApplication {
     public SocialNetworkingApplication(Clock clock) {
     }
 
-    public void start() {
-    }
-
     public void accept(String message) {
     }
 
