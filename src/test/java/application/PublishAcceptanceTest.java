@@ -1,3 +1,4 @@
+package application;
 import static java.time.Clock.fixed;
 import static java.time.Clock.tick;
 import static java.time.Duration.ofMinutes;
@@ -14,6 +15,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import application.SocialNetworkingApplication;
 
 public class PublishAcceptanceTest {
     private SocialNetworkingApplication socialNetworkingApplication;
