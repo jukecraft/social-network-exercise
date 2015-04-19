@@ -1,16 +1,19 @@
 package accepting;
 
 public class Message {
-    private String string;
+    private String message;
 
-    public Message(String string) {
-        this.string = string;
-        // TODO Auto-generated constructor stub
+    public static Message emptyMessage() {
+        return new Message("");
+    }
+
+    public Message(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
-        return string;
+        return message;
     }
 
 }

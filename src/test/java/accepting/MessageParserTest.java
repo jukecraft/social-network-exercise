@@ -7,19 +7,24 @@ import org.junit.Test;
 
 public class MessageParserTest {
 
+    private MessageParser parser = new MessageParser();;
+
     @Test
     public void givenAnEmptyStringItReturnsAnEmptyMessageObject() {
-        MessageParser parser = new MessageParser();
-
         Message message = parser.parse("");
 
         assertThat(message.toString(), is(""));
     }
 
     @Test
-    public void givenAStringWithAMessageItReturnsAMessageObjectWithThatString() {
-        MessageParser parser = new MessageParser();
+    public void givenAnEmptySecondMessagePartItReturnsAnEmptyMessageObject() {
+        Message message = parser.parse("Alice ->");
 
+        assertThat(message.toString(), is(""));
+    }
+
+    @Test
+    public void givenAStringWithAMessageItReturnsAMessageObjectWithThatString() {
         Message message = parser.parse("Alice -> I love the weather today");
 
         assertThat(message.toString(), is("I love the weather today"));
