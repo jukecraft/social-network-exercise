@@ -27,11 +27,12 @@ public class PostTest {
     @Test
     public void createdWithTimestampItPrintsTheTimePassedSinceThen() {
         LocalDateTime postingTime = LocalDateTime.now();
-        Message message = new Message("I love the weather today", postingTime);
-        Post post = new Post(message);
+        Message message = new Message("I love the weather today");
+        Post post = new Post(message, postingTime);
 
         String printedTimestamp = post.printTimestamp(postingTime.plusMinutes(5));
 
         assertThat(printedTimestamp, is(" (5 minutes ago)"));
     }
+
 }

@@ -10,12 +10,15 @@ public class Post {
         this.message = message;
     }
 
+    public Post(Message message, LocalDateTime postingTime) {
+    }
+
     @Override
     public String toString() {
         return message.toString();
     }
 
-    public String printTimestamp(LocalDateTime plusMinutes) {
+    public String printTimestamp(LocalDateTime currentTime) {
         return " (5 minutes ago)";
     }
 
