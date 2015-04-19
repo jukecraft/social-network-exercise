@@ -16,4 +16,13 @@ public class MessageParserTest {
         assertThat(message.toString(), is(""));
     }
 
+    @Test
+    public void givenAStringWithAMessageItReturnsAMessageObjectWithThatString() {
+        MessageParser parser = new MessageParser();
+
+        Message message = parser.parse("Alice -> I love the weather today");
+
+        assertThat(message.toString(), is("I love the weather today"));
+    }
+
 }
