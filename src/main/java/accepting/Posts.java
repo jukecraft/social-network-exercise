@@ -1,12 +1,13 @@
 package accepting;
 
-import java.util.Collections;
+import static java.util.Collections.emptyList;
+
 import java.util.List;
 
 public class Posts {
 
     public List<String> printPosts() {
-        return Collections.emptyList();
+        return emptyList();
     }
 
 }
