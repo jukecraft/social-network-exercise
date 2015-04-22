@@ -22,7 +22,7 @@ public class SocialNetworkingApplication {
     }
 
     public void accept(String message) {
-        if (message.equals("Alice"))
+        if (message.equals("Alice") || message.equals("Bob"))
             addTimelineToOutput();
         else
             addNewPost(message);
