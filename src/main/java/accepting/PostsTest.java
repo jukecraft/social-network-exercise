@@ -31,4 +31,16 @@ public class PostsTest {
 
         assertThat(output, contains(post.printTimestamp(PRINTING_TIME)));
     }
+
+    @Test
+    public void givenAnEmptyListOfPostsWhenTwoPostsAreAddedItReturnsOutputWithThatPosts() {
+        Post post = aPost().create();
+        posts.addPost(post);
+        Post anotherPost = aPost().create();
+        posts.addPost(anotherPost);
+
+        List<String> output = posts.printPosts(PRINTING_TIME);
+
+        assertThat(output, contains(post.printTimestamp(PRINTING_TIME), anotherPost.printTimestamp(PRINTING_TIME)));
+    }
 }
