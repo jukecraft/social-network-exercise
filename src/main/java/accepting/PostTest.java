@@ -31,7 +31,7 @@ public class PostTest {
         PostingTime postingTime = new PostingTime(now());
         Post post = new Post(IRELLEVANT_MESSAGE, postingTime);
 
-        String printedTimestamp = post.printTimestamp(postingTime.plusMinutes(5));
+        String printedTimestamp = post.printTimestamp(new PostingTime(now().plusMinutes(5)));
 
         assertThat(printedTimestamp, is(" (5 minutes ago)"));
     }
