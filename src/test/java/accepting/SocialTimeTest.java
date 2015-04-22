@@ -33,14 +33,14 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void createdWithDifferentTimestampItPrintsDifferenceToGivenTimestamp() {
+    public void createdWithOneMinuteTimestampItPrintsDifferenceToGivenTimestamp() {
         SocialTime timeOfPrinting = aTime() //
-            .plusMinutes(10) //
+            .plusMinutes(1) //
             .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
 
-        assertThat(printedTimestamp, is("10 minutes ago"));
+        assertThat(printedTimestamp, is("1 minute ago"));
     }
 
     @Test
