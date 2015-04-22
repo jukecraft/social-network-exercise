@@ -31,4 +31,13 @@ public class PostTest {
         assertThat(printedTimestamp, is(ANOTHER_MESSAGE_TEXT + " (5 minutes ago)"));
     }
 
+    @Test
+    public void createdWithMessageAndOtherPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
+        Post post = new Post(new Message(ANOTHER_MESSAGE_TEXT), new SocialTime(TIMESTAMP));
+
+        String printedTimestamp = post.printTimestamp(new SocialTime(TIMESTAMP.plusMinutes(10)));
+
+        assertThat(printedTimestamp, is(ANOTHER_MESSAGE_TEXT + " (10 minutes ago)"));
+    }
+
 }
