@@ -2,8 +2,13 @@ package accepting;
 
 import static accepting.builder.PostBuilder.aPost;
 import static accepting.builder.SocialTimeBuilder.aTime;
+import static java.util.Arrays.asList;
+import static java.util.Collections.sort;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -51,6 +56,22 @@ public class PostTest {
             .create());
 
         assertThat(printedTimestamp, is(MESSAGE_TEXT + " (10 minutes ago)"));
+    }
+
+    @Test
+    public void itIsSortedByPostingTimeLatestFirst() {
+        Post post = aPost() //
+            .withPostingTime(aTime()) //
+            .create();
+        Post laterPost = aPost() //
+            .withPostingTime(aTime().plusMinutes(1)) //
+            .create();
+
+        List<Post> posts = asList(post, laterPost);
+
+        sort(posts);
+
+        assertThat(posts, contains(laterPost, post));
     }
 
 }
