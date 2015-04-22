@@ -5,14 +5,14 @@ import static java.time.Duration.between;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class PostingTime {
+public class SocialTime {
     private LocalDateTime timestamp;
 
-    public PostingTime(LocalDateTime timestamp) {
+    public SocialTime(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
-    public String printTimestamp(PostingTime timeOfPrinting) {
+    public String printTimestamp(SocialTime timeOfPrinting) {
         Duration timePassed = between(this.timestamp, timeOfPrinting.timestamp);
         return timePassed.toMinutes() + " minutes ago";
     }

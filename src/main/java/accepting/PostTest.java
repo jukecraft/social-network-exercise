@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 public class PostTest {
-    private static final PostingTime IRRELLEVANT_POSTING_TIME = null;
+    private static final SocialTime IRRELLEVANT_POSTING_TIME = null;
     private static final Message IRELLEVANT_MESSAGE = null;
 
     @Test
@@ -28,10 +28,10 @@ public class PostTest {
 
     @Test
     public void createdWithPostingTimeItPrintsTheTimePassedSinceThen() {
-        PostingTime postingTime = new PostingTime(now());
+        SocialTime postingTime = new SocialTime(now());
         Post post = new Post(IRELLEVANT_MESSAGE, postingTime);
 
-        String printedTimestamp = post.printTimestamp(new PostingTime(now().plusMinutes(5)));
+        String printedTimestamp = post.printTimestamp(new SocialTime(now().plusMinutes(5)));
 
         assertThat(printedTimestamp, is(" (5 minutes ago)"));
     }

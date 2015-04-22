@@ -4,7 +4,7 @@ public class Post {
 
     private Message message;
 
-    public Post(Message message, PostingTime postingTime) {
+    public Post(Message message, SocialTime postingTime) {
         this.message = message;
     }
 
@@ -13,7 +13,7 @@ public class Post {
         return message.toString();
     }
 
-    public String printTimestamp(PostingTime postingTime) {
+    public String printTimestamp(SocialTime postingTime) {
         return " (5 minutes ago)";
     }
 

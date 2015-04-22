@@ -9,29 +9,29 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PostingTimeTest {
+public class SocialTimeTest {
     private static final LocalDateTime ORIGINAL_TIMESTAMP = now();
-    private PostingTime originalPostingTime;
+    private SocialTime originalSocialTime;
 
     @Before
     public void setUp() {
-        originalPostingTime = new PostingTime(ORIGINAL_TIMESTAMP);
+        originalSocialTime = new SocialTime(ORIGINAL_TIMESTAMP);
     }
 
     @Test
     public void createdWithTimestampItPrintsDifferenceToGivenTimestamp() {
-        PostingTime timeOfPrinting = new PostingTime(ORIGINAL_TIMESTAMP.plusMinutes(5));
+        SocialTime timeOfPrinting = new SocialTime(ORIGINAL_TIMESTAMP.plusMinutes(5));
 
-        String printedTimestamp = originalPostingTime.printTimestamp(timeOfPrinting);
+        String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
 
         assertThat(printedTimestamp, is("5 minutes ago"));
     }
 
     @Test
     public void createdWithDifferentTimestampItPrintsDifferenceToGivenTimestamp() {
-        PostingTime timeOfPrinting = new PostingTime(ORIGINAL_TIMESTAMP.plusMinutes(10));
+        SocialTime timeOfPrinting = new SocialTime(ORIGINAL_TIMESTAMP.plusMinutes(10));
 
-        String printedTimestamp = originalPostingTime.printTimestamp(timeOfPrinting);
+        String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
 
         assertThat(printedTimestamp, is("10 minutes ago"));
     }
