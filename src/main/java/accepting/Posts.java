@@ -6,8 +6,13 @@ import java.util.List;
 
 public class Posts {
 
-    public List<String> printPosts() {
+    public List<String> printPosts(SocialTime socialTime) {
         return emptyList();
+    }
+
+    public void addPost(Post create) {
+        // TODO Auto-generated method stub
+
     }
 
 }
