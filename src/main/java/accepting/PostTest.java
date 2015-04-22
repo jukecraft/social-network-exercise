@@ -1,5 +1,7 @@
 package accepting;
 
+import static accepting.PostBuilder.aPost;
+import static accepting.SocialTimeBuilder.aTime;
 import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,29 +17,47 @@ public class PostTest {
 
     @Test
     public void createdWithFilledMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = new Post(new Message(MESSAGE_TEXT), new SocialTime(TIMESTAMP));
+        Post post = aPost() //
+            .withMessage(MESSAGE_TEXT) //
+            .withPostingTime(TIMESTAMP) //
+            .create();
 
-        String printedTimestamp = post.printTimestamp(new SocialTime(TIMESTAMP.plusMinutes(5)));
+        String printedTimestamp = post.printTimestamp(aTime() //
+            .withTimestamp(TIMESTAMP) //
+            .plusMinutes(5) //
+            .create());
 
         assertThat(printedTimestamp, is(MESSAGE_TEXT + " (5 minutes ago)"));
     }
 
     @Test
     public void createdWithOtherMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = new Post(new Message(ANOTHER_MESSAGE_TEXT), new SocialTime(TIMESTAMP));
+        Post post = aPost() //
+            .withMessage(ANOTHER_MESSAGE_TEXT) //
+            .withPostingTime(TIMESTAMP) //
+            .create();
 
-        String printedTimestamp = post.printTimestamp(new SocialTime(TIMESTAMP.plusMinutes(5)));
+        String printedTimestamp = post.printTimestamp(aTime() //
+            .withTimestamp(TIMESTAMP) //
+            .plusMinutes(5) //
+            .create());
 
         assertThat(printedTimestamp, is(ANOTHER_MESSAGE_TEXT + " (5 minutes ago)"));
     }
 
     @Test
     public void createdWithMessageAndOtherPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = new Post(new Message(ANOTHER_MESSAGE_TEXT), new SocialTime(TIMESTAMP));
+        Post post = aPost() //
+            .withMessage(MESSAGE_TEXT) //
+            .withPostingTime(TIMESTAMP) //
+            .create();
 
-        String printedTimestamp = post.printTimestamp(new SocialTime(TIMESTAMP.plusMinutes(10)));
+        String printedTimestamp = post.printTimestamp(aTime() //
+            .withTimestamp(TIMESTAMP) //
+            .plusMinutes(10) //
+            .create());
 
-        assertThat(printedTimestamp, is(ANOTHER_MESSAGE_TEXT + " (10 minutes ago)"));
+        assertThat(printedTimestamp, is(MESSAGE_TEXT + " (10 minutes ago)"));
     }
 
 }

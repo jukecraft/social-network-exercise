@@ -1,5 +1,6 @@
 package accepting;
 
+import static accepting.SocialTimeBuilder.aTime;
 import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,12 +16,17 @@ public class SocialTimeTest {
 
     @Before
     public void setUp() {
-        originalSocialTime = new SocialTime(ORIGINAL_TIMESTAMP);
+        originalSocialTime = aTime() //
+            .withTimestamp(ORIGINAL_TIMESTAMP) //
+            .create();
     }
 
     @Test
     public void createdWithTimestampItPrintsDifferenceToGivenTimestamp() {
-        SocialTime timeOfPrinting = new SocialTime(ORIGINAL_TIMESTAMP.plusMinutes(5));
+        SocialTime timeOfPrinting = aTime() //
+            .withTimestamp(ORIGINAL_TIMESTAMP) //
+            .plusMinutes(5) //
+            .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
 
@@ -29,7 +35,10 @@ public class SocialTimeTest {
 
     @Test
     public void createdWithDifferentTimestampItPrintsDifferenceToGivenTimestamp() {
-        SocialTime timeOfPrinting = new SocialTime(ORIGINAL_TIMESTAMP.plusMinutes(10));
+        SocialTime timeOfPrinting = aTime() //
+            .withTimestamp(ORIGINAL_TIMESTAMP) //
+            .plusMinutes(10) //
+            .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
 
