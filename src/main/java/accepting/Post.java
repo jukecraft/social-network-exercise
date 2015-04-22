@@ -1,15 +1,11 @@
 package accepting;
 
-
 public class Post {
 
     private Message message;
 
-    public Post(Message message) {
+    public Post(Message message, PostingTime postingTime) {
         this.message = message;
-    }
-
-    public Post(Message message, PostingTime parameterObject) {
     }
 
     @Override
