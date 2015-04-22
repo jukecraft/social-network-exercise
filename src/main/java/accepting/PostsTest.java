@@ -1,5 +1,7 @@
 package accepting;
 
+import static accepting.builder.PostBuilder.aPost;
+import static accepting.builder.SocialTimeBuilder.aTime;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -9,28 +11,24 @@ import java.util.List;
 
 import org.junit.Test;
 
-import accepting.builder.PostBuilder;
-import accepting.builder.SocialTimeBuilder;
-
 public class PostsTest {
+    private static final SocialTime PRINTING_TIME = aTime().create();
+    private Posts posts = new Posts();
+
     @Test
     public void givenAnEmptyListOfPostsItReturnsNoOutput() {
-        Posts posts = new Posts();
-
-        List<String> output = posts.printPosts(SocialTimeBuilder.aTime().create());
+        List<String> output = posts.printPosts(PRINTING_TIME);
 
         assertThat(output, is(empty()));
     }
 
     @Test
     public void givenAnEmptyListOfPostsWhenAPostIsAddedItReturnsOutputWithThatPost() {
-        Posts posts = new Posts();
-        Post post = PostBuilder.aPost().create();
+        Post post = aPost().create();
         posts.addPost(post);
-        SocialTime printingTime = SocialTimeBuilder.aTime().create();
 
-        List<String> output = posts.printPosts(printingTime);
+        List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(post.printTimestamp(printingTime)));
+        assertThat(output, contains(post.printTimestamp(PRINTING_TIME)));
     }
 }
