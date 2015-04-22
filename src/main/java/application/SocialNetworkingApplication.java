@@ -12,6 +12,8 @@ import accepting.Posts;
 import accepting.SocialTime;
 
 public class SocialNetworkingApplication {
+    private static final String POSTING_COMMAND = "->";
+
     private Posts posts = new Posts();
     private List<String> output = new ArrayList<>();
     private Clock clock;
@@ -22,10 +24,10 @@ public class SocialNetworkingApplication {
     }
 
     public void accept(String message) {
-        if (message.equals("Alice") || message.equals("Bob"))
-            addTimelineToOutput();
-        else
+        if (message.contains(POSTING_COMMAND))
             addNewPost(message);
+        else
+            addTimelineToOutput();
     }
 
     private void addTimelineToOutput() {
