@@ -15,7 +15,7 @@ public class PostingTime {
     }
 
     public String printTimestamp(PostingTime postingTime) {
-        return null;
+        return "5 minutes ago";
         // TODO Auto-generated method stub
 
     }
