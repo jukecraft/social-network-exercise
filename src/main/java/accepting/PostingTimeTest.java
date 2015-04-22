@@ -15,4 +15,13 @@ public class PostingTimeTest {
 
         assertThat(timestamp, is("5 minutes ago"));
     }
+
+    @Test
+    public void createdWithDifferentTimestampItPrintsDifferenceToGivenTimestamp() {
+        PostingTime postingTime = new PostingTime(now());
+
+        String timestamp = postingTime.printTimestamp(postingTime.plusMinutes(10));
+
+        assertThat(timestamp, is("10 minutes ago"));
+    }
 }
