@@ -14,7 +14,14 @@ public class SocialTime implements Comparable<SocialTime> {
 
     public String printTimestamp(SocialTime timeOfPrinting) {
         Duration timePassed = between(this.timestamp, timeOfPrinting.timestamp);
-        return timePassed.toMinutes() + " minutes ago";
+        long numberOfMinutes = timePassed.toMinutes();
+        return numberOfMinutes + " " + getTimestring(numberOfMinutes) + " ago";
+    }
+
+    private String getTimestring(long numberOfMinutes) {
+        if (numberOfMinutes > 1)
+            return "minutes";
+        return "minute";
     }
 
     @Override
