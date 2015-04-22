@@ -1,6 +1,7 @@
 package application;
 
 import static java.time.Duration.ofMinutes;
+import static java.time.Instant.now;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -17,27 +18,11 @@ import org.junit.Test;
 public class PublishAcceptanceTest {
     private SocialNetworkingApplication socialNetworkingApplication;
     private Clock clock;
-    private Instant instant = Instant.now();
+    private Instant instantReturnedByClock = now();
 
     @Before
     public void setUpApplication() {
-        clock = new Clock() {
-
-            @Override
-            public Clock withZone(ZoneId zone) {
-                return this;
-            }
-
-            @Override
-            public Instant instant() {
-                return instant;
-            }
-
-            @Override
-            public ZoneId getZone() {
-                return systemDefaultZone().getZone();
-            }
-        };
+        clock = createMockedClock();
         socialNetworkingApplication = new SocialNetworkingApplication(clock);
     }
 
@@ -53,11 +38,31 @@ public class PublishAcceptanceTest {
     @Test
     public void givenAlicePublishedAMessageWhenSomeoneViewsTheirTimelineItIsShownWithTheTimeSincePosted() {
         socialNetworkingApplication.accept("Alice -> I love the weather today");
-        instant = instant.plus(ofMinutes(5));
+        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(5));
 
         socialNetworkingApplication.accept("Alice");
 
         List<String> output = socialNetworkingApplication.getOutput();
         assertThat(output, contains("I love the weather today (5 minutes ago)"));
+    }
+
+    private Clock createMockedClock() {
+        return new Clock() {
+
+            @Override
+            public Clock withZone(ZoneId zone) {
+                return this;
+            }
+
+            @Override
+            public Instant instant() {
+                return instantReturnedByClock;
+            }
+
+            @Override
+            public ZoneId getZone() {
+                return systemDefaultZone().getZone();
+            }
+        };
     }
 }

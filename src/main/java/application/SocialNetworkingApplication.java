@@ -1,7 +1,8 @@
 package application;
 
+import static java.time.LocalDateTime.now;
+
 import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class SocialNetworkingApplication {
     private Posts posts = new Posts();
     private List<String> output = new ArrayList<>();
     private Clock clock;
+    private MessageParser parser = new MessageParser();
 
     public SocialNetworkingApplication(Clock clock) {
         this.clock = clock;
@@ -21,9 +23,26 @@ public class SocialNetworkingApplication {
 
     public void accept(String message) {
         if (message.equals("Alice"))
-            output.addAll(posts.printPosts(new SocialTime(LocalDateTime.now(clock))));
+            addTimelineToOutput();
         else
-            posts.addPost(new Post(new MessageParser().parse(message), new SocialTime(LocalDateTime.now(clock))));
+            addNewPost(message);
+    }
+
+    private void addTimelineToOutput() {
+        output.addAll(posts.printPosts(getCurrentTime()));
+    }
+
+    private void addNewPost(String message) {
+        posts.addPost(createNewPost(message));
+    }
+
+    private Post createNewPost(String message) {
+
+        return new Post(parser.parse(message), getCurrentTime());
+    }
+
+    private SocialTime getCurrentTime() {
+        return new SocialTime(now(clock));
     }
 
     public List<String> getOutput() {
