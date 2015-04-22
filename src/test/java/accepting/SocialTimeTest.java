@@ -44,7 +44,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void itIsSortedByTimeLatestFirst() {
+    public void itIsSortedByTimestampLatestFirst() {
         SocialTime time = aTime().create();
         SocialTime laterTime = aTime().plusMinutes(1).create();
         List<SocialTime> times = asList(time, laterTime);

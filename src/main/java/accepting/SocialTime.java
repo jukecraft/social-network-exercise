@@ -18,7 +18,7 @@ public class SocialTime implements Comparable<SocialTime> {
     }
 
     @Override
-    public int compareTo(SocialTime o) {
-        return o.timestamp.compareTo(this.timestamp);
+    public int compareTo(SocialTime other) {
+        return other.timestamp.compareTo(this.timestamp);
     }
 }
