@@ -10,6 +10,7 @@ public class Posts {
 
     public List<String> printPosts(SocialTime printingTime) {
         return posts.stream() //
+            .sorted() //
             .map(post -> post.printTimestamp(printingTime)) //
             .collect(toList());
     }
