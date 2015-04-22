@@ -13,4 +13,10 @@ public class PostingTime {
         // TODO Auto-generated method stub
         return this;
     }
+
+    public String printTimestamp(PostingTime postingTime) {
+        return null;
+        // TODO Auto-generated method stub
+
+    }
 }
