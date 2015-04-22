@@ -12,35 +12,35 @@ import java.util.List;
 import org.junit.Test;
 
 public class PostsTest {
+    private static final Post A_POST = aPost().withMessage("message1").create();
+    private static final Post ANOTHER_POST = aPost().withMessage("message2").create();;
     private static final SocialTime PRINTING_TIME = aTime().create();
+
     private Posts posts = new Posts();
 
     @Test
-    public void givenAnEmptyListOfPostsItReturnsNoOutput() {
+    public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
         List<String> output = posts.printPosts(PRINTING_TIME);
 
         assertThat(output, is(empty()));
     }
 
     @Test
-    public void givenAnEmptyListOfPostsWhenAPostIsAddedItReturnsOutputWithThatPost() {
-        Post post = aPost().create();
-        posts.addPost(post);
+    public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
+        posts.addPost(A_POST);
 
         List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(post.printTimestamp(PRINTING_TIME)));
+        assertThat(output, contains(A_POST.printTimestamp(PRINTING_TIME)));
     }
 
     @Test
-    public void givenAnEmptyListOfPostsWhenTwoPostsAreAddedItReturnsOutputWithThatPosts() {
-        Post post = aPost().create();
-        posts.addPost(post);
-        Post anotherPost = aPost().create();
-        posts.addPost(anotherPost);
+    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithThatPosts() {
+        posts.addPost(A_POST);
+        posts.addPost(ANOTHER_POST);
 
         List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(post.printTimestamp(PRINTING_TIME), anotherPost.printTimestamp(PRINTING_TIME)));
+        assertThat(output, contains(A_POST.printTimestamp(PRINTING_TIME), ANOTHER_POST.printTimestamp(PRINTING_TIME)));
     }
 }
