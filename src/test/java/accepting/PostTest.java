@@ -1,7 +1,7 @@
 package accepting;
 
-import static accepting.PostBuilder.aPost;
-import static accepting.SocialTimeBuilder.aTime;
+import static accepting.builder.PostBuilder.aPost;
+import static accepting.builder.SocialTimeBuilder.aTime;
 import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
