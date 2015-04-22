@@ -23,7 +23,7 @@ public class PostTest {
             .withPostingTime(aTime()) //
             .create();
 
-        String printedTimestamp = post.printTimestamp(aTime() //
+        String printedTimestamp = post.printAt(aTime() //
             .plusMinutes(5) //
             .create());
 
@@ -37,7 +37,7 @@ public class PostTest {
             .withPostingTime(aTime()) //
             .create();
 
-        String printedTimestamp = post.printTimestamp(aTime() //
+        String printedTimestamp = post.printAt(aTime() //
             .plusMinutes(5) //
             .create());
 
@@ -51,7 +51,7 @@ public class PostTest {
             .withPostingTime(aTime()) //
             .create();
 
-        String printedTimestamp = post.printTimestamp(aTime() //
+        String printedTimestamp = post.printAt(aTime() //
             .plusMinutes(10) //
             .create());
 

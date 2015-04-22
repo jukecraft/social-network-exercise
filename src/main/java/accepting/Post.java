@@ -13,7 +13,7 @@ public class Post implements Comparable<Post> {
         this.postingTime = postingTime;
     }
 
-    public String printTimestamp(SocialTime printingTime) {
+    public String printAt(SocialTime printingTime) {
         return format(POST_PRINT_FORMAT, message, postingTime.printTimestamp(printingTime));
     }
 

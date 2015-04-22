@@ -11,7 +11,7 @@ public class Posts {
     public List<String> printPosts(SocialTime printingTime) {
         return posts.stream() //
             .sorted() //
-            .map(post -> post.printTimestamp(printingTime)) //
+            .map(post -> post.printAt(printingTime)) //
             .collect(toList());
     }
 

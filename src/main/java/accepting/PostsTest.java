@@ -38,7 +38,7 @@ public class PostsTest {
 
         List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(A_POST.printTimestamp(PRINTING_TIME)));
+        assertThat(output, contains(A_POST.printAt(PRINTING_TIME)));
     }
 
     @Test
@@ -48,6 +48,6 @@ public class PostsTest {
 
         List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(LATER_POST.printTimestamp(PRINTING_TIME), A_POST.printTimestamp(PRINTING_TIME)));
+        assertThat(output, contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
     }
 }
