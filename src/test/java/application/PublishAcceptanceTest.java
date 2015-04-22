@@ -1,30 +1,43 @@
 package application;
-import static java.time.Clock.fixed;
-import static java.time.Clock.tick;
+
 import static java.time.Duration.ofMinutes;
-import static java.time.Instant.now;
-import static java.time.ZoneId.systemDefault;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import application.SocialNetworkingApplication;
 
 public class PublishAcceptanceTest {
     private SocialNetworkingApplication socialNetworkingApplication;
     private Clock clock;
+    private Instant instant = Instant.now();
 
     @Before
     public void setUpApplication() {
-        clock = fixed(now(), systemDefault());
+        clock = new Clock() {
+
+            @Override
+            public Clock withZone(ZoneId zone) {
+                return this;
+            }
+
+            @Override
+            public Instant instant() {
+                return instant;
+            }
+
+            @Override
+            public ZoneId getZone() {
+                return systemDefaultZone().getZone();
+            }
+        };
         socialNetworkingApplication = new SocialNetworkingApplication(clock);
     }
 
@@ -38,10 +51,9 @@ public class PublishAcceptanceTest {
     }
 
     @Test
-    @Ignore
     public void givenAlicePublishedAMessageWhenSomeoneViewsTheirTimelineItIsShownWithTheTimeSincePosted() {
         socialNetworkingApplication.accept("Alice -> I love the weather today");
-        tick(clock, ofMinutes(5));
+        instant = instant.plus(ofMinutes(5));
 
         socialNetworkingApplication.accept("Alice");
 
