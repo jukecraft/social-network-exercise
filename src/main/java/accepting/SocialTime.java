@@ -19,7 +19,6 @@ public class SocialTime implements Comparable<SocialTime> {
 
     @Override
     public int compareTo(SocialTime o) {
-        // TODO Auto-generated method stub
-        return 0;
+        return o.timestamp.compareTo(this.timestamp);
     }
 }
