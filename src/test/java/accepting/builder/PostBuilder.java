@@ -1,6 +1,6 @@
 package accepting.builder;
 
-import static java.time.LocalDateTime.now;
+import static accepting.builder.SocialTimeBuilder.aTime;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +11,7 @@ import accepting.SocialTime;
 public class PostBuilder {
 
     private String messageText = "default message";
-    private LocalDateTime timestamp = now();
+    private SocialTime timestamp = aTime().create();
 
     public static PostBuilder aPost() {
         return new PostBuilder();
@@ -23,12 +23,17 @@ public class PostBuilder {
     }
 
     public PostBuilder withPostingTime(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+        this.timestamp = aTime().withTimestamp(timestamp).create();
+        return this;
+    }
+
+    public PostBuilder withPostingTime(SocialTimeBuilder timestamp) {
+        this.timestamp = timestamp.create();
         return this;
     }
 
     public Post create() {
-        return new Post(new Message(messageText), new SocialTime(timestamp));
+        return new Post(new Message(messageText), timestamp);
     }
 
 }
