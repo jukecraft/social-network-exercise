@@ -18,9 +18,8 @@ public class Post implements Comparable<Post> {
     }
 
     @Override
-    public int compareTo(Post arg0) {
-        // TODO Auto-generated method stub
-        return this.postingTime.compareTo(arg0.postingTime);
+    public int compareTo(Post other) {
+        return this.postingTime.compareTo(other.postingTime);
     }
 
 }

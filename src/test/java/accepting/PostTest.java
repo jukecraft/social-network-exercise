@@ -59,7 +59,7 @@ public class PostTest {
     }
 
     @Test
-    public void itIsSortedByPostingTimeLatestFirst() {
+    public void twoPostsAreSortedByPostingTimeLatestFirst() {
         Post post = aPost() //
             .withPostingTime(aTime()) //
             .create();
