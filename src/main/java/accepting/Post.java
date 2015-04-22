@@ -8,13 +8,8 @@ public class Post {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return message.toString();
-    }
-
     public String printTimestamp(SocialTime postingTime) {
-        return " (5 minutes ago)";
+        return message.toString() + " (5 minutes ago)";
     }
 
 }
