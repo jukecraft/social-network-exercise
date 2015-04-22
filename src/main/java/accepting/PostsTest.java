@@ -2,6 +2,7 @@ package accepting;
 
 import static accepting.builder.PostBuilder.aPost;
 import static accepting.builder.SocialTimeBuilder.aTime;
+import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -12,8 +13,14 @@ import java.util.List;
 import org.junit.Test;
 
 public class PostsTest {
-    private static final Post A_POST = aPost().withMessage("message1").create();
-    private static final Post ANOTHER_POST = aPost().withMessage("message2").create();;
+    private static final Post A_POST = aPost() //
+        .withPostingTime(now()) //
+        .withMessage("message1") //
+        .create();
+    private static final Post LATER_POST = aPost() //
+        .withPostingTime(now().plusYears(1)) //
+        .withMessage("message2") //
+        .create();
     private static final SocialTime PRINTING_TIME = aTime().create();
 
     private Posts posts = new Posts();
@@ -35,12 +42,12 @@ public class PostsTest {
     }
 
     @Test
-    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithThatPosts() {
+    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithThatPostsSortedLatestFirst() {
         posts.addPost(A_POST);
-        posts.addPost(ANOTHER_POST);
+        posts.addPost(LATER_POST);
 
         List<String> output = posts.printPosts(PRINTING_TIME);
 
-        assertThat(output, contains(A_POST.printTimestamp(PRINTING_TIME), ANOTHER_POST.printTimestamp(PRINTING_TIME)));
+        assertThat(output, contains(LATER_POST.printTimestamp(PRINTING_TIME), A_POST.printTimestamp(PRINTING_TIME)));
     }
 }
