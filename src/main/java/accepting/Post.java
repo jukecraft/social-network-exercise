@@ -1,7 +1,10 @@
 package accepting;
 
+import static java.text.MessageFormat.format;
+
 public class Post {
 
+    private static final String POST_PRINT_FORMAT = "{0} ({1})";
     private Message message;
     private SocialTime postingTime;
 
@@ -10,8 +13,8 @@ public class Post {
         this.postingTime = postingTime;
     }
 
-    public String printTimestamp(SocialTime postingTime) {
-        return message.toString() + " (" + this.postingTime.printTimestamp(postingTime) + ")";
+    public String printTimestamp(SocialTime printingTime) {
+        return format(POST_PRINT_FORMAT, message, postingTime.printTimestamp(printingTime));
     }
 
 }
