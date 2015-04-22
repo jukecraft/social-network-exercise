@@ -1,18 +1,14 @@
 package accepting;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Posts {
     private List<Post> posts = new ArrayList<>();
 
     public List<String> printPosts(SocialTime printingTime) {
-        if (posts.isEmpty())
-            return emptyList();
-        return asList(posts.get(0).printTimestamp(printingTime));
+        return posts.stream().map(post -> post.printTimestamp(printingTime)).collect(Collectors.toList());
     }
 
     public void addPost(Post create) {
