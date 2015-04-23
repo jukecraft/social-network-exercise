@@ -4,7 +4,7 @@ public class Timelines {
 
     public Posts getPostsFor(String string) {
         // TODO Auto-generated method stub
-        return null;
+        return new Posts();
     }
 
 }
