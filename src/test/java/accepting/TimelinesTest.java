@@ -1,18 +1,20 @@
 package accepting;
 
+import static accepting.builder.SocialTimeBuilder.aTime;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import accepting.builder.SocialTimeBuilder;
-
 public class TimelinesTest {
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
         Timelines timelines = new Timelines();
-        Posts alicesPosts = timelines.getPostsFor("Alice");
-        assertThat(alicesPosts.printPosts(SocialTimeBuilder.aTime().create()), is(empty()));
+
+        Timeline alicesTimeline = timelines.getPostsFor("Alice");
+
+        assertThat(alicesTimeline.printTimeline(aTime().create()), is(empty()));
     }
+
 }

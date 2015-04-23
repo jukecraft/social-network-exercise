@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class PostsTest {
+public class TimelineTest {
     private static final Post A_POST = aPost() //
         .withPostingTime(now()) //
         .withMessage("message1") //
@@ -23,30 +23,30 @@ public class PostsTest {
         .create();
     private static final SocialTime PRINTING_TIME = aTime().create();
 
-    private Posts posts = new Posts();
+    private Timeline timeline = new Timeline();
 
     @Test
     public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
-        List<String> output = posts.printPosts(PRINTING_TIME);
+        List<String> output = timeline.printTimeline(PRINTING_TIME);
 
         assertThat(output, is(empty()));
     }
 
     @Test
     public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
-        posts.addPost(A_POST);
+        timeline.addPost(A_POST);
 
-        List<String> output = posts.printPosts(PRINTING_TIME);
+        List<String> output = timeline.printTimeline(PRINTING_TIME);
 
         assertThat(output, contains(A_POST.printAt(PRINTING_TIME)));
     }
 
     @Test
     public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithThatPostsSortedLatestFirst() {
-        posts.addPost(A_POST);
-        posts.addPost(LATER_POST);
+        timeline.addPost(A_POST);
+        timeline.addPost(LATER_POST);
 
-        List<String> output = posts.printPosts(PRINTING_TIME);
+        List<String> output = timeline.printTimeline(PRINTING_TIME);
 
         assertThat(output, contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
     }

@@ -8,13 +8,13 @@ import java.util.List;
 
 import accepting.MessageParser;
 import accepting.Post;
-import accepting.Posts;
 import accepting.SocialTime;
+import accepting.Timeline;
 
 public class SocialNetworkingApplication {
     private static final String POSTING_COMMAND = "->";
 
-    private Posts posts = new Posts();
+    private Timeline posts = new Timeline();
     private List<String> output = new ArrayList<>();
     private Clock clock;
     private MessageParser parser = new MessageParser();
@@ -31,7 +31,7 @@ public class SocialNetworkingApplication {
     }
 
     private void addTimelineToOutput() {
-        output.addAll(posts.printPosts(getCurrentTime()));
+        output.addAll(posts.printTimeline(getCurrentTime()));
     }
 
     private void addNewPost(String message) {
@@ -39,7 +39,6 @@ public class SocialNetworkingApplication {
     }
 
     private Post createNewPost(String message) {
-
         return new Post(parser.parse(message), getCurrentTime());
     }
 

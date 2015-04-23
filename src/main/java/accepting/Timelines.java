@@ -2,9 +2,8 @@ package accepting;
 
 public class Timelines {
 
-    public Posts getPostsFor(String string) {
-        // TODO Auto-generated method stub
-        return new Posts();
+    public Timeline getPostsFor(String username) {
+        return new Timeline();
     }
 
 }
