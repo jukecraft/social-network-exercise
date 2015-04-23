@@ -1,15 +1,19 @@
 package accepting;
 
+import java.util.HashMap;
+
 public class Timelines {
 
-    private Timeline timeline = new Timeline();
+    private HashMap<String, Timeline> timelines = new HashMap<>();
 
     public Timeline getPostsFor(String user) {
-        return timeline;
+        return timelines.getOrDefault(user, new Timeline());
     }
 
     public void post(String user, Post post) {
+        Timeline timeline = timelines.getOrDefault(user, new Timeline());
         timeline.addPost(post);
+        timelines.put(user, timeline);
     }
 
 }
