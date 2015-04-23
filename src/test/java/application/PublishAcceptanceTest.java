@@ -59,6 +59,21 @@ public class PublishAcceptanceTest {
         assertThat(output, contains("Good game though. (1 minute ago)", "Damn! We lost! (2 minutes ago)"));
     }
 
+    @Test
+    public void givenBobAndAlicePublishedMessagesWhenAliceViewsHerTimelineOnlyHerPostsAreShown() {
+        socialNetworkingApplication.accept("Alice -> I love the weather today");
+        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
+        socialNetworkingApplication.accept("Bob -> Damn! We lost!");
+        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
+        socialNetworkingApplication.accept("Bob -> Good game though.");
+        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
+
+        socialNetworkingApplication.accept("Alice");
+
+        List<String> output = socialNetworkingApplication.getOutput();
+        assertThat(output, contains("I love the weather today (5 minutes ago)"));
+    }
+
     private Clock createMockedClock() {
         return new Clock() {
 
