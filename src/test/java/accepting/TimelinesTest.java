@@ -12,7 +12,8 @@ import org.junit.Test;
 public class TimelinesTest {
     private static final String ALICE = "Alice";
     private static final SocialTime PRINTING_TIME = aTime().create();
-    private static final Post A_POST = aPost().create();
+    private static final Post A_POST = aPost().withMessage("a post").create();
+    private static final Post ANOTHER_POST = aPost().withMessage("another post").create();
 
     private Timelines timelines = new Timelines();
 
@@ -35,7 +36,7 @@ public class TimelinesTest {
     @Test
     public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
-        timelines.post("Bob", aPost().withMessage("another post").create());
+        timelines.post("Bob", ANOTHER_POST);
 
         Timeline alicesTimeline = timelines.getPostsFor(ALICE);
 
