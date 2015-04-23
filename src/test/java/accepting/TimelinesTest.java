@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 public class TimelinesTest {
-    private static final String USER = "Alice";
+    private static final String ALICE = "Alice";
     private static final SocialTime PRINTING_TIME = aTime().create();
     private static final Post A_POST = aPost().create();
 
@@ -18,16 +18,26 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
-        Timeline alicesTimeline = timelines.getPostsFor(USER);
+        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
 
         assertThat(alicesTimeline.printTimeline(PRINTING_TIME), is(empty()));
     }
 
     @Test
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
-        timelines.post(USER, A_POST);
+        timelines.post(ALICE, A_POST);
 
-        Timeline alicesTimeline = timelines.getPostsFor(USER);
+        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
+
+        assertThat(alicesTimeline.printTimeline(PRINTING_TIME), contains(A_POST.printAt(PRINTING_TIME)));
+    }
+
+    @Test
+    public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
+        timelines.post(ALICE, A_POST);
+        timelines.post("Bob", aPost().withMessage("another post").create());
+
+        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
 
         assertThat(alicesTimeline.printTimeline(PRINTING_TIME), contains(A_POST.printAt(PRINTING_TIME)));
     }
