@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PublishAcceptanceTest {
+public class SocialNetworkingApplicationTest {
     private SocialNetworkingApplication socialNetworkingApplication;
     private Instant instantReturnedByClock = now();
 
