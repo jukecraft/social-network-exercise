@@ -7,21 +7,7 @@ import org.junit.Test;
 
 public class MessageParserTest {
 
-    private MessageParser parser = new MessageParser();;
-
-    @Test
-    public void givenAnEmptyStringItReturnsAnEmptyMessageObject() {
-        Message message = parser.parse("");
-
-        assertThat(message.toString(), is(""));
-    }
-
-    @Test
-    public void givenAnEmptySecondMessagePartItReturnsAnEmptyMessageObject() {
-        Message message = parser.parse("Alice ->");
-
-        assertThat(message.toString(), is(""));
-    }
+    private MessageParser parser = new MessageParser();
 
     @Test
     public void givenAStringWithAMessageItReturnsAMessageObjectWithThatString() {
