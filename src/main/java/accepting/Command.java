@@ -8,7 +8,7 @@ public class Command {
 
     public String getUser() {
         // TODO Auto-generated method stub
-        return null;
+        return "Alice";
     }
 
 }
