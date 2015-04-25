@@ -4,10 +4,12 @@ public class Command {
 
     private static final String COMMAND_SEPERATOR = " ";
     private String user;
+    private Message message;
 
     public Command(String command) {
         String[] commandParts = command.split(COMMAND_SEPERATOR);
         user = commandParts[0];
+        message = new Message(command.substring(user.length()));
     }
 
     public String getUser() {
@@ -15,7 +17,7 @@ public class Command {
     }
 
     public Message getMessage() {
-        return new Message("-> Good game though.");
+        return message;
     }
 
 }
