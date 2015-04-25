@@ -1,13 +1,14 @@
 package accepting;
 
+import static accepting.builder.PostBuilder.aPost;
+import static accepting.builder.SocialTimeBuilder.aTime;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import accepting.Command;
-
 public class CommandTest {
+    private static final SocialTime TIME = aTime().create();
 
     @Test
     public void whenItParsesACommandFromStringItExtractsTheUser() {
@@ -24,17 +25,23 @@ public class CommandTest {
     }
 
     @Test
-    public void whenItParsesACommandItExtractsTheMessage() {
+    public void givenACommandWithAMessageWhenAPostIsCreatedItReturnsANewPostWithThatExtractedMessageAndTheGivenTime() {
         Command command = new Command("Bob -> Good game though.");
 
-        assertThat(command.getMessage().toString(), is("Good game though."));
+        assertThat(command.createPost(TIME), is(aPost() //
+            .withMessage("Good game though.") //
+            .withPostingTime(TIME) //
+            .create()));
     }
 
     @Test
-    public void whenItParsesACommandWithADifferentMessageItExtractsTheMessage() {
+    public void givenACommandWithADifferentMessageWhenAPostIsCreatedItReturnsANewPostWithThatExtractedMessageAndTheGivenTime() {
         Command command = new Command("Bob -> Damn! We lost!");
 
-        assertThat(command.getMessage().toString(), is("Damn! We lost!"));
+        assertThat(command.createPost(TIME), is(aPost() //
+            .withMessage("Damn! We lost!") //
+            .withPostingTime(TIME) //
+            .create()));
     }
 
 }

@@ -18,10 +18,6 @@ public class Command extends SocialNetworkingValueObject {
         return user;
     }
 
-    public Message getMessage() {
-        return message;
-    }
-
     public Post createPost(SocialTime time) {
         return new Post(message, time);
     }
