@@ -15,7 +15,6 @@ import java.time.Instant;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SocialNetworkingApplicationTest {
@@ -64,7 +63,6 @@ public class SocialNetworkingApplicationTest {
     }
 
     @Test
-    @Ignore
     public void givenBobAndAlicePublishedMessagesWhenAliceViewsHerTimelineOnlyHerPostsAreShown() {
         socialNetworkingApplication.accept("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));

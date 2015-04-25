@@ -7,14 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import accepting.Command;
-import accepting.Post;
 import accepting.SocialTime;
-import accepting.Timeline;
+import accepting.Timelines;
 
 public class SocialNetworkingApplication {
     private static final String POSTING_COMMAND = "->";
-
-    private Timeline posts = new Timeline();
+    private Timelines timelines = new Timelines();
     private List<String> output = new ArrayList<>();
     private Clock clock;
 
@@ -26,20 +24,17 @@ public class SocialNetworkingApplication {
         if (message.contains(POSTING_COMMAND))
             addNewPost(message);
         else
-            addTimelineToOutput();
+            addTimelineToOutput(message);
     }
 
-    private void addTimelineToOutput() {
-        output.addAll(posts.printTimeline(getCurrentTime()));
+    private void addTimelineToOutput(String message) {
+        Command command = new Command(message + " -> qre");
+        output.addAll(timelines.getPostsFor(command.getUser()).printTimeline(getCurrentTime()));
     }
 
     private void addNewPost(String message) {
-        posts.addPost(createNewPost(message));
-    }
-
-    private Post createNewPost(String message) {
         Command command = new Command(message);
-        return command.createPost(getCurrentTime());
+        timelines.post(command.getUser(), command.createPost(getCurrentTime()));
     }
 
     private SocialTime getCurrentTime() {
