@@ -1,5 +1,6 @@
 package application;
 
+import static application.ApplicationFactory.standardConfiguration;
 import static java.time.Duration.ofMinutes;
 import static java.time.Instant.now;
 import static java.time.ZoneId.systemDefault;
@@ -17,7 +18,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SocialNetworkingAcceptanceTest {
+public class ApplicationAcceptanceTest {
     private SocialNetworkingApplication application;
     private Instant instantReturnedByClock = now();
 
@@ -26,7 +27,8 @@ public class SocialNetworkingAcceptanceTest {
         Clock clock = mock(Clock.class);
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        application = new SocialNetworkingApplication(clock);
+        ApplicationFactory factory = standardConfiguration().withClock(clock);
+        application = new SocialNetworkingApplication(factory);
     }
 
     @Test

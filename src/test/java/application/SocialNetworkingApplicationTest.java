@@ -1,80 +1,48 @@
 package application;
 
-import static java.time.Duration.ofMinutes;
-import static java.time.Instant.now;
-import static java.time.ZoneId.systemDefault;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
+import static accepting.builder.SocialTimeBuilder.aTime;
+import static application.ApplicationFactory.standardConfiguration;
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.Clock;
-import java.time.Instant;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import accepting.SocialTime;
+
+import commands.Commands;
+import commons.SocialTimeClock;
+
 public class SocialNetworkingApplicationTest {
+    private static final String COMMAND = "Alice -> I love the weather today";
+    private static final List<String> OUTPUT = asList("Good game though. (1 minute ago)",
+        "Damn! We lost! (2 minutes ago)");
+    private static final SocialTime TIME = aTime().create();
     private SocialNetworkingApplication socialNetworkingApplication;
-    private Instant instantReturnedByClock = now();
+    private Commands commands;
 
     @Before
     public void setUpApplication() {
-        Clock clock = mock(Clock.class);
-        when(clock.getZone()).thenReturn(systemDefault());
-        when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        socialNetworkingApplication = new SocialNetworkingApplication(clock);
+        SocialTimeClock clock = mock(SocialTimeClock.class);
+        when(clock.getLocalDateTime()).thenReturn(TIME);
+        commands = mock(Commands.class);
+        socialNetworkingApplication = new SocialNetworkingApplication(standardConfiguration().withCommands(commands)
+            .withClock(clock));
+
     }
 
     @Test
-    public void givenAlicePublishedAMessageNoOutputIsGiven() {
-        socialNetworkingApplication.accept("Alice -> I love the weather today");
+    public void givenTheCommandsReturnAnOutputWhenTheApplicationAcceptsACommandThatOutputIsReturned() {
+        when(commands.execute(COMMAND, TIME)).thenReturn(OUTPUT);
 
-        List<String> output = socialNetworkingApplication.getOutput();
+        socialNetworkingApplication.accept(COMMAND);
 
-        assertThat(output, is(empty()));
-    }
-
-    @Test
-    public void givenAlicePublishedAMessageWhenSomeoneViewsTheirTimelineItIsShownWithTheTimeSincePosted() {
-        socialNetworkingApplication.accept("Alice -> I love the weather today");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(5));
-
-        socialNetworkingApplication.accept("Alice");
-
-        List<String> output = socialNetworkingApplication.getOutput();
-        assertThat(output, contains("I love the weather today (5 minutes ago)"));
-    }
-
-    @Test
-    public void givenBobPublishedTwoMessagesWhenSomeoneViewsTheirTimelineTheyAreShownNewestFirst() {
-        socialNetworkingApplication.accept("Bob -> Damn! We lost!");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-        socialNetworkingApplication.accept("Bob -> Good game though.");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-
-        socialNetworkingApplication.accept("Bob");
-
-        List<String> output = socialNetworkingApplication.getOutput();
-        assertThat(output, contains("Good game though. (1 minute ago)", "Damn! We lost! (2 minutes ago)"));
-    }
-
-    @Test
-    public void givenBobAndAlicePublishedMessagesWhenAliceViewsHerTimelineOnlyHerPostsAreShown() {
-        socialNetworkingApplication.accept("Alice -> I love the weather today");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
-        socialNetworkingApplication.accept("Bob -> Damn! We lost!");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-        socialNetworkingApplication.accept("Bob -> Good game though.");
-        instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-
-        socialNetworkingApplication.accept("Alice");
-
-        List<String> output = socialNetworkingApplication.getOutput();
-        assertThat(output, contains("I love the weather today (5 minutes ago)"));
+        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT));
     }
 
 }
