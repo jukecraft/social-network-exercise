@@ -33,7 +33,6 @@ public class PostBuilder {
     }
 
     public Post create() {
-        return new Post(new Message(messageText), timestamp);
+        return new Post(new Message("-> " + messageText), timestamp);
     }
-
 }

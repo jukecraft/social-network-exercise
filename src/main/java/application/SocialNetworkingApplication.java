@@ -6,7 +6,7 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-import accepting.MessageParser;
+import accepting.Message;
 import accepting.Post;
 import accepting.SocialTime;
 import accepting.Timeline;
@@ -17,7 +17,6 @@ public class SocialNetworkingApplication {
     private Timeline posts = new Timeline();
     private List<String> output = new ArrayList<>();
     private Clock clock;
-    private MessageParser parser = new MessageParser();
 
     public SocialNetworkingApplication(Clock clock) {
         this.clock = clock;
@@ -39,7 +38,7 @@ public class SocialNetworkingApplication {
     }
 
     private Post createNewPost(String message) {
-        return new Post(parser.parse(message), getCurrentTime());
+        return new Post(new Message(message), getCurrentTime());
     }
 
     private SocialTime getCurrentTime() {
