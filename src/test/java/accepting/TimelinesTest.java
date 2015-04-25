@@ -1,5 +1,6 @@
 package accepting;
 
+import static accepting.UserBuilder.aUser;
 import static accepting.builder.PostBuilder.aPost;
 import static accepting.builder.SocialTimeBuilder.aTime;
 import static org.hamcrest.Matchers.contains;
@@ -10,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 public class TimelinesTest {
-    private static final String ALICE = "Alice";
+    private static final User ALICE = aUser().withName("Alice").create();
     private static final SocialTime PRINTING_TIME = aTime().create();
     private static final Post A_POST = aPost().withMessage("a post").create();
     private static final Post ANOTHER_POST = aPost().withMessage("another post").create();
@@ -36,7 +37,7 @@ public class TimelinesTest {
     @Test
     public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
-        timelines.post("Bob", ANOTHER_POST);
+        timelines.post(aUser().withName("Bob").create(), ANOTHER_POST);
 
         Timeline alicesTimeline = timelines.getPostsFor(ALICE);
 

@@ -5,16 +5,16 @@ import commons.SocialNetworkingValueObject;
 public class Command extends SocialNetworkingValueObject {
     private static final String COMMAND_SEPERATOR = " ";
 
-    private final String user;
+    private final User user;
     private final Message message;
 
     public Command(String command) {
         String[] commandParts = command.split(COMMAND_SEPERATOR);
-        user = commandParts[0];
-        message = new Message(command.substring(user.length()));
+        user = new User(commandParts[0]);
+        message = new Message(command.substring(commandParts[0].length()));
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 

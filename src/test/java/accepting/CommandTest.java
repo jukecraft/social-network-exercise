@@ -1,5 +1,6 @@
 package accepting;
 
+import static accepting.UserBuilder.aUser;
 import static accepting.builder.PostBuilder.aPost;
 import static accepting.builder.SocialTimeBuilder.aTime;
 import static org.hamcrest.Matchers.is;
@@ -14,14 +15,14 @@ public class CommandTest {
     public void whenItParsesACommandFromStringItExtractsTheUser() {
         Command command = new Command("Alice -> I love the weather today");
 
-        assertThat(command.getUser(), is("Alice"));
+        assertThat(command.getUser(), is(aUser().withName("Alice").create()));
     }
 
     @Test
     public void whenItParsesACommandFromAnotherUserItExtractsTheUser() {
         Command command = new Command("Bob -> Good game though.");
 
-        assertThat(command.getUser(), is("Bob"));
+        assertThat(command.getUser(), is(aUser().withName("Bob").create()));
     }
 
     @Test
