@@ -20,4 +20,8 @@ public class Command {
         return message;
     }
 
+    public Post createPost(SocialTime time) {
+        return new Post(message, time);
+    }
+
 }

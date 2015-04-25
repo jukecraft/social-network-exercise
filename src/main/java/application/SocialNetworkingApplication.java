@@ -6,7 +6,7 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-import accepting.Message;
+import accepting.Command;
 import accepting.Post;
 import accepting.SocialTime;
 import accepting.Timeline;
@@ -38,7 +38,8 @@ public class SocialNetworkingApplication {
     }
 
     private Post createNewPost(String message) {
-        return new Post(new Message(message), getCurrentTime());
+        Command command = new Command(message);
+        return command.createPost(getCurrentTime());
     }
 
     private SocialTime getCurrentTime() {
