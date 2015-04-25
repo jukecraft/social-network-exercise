@@ -3,7 +3,6 @@ package accepting;
 import java.util.HashMap;
 
 public class Timelines {
-
     private HashMap<String, Timeline> timelines = new HashMap<>();
 
     public Timeline getPostsFor(String user) {

@@ -1,9 +1,11 @@
 package accepting;
 
-public class Message {
+import commons.SocialNetworkingValueObject;
+
+public class Message extends SocialNetworkingValueObject {
     private static final String MESSAGE_SEPARATOR = "-> ";
 
-    private String message;
+    private final String message;
 
     public Message(String message) {
         String[] messageParts = message.split(MESSAGE_SEPARATOR);

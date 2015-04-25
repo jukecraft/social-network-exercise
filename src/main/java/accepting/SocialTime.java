@@ -6,12 +6,14 @@ import static java.time.Duration.between;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class SocialTime implements Comparable<SocialTime> {
+import commons.SocialNetworkingValueObject;
+
+public class SocialTime extends SocialNetworkingValueObject implements Comparable<SocialTime> {
     private static final String UNIT_ONE_MINUTE = "minute";
     private static final String UNIT_MULTIPLE_MINUTES = "minutes";
     private static final String TIMESTAMP_PATTERN = "{0} {1} ago";
 
-    private LocalDateTime timestamp;
+    private final LocalDateTime timestamp;
 
     public SocialTime(LocalDateTime timestamp) {
         this.timestamp = timestamp;

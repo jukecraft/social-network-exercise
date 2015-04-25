@@ -2,11 +2,13 @@ package accepting;
 
 import static java.text.MessageFormat.format;
 
-public class Post implements Comparable<Post> {
+import commons.SocialNetworkingValueObject;
 
+public class Post extends SocialNetworkingValueObject implements Comparable<Post> {
     private static final String POST_PRINT_FORMAT = "{0} ({1})";
-    private Message message;
-    private SocialTime postingTime;
+
+    private final Message message;
+    private final SocialTime postingTime;
 
     public Post(Message message, SocialTime postingTime) {
         this.message = message;

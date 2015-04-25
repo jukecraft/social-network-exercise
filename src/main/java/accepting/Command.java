@@ -1,10 +1,12 @@
 package accepting;
 
-public class Command {
+import commons.SocialNetworkingValueObject;
+
+public class Command extends SocialNetworkingValueObject {
     private static final String COMMAND_SEPERATOR = " ";
 
-    private String user;
-    private Message message;
+    private final String user;
+    private final Message message;
 
     public Command(String command) {
         String[] commandParts = command.split(COMMAND_SEPERATOR);
