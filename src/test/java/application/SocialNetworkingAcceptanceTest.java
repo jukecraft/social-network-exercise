@@ -15,7 +15,6 @@ import java.time.Instant;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SocialNetworkingAcceptanceTest {
@@ -31,7 +30,6 @@ public class SocialNetworkingAcceptanceTest {
     }
 
     @Test
-    @Ignore
     public void givenAliceAndBobPublishedMessagesWhenTheyLookAtTheirWallsTheirPostsAreListedNewestFirst() {
         application.accept("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
