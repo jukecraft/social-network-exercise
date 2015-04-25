@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CommandTest {
 
     @Test
-    public void whenItParsesAStringItExtractsTheUser() {
+    public void whenItParsesACommandFromStringItExtractsTheUser() {
         Command command = new Command("Alice -> I love the weather today");
 
         assertThat(command.getUser(), is("Alice"));
