@@ -1,8 +1,8 @@
 package accepting;
 
 public class Command {
-
     private static final String COMMAND_SEPERATOR = " ";
+
     private String user;
     private Message message;
 
