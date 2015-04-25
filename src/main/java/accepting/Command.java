@@ -14,9 +14,8 @@ public class Command {
         return user;
     }
 
-    public Object getMessage() {
-        // TODO Auto-generated method stub
-        return null;
+    public Message getMessage() {
+        return new Message("-> Good game though.");
     }
 
 }
