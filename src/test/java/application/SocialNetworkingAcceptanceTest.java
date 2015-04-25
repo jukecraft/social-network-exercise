@@ -18,8 +18,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class PublishAcceptanceTest {
-    private SocialNetworkingApplication socialNetworkingApplication;
+public class SocialNetworkingAcceptanceTest {
+    private SocialNetworkingApplication application;
     private Instant instantReturnedByClock = now();
 
     @Before
@@ -27,28 +27,28 @@ public class PublishAcceptanceTest {
         Clock clock = mock(Clock.class);
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        socialNetworkingApplication = new SocialNetworkingApplication(clock);
+        application = new SocialNetworkingApplication(clock);
     }
 
     @Test
     @Ignore
-    public void givenAlicePublishedAMessageNoOutputIsGiven() {
-        socialNetworkingApplication.accept("Alice -> I love the weather today");
+    public void givenAliceAndBobPublishedMessagesWhenTheyLookAtTheirWallsTheirPostsAreListedNewestFirst() {
+        application.accept("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
-        socialNetworkingApplication.accept("Bob -> Damn! We lost!");
+        application.accept("Bob -> Damn! We lost!");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-        socialNetworkingApplication.accept("Bob -> Good game though.");
+        application.accept("Bob -> Good game though.");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
 
-        List<String> output = socialNetworkingApplication.getOutput();
+        List<String> output = application.getOutput();
         assertThat(output, is(empty()));
 
-        socialNetworkingApplication.accept("Alice");
-        output = socialNetworkingApplication.getOutput();
+        application.accept("Alice");
+        output = application.getOutput();
         assertThat(output, contains("I love the weather today (5 minutes ago)"));
 
-        socialNetworkingApplication.accept("Bob");
-        output = socialNetworkingApplication.getOutput();
+        application.accept("Bob");
+        output = application.getOutput();
         assertThat(output, contains("Good game though. (1 minute ago)", "Damn! We lost! (2 minutes ago)"));
     }
 
