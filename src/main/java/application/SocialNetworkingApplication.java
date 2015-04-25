@@ -8,6 +8,7 @@ import java.util.List;
 
 import accepting.PostCommand;
 import accepting.SocialTime;
+import accepting.UserCommand;
 import accepting.Timelines;
 
 public class SocialNetworkingApplication {
@@ -28,7 +29,7 @@ public class SocialNetworkingApplication {
     }
 
     private void addTimelineToOutput(String message) {
-        PostCommand command = new PostCommand(message + " -> qre");
+        UserCommand command = new UserCommand(message);
         output.addAll(timelines.getPostsFor(command.getUser()).printTimeline(getCurrentTime()));
     }
 
