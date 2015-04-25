@@ -7,17 +7,16 @@ import time.SocialTime;
 
 public class Commands {
     private List<Command> commands;
-    private static final String COMMAND_SEPERATOR = " ";
 
     public Commands(List<Command> commands) {
-
         this.commands = commands;
     }
 
     public List<String> execute(String command, SocialTime time) {
-        String[] commandParts = command.split(COMMAND_SEPERATOR);
-        User user = new User(commandParts[0]);
-        String commandWithoutUser = command.substring(commandParts[0].length());
+        User user = new User(command);
+
+        String commandWithoutUser = command.substring(user.lengthOfName());
+
         List<String> output = new ArrayList<>();
         for (Command command2 : commands) {
             if (command2.isApplicable(commandWithoutUser))
