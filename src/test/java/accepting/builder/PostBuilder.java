@@ -22,17 +22,21 @@ public class PostBuilder {
         return this;
     }
 
-    public PostBuilder withPostingTime(LocalDateTime timestamp) {
-        this.timestamp = aTime().withTimestamp(timestamp).create();
+    public PostBuilder withPostingTime(SocialTime timestamp) {
+        this.timestamp = timestamp;
         return this;
     }
 
-    public PostBuilder withPostingTime(SocialTimeBuilder timestamp) {
-        this.timestamp = timestamp.create();
-        return this;
+    public PostBuilder withPostingTime(SocialTimeBuilder timestampBuilder) {
+        return withPostingTime(timestampBuilder.create());
+    }
+
+    public PostBuilder withPostingTime(LocalDateTime timestamp) {
+        return withPostingTime(aTime().withTimestamp(timestamp));
     }
 
     public Post create() {
         return new Post(new Message("-> " + messageText), timestamp);
     }
+
 }
