@@ -1,41 +1,33 @@
 package application;
 
 import static java.time.LocalDateTime.now;
+import static java.util.Arrays.asList;
 
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-import accepting.PostCommand;
 import accepting.SocialTime;
-import accepting.UserCommand;
 import accepting.Timelines;
 
+import commands.Commands;
+import commands.PostCommand;
+import commands.TimelineCommand;
+
 public class SocialNetworkingApplication {
-    private static final String POSTING_COMMAND = "->";
-    private Timelines timelines = new Timelines();
+
     private List<String> output = new ArrayList<>();
     private Clock clock;
+    private Commands commands;
 
     public SocialNetworkingApplication(Clock clock) {
         this.clock = clock;
+        Timelines timelines = new Timelines();
+        commands = new Commands(asList(new PostCommand(timelines), new TimelineCommand(timelines)));
     }
 
-    public void accept(String message) {
-        if (message.contains(POSTING_COMMAND))
-            addNewPost(message);
-        else
-            addTimelineToOutput(message);
-    }
-
-    private void addTimelineToOutput(String message) {
-        UserCommand command = new UserCommand(message);
-        output.addAll(timelines.getPostsFor(command.getUser()).printTimeline(getCurrentTime()));
-    }
-
-    private void addNewPost(String message) {
-        PostCommand command = new PostCommand(message);
-        timelines.post(command.getUser(), command.createPost(getCurrentTime()));
+    public void accept(String command) {
+        output = commands.execute(command, getCurrentTime());
     }
 
     private SocialTime getCurrentTime() {
