@@ -1,13 +1,10 @@
 package accepting;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Timelines {
     private HashMap<User, Timeline> timelines = new HashMap<>();
-
-    public Timeline getPostsFor(User user) {
-        return findTimeline(user);
-    }
 
     public void post(User user, Post post) {
         Timeline timeline = findTimeline(user);
@@ -17,6 +14,10 @@ public class Timelines {
 
     private Timeline findTimeline(User user) {
         return timelines.getOrDefault(user, new Timeline());
+    }
+
+    public List<String> printTimeline(User user, SocialTime time) {
+        return findTimeline(user).printTimeline(time);
     }
 
 }

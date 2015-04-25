@@ -8,6 +8,8 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class TimelinesTest {
@@ -20,18 +22,18 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
-        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
+        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline.printTimeline(PRINTING_TIME), is(empty()));
+        assertThat(alicesTimeline, is(empty()));
     }
 
     @Test
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
 
-        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
+        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline.printTimeline(PRINTING_TIME), contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline, contains(A_POST.printAt(PRINTING_TIME)));
     }
 
     @Test
@@ -39,9 +41,9 @@ public class TimelinesTest {
         timelines.post(ALICE, A_POST);
         timelines.post(aUser().withName("Bob").create(), ANOTHER_POST);
 
-        Timeline alicesTimeline = timelines.getPostsFor(ALICE);
+        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline.printTimeline(PRINTING_TIME), contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline, contains(A_POST.printAt(PRINTING_TIME)));
     }
 
 }
