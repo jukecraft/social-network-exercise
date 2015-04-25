@@ -1,6 +1,7 @@
-package accepting;
+package timeline;
 
 import static java.text.MessageFormat.format;
+import time.SocialTime;
 
 import commons.SocialNetworkingValueObject;
 

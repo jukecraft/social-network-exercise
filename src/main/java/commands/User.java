@@ -1,4 +1,4 @@
-package accepting;
+package commands;
 
 import commons.SocialNetworkingValueObject;
 

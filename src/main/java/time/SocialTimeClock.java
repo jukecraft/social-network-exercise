@@ -1,10 +1,8 @@
-package commons;
+package time;
 
 import static java.time.LocalDateTime.now;
 
 import java.time.Clock;
-
-import accepting.SocialTime;
 
 public class SocialTimeClock {
 

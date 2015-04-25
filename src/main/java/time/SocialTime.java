@@ -1,4 +1,4 @@
-package accepting;
+package time;
 
 import static java.text.MessageFormat.format;
 import static java.time.Duration.between;

@@ -1,12 +1,12 @@
-package accepting.builder;
+package timeline;
 
-import static accepting.builder.SocialTimeBuilder.aTime;
+import static timeline.SocialTimeBuilder.aTime;
 
 import java.time.LocalDateTime;
 
-import accepting.Message;
-import accepting.Post;
-import accepting.SocialTime;
+import time.SocialTime;
+import timeline.Message;
+import timeline.Post;
 
 public class PostBuilder {
 

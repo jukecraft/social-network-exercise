@@ -1,22 +1,21 @@
 package application;
 
-import static accepting.builder.SocialTimeBuilder.aTime;
 import static application.ApplicationFactory.standardConfiguration;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static timeline.SocialTimeBuilder.aTime;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import accepting.SocialTime;
-
+import time.SocialTime;
+import time.SocialTimeClock;
 import commands.Commands;
-import commons.SocialTimeClock;
 
 public class SocialNetworkingApplicationTest {
     private static final String COMMAND = "Alice -> I love the weather today";

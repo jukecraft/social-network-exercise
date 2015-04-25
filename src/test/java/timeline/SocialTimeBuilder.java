@@ -1,4 +1,4 @@
-package accepting.builder;
+package timeline;
 
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.ofInstant;
@@ -7,7 +7,7 @@ import static java.time.ZoneId.systemDefault;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-import accepting.SocialTime;
+import time.SocialTime;
 
 public class SocialTimeBuilder {
 

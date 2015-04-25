@@ -1,16 +1,19 @@
-package accepting;
+package timeline;
 
-import static accepting.UserBuilder.aUser;
-import static accepting.builder.PostBuilder.aPost;
-import static accepting.builder.SocialTimeBuilder.aTime;
+import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static timeline.PostBuilder.aPost;
+import static timeline.SocialTimeBuilder.aTime;
 
 import java.util.List;
 
 import org.junit.Test;
+
+import commands.User;
+import time.SocialTime;
 
 public class TimelinesTest {
     private static final User ALICE = aUser().withName("Alice").create();

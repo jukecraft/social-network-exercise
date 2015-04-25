@@ -1,4 +1,4 @@
-package accepting;
+package timeline;
 
 import commons.SocialNetworkingValueObject;
 

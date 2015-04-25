@@ -4,11 +4,10 @@ import static java.util.Collections.emptyList;
 
 import java.util.List;
 
-import accepting.Message;
-import accepting.Post;
-import accepting.SocialTime;
-import accepting.Timelines;
-import accepting.User;
+import time.SocialTime;
+import timeline.Message;
+import timeline.Post;
+import timeline.Timelines;
 
 public class PostCommand implements Command {
 

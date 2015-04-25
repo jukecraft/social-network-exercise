@@ -25,10 +25,11 @@ public class ApplicationAcceptanceTest {
     @Before
     public void setUpApplication() {
         Clock clock = mock(Clock.class);
+
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        ApplicationFactory factory = standardConfiguration().withClock(clock);
-        application = new SocialNetworkingApplication(factory);
+
+        application = new SocialNetworkingApplication(standardConfiguration().withClock(clock));
     }
 
     @Test

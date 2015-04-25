@@ -1,7 +1,6 @@
 package commands;
 
-import static accepting.UserBuilder.aUser;
-import static accepting.builder.SocialTimeBuilder.aTime;
+import static commands.UserBuilder.aUser;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
@@ -10,14 +9,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static timeline.SocialTimeBuilder.aTime;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import accepting.SocialTime;
-import accepting.User;
+import time.SocialTime;
 
 public class CommandsTest {
     private static final String USERNAME = "Alice";

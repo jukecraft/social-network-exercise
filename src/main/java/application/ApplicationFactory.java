@@ -5,12 +5,12 @@ import static java.util.Arrays.asList;
 
 import java.time.Clock;
 
-import accepting.Timelines;
+import time.SocialTimeClock;
+import timeline.Timelines;
 
 import commands.Commands;
 import commands.PostCommand;
 import commands.TimelineCommand;
-import commons.SocialTimeClock;
 
 public class ApplicationFactory {
 

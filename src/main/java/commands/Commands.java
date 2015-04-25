@@ -3,8 +3,7 @@ package commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import accepting.SocialTime;
-import accepting.User;
+import time.SocialTime;
 
 public class Commands {
     private List<Command> commands;

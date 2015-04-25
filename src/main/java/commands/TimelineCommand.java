@@ -2,9 +2,8 @@ package commands;
 
 import java.util.List;
 
-import accepting.SocialTime;
-import accepting.Timelines;
-import accepting.User;
+import time.SocialTime;
+import timeline.Timelines;
 
 public class TimelineCommand implements Command {
 

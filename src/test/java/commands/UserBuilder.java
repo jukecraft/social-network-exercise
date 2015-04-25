@@ -1,4 +1,6 @@
-package accepting;
+package commands;
+
+import commands.User;
 
 public class UserBuilder {
     private String name = "userName";

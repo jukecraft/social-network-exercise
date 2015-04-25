@@ -1,20 +1,19 @@
 package commands;
 
-import static accepting.UserBuilder.aUser;
-import static accepting.builder.PostBuilder.aPost;
-import static accepting.builder.SocialTimeBuilder.aTime;
+import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static timeline.PostBuilder.aPost;
+import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
 
-import accepting.Post;
-import accepting.SocialTime;
-import accepting.Timelines;
-import accepting.User;
+import time.SocialTime;
+import timeline.Post;
+import timeline.Timelines;
 
 public class PostCommandTest {
     private static final SocialTime TIME = aTime().create();

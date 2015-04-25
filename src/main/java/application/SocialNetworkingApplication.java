@@ -3,8 +3,9 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import time.SocialTimeClock;
+
 import commands.Commands;
-import commons.SocialTimeClock;
 
 public class SocialNetworkingApplication {
 

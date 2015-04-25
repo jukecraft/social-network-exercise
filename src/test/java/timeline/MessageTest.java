@@ -1,4 +1,4 @@
-package accepting;
+package timeline;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

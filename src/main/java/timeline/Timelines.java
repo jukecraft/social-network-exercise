@@ -1,7 +1,11 @@
-package accepting;
+package timeline;
 
 import java.util.HashMap;
 import java.util.List;
+
+import commands.User;
+
+import time.SocialTime;
 
 public class Timelines {
     private HashMap<User, Timeline> timelines = new HashMap<>();

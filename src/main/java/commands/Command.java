@@ -2,8 +2,7 @@ package commands;
 
 import java.util.List;
 
-import accepting.SocialTime;
-import accepting.User;
+import time.SocialTime;
 
 public interface Command {
     boolean isApplicable(String command);

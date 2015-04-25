@@ -1,12 +1,12 @@
-package accepting;
+package timeline;
 
-import static accepting.builder.PostBuilder.aPost;
-import static accepting.builder.SocialTimeBuilder.aTime;
 import static java.util.Arrays.asList;
 import static java.util.Collections.sort;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static timeline.PostBuilder.aPost;
+import static timeline.SocialTimeBuilder.aTime;
 
 import java.util.List;
 
