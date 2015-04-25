@@ -1,15 +1,15 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import time.SocialTimeClock;
+import timeline.Output;
 
 import commands.Commands;
 
 public class SocialNetworkingApplication {
 
-    private List<String> output = new ArrayList<>();
+    private Output output = new Output();
     private SocialTimeClock clock;
     private Commands commands;
 
@@ -23,7 +23,7 @@ public class SocialNetworkingApplication {
     }
 
     public List<String> getOutput() {
-        return output;
+        return output.getOutput();
     }
 
 }

@@ -8,19 +8,19 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static timeline.SocialTimeBuilder.aTime;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import time.SocialTime;
 import time.SocialTimeClock;
+import timeline.Output;
+
 import commands.Commands;
 
 public class SocialNetworkingApplicationTest {
     private static final String COMMAND = "Alice -> I love the weather today";
-    private static final List<String> OUTPUT = asList("Good game though. (1 minute ago)",
-        "Damn! We lost! (2 minutes ago)");
+    private static final Output OUTPUT = new Output(asList("Good game though. (1 minute ago)",
+        "Damn! We lost! (2 minutes ago)"));
     private static final SocialTime TIME = aTime().create();
     private SocialNetworkingApplication socialNetworkingApplication;
     private Commands commands;
@@ -41,7 +41,7 @@ public class SocialNetworkingApplicationTest {
 
         socialNetworkingApplication.accept(COMMAND);
 
-        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT));
+        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT.getOutput()));
     }
 
 }

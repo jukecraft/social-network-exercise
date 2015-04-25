@@ -11,12 +11,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static timeline.SocialTimeBuilder.aTime;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import time.SocialTime;
+import timeline.Output;
 
 public class CommandsTest {
     private static final String USERNAME = "Alice";
@@ -33,6 +32,8 @@ public class CommandsTest {
     public void setUpCommands() {
         when(applicableCommand.isApplicable(COMMAND)).thenReturn(true);
         when(notApplicableCommand.isApplicable(COMMAND)).thenReturn(false);
+        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND, TIME)).thenReturn(
+            new Output(asList(OUTPUT1, OUTPUT2)));
     }
 
     @Test
@@ -47,12 +48,11 @@ public class CommandsTest {
 
     @Test
     public void givenMultipleCommandsTheOutputIsCollected() {
-        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND, TIME)).thenReturn(asList(OUTPUT1, OUTPUT2));
         Commands commands = new Commands(asList(applicableCommand, applicableCommand));
 
-        List<String> output = commands.execute(USERNAME + COMMAND, TIME);
+        Output output = commands.execute(USERNAME + COMMAND, TIME);
 
-        assertThat(output, contains(OUTPUT1, OUTPUT2, OUTPUT1, OUTPUT2));
+        assertThat(output.getOutput(), contains(OUTPUT1, OUTPUT2, OUTPUT1, OUTPUT2));
     }
 
 }

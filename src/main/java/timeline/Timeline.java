@@ -10,11 +10,11 @@ import time.SocialTime;
 public class Timeline {
     private List<Post> posts = new ArrayList<>();
 
-    public List<String> printTimeline(SocialTime printingTime) {
-        return posts.stream() //
+    public Output printTimeline(SocialTime printingTime) {
+        return new Output(posts.stream() //
             .sorted() //
             .map(post -> post.printAt(printingTime)) //
-            .collect(toList());
+            .collect(toList()));
     }
 
     public void addPost(Post create) {

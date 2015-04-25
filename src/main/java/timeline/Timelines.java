@@ -1,11 +1,10 @@
 package timeline;
 
 import java.util.HashMap;
-import java.util.List;
-
-import commands.User;
 
 import time.SocialTime;
+
+import commands.User;
 
 public class Timelines {
     private HashMap<User, Timeline> timelines = new HashMap<>();
@@ -20,7 +19,7 @@ public class Timelines {
         return timelines.getOrDefault(user, new Timeline());
     }
 
-    public List<String> printTimeline(User user, SocialTime time) {
+    public Output printTimeline(User user, SocialTime time) {
         return findTimeline(user).printTimeline(time);
     }
 

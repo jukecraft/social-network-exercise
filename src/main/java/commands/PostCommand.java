@@ -1,11 +1,8 @@
 package commands;
 
-import static java.util.Collections.emptyList;
-
-import java.util.List;
-
 import time.SocialTime;
 import timeline.Message;
+import timeline.Output;
 import timeline.Post;
 import timeline.Timelines;
 
@@ -25,8 +22,8 @@ public class PostCommand implements Command {
     }
 
     @Override
-    public List<String> executeCommand(User user, String command, SocialTime time) {
+    public Output executeCommand(User user, String command, SocialTime time) {
         timelines.post(user, new Post(new Message(command), time));
-        return emptyList();
+        return new Output();
     }
 }

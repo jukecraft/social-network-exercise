@@ -1,8 +1,7 @@
 package commands;
 
-import java.util.List;
-
 import time.SocialTime;
+import timeline.Output;
 import timeline.Timelines;
 
 public class TimelineCommand implements Command {
@@ -19,7 +18,7 @@ public class TimelineCommand implements Command {
     }
 
     @Override
-    public List<String> executeCommand(User user, String command, SocialTime time) {
+    public Output executeCommand(User user, String command, SocialTime time) {
         return timelines.printTimeline(user, time);
     }
 }

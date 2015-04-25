@@ -55,6 +55,6 @@ public class PostCommandTest {
 
     @Test
     public void itReturnsNoOutput() {
-        assertThat(command.executeCommand(ALICE, "-> dsg", TIME), is(empty()));
+        assertThat(command.executeCommand(ALICE, "-> dsg", TIME).getOutput(), is(empty()));
     }
 }

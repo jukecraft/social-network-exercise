@@ -2,7 +2,6 @@ package commands;
 
 import static commands.UserBuilder.aUser;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -10,34 +9,33 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static timeline.SocialTimeBuilder.aTime;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import time.SocialTime;
+import timeline.Output;
 import timeline.Timelines;
 
 public class TimelineCommandTest {
     private static final SocialTime TIME = aTime().create();
     private static final User ALICE = aUser().withName("Alice").create();
-    private static final List<String> OUTPUT = asList("output", "another output");
+    private static final Output OUTPUT = new Output(asList("output", "another output"));
     private Timelines timelines = mock(Timelines.class);
     private TimelineCommand command = new TimelineCommand(timelines);
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
-        when(timelines.printTimeline(ALICE, TIME)).thenReturn(emptyList());
+        when(timelines.printTimeline(ALICE, TIME)).thenReturn(new Output());
 
-        List<String> output = command.executeCommand(ALICE, "", TIME);
+        Output output = command.executeCommand(ALICE, "", TIME);
 
-        assertThat(output, is(empty()));
+        assertThat(output.getOutput(), is(empty()));
     }
 
     @Test
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
         when(timelines.printTimeline(ALICE, TIME)).thenReturn(OUTPUT);
 
-        List<String> output = command.executeCommand(ALICE, "", TIME);
+        Output output = command.executeCommand(ALICE, "", TIME);
 
         assertThat(output, is(OUTPUT));
     }

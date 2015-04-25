@@ -8,8 +8,6 @@ import static org.junit.Assert.assertThat;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import time.SocialTime;
@@ -29,18 +27,18 @@ public class TimelineTest {
 
     @Test
     public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
-        List<String> output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output, is(empty()));
+        assertThat(output.getOutput(), is(empty()));
     }
 
     @Test
     public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
         timeline.addPost(A_POST);
 
-        List<String> output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output, contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(output.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
     }
 
     @Test
@@ -48,8 +46,8 @@ public class TimelineTest {
         timeline.addPost(A_POST);
         timeline.addPost(LATER_POST);
 
-        List<String> output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output, contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
+        assertThat(output.getOutput(), contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
     }
 }

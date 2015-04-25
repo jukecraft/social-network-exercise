@@ -1,9 +1,9 @@
 package commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import time.SocialTime;
+import timeline.Output;
 
 public class Commands {
     private List<Command> commands;
@@ -12,15 +12,15 @@ public class Commands {
         this.commands = commands;
     }
 
-    public List<String> execute(String command, SocialTime time) {
+    public Output execute(String command, SocialTime time) {
         User user = new User(command);
 
         String commandWithoutUser = command.substring(user.lengthOfName());
 
-        List<String> output = new ArrayList<>();
+        Output output = new Output();
         for (Command command2 : commands) {
             if (command2.isApplicable(commandWithoutUser))
-                output.addAll(command2.executeCommand(user, commandWithoutUser, time));
+                output.add(command2.executeCommand(user, commandWithoutUser, time));
         }
         return output;
     }

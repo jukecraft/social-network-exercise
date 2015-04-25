@@ -2,18 +2,16 @@ package timeline;
 
 import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
-import java.util.List;
-
 import org.junit.Test;
 
-import commands.User;
 import time.SocialTime;
+
+import commands.User;
 
 public class TimelinesTest {
     private static final User ALICE = aUser().withName("Alice").create();
@@ -25,18 +23,18 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
-        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline, is(empty()));
+        assertThat(alicesTimeline, is(new Output()));
     }
 
     @Test
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
 
-        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline, contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
     }
 
     @Test
@@ -44,9 +42,9 @@ public class TimelinesTest {
         timelines.post(ALICE, A_POST);
         timelines.post(aUser().withName("Bob").create(), ANOTHER_POST);
 
-        List<String> alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline, contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
     }
 
 }
