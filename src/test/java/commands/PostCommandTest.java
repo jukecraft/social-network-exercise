@@ -3,6 +3,7 @@ package commands;
 import static accepting.UserBuilder.aUser;
 import static accepting.builder.PostBuilder.aPost;
 import static accepting.builder.SocialTimeBuilder.aTime;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -51,5 +52,10 @@ public class PostCommandTest {
     @Test
     public void itIsNotApplicableIfItDoesntContainAnArrow() {
         assertThat(command.isApplicable("??"), is(false));
+    }
+
+    @Test
+    public void itReturnsNoOutput() {
+        assertThat(command.executeCommand(ALICE, "-> dsg", TIME), is(empty()));
     }
 }
