@@ -28,4 +28,11 @@ public class CommandTest {
         assertThat(command.getMessage().toString(), is("Good game though."));
     }
 
+    @Test
+    public void whenItParsesACommandWithADifferentMessageItExtractsTheMessage() {
+        Command command = new Command("Bob -> Damn! We lost!");
+
+        assertThat(command.getMessage().toString(), is("Damn! We lost!"));
+    }
+
 }
