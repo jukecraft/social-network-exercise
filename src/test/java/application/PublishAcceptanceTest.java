@@ -2,14 +2,16 @@ package application;
 
 import static java.time.Duration.ofMinutes;
 import static java.time.Instant.now;
+import static java.time.ZoneId.systemDefault;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.util.List;
 
 import org.junit.Before;
@@ -18,12 +20,13 @@ import org.junit.Test;
 
 public class PublishAcceptanceTest {
     private SocialNetworkingApplication socialNetworkingApplication;
-    private Clock clock;
     private Instant instantReturnedByClock = now();
 
     @Before
     public void setUpApplication() {
-        clock = createMockedClock();
+        Clock clock = mock(Clock.class);
+        when(clock.getZone()).thenReturn(systemDefault());
+        when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
         socialNetworkingApplication = new SocialNetworkingApplication(clock);
     }
 
@@ -76,23 +79,4 @@ public class PublishAcceptanceTest {
         assertThat(output, contains("I love the weather today (5 minutes ago)"));
     }
 
-    private Clock createMockedClock() {
-        return new Clock() {
-
-            @Override
-            public Clock withZone(ZoneId zone) {
-                return this;
-            }
-
-            @Override
-            public Instant instant() {
-                return instantReturnedByClock;
-            }
-
-            @Override
-            public ZoneId getZone() {
-                return systemDefaultZone().getZone();
-            }
-        };
-    }
 }
