@@ -6,7 +6,7 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
-import accepting.Command;
+import accepting.PostCommand;
 import accepting.SocialTime;
 import accepting.Timelines;
 
@@ -28,12 +28,12 @@ public class SocialNetworkingApplication {
     }
 
     private void addTimelineToOutput(String message) {
-        Command command = new Command(message + " -> qre");
+        PostCommand command = new PostCommand(message + " -> qre");
         output.addAll(timelines.getPostsFor(command.getUser()).printTimeline(getCurrentTime()));
     }
 
     private void addNewPost(String message) {
-        Command command = new Command(message);
+        PostCommand command = new PostCommand(message);
         timelines.post(command.getUser(), command.createPost(getCurrentTime()));
     }
 

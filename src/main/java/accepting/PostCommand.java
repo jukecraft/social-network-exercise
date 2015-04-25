@@ -2,13 +2,13 @@ package accepting;
 
 import commons.SocialNetworkingValueObject;
 
-public class Command extends SocialNetworkingValueObject {
+public class PostCommand extends SocialNetworkingValueObject {
     private static final String COMMAND_SEPERATOR = " ";
 
     private final User user;
     private final Message message;
 
-    public Command(String command) {
+    public PostCommand(String command) {
         String[] commandParts = command.split(COMMAND_SEPERATOR);
         user = new User(commandParts[0]);
         message = new Message(command.substring(commandParts[0].length()));
