@@ -14,4 +14,11 @@ public class CommandTest {
         assertThat(command.getUser(), is("Alice"));
     }
 
+    @Test
+    public void whenItParsesACommandFromAnotherUserItExtractsTheUser() {
+        Command command = new Command("Bob -> Good game though.");
+
+        assertThat(command.getUser(), is("Bob"));
+    }
+
 }
