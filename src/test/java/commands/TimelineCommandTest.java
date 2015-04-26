@@ -29,7 +29,7 @@ public class TimelineCommandTest {
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
         when(timelines.collectPosts(ALICE)).thenReturn(new Output());
 
-        Output output = command.executeCommand(ALICE, TIMELINE_COMMAND, TIME);
+        Output output = command.executeCommand(ALICE, TIMELINE_COMMAND);
 
         assertThat(output, is(anEmptyOutput().create()));
     }
@@ -38,7 +38,7 @@ public class TimelineCommandTest {
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
         when(timelines.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        Output output = command.executeCommand(ALICE, TIMELINE_COMMAND, TIME);
+        Output output = command.executeCommand(ALICE, TIMELINE_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }

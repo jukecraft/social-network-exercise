@@ -21,7 +21,7 @@ public class Commands {
         return commands.stream() //
             .filter(candidate -> candidate.isApplicable(commandParameter)) //
             .findFirst() //
-            .map(command -> command.executeCommand(user, commandParameter, time)) //
+            .map(command -> command.executeCommand(user, commandParameter)) //
             .orElse(new Output());
     }
 }

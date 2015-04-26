@@ -1,13 +1,10 @@
 package commands;
 
-import time.SocialTime;
 import timeline.Message;
 import timeline.Output;
-import timeline.Post;
 import timeline.TimelineService;
 
 public class PostCommand implements Command {
-
     private static final String POSTING_COMMAND = " -> ";
 
     private TimelineService timelines;
@@ -22,8 +19,8 @@ public class PostCommand implements Command {
     }
 
     @Override
-    public Output executeCommand(User user, CommandParameter command, SocialTime time) {
-        timelines.post(user, new Post(new Message(command), time));
+    public Output executeCommand(User user, CommandParameter command) {
+        timelines.post(user, new Message(command));
         return new Output();
     }
 }

@@ -30,8 +30,9 @@ public class SocialNetworkingApplicationTest {
         SocialTimeClock clock = mock(SocialTimeClock.class);
         when(clock.getLocalDateTime()).thenReturn(TIME);
         commands = mock(Commands.class);
-        socialNetworkingApplication = new SocialNetworkingApplication(standardConfiguration().withCommands(commands)
-            .withClock(clock));
+        socialNetworkingApplication = new SocialNetworkingApplication(standardConfiguration() //
+            .withClock(clock) //
+            .withCommands(commands));
     }
 
     @Test

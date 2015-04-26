@@ -33,7 +33,7 @@ public class CommandsTest {
     public void setUpCommands() {
         when(applicableCommand.isApplicable(COMMAND_PARAMETER)).thenReturn(true);
         when(notApplicableCommand.isApplicable(COMMAND_PARAMETER)).thenReturn(false);
-        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND_PARAMETER, TIME)).thenReturn(OUTPUT);
+        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND_PARAMETER)).thenReturn(OUTPUT);
     }
 
     @Test
@@ -42,9 +42,9 @@ public class CommandsTest {
 
         commands.execute(COMMAND_PARAMETER, TIME);
 
-        verify(applicableCommand).executeCommand(EXPECTED_USER, COMMAND_PARAMETER, TIME);
+        verify(applicableCommand).executeCommand(EXPECTED_USER, COMMAND_PARAMETER);
         verify(notApplicableCommand, never()) //
-            .executeCommand(any(User.class), any(CommandParameter.class), any(SocialTime.class));
+            .executeCommand(any(User.class), any(CommandParameter.class));
     }
 
     @Test

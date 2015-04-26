@@ -1,16 +1,16 @@
 package timeline;
 
+import time.SocialTimeClock;
+
 import commands.User;
 
 public class TimelineService {
     private final Timelines timelines;
+    private final SocialTimeClock clock;
 
-    public TimelineService(Timelines timelines) {
+    public TimelineService(Timelines timelines, SocialTimeClock clock) {
         this.timelines = timelines;
-    }
-
-    public void post(User user, Post post) {
-        timelines.post(user, post);
+        this.clock = clock;
     }
 
     public Output collectPosts(User user) {
@@ -20,4 +20,7 @@ public class TimelineService {
     public void registerFollowing(User follower, User follows) {
     }
 
+    public void post(User author, Message message) {
+        timelines.post(author, new Post(message, clock.getLocalDateTime()));
+    }
 }

@@ -8,42 +8,34 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.PostBuilder.aPost;
-import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
 
-import time.SocialTime;
+import timeline.Message;
 import timeline.Output;
-import timeline.Post;
 import timeline.TimelineService;
 
 public class PostCommandTest {
-    private static final SocialTime TIME = aTime().create();
     private static final User ALICE = aUser().withName("Alice").create();
     private TimelineService timelines = mock(TimelineService.class);
     private PostCommand command = new PostCommand(timelines);
 
     @Test
-    public void itCreatesANewPostInTheTimelinesFromTheGivenMessageUserAndTime() {
-        command.executeCommand(ALICE, aCommand().withCommand(" -> I love the weather today").create(), TIME);
+    public void itPostANewMessageInTheTimelinesForTheGivenUser() {
+        CommandParameter commandParameter = aCommand().withCommand(" -> I love the weather today").create();
 
-        Post expectedPost = aPost() //
-            .withMessage("I love the weather today") //
-            .withPostingTime(TIME) //
-            .create();
-        verify(timelines).post(ALICE, expectedPost);
+        command.executeCommand(ALICE, commandParameter);
+
+        verify(timelines).post(ALICE, new Message(commandParameter));
     }
 
     @Test
-    public void itCreatesANewPostInTheTimelinesFromTheGivenDifferentMessageUserAndTime() {
-        command.executeCommand(ALICE, aCommand().withCommand(" -> Good game though.").create(), TIME);
+    public void itPostADifferentNewMessageInTheTimelinesForTheGivenUser() {
+        CommandParameter commandParameter = aCommand().withCommand(" -> Good game though.").create();
 
-        Post expectedPost = aPost() //
-            .withMessage("Good game though.") //
-            .withPostingTime(TIME) //
-            .create();
-        verify(timelines).post(ALICE, expectedPost);
+        command.executeCommand(ALICE, commandParameter);
+
+        verify(timelines).post(ALICE, new Message(commandParameter));
     }
 
     @Test
@@ -77,7 +69,7 @@ public class PostCommandTest {
     public void itReturnsNoOutput() {
         CommandParameter commandParameter = aPostCommand().create();
 
-        Output output = command.executeCommand(ALICE, commandParameter, TIME);
+        Output output = command.executeCommand(ALICE, commandParameter);
 
         assertThat(output, is(anEmptyOutput().create()));
     }

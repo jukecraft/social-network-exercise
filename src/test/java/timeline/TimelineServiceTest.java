@@ -1,5 +1,6 @@
 package timeline;
 
+import static commands.CommandParameterBuilder.aPostCommand;
 import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,6 +14,7 @@ import static timeline.SocialTimeBuilder.aTime;
 import org.junit.Test;
 
 import time.SocialTime;
+import time.SocialTimeClock;
 
 import commands.User;
 
@@ -21,15 +23,20 @@ public class TimelineServiceTest {
     private static final Post POST = aPost().create();
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anOutput().create();
+    private static final Message MESSAGE = new Message(aPostCommand().create());
 
+    private SocialTimeClock clock = mock(SocialTimeClock.class);
     private Timelines timelines = mock(Timelines.class);
-    private TimelineService timelineService = new TimelineService(timelines);
+    private TimelineService timelineService = new TimelineService(timelines, clock);
 
     @Test
-    public void itDelegatesPostsToTimelines() {
-        timelineService.post(USER, POST);
+    public void itDelegatesPostsToTimelinesIncludingTheCurrentTime() {
+        when(clock.getLocalDateTime()).thenReturn(TIME);
 
-        verify(timelines).post(USER, POST);
+        timelineService.post(USER, MESSAGE);
+
+        Post expectedPost = aPost().withMessage(MESSAGE.toString()).withPostingTime(TIME).create();
+        verify(timelines).post(USER, expectedPost);
     }
 
     @Test

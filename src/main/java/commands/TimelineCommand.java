@@ -1,6 +1,5 @@
 package commands;
 
-import time.SocialTime;
 import timeline.Output;
 import timeline.TimelineService;
 
@@ -18,7 +17,7 @@ public class TimelineCommand implements Command {
     }
 
     @Override
-    public Output executeCommand(User user, CommandParameter command, SocialTime time) {
+    public Output executeCommand(User user, CommandParameter command) {
         return timelines.collectPosts(user);
     }
 }

@@ -15,21 +15,26 @@ import commands.TimelineCommand;
 
 public class ApplicationFactory {
 
-    private SocialTimeClock clock = new SocialTimeClock(systemDefaultZone());
-    private TimelineService timelineService = new TimelineService(new Timelines());
-    private Commands commands = new Commands(asList(new PostCommand(timelineService), new TimelineCommand(timelineService)));
+    private SocialTimeClock clock;
+    private TimelineService timelineService;
+    private Commands commands;
 
     public static ApplicationFactory standardConfiguration() {
-        return new ApplicationFactory();
+        return new ApplicationFactory(systemDefaultZone());
+    }
+
+    public ApplicationFactory(Clock clock) {
+        withClock(clock);
     }
 
     public ApplicationFactory withClock(Clock clock) {
-        this.clock = new SocialTimeClock(clock);
-        return this;
+        return withClock(new SocialTimeClock(clock));
     }
 
     public ApplicationFactory withClock(SocialTimeClock clock) {
         this.clock = clock;
+        timelineService = new TimelineService(new Timelines(), clock);
+        commands = new Commands(asList(new PostCommand(timelineService), new TimelineCommand(timelineService)));
         return this;
     }
 
