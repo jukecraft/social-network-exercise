@@ -18,8 +18,9 @@ import timeline.User;
 
 public class PostCommandTest {
     private static final User ALICE = aUser().withName("Alice").create();
-    private TimelineService timelines = mock(TimelineService.class);
-    private PostCommand command = new PostCommand(timelines);
+
+    private TimelineService timelineService = mock(TimelineService.class);
+    private PostCommand command = new PostCommand(timelineService);
 
     @Test
     public void itPostANewMessageInTheTimelinesForTheGivenUser() {
@@ -27,7 +28,7 @@ public class PostCommandTest {
 
         command.executeCommand(commandParameter);
 
-        verify(timelines).post(ALICE, new Message(commandParameter));
+        verify(timelineService).post(ALICE, new Message(commandParameter));
     }
 
     @Test
@@ -36,7 +37,7 @@ public class PostCommandTest {
 
         command.executeCommand(commandParameter);
 
-        verify(timelines).post(ALICE, new Message(commandParameter));
+        verify(timelineService).post(ALICE, new Message(commandParameter));
     }
 
     @Test

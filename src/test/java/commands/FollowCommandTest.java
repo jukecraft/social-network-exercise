@@ -20,8 +20,9 @@ public class FollowCommandTest {
     private static final User ALICE = aUser().withName(USERNAME_ALICE).create();
     private static final String USERNAME_BOB = "Bob";
     private static final User BOB = aUser().withName(USERNAME_BOB).create();
-    private TimelineService timelines = mock(TimelineService.class);
-    private FollowCommand command = new FollowCommand(timelines);
+
+    private TimelineService timelineService = mock(TimelineService.class);
+    private FollowCommand command = new FollowCommand(timelineService);
 
     @Test
     public void itIsApplicableIfCommandStartsWithFollows() {
@@ -48,7 +49,7 @@ public class FollowCommandTest {
             .withCommand(" follows " + USERNAME_BOB) //
             .create());
 
-        verify(timelines).registerFollowing(ALICE, BOB);
+        verify(timelineService).registerFollowing(ALICE, BOB);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class FollowCommandTest {
             .withCommand(" follows " + USERNAME_ALICE) //
             .create());
 
-        verify(timelines).registerFollowing(BOB, ALICE);
+        verify(timelineService).registerFollowing(BOB, ALICE);
     }
 
     @Test

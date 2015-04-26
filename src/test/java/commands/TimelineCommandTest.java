@@ -20,12 +20,13 @@ public class TimelineCommandTest {
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final CommandParameter TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
     private static final Output OUTPUT = anOutput().create();
-    private TimelineService timelines = mock(TimelineService.class);
-    private TimelineCommand command = new TimelineCommand(timelines);
+
+    private TimelineService timelineService = mock(TimelineService.class);
+    private TimelineCommand command = new TimelineCommand(timelineService);
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
-        when(timelines.collectPosts(ALICE)).thenReturn(new Output());
+        when(timelineService.collectPosts(ALICE)).thenReturn(new Output());
 
         Output output = command.executeCommand(TIMELINE_COMMAND);
 
@@ -34,7 +35,7 @@ public class TimelineCommandTest {
 
     @Test
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
-        when(timelines.collectPosts(ALICE)).thenReturn(OUTPUT);
+        when(timelineService.collectPosts(ALICE)).thenReturn(OUTPUT);
 
         Output output = command.executeCommand(TIMELINE_COMMAND);
 
