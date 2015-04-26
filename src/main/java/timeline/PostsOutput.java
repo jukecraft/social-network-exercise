@@ -39,8 +39,9 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
             .collect(toList());
     }
 
-    public Output mergeWith(PostsOutput anotherOutput) {
-        // TODO Auto-generated method stub
-        return null;
+    public PostsOutput mergeWith(PostsOutput anotherOutput) {
+        List<Post> mergedPosts = new ArrayList<>(posts);
+        mergedPosts.addAll(anotherOutput.posts);
+        return new PostsOutput(mergedPosts);
     }
 }
