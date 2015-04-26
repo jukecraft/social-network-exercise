@@ -17,7 +17,7 @@ public class WallCommand {
 
     public Output executeCommand(CommandParameter wallCommand) {
         // TODO Auto-generated method stub
-        return null;
+        return new Output();
     }
 
 }
