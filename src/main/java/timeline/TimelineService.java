@@ -22,4 +22,9 @@ public class TimelineService {
     public void post(User author, Message message) {
         timelines.post(author, new Post(message, clock.getLocalDateTime()));
     }
+
+    public Object collectWall(User alice) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
