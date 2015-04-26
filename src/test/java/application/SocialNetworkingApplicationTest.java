@@ -40,7 +40,7 @@ public class SocialNetworkingApplicationTest {
 
         socialNetworkingApplication.accept(COMMAND);
 
-        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT.getOutput(TIME)));
+        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT.print(TIME)));
     }
 
 }

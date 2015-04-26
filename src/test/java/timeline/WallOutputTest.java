@@ -23,7 +23,7 @@ public class WallOutputTest {
     public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
         WallOutput output = anEmptyWallOutput().create();
 
-        List<String> printedTimeline = output.getOutput(PRINTING_TIME);
+        List<String> printedTimeline = output.print(PRINTING_TIME);
 
         assertThat(printedTimeline, is(empty()));
     }

@@ -34,7 +34,7 @@ public class PostsOutputTest {
     public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
         Output output = anEmptyPostsOutput().create();
 
-        List<String> printedTimeline = output.getOutput(PRINTING_TIME);
+        List<String> printedTimeline = output.print(PRINTING_TIME);
 
         assertThat(printedTimeline, is(empty()));
     }
@@ -46,7 +46,7 @@ public class PostsOutputTest {
             .withPost(LATER_POST) //
             .create();
 
-        List<String> printedTimeline = output.getOutput(PRINTING_TIME);
+        List<String> printedTimeline = output.print(PRINTING_TIME);
 
         assertThat(printedTimeline, contains(LATER_MESSAGE + " (1 minute ago)", EARLIER_MESSAGE + " (5 minutes ago)"));
     }

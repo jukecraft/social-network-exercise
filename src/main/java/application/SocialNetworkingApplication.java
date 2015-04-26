@@ -24,7 +24,7 @@ public class SocialNetworkingApplication {
     }
 
     public List<String> getOutput() {
-        return output.getOutput(clock.getLocalDateTime());
+        return output.print(clock.getLocalDateTime());
     }
 
 }

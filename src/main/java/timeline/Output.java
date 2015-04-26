@@ -6,6 +6,6 @@ import time.SocialTime;
 
 public interface Output {
 
-    List<String> getOutput(SocialTime printingTime);
+    List<String> print(SocialTime printingTime);
 
 }

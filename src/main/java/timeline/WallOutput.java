@@ -19,7 +19,7 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
     }
 
     @Override
-    public List<String> getOutput(SocialTime printingTime) {
+    public List<String> print(SocialTime printingTime) {
         return emptyList();
     }
 
