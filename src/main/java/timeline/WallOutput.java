@@ -1,7 +1,8 @@
 package timeline;
 
-import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,16 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
 
     @Override
     public List<String> print(SocialTime printingTime) {
-        return emptyList();
+        List<String> output = new ArrayList<>();
+        timelines.forEach((user, posts) -> output.addAll(printPosts(user, posts, printingTime)));
+        return output;
+    }
+
+    private List<String> printPosts(User user, PostsOutput posts, SocialTime printingTime) {
+        return posts.print(printingTime) //
+            .stream() //
+            .map(post -> user + " - " + post) //
+            .collect(toList());
     }
 
 }
