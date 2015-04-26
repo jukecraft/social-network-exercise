@@ -23,4 +23,9 @@ public class Timelines {
         return findTimeline(user).printTimeline(time);
     }
 
+    public void registerFollowing(User alice, User create) {
+        // TODO Auto-generated method stub
+
+    }
+
 }
