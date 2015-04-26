@@ -5,9 +5,10 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.SocialTimeBuilder.aTime;
+import static timeline.builder.UserBuilder.aUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,17 +18,18 @@ import org.junit.Test;
 import time.SocialTime;
 
 public class PostsOutputTest {
-    private static final String EARLIER_MESSAGE = "earlier message";
-    private static final String LATER_MESSAGE = "later message";
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
     private static final SocialTime PRINTING_TIME = aTime().withTimestamp(PRINTING_TIMESTAMP).create();
     private static final Post A_POST = aPost() //
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5)) //
-        .withMessage(EARLIER_MESSAGE) //
+        .withMessage("earlier message") //
+        .withUser(aUser().withName("Alice").create()) //
         .create();
+
     private static final Post LATER_POST = aPost() //
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1)) //
-        .withMessage(LATER_MESSAGE) //
+        .withMessage("later message") //
+        .withUser(aUser().withName("Bob").create()) //
         .create();
 
     @Test
@@ -48,7 +50,19 @@ public class PostsOutputTest {
 
         List<String> printedTimeline = output.print(PRINTING_TIME);
 
-        assertThat(printedTimeline, contains(LATER_MESSAGE + " (1 minute ago)", EARLIER_MESSAGE + " (5 minutes ago)"));
+        assertThat(printedTimeline, contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
     }
 
+    @Test
+    public void givenTwoPostsWhenAskedToPrintWithUserItPrintsThemWithTimestampsAndUsersSortedLatestFirst() {
+        Output output = anEmptyPostsOutput() //
+            .withPost(A_POST) //
+            .withPost(LATER_POST) //
+            .create();
+
+        List<String> printedTimeline = output.printWithUser(PRINTING_TIME);
+
+        assertThat(printedTimeline,
+            contains(LATER_POST.printWithUser(PRINTING_TIME), A_POST.printWithUser(PRINTING_TIME)));
+    }
 }

@@ -33,4 +33,10 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
             .collect(toList());
     }
 
+    @Override
+    public List<String> printWithUser(SocialTime printingTime) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

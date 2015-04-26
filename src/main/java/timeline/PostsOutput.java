@@ -29,4 +29,8 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
             .collect(toList());
     }
 
+    @Override
+    public List<String> printWithUser(SocialTime printingTime) {
+        return null;
+    }
 }
