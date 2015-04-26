@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import time.SocialTime;
 
@@ -23,17 +24,18 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
 
     @Override
     public List<String> print(SocialTime printingTime) {
-        return posts.stream() //
-            .sorted() //
-            .map(post -> post.printAt(printingTime)) //
-            .collect(toList());
+        return printAllWith(post -> post.printAt(printingTime));
     }
 
     @Override
     public List<String> printWithUser(SocialTime printingTime) {
+        return printAllWith(post -> post.printWithUser(printingTime));
+    }
+
+    private List<String> printAllWith(Function<Post, String> printingOption) {
         return posts.stream() //
             .sorted() //
-            .map(post -> post.printWithUser(printingTime)) //
+            .map(printingOption) //
             .collect(toList());
     }
 }
