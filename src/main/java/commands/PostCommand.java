@@ -19,8 +19,8 @@ public class PostCommand implements Command {
     }
 
     @Override
-    public Output executeCommand(User user, CommandParameter command) {
-        timelines.post(user, new Message(command));
+    public Output executeCommand(CommandParameter command) {
+        timelines.post(new User(command), new Message(command));
         return new Output();
     }
 }

@@ -24,7 +24,7 @@ public class PostCommandTest {
     public void itPostANewMessageInTheTimelinesForTheGivenUser() {
         CommandParameter commandParameter = aCommand().withCommand(" -> I love the weather today").create();
 
-        command.executeCommand(ALICE, commandParameter);
+        command.executeCommand(commandParameter);
 
         verify(timelines).post(ALICE, new Message(commandParameter));
     }
@@ -33,7 +33,7 @@ public class PostCommandTest {
     public void itPostADifferentNewMessageInTheTimelinesForTheGivenUser() {
         CommandParameter commandParameter = aCommand().withCommand(" -> Good game though.").create();
 
-        command.executeCommand(ALICE, commandParameter);
+        command.executeCommand(commandParameter);
 
         verify(timelines).post(ALICE, new Message(commandParameter));
     }
@@ -69,7 +69,7 @@ public class PostCommandTest {
     public void itReturnsNoOutput() {
         CommandParameter commandParameter = aPostCommand().create();
 
-        Output output = command.executeCommand(ALICE, commandParameter);
+        Output output = command.executeCommand(commandParameter);
 
         assertThat(output, is(anEmptyOutput().create()));
     }

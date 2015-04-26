@@ -12,15 +12,10 @@ public class Commands {
     }
 
     public Output execute(CommandParameter commandParameter) {
-        User user = new User(commandParameter);
-        return execute(user, commandParameter);
-    }
-
-    private Output execute(User user, CommandParameter commandParameter) {
         return commands.stream() //
             .filter(candidate -> candidate.isApplicable(commandParameter)) //
             .findFirst() //
-            .map(command -> command.executeCommand(user, commandParameter)) //
+            .map(command -> command.executeCommand(commandParameter)) //
             .orElse(new Output());
     }
 }

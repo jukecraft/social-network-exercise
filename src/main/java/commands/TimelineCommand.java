@@ -17,7 +17,7 @@ public class TimelineCommand implements Command {
     }
 
     @Override
-    public Output executeCommand(User user, CommandParameter command) {
-        return timelines.collectPosts(user);
+    public Output executeCommand(CommandParameter command) {
+        return timelines.collectPosts(new User(command));
     }
 }
