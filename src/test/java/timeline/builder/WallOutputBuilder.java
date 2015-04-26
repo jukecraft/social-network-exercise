@@ -1,4 +1,8 @@
-package timeline;
+package timeline.builder;
+
+import timeline.Output;
+import timeline.User;
+import timeline.WallOutput;
 
 public class WallOutputBuilder {
     private WallOutput output = new WallOutput();

@@ -7,12 +7,12 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static timeline.WallOutputBuilder.anEmptyWallOutput;
 import static timeline.builder.OutputBuilder.anEmptyOutput;
 import static timeline.builder.OutputBuilder.anOutput;
 import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
+import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
 
 import org.junit.Test;
 
