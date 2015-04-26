@@ -3,8 +3,8 @@ package timeline;
 import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.PostBuilder.aPost;
+import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostBuilder.aPost;
 
 import org.junit.Test;
 

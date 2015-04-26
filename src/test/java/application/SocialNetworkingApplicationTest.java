@@ -5,8 +5,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.OutputBuilder.anOutput;
-import static timeline.SocialTimeBuilder.aTime;
+import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.SocialTimeBuilder.aTime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,6 @@ import org.junit.Test;
 import time.SocialTime;
 import time.SocialTimeClock;
 import timeline.Output;
-
 import commands.CommandParameter;
 import commands.Commands;
 

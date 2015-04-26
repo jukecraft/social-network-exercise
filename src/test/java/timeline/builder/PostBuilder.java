@@ -1,11 +1,12 @@
-package timeline;
+package timeline.builder;
 
-import static timeline.SocialTimeBuilder.aTime;
+import static timeline.builder.SocialTimeBuilder.aTime;
 
 import java.time.LocalDateTime;
 
 import time.SocialTime;
-
+import timeline.Message;
+import timeline.Post;
 import commands.CommandParameterBuilder;
 
 public class PostBuilder {

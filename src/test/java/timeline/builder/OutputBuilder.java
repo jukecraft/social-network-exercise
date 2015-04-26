@@ -1,9 +1,12 @@
-package timeline;
+package timeline.builder;
 
-import static timeline.PostBuilder.aPost;
+import static timeline.builder.PostBuilder.aPost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timeline.Output;
+import timeline.Post;
 
 public class OutputBuilder {
 

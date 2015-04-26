@@ -1,13 +1,13 @@
 package commands;
 
 import static commands.CommandParameterBuilder.aCommand;
-import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.OutputBuilder.anOutput;
+import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 

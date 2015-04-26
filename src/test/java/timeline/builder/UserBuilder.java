@@ -1,4 +1,4 @@
-package commands;
+package timeline.builder;
 
 import static commands.CommandParameterBuilder.aCommand;
 import timeline.User;

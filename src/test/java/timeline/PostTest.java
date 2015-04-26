@@ -5,8 +5,8 @@ import static java.util.Collections.sort;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.PostBuilder.aPost;
-import static timeline.SocialTimeBuilder.aTime;
+import static timeline.builder.PostBuilder.aPost;
+import static timeline.builder.SocialTimeBuilder.aTime;
 
 import java.util.List;
 

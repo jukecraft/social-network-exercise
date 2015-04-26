@@ -5,9 +5,9 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.PostBuilder.aPost;
-import static timeline.SocialTimeBuilder.aTime;
+import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostBuilder.aPost;
+import static timeline.builder.SocialTimeBuilder.aTime;
 
 import java.time.LocalDateTime;
 import java.util.List;

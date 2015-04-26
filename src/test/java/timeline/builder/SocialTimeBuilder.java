@@ -1,4 +1,4 @@
-package timeline;
+package timeline.builder;
 
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.ofInstant;

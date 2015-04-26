@@ -1,15 +1,15 @@
 package timeline;
 
 import static commands.CommandParameterBuilder.aPostCommand;
-import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static timeline.OutputBuilder.anOutput;
-import static timeline.PostBuilder.aPost;
-import static timeline.SocialTimeBuilder.aTime;
+import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.PostBuilder.aPost;
+import static timeline.builder.SocialTimeBuilder.aTime;
+import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 
