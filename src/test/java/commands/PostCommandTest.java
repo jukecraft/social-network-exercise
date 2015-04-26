@@ -16,12 +16,12 @@ import org.junit.Test;
 import time.SocialTime;
 import timeline.Output;
 import timeline.Post;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class PostCommandTest {
     private static final SocialTime TIME = aTime().create();
     private static final User ALICE = aUser().withName("Alice").create();
-    private Timelines timelines = mock(Timelines.class);
+    private TimelineService timelines = mock(TimelineService.class);
     private PostCommand command = new PostCommand(timelines);
 
     @Test

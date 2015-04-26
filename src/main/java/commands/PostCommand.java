@@ -4,15 +4,15 @@ import time.SocialTime;
 import timeline.Message;
 import timeline.Output;
 import timeline.Post;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class PostCommand implements Command {
 
     private static final String POSTING_COMMAND = " -> ";
 
-    private Timelines timelines;
+    private TimelineService timelines;
 
-    public PostCommand(Timelines timelines) {
+    public PostCommand(TimelineService timelines) {
         this.timelines = timelines;
     }
 

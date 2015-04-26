@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import time.SocialTime;
 import timeline.Output;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class TimelineCommandTest {
     private static final String USERNAME = "Alice";
@@ -21,7 +21,7 @@ public class TimelineCommandTest {
     private static final CommandParameter TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anEmptyOutput().withLine("my line").create();
-    private Timelines timelines = mock(Timelines.class);
+    private TimelineService timelines = mock(TimelineService.class);
     private TimelineCommand command = new TimelineCommand(timelines);
 
     @Test

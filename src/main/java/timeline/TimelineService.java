@@ -6,7 +6,7 @@ import time.SocialTime;
 
 import commands.User;
 
-public class Timelines {
+public class TimelineService {
     private HashMap<User, Timeline> timelines = new HashMap<>();
 
     public void post(User user, Post post) {
@@ -24,7 +24,6 @@ public class Timelines {
     }
 
     public void registerFollowing(User follower, User follows) {
-
     }
 
 }

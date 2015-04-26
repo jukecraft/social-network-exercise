@@ -2,14 +2,14 @@ package commands;
 
 import time.SocialTime;
 import timeline.Output;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class FollowCommand {
 
     private static final String COMMAND_IDENTIFIER = " follows ";
-    private Timelines timelines;
+    private TimelineService timelines;
 
-    public FollowCommand(Timelines timelines) {
+    public FollowCommand(TimelineService timelines) {
         this.timelines = timelines;
     }
 

@@ -2,13 +2,13 @@ package commands;
 
 import time.SocialTime;
 import timeline.Output;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class TimelineCommand implements Command {
 
-    private Timelines timelines;
+    private TimelineService timelines;
 
-    public TimelineCommand(Timelines timelines) {
+    public TimelineCommand(TimelineService timelines) {
         this.timelines = timelines;
     }
 

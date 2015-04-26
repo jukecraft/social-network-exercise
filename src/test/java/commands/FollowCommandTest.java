@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import time.SocialTime;
 import timeline.Output;
-import timeline.Timelines;
+import timeline.TimelineService;
 
 public class FollowCommandTest {
     private static final SocialTime TIME = aTime().create();
@@ -22,7 +22,7 @@ public class FollowCommandTest {
     private static final User ALICE = aUser().withName(USERNAME_ALICE).create();
     private static final String USERNAME_BOB = "Bob";
     private static final User BOB = aUser().withName(USERNAME_BOB).create();
-    private Timelines timelines = mock(Timelines.class);
+    private TimelineService timelines = mock(TimelineService.class);
     private FollowCommand command = new FollowCommand(timelines);
 
     @Test

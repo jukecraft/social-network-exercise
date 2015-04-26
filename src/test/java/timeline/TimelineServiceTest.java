@@ -13,14 +13,14 @@ import time.SocialTime;
 
 import commands.User;
 
-public class TimelinesTest {
+public class TimelineServiceTest {
     private static final User ALICE = aUser().withName("Alice").create();
     private static final User BOB = aUser().withName("Bob").create();
     private static final SocialTime PRINTING_TIME = aTime().create();
     private static final Post A_POST = aPost().withMessage("a post").create();
     private static final Post ANOTHER_POST = aPost().withMessage("another post").create();
 
-    private Timelines timelines = new Timelines();
+    private TimelineService timelines = new TimelineService();
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
