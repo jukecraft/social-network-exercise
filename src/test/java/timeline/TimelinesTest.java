@@ -5,18 +5,14 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.PostBuilder.aPost;
-import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
-
-import time.SocialTime;
 
 import commands.User;
 
 public class TimelinesTest {
     private static final User ALICE = aUser().withName("Alice").create();
     private static final User BOB = aUser().withName("Bob").create();
-    private static final SocialTime PRINTING_TIME = aTime().create();
     private static final Post A_POST = aPost().withMessage("a post").create();
     private static final Post ANOTHER_POST = aPost().withMessage("another post").create();
 

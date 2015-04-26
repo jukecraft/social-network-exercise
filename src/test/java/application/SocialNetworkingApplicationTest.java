@@ -37,7 +37,7 @@ public class SocialNetworkingApplicationTest {
 
     @Test
     public void givenTheCommandsReturnAnOutputWhenTheApplicationAcceptsACommandThatOutputIsReturned() {
-        when(commands.execute(new CommandParameter(COMMAND), TIME)).thenReturn(OUTPUT);
+        when(commands.execute(new CommandParameter(COMMAND))).thenReturn(OUTPUT);
 
         socialNetworkingApplication.accept(COMMAND);
 

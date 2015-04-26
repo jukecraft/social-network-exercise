@@ -20,7 +20,7 @@ public class SocialNetworkingApplication {
     }
 
     public void accept(String command) {
-        output = commands.execute(new CommandParameter(command), clock.getLocalDateTime());
+        output = commands.execute(new CommandParameter(command));
     }
 
     public List<String> getOutput() {

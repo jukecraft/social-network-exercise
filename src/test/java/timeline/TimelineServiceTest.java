@@ -20,7 +20,6 @@ import commands.User;
 
 public class TimelineServiceTest {
     private static final User USER = aUser().create();
-    private static final Post POST = aPost().create();
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anOutput().create();
     private static final Message MESSAGE = new Message(aPostCommand().create());

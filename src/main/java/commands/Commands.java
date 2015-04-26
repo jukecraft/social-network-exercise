@@ -2,7 +2,6 @@ package commands;
 
 import java.util.List;
 
-import time.SocialTime;
 import timeline.Output;
 
 public class Commands {
@@ -12,12 +11,12 @@ public class Commands {
         this.commands = commands;
     }
 
-    public Output execute(CommandParameter commandParameter, SocialTime time) {
+    public Output execute(CommandParameter commandParameter) {
         User user = new User(commandParameter);
-        return execute(time, user, commandParameter);
+        return execute(user, commandParameter);
     }
 
-    private Output execute(SocialTime time, User user, CommandParameter commandParameter) {
+    private Output execute(User user, CommandParameter commandParameter) {
         return commands.stream() //
             .filter(candidate -> candidate.isApplicable(commandParameter)) //
             .findFirst() //

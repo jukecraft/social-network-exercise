@@ -11,19 +11,16 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import time.SocialTime;
 import timeline.Output;
 
 public class CommandsTest {
     private static final String USERNAME = "Alice";
     private static final User EXPECTED_USER = aUser().withName(USERNAME).create();
     private static final CommandParameter COMMAND_PARAMETER = aPostCommand().withUser(USERNAME).create();
-    private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anEmptyOutput().create();
 
     private Command applicableCommand = mock(Command.class);
@@ -40,7 +37,7 @@ public class CommandsTest {
     public void givenMultipleCommandsTheFirstApplicableIsExecuted() {
         Commands commands = new Commands(asList(notApplicableCommand, applicableCommand));
 
-        commands.execute(COMMAND_PARAMETER, TIME);
+        commands.execute(COMMAND_PARAMETER);
 
         verify(applicableCommand).executeCommand(EXPECTED_USER, COMMAND_PARAMETER);
         verify(notApplicableCommand, never()) //
@@ -51,7 +48,7 @@ public class CommandsTest {
     public void givenMultipleCommandsTheFirstApplicableIsExecutedAndTheResultIsCollected() {
         Commands commands = new Commands(asList(applicableCommand, applicableCommand));
 
-        Output output = commands.execute(COMMAND_PARAMETER, TIME);
+        Output output = commands.execute(COMMAND_PARAMETER);
 
         assertThat(output, is(OUTPUT));
     }

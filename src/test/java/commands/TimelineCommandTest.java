@@ -8,11 +8,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.OutputBuilder.anOutput;
-import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
 
-import time.SocialTime;
 import timeline.Output;
 import timeline.TimelineService;
 
@@ -20,7 +18,6 @@ public class TimelineCommandTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final CommandParameter TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
-    private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anOutput().create();
     private TimelineService timelines = mock(TimelineService.class);
     private TimelineCommand command = new TimelineCommand(timelines);
