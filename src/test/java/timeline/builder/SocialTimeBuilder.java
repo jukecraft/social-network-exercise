@@ -31,6 +31,11 @@ public class SocialTimeBuilder {
         return this;
     }
 
+    public SocialTimeBuilder plusSeconds(int numberOfSeconds) {
+        timestamp = timestamp.plusSeconds(numberOfSeconds);
+        return this;
+    }
+
     public SocialTime create() {
         return new SocialTime(timestamp);
     }

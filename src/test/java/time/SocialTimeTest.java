@@ -44,6 +44,17 @@ public class SocialTimeTest {
     }
 
     @Test
+    public void createdWithSecondsTimestampItPrintsDifferenceToGivenTimestamp() {
+        SocialTime timeOfPrinting = aTime() //
+            .plusSeconds(15) //
+            .create();
+
+        String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
+
+        assertThat(printedTimestamp, is("15 seconds ago"));
+    }
+
+    @Test
     public void itIsSortedByTimestampLatestFirst() {
         SocialTime time = aTime().create();
         SocialTime laterTime = aTime().plusMinutes(1).create();
