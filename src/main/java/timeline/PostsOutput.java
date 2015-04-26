@@ -31,6 +31,9 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
 
     @Override
     public List<String> printWithUser(SocialTime printingTime) {
-        return null;
+        return posts.stream() //
+            .sorted() //
+            .map(post -> post.printWithUser(printingTime)) //
+            .collect(toList());
     }
 }
