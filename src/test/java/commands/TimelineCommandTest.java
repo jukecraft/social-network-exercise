@@ -1,12 +1,11 @@
 package commands;
 
 import static commands.UserBuilder.aUser;
-import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
@@ -18,7 +17,7 @@ import timeline.Timelines;
 public class TimelineCommandTest {
     private static final SocialTime TIME = aTime().create();
     private static final User ALICE = aUser().withName("Alice").create();
-    private static final Output OUTPUT = new Output(asList("output", "another output"));
+    private static final Output OUTPUT = anEmptyOutput().withLine("my line").create();
     private Timelines timelines = mock(Timelines.class);
     private TimelineCommand command = new TimelineCommand(timelines);
 
@@ -28,7 +27,7 @@ public class TimelineCommandTest {
 
         Output output = command.executeCommand(ALICE, "", TIME);
 
-        assertThat(output.getOutput(), is(empty()));
+        assertThat(output, is(anEmptyOutput().create()));
     }
 
     @Test

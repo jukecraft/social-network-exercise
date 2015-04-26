@@ -1,9 +1,9 @@
 package timeline;
 
 import static commands.UserBuilder.aUser;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
@@ -15,6 +15,7 @@ import commands.User;
 
 public class TimelinesTest {
     private static final User ALICE = aUser().withName("Alice").create();
+    private static final User BOB = aUser().withName("Bob").create();
     private static final SocialTime PRINTING_TIME = aTime().create();
     private static final Post A_POST = aPost().withMessage("a post").create();
     private static final Post ANOTHER_POST = aPost().withMessage("another post").create();
@@ -25,7 +26,7 @@ public class TimelinesTest {
     public void givenEmptyTimelinesNoPostsAreReturned() {
         Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline, is(new Output()));
+        assertThat(alicesTimeline, is(anEmptyOutput().create()));
     }
 
     @Test
@@ -34,17 +35,21 @@ public class TimelinesTest {
 
         Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline, is(anEmptyOutput() //
+            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .create()));
     }
 
     @Test
     public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
-        timelines.post(aUser().withName("Bob").create(), ANOTHER_POST);
+        timelines.post(BOB, ANOTHER_POST);
 
         Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
-        assertThat(alicesTimeline.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(alicesTimeline, is(anEmptyOutput() //
+            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .create()));
     }
 
 }

@@ -1,11 +1,11 @@
 package application;
 
 import static application.ApplicationFactory.standardConfiguration;
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Before;
@@ -19,8 +19,10 @@ import commands.Commands;
 
 public class SocialNetworkingApplicationTest {
     private static final String COMMAND = "Alice -> I love the weather today";
-    private static final Output OUTPUT = new Output(asList("Good game though. (1 minute ago)",
-        "Damn! We lost! (2 minutes ago)"));
+    private static final Output OUTPUT = anEmptyOutput() //
+        .withLine("Good game though. (1 minute ago)") //
+        .withLine("Damn! We lost! (2 minutes ago)") //
+        .create();
     private static final SocialTime TIME = aTime().create();
     private SocialNetworkingApplication socialNetworkingApplication;
     private Commands commands;
@@ -32,7 +34,6 @@ public class SocialNetworkingApplicationTest {
         commands = mock(Commands.class);
         socialNetworkingApplication = new SocialNetworkingApplication(standardConfiguration().withCommands(commands)
             .withClock(clock));
-
     }
 
     @Test

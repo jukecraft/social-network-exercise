@@ -1,11 +1,11 @@
 package commands;
 
 import static commands.UserBuilder.aUser;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
@@ -55,6 +55,6 @@ public class PostCommandTest {
 
     @Test
     public void itReturnsNoOutput() {
-        assertThat(command.executeCommand(ALICE, "-> dsg", TIME).getOutput(), is(empty()));
+        assertThat(command.executeCommand(ALICE, "-> dsg", TIME), is(anEmptyOutput().create()));
     }
 }

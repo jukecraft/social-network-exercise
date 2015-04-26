@@ -1,10 +1,9 @@
 package timeline;
 
 import static java.time.LocalDateTime.now;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
@@ -29,7 +28,7 @@ public class TimelineTest {
     public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
         Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output.getOutput(), is(empty()));
+        assertThat(output, is(anEmptyOutput().create()));
     }
 
     @Test
@@ -38,7 +37,9 @@ public class TimelineTest {
 
         Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output.getOutput(), contains(A_POST.printAt(PRINTING_TIME)));
+        assertThat(output, is(anEmptyOutput() //
+            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .create()));
     }
 
     @Test
@@ -48,6 +49,9 @@ public class TimelineTest {
 
         Output output = timeline.printTimeline(PRINTING_TIME);
 
-        assertThat(output.getOutput(), contains(LATER_POST.printAt(PRINTING_TIME), A_POST.printAt(PRINTING_TIME)));
+        assertThat(output, is(anEmptyOutput() //
+            .withLine(LATER_POST.printAt(PRINTING_TIME)) //
+            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .create()));
     }
 }

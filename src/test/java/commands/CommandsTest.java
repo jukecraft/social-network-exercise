@@ -9,6 +9,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class CommandsTest {
     private static final User EXPECTED_USER = aUser().withName(USERNAME).create();
     private static final String COMMAND = " test command";
     private static final SocialTime TIME = aTime().create();
-    private static final Output OUTPUT = new Output(asList("output", "another output"));
+    private static final Output OUTPUT = anEmptyOutput().create();
 
     private Command applicableCommand = mock(Command.class);
     private Command notApplicableCommand = mock(Command.class);
