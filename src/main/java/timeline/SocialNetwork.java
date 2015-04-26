@@ -6,12 +6,10 @@ import java.util.List;
 
 public class SocialNetwork {
 
-    public void registerFollowing(User bob, User alice) {
-        // TODO Auto-generated method stub
-
+    public void registerFollowing(User follower, User following) {
     }
 
-    public List<User> getFollowing(User alice) {
+    public List<User> getFollowing(User user) {
         return emptyList();
     }
 
