@@ -1,5 +1,7 @@
 package timeline;
 
+import static java.util.Collections.emptyList;
+
 import java.util.List;
 
 public class SocialNetwork {
@@ -10,8 +12,7 @@ public class SocialNetwork {
     }
 
     public List<User> getFollowing(User alice) {
-        // TODO Auto-generated method stub
-        return null;
+        return emptyList();
     }
 
 }
