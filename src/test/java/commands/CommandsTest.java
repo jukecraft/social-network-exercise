@@ -21,7 +21,8 @@ import timeline.Output;
 public class CommandsTest {
     private static final String USERNAME = "Alice";
     private static final User EXPECTED_USER = aUser().withName(USERNAME).create();
-    private static final String COMMAND = " test command";
+    private static final CommandParameter COMMAND_PARAMETER = new CommandParameter(USERNAME
+        + " -> I love the weather today!");
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anEmptyOutput().create();
 
@@ -30,26 +31,27 @@ public class CommandsTest {
 
     @Before
     public void setUpCommands() {
-        when(applicableCommand.isApplicable(COMMAND)).thenReturn(true);
-        when(notApplicableCommand.isApplicable(COMMAND)).thenReturn(false);
-        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND, TIME)).thenReturn(OUTPUT);
+        when(applicableCommand.isApplicable(COMMAND_PARAMETER)).thenReturn(true);
+        when(notApplicableCommand.isApplicable(COMMAND_PARAMETER)).thenReturn(false);
+        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND_PARAMETER, TIME)).thenReturn(OUTPUT);
     }
 
     @Test
     public void givenMultipleCommandsTheFirstApplicableIsExecuted() {
         Commands commands = new Commands(asList(notApplicableCommand, applicableCommand));
 
-        commands.execute(USERNAME + COMMAND, TIME);
+        commands.execute(COMMAND_PARAMETER, TIME);
 
-        verify(applicableCommand).executeCommand(EXPECTED_USER, COMMAND, TIME);
-        verify(notApplicableCommand, never()).executeCommand(any(User.class), any(String.class), any(SocialTime.class));
+        verify(applicableCommand).executeCommand(EXPECTED_USER, COMMAND_PARAMETER, TIME);
+        verify(notApplicableCommand, never()) //
+            .executeCommand(any(User.class), any(CommandParameter.class), any(SocialTime.class));
     }
 
     @Test
     public void givenMultipleCommandsTheFirstApplicableIsExecutedAndTheResultIsCollected() {
         Commands commands = new Commands(asList(applicableCommand, applicableCommand));
 
-        Output output = commands.execute(USERNAME + COMMAND, TIME);
+        Output output = commands.execute(COMMAND_PARAMETER, TIME);
 
         assertThat(output, is(OUTPUT));
     }

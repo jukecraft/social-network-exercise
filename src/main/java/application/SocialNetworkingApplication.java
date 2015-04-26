@@ -4,7 +4,7 @@ import java.util.List;
 
 import time.SocialTimeClock;
 import timeline.Output;
-
+import commands.CommandParameter;
 import commands.Commands;
 
 public class SocialNetworkingApplication {
@@ -19,7 +19,7 @@ public class SocialNetworkingApplication {
     }
 
     public void accept(String command) {
-        output = commands.execute(command, clock.getLocalDateTime());
+        output = commands.execute(new CommandParameter(command), clock.getLocalDateTime());
     }
 
     public List<String> getOutput() {

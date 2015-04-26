@@ -17,12 +17,12 @@ public class PostCommand implements Command {
     }
 
     @Override
-    public boolean isApplicable(String command) {
+    public boolean isApplicable(CommandParameter command) {
         return command.contains(POSTING_COMMAND);
     }
 
     @Override
-    public Output executeCommand(User user, String command, SocialTime time) {
+    public Output executeCommand(User user, CommandParameter command, SocialTime time) {
         timelines.post(user, new Post(new Message(command), time));
         return new Output();
     }

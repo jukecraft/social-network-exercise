@@ -14,7 +14,7 @@ import org.junit.Test;
 import time.SocialTime;
 import time.SocialTimeClock;
 import timeline.Output;
-
+import commands.CommandParameter;
 import commands.Commands;
 
 public class SocialNetworkingApplicationTest {
@@ -38,7 +38,7 @@ public class SocialNetworkingApplicationTest {
 
     @Test
     public void givenTheCommandsReturnAnOutputWhenTheApplicationAcceptsACommandThatOutputIsReturned() {
-        when(commands.execute(COMMAND, TIME)).thenReturn(OUTPUT);
+        when(commands.execute(new CommandParameter(COMMAND), TIME)).thenReturn(OUTPUT);
 
         socialNetworkingApplication.accept(COMMAND);
 

@@ -4,7 +4,7 @@ import time.SocialTime;
 import timeline.Output;
 
 public interface Command {
-    boolean isApplicable(String command);
+    boolean isApplicable(CommandParameter commandParameter);
 
-    Output executeCommand(User user, String command, SocialTime time);
+    Output executeCommand(User user, CommandParameter commandParameter, SocialTime time);
 }

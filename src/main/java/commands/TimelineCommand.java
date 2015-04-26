@@ -13,12 +13,12 @@ public class TimelineCommand implements Command {
     }
 
     @Override
-    public boolean isApplicable(String command) {
-        return command.length() == 0;
+    public boolean isApplicable(CommandParameter command) {
+        return command.isEmpty();
     }
 
     @Override
-    public Output executeCommand(User user, String command, SocialTime time) {
+    public Output executeCommand(User user, CommandParameter command, SocialTime time) {
         return timelines.printTimeline(user, time);
     }
 }

@@ -1,7 +1,5 @@
 package commands;
 
-import commands.User;
-
 public class UserBuilder {
     private String name = "userName";
 
@@ -15,6 +13,6 @@ public class UserBuilder {
     }
 
     public User create() {
-        return new User(name);
+        return new User(new CommandParameter(name));
     }
 }

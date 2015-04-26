@@ -5,8 +5,8 @@ import static timeline.SocialTimeBuilder.aTime;
 import java.time.LocalDateTime;
 
 import time.SocialTime;
-import timeline.Message;
-import timeline.Post;
+
+import commands.CommandParameter;
 
 public class PostBuilder {
 
@@ -36,7 +36,7 @@ public class PostBuilder {
     }
 
     public Post create() {
-        return new Post(new Message("-> " + messageText), timestamp);
+        return new Post(new Message(new CommandParameter("Alice -> " + messageText)), timestamp);
     }
 
 }

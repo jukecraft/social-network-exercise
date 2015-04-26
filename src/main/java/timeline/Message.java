@@ -1,5 +1,6 @@
 package timeline;
 
+import commands.CommandParameter;
 import commons.SocialNetworkingValueObject;
 
 public class Message extends SocialNetworkingValueObject {
@@ -7,9 +8,8 @@ public class Message extends SocialNetworkingValueObject {
 
     private final String message;
 
-    public Message(String message) {
-        String[] messageParts = message.split(MESSAGE_SEPARATOR);
-        this.message = messageParts[1];
+    public Message(CommandParameter command) {
+        this.message = command.afterSeparator(MESSAGE_SEPARATOR);
     }
 
     @Override

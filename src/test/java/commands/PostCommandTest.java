@@ -23,7 +23,7 @@ public class PostCommandTest {
 
     @Test
     public void itCreatesANewPostInTheTimelinesFromTheGivenMessageUserAndTime() {
-        command.executeCommand(ALICE, "-> I love the weather today", TIME);
+        command.executeCommand(ALICE, new CommandParameter("Alice -> I love the weather today"), TIME);
 
         Post expectedPost = aPost() //
             .withMessage("I love the weather today") //
@@ -34,7 +34,7 @@ public class PostCommandTest {
 
     @Test
     public void itCreatesANewPostInTheTimelinesFromTheGivenDifferentMessageUserAndTime() {
-        command.executeCommand(ALICE, "-> Good game though.", TIME);
+        command.executeCommand(ALICE, new CommandParameter("Alice -> Good game though."), TIME);
 
         Post expectedPost = aPost() //
             .withMessage("Good game though.") //
@@ -45,16 +45,17 @@ public class PostCommandTest {
 
     @Test
     public void itIsApplicableIfItContainsAnArrow() {
-        assertThat(command.isApplicable("->"), is(true));
+        assertThat(command.isApplicable(new CommandParameter("Alice -> Good game though.")), is(true));
     }
 
     @Test
     public void itIsNotApplicableIfItDoesntContainAnArrow() {
-        assertThat(command.isApplicable("??"), is(false));
+        assertThat(command.isApplicable(new CommandParameter("Alice")), is(false));
     }
 
     @Test
     public void itReturnsNoOutput() {
-        assertThat(command.executeCommand(ALICE, "-> dsg", TIME), is(anEmptyOutput().create()));
+        assertThat(command.executeCommand(ALICE, new CommandParameter("Alice -> I love the weather today"), TIME),
+            is(anEmptyOutput().create()));
     }
 }

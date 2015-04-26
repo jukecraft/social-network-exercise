@@ -12,17 +12,16 @@ public class Commands {
         this.commands = commands;
     }
 
-    public Output execute(String command, SocialTime time) {
-        User user = new User(command);
-        String commandWithoutUser = command.substring(user.lengthOfName());
-        return execute(time, user, commandWithoutUser);
+    public Output execute(CommandParameter commandParameter, SocialTime time) {
+        User user = new User(commandParameter);
+        return execute(time, user, commandParameter);
     }
 
-    private Output execute(SocialTime time, User user, String commandAsString) {
+    private Output execute(SocialTime time, User user, CommandParameter commandParameter) {
         return commands.stream() //
-            .filter(candidate -> candidate.isApplicable(commandAsString)) //
+            .filter(candidate -> candidate.isApplicable(commandParameter)) //
             .findFirst() //
-            .map(command -> command.executeCommand(user, commandAsString, time)) //
+            .map(command -> command.executeCommand(user, commandParameter, time)) //
             .orElse(new Output());
     }
 }
