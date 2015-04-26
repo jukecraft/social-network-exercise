@@ -33,7 +33,7 @@ public class ApplicationAcceptanceTest {
     }
 
     @Test
-    public void givenAliceAndBobPublishedMessagesWhenTheyLookAtTheirWallsTheirPostsAreListedNewestFirst() {
+    public void usersCanPublishMessagesReadTheirTimelineFollowOthersAndViewTheirWall() {
         application.accept("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
         application.accept("Bob -> Damn! We lost!");
