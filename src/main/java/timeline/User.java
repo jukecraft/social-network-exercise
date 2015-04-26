@@ -11,10 +11,6 @@ public class User extends SocialNetworkingValueObject {
         this.name = commandParameter.getUser();
     }
 
-    public void follows(User follows) {
-        // TODO Auto-generated method stub
-    }
-
     @Override
     public String toString() {
         return name;
