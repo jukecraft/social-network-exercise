@@ -1,8 +1,5 @@
 package timeline;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,22 +18,9 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
 
     @Override
     public List<String> print(SocialTime printingTime) {
-        List<String> output = new ArrayList<>();
-        timelines.forEach((user, posts) -> output.addAll(printPosts(user, posts, printingTime)));
-        return output;
-    }
-
-    private List<String> printPosts(User user, PostsOutput posts, SocialTime printingTime) {
-        return posts.print(printingTime) //
-            .stream() //
-            .map(post -> user + " - " + post) //
-            .collect(toList());
-    }
-
-    @Override
-    public List<String> printWithUser(SocialTime printingTime) {
-        // TODO Auto-generated method stub
-        return null;
+        PostsOutput mergedPosts = timelines.values().stream() //
+            .reduce((output1, output2) -> output1.mergeWith(output2)).orElse(new PostsOutput());
+        return mergedPosts.printWithUser(printingTime);
     }
 
 }
