@@ -1,5 +1,6 @@
-package commands;
+package timeline;
 
+import commands.CommandParameter;
 import commons.SocialNetworkingValueObject;
 
 public class User extends SocialNetworkingValueObject {

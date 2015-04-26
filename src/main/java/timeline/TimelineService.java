@@ -2,8 +2,6 @@ package timeline;
 
 import time.SocialTimeClock;
 
-import commands.User;
-
 public class TimelineService {
     private final Timelines timelines;
     private final SocialTimeClock clock;

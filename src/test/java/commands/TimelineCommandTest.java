@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class TimelineCommandTest {
     private static final String USERNAME = "Alice";

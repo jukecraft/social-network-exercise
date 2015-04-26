@@ -16,8 +16,6 @@ import org.junit.Test;
 import time.SocialTime;
 import time.SocialTimeClock;
 
-import commands.User;
-
 public class TimelineServiceTest {
     private static final User USER = aUser().create();
     private static final SocialTime TIME = aTime().create();

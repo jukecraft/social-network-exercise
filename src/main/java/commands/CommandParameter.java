@@ -21,8 +21,8 @@ public class CommandParameter extends SocialNetworkingValueObject {
         return commandWithoutUser.startsWith(identifier);
     }
 
-    public String afterSeparator(String messageSeparator) {
-        String[] commandParts = commandWithoutUser.split(messageSeparator);
+    public String afterIdentifier(String identifier) {
+        String[] commandParts = commandWithoutUser.split(identifier);
         return commandParts[1];
     }
 

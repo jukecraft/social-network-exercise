@@ -8,8 +8,6 @@ import static timeline.PostBuilder.aPost;
 
 import org.junit.Test;
 
-import commands.User;
-
 public class TimelinesTest {
     private static final User ALICE = aUser().withName("Alice").create();
     private static final User BOB = aUser().withName("Bob").create();

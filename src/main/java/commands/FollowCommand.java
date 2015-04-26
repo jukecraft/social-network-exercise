@@ -3,10 +3,11 @@ package commands;
 import time.SocialTime;
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class FollowCommand {
-
     private static final String COMMAND_IDENTIFIER = " follows ";
+
     private TimelineService timelines;
 
     public FollowCommand(TimelineService timelines) {
@@ -18,10 +19,14 @@ public class FollowCommand {
     }
 
     public Output executeCommand(User alice, CommandParameter parameter, SocialTime time) {
-        CommandParameter secondUserParameter = new CommandParameter(parameter.afterSeparator(COMMAND_IDENTIFIER));
-        User user = new User(secondUserParameter);
+        User user = extractUser(parameter);
         timelines.registerFollowing(alice, user);
         return new Output();
+    }
+
+    private User extractUser(CommandParameter parameter) {
+        CommandParameter secondUserParameter = new CommandParameter(parameter.afterIdentifier(COMMAND_IDENTIFIER));
+        return new User(secondUserParameter);
     }
 
 }

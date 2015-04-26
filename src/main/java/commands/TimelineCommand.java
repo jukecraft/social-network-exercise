@@ -2,6 +2,7 @@ package commands;
 
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class TimelineCommand implements Command {
 

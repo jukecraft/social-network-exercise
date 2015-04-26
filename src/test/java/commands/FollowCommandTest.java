@@ -15,6 +15,7 @@ import org.junit.Test;
 import time.SocialTime;
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class FollowCommandTest {
     private static final SocialTime TIME = aTime().create();

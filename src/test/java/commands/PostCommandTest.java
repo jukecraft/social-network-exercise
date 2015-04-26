@@ -14,6 +14,7 @@ import org.junit.Test;
 import timeline.Message;
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class PostCommandTest {
     private static final User ALICE = aUser().withName("Alice").create();

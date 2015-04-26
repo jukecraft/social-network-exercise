@@ -2,8 +2,6 @@ package timeline;
 
 import java.util.HashMap;
 
-import commands.User;
-
 public class Timelines {
     public HashMap<User, Timeline> timelines = new HashMap<User, Timeline>();
 

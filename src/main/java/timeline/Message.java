@@ -9,7 +9,7 @@ public class Message extends SocialNetworkingValueObject {
     private final String message;
 
     public Message(CommandParameter command) {
-        this.message = command.afterSeparator(MESSAGE_SEPARATOR);
+        this.message = command.afterIdentifier(MESSAGE_SEPARATOR);
     }
 
     @Override

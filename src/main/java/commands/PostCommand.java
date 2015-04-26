@@ -3,6 +3,7 @@ package commands;
 import timeline.Message;
 import timeline.Output;
 import timeline.TimelineService;
+import timeline.User;
 
 public class PostCommand implements Command {
     private static final String POSTING_COMMAND = " -> ";

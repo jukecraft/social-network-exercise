@@ -1,6 +1,7 @@
 package commands;
 
 import static commands.CommandParameterBuilder.aCommand;
+import timeline.User;
 
 public class UserBuilder {
     private String name = "userName";
