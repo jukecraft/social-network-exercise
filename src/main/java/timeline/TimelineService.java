@@ -23,7 +23,7 @@ public class TimelineService {
         timelines.post(author, new Post(message, clock.getLocalDateTime()));
     }
 
-    public Object collectWall(User alice) {
+    public Output collectWall(User alice) {
         // TODO Auto-generated method stub
         return null;
     }
