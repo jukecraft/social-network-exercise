@@ -2,6 +2,7 @@ package application;
 
 import static application.ApplicationFactory.standardConfiguration;
 import static java.time.Duration.ofMinutes;
+import static java.time.Duration.ofSeconds;
 import static java.time.Instant.now;
 import static java.time.ZoneId.systemDefault;
 import static org.hamcrest.Matchers.contains;
@@ -13,7 +14,6 @@ import static org.mockito.Mockito.when;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,17 +40,37 @@ public class ApplicationAcceptanceTest {
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
         application.accept("Bob -> Good game though.");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
+        application.accept("Charlie -> I'm in New York today! Anyone want to have a coffee?");
+        instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(2));
 
-        List<String> output = application.getOutput();
-        assertThat(output, is(empty()));
+        assertThat(application.getOutput(), is(empty()));
 
         application.accept("Alice");
-        output = application.getOutput();
-        assertThat(output, contains("I love the weather today (5 minutes ago)"));
+        assertThat(application.getOutput(), contains("I love the weather today (5 minutes ago)"));
 
         application.accept("Bob");
-        output = application.getOutput();
-        assertThat(output, contains("Good game though. (1 minute ago)", "Damn! We lost! (2 minutes ago)"));
-    }
+        assertThat(application.getOutput(), contains( //
+            "Good game though. (1 minute ago)", //
+            "Damn! We lost! (2 minutes ago)"));
 
+        application.accept("Charlie follows Alice");
+        assertThat(application.getOutput(), is(empty()));
+
+        application.accept("Charlie wall Charlie");
+        assertThat(application.getOutput(), contains( //
+            "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)", //
+            "Alice - I love the weather today (5 minutes ago)"));
+
+        application.accept("Charlie follows Bob");
+        assertThat(application.getOutput(), is(empty()));
+
+        instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(13));
+
+        application.accept("Charlie wall Charlie");
+        assertThat(application.getOutput(), contains( //
+            "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)", //
+            "Bob - Good game though. (1 minute ago)", //
+            "Bob - Damn! We lost! (2 minutes ago)", //
+            "Alice - I love the weather today (5 minutes ago)"));
+    }
 }
