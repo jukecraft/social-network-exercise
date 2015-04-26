@@ -16,4 +16,14 @@ public class FollowCommandTest {
 
         assertThat(isApplicable, is(true));
     }
+
+    @Test
+    public void itIsNotApplicableIfItDoesntContainFollows() {
+        FollowCommand command = new FollowCommand();
+        CommandParameter commandParameter = aCommand().withCommand("").create();
+
+        boolean isApplicable = command.isApplicable(commandParameter);
+
+        assertThat(isApplicable, is(false));
+    }
 }
