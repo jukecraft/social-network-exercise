@@ -1,6 +1,7 @@
 package timeline;
 
 import static java.util.Arrays.asList;
+import static timeline.PostBuilder.aPost;
 
 public class OutputBuilder {
     private Output output = new Output();
@@ -11,11 +12,11 @@ public class OutputBuilder {
 
     public static OutputBuilder anOutput() {
         return new OutputBuilder() //
-            .withLine("");
+            .withPost(aPost().create());
     }
 
-    public OutputBuilder withLine(String line) {
-        output.add(new Output(asList(line)));
+    public OutputBuilder withPost(Post post) {
+        output.add(new Output(asList(post)));
         return this;
     }
 

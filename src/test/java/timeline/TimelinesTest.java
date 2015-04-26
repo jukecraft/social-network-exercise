@@ -36,7 +36,7 @@ public class TimelinesTest {
         Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
         assertThat(alicesTimeline, is(anEmptyOutput() //
-            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .withPost(A_POST) //
             .create()));
     }
 
@@ -48,7 +48,7 @@ public class TimelinesTest {
         Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
 
         assertThat(alicesTimeline, is(anEmptyOutput() //
-            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .withPost(A_POST) //
             .create()));
     }
 

@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.OutputBuilder.anEmptyOutput;
+import static timeline.OutputBuilder.anOutput;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Before;
@@ -14,15 +14,13 @@ import org.junit.Test;
 import time.SocialTime;
 import time.SocialTimeClock;
 import timeline.Output;
+
 import commands.CommandParameter;
 import commands.Commands;
 
 public class SocialNetworkingApplicationTest {
     private static final String COMMAND = "Alice -> I love the weather today";
-    private static final Output OUTPUT = anEmptyOutput() //
-        .withLine("Good game though. (1 minute ago)") //
-        .withLine("Damn! We lost! (2 minutes ago)") //
-        .create();
+    private static final Output OUTPUT = anOutput().create();
     private static final SocialTime TIME = aTime().create();
     private SocialNetworkingApplication socialNetworkingApplication;
     private Commands commands;
@@ -42,7 +40,7 @@ public class SocialNetworkingApplicationTest {
 
         socialNetworkingApplication.accept(COMMAND);
 
-        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT.getOutput()));
+        assertThat(socialNetworkingApplication.getOutput(), is(OUTPUT.getOutput(TIME)));
     }
 
 }

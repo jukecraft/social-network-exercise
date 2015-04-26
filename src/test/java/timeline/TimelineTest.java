@@ -38,20 +38,20 @@ public class TimelineTest {
         Output output = timeline.printTimeline(PRINTING_TIME);
 
         assertThat(output, is(anEmptyOutput() //
-            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .withPost(A_POST) //
             .create()));
     }
 
     @Test
-    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithThatPostsSortedLatestFirst() {
+    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithBothPosts() {
         timeline.addPost(A_POST);
         timeline.addPost(LATER_POST);
 
         Output output = timeline.printTimeline(PRINTING_TIME);
 
         assertThat(output, is(anEmptyOutput() //
-            .withLine(LATER_POST.printAt(PRINTING_TIME)) //
-            .withLine(A_POST.printAt(PRINTING_TIME)) //
+            .withPost(A_POST) //
+            .withPost(LATER_POST) //
             .create()));
     }
 }
