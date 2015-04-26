@@ -5,13 +5,13 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
-import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
+import static timeline.builder.PostsOutputBuilder.aPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -19,7 +19,7 @@ public class WallCommandTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final CommandParameter WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();
-    private static final Output OUTPUT = anOutput().create();
+    private static final PostsOutput OUTPUT = aPostsOutput().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
     private WallCommand command = new WallCommand(timelineService);
@@ -44,18 +44,18 @@ public class WallCommandTest {
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoWallForTheGivenUser() {
-        when(timelineService.collectWall(ALICE)).thenReturn(new Output());
+        when(timelineService.collectWall(ALICE)).thenReturn(new PostsOutput());
 
-        Output output = command.executeCommand(WALL_COMMAND);
+        PostsOutput output = command.executeCommand(WALL_COMMAND);
 
-        assertThat(output, is(anEmptyOutput().create()));
+        assertThat(output, is(anEmptyPostsOutput().create()));
     }
 
     @Test
     public void itReturnsOutputIfTimelinesHasAWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(OUTPUT);
 
-        Output output = command.executeCommand(WALL_COMMAND);
+        PostsOutput output = command.executeCommand(WALL_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }

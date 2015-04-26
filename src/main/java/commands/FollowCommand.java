@@ -1,6 +1,6 @@
 package commands;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -17,9 +17,9 @@ public class FollowCommand implements Command {
         return commandParameter.startsWith(COMMAND_IDENTIFIER);
     }
 
-    public Output executeCommand(CommandParameter parameter) {
+    public PostsOutput executeCommand(CommandParameter parameter) {
         timelineService.registerFollowing(new User(parameter), extractSecondUser(parameter));
-        return new Output();
+        return new PostsOutput();
     }
 
     private User extractSecondUser(CommandParameter parameter) {

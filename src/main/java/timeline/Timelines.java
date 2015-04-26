@@ -11,7 +11,7 @@ public class Timelines {
         timelines.put(author, timeline);
     }
 
-    public Output collectPosts(User user) {
+    public PostsOutput collectPosts(User user) {
         return get(user).collectPosts();
     }
 

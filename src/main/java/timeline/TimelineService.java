@@ -16,7 +16,7 @@ public class TimelineService {
         this.clock = clock;
     }
 
-    public Output collectPosts(User user) {
+    public PostsOutput collectPosts(User user) {
         return timelines.collectPosts(user);
     }
 
@@ -28,13 +28,13 @@ public class TimelineService {
         timelines.post(author, new Post(message, clock.getLocalDateTime()));
     }
 
-    public Output collectWall(User wallUser) {
+    public PostsOutput collectWall(User wallUser) {
         List<User> relevantUsers = new ArrayList<User>(network.getFollowing(wallUser));
         relevantUsers.add(wallUser);
         return collectWallOutput(relevantUsers);
     }
 
-    private Output collectWallOutput(List<User> relevantUsers) {
+    private PostsOutput collectWallOutput(List<User> relevantUsers) {
         WallOutput wallOutput = new WallOutput();
         relevantUsers.forEach(user -> wallOutput.addPosts(user, collectPosts(user)));
         return wallOutput;

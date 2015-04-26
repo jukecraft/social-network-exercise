@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.SocialTimeBuilder.aTime;
 
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import time.SocialTime;
 
-public class OutputTest {
+public class PostsOutputTest {
     private static final String EARLIER_MESSAGE = "earlier message";
     private static final String LATER_MESSAGE = "later message";
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
@@ -32,7 +32,7 @@ public class OutputTest {
 
     @Test
     public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
-        Output output = anEmptyOutput().create();
+        PostsOutput output = anEmptyPostsOutput().create();
 
         List<String> printedTimeline = output.getOutput(PRINTING_TIME);
 
@@ -41,7 +41,7 @@ public class OutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintTimelineItPrintsThemWithTimestampsSortedLatestFirst() {
-        Output output = anEmptyOutput() //
+        PostsOutput output = anEmptyPostsOutput() //
             .withPost(A_POST) //
             .withPost(LATER_POST) //
             .create();

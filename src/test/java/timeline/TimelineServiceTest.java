@@ -7,8 +7,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
-import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
+import static timeline.builder.PostsOutputBuilder.aPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
@@ -23,7 +23,7 @@ public class TimelineServiceTest {
     private static final User ALICE = aUser().withName("Alice").create();
     private static final User BOB = aUser().withName("Bob").create();
     private static final SocialTime TIME = aTime().create();
-    private static final Output OUTPUT = anOutput().create();
+    private static final PostsOutput OUTPUT = aPostsOutput().create();
     private static final Message MESSAGE = new Message(aPostCommand().create());
 
     private Timelines timelines = mock(Timelines.class);
@@ -46,7 +46,7 @@ public class TimelineServiceTest {
     public void itDelegatesPrintTimelineToTimelines() {
         when(timelines.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        Output actualOutput = timelineService.collectPosts(ALICE);
+        PostsOutput actualOutput = timelineService.collectPosts(ALICE);
 
         assertThat(actualOutput, is(OUTPUT));
     }
@@ -62,19 +62,19 @@ public class TimelineServiceTest {
     public void itCollectsTimelinesFromUserAndFollowingIntoAWall() {
         when(network.getFollowing(ALICE)).thenReturn(asList(BOB));
 
-        Output alicesTimeline = anEmptyOutput() //
+        PostsOutput alicesTimeline = anEmptyPostsOutput() //
             .withPost(aPost().withMessage("message1").create()) //
             .withPost(aPost().withMessage("message2").create()) //
             .create();
         when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
 
-        Output bobsTimeline = anEmptyOutput() //
+        PostsOutput bobsTimeline = anEmptyPostsOutput() //
             .withPost(aPost().withMessage("message3").create()) //
             .withPost(aPost().withMessage("message4").create()) //
             .create();
         when(timelines.collectPosts(BOB)).thenReturn(bobsTimeline);
 
-        Output actualOutput = timelineService.collectWall(ALICE);
+        PostsOutput actualOutput = timelineService.collectWall(ALICE);
 
         assertThat(actualOutput, is(anEmptyWallOutput() //
             .withTimeline(ALICE, alicesTimeline) //

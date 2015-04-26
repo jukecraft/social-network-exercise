@@ -6,8 +6,8 @@ import java.util.List;
 public class Timeline {
     private List<Post> posts = new ArrayList<>();
 
-    public Output collectPosts() {
-        return new Output(posts);
+    public PostsOutput collectPosts() {
+        return new PostsOutput(posts);
     }
 
     public void addPost(Post create) {

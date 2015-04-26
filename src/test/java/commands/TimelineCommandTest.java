@@ -5,13 +5,13 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
-import static timeline.builder.OutputBuilder.anOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
+import static timeline.builder.PostsOutputBuilder.aPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -19,25 +19,25 @@ public class TimelineCommandTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final CommandParameter TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
-    private static final Output OUTPUT = anOutput().create();
+    private static final PostsOutput OUTPUT = aPostsOutput().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
     private TimelineCommand command = new TimelineCommand(timelineService);
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
-        when(timelineService.collectPosts(ALICE)).thenReturn(new Output());
+        when(timelineService.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
-        Output output = command.executeCommand(TIMELINE_COMMAND);
+        PostsOutput output = command.executeCommand(TIMELINE_COMMAND);
 
-        assertThat(output, is(anEmptyOutput().create()));
+        assertThat(output, is(anEmptyPostsOutput().create()));
     }
 
     @Test
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        Output output = command.executeCommand(TIMELINE_COMMAND);
+        PostsOutput output = command.executeCommand(TIMELINE_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }

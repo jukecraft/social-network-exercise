@@ -9,15 +9,15 @@ import time.SocialTime;
 
 import commons.SocialNetworkingValueObject;
 
-public class Output extends SocialNetworkingValueObject {
+public class PostsOutput extends SocialNetworkingValueObject {
 
     private List<Post> posts;
 
-    public Output(List<Post> posts) {
+    public PostsOutput(List<Post> posts) {
         this.posts = posts;
     }
 
-    public Output() {
+    public PostsOutput() {
         posts = new ArrayList<>();
     }
 

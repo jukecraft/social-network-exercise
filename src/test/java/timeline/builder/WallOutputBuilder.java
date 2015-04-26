@@ -1,6 +1,6 @@
 package timeline.builder;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.User;
 import timeline.WallOutput;
 
@@ -11,7 +11,7 @@ public class WallOutputBuilder {
         return new WallOutputBuilder();
     }
 
-    public WallOutputBuilder withTimeline(User user, Output posts) {
+    public WallOutputBuilder withTimeline(User user, PostsOutput posts) {
         output.addPosts(user, posts);
         return this;
     }

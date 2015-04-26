@@ -1,6 +1,6 @@
 package commands;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -17,7 +17,7 @@ public class WallCommand {
         return commandParameter.startsWith(WALL_IDENTIFIER);
     }
 
-    public Output executeCommand(CommandParameter wallCommand) {
+    public PostsOutput executeCommand(CommandParameter wallCommand) {
         return timelineService.collectWall(new User(wallCommand));
     }
 

@@ -6,12 +6,12 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 
-import timeline.Output;
+import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -66,8 +66,8 @@ public class FollowCommandTest {
     public void itReturnsNoOutput() {
         CommandParameter commandParameter = aFollowsCommand().create();
 
-        Output output = command.executeCommand(commandParameter);
+        PostsOutput output = command.executeCommand(commandParameter);
 
-        assertThat(output, is(anEmptyOutput().create()));
+        assertThat(output, is(anEmptyPostsOutput().create()));
     }
 }

@@ -1,9 +1,9 @@
 package commands;
 
-import timeline.Output;
+import timeline.PostsOutput;
 
 public interface Command {
     boolean isApplicable(CommandParameter commandParameter);
 
-    Output executeCommand(CommandParameter commandParameter);
+    PostsOutput executeCommand(CommandParameter commandParameter);
 }

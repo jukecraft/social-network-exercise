@@ -3,7 +3,7 @@ package timeline;
 import static java.time.LocalDateTime.now;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
 
 import org.junit.Test;
@@ -22,18 +22,18 @@ public class TimelineTest {
 
     @Test
     public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
-        Output output = timeline.collectPosts();
+        PostsOutput output = timeline.collectPosts();
 
-        assertThat(output, is(anEmptyOutput().create()));
+        assertThat(output, is(anEmptyPostsOutput().create()));
     }
 
     @Test
     public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
         timeline.addPost(A_POST);
 
-        Output output = timeline.collectPosts();
+        PostsOutput output = timeline.collectPosts();
 
-        assertThat(output, is(anEmptyOutput() //
+        assertThat(output, is(anEmptyPostsOutput() //
             .withPost(A_POST) //
             .create()));
     }
@@ -43,9 +43,9 @@ public class TimelineTest {
         timeline.addPost(A_POST);
         timeline.addPost(LATER_POST);
 
-        Output output = timeline.collectPosts();
+        PostsOutput output = timeline.collectPosts();
 
-        assertThat(output, is(anEmptyOutput() //
+        assertThat(output, is(anEmptyPostsOutput() //
             .withPost(A_POST) //
             .withPost(LATER_POST) //
             .create()));

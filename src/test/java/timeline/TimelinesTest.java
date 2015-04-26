@@ -2,7 +2,7 @@ package timeline;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.builder.OutputBuilder.anEmptyOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.UserBuilder.aUser;
 
@@ -18,18 +18,18 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
-        Output alicesTimeline = timelines.collectPosts(ALICE);
+        PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
-        assertThat(alicesTimeline, is(anEmptyOutput().create()));
+        assertThat(alicesTimeline, is(anEmptyPostsOutput().create()));
     }
 
     @Test
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
 
-        Output alicesTimeline = timelines.collectPosts(ALICE);
+        PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
-        assertThat(alicesTimeline, is(anEmptyOutput() //
+        assertThat(alicesTimeline, is(anEmptyPostsOutput() //
             .withPost(A_POST) //
             .create()));
     }
@@ -39,9 +39,9 @@ public class TimelinesTest {
         timelines.post(ALICE, A_POST);
         timelines.post(BOB, ANOTHER_POST);
 
-        Output alicesTimeline = timelines.collectPosts(ALICE);
+        PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
-        assertThat(alicesTimeline, is(anEmptyOutput() //
+        assertThat(alicesTimeline, is(anEmptyPostsOutput() //
             .withPost(A_POST) //
             .create()));
     }
