@@ -27,7 +27,6 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
         return printAllWith(post -> post.printAt(printingTime));
     }
 
-    @Override
     public List<String> printWithUser(SocialTime printingTime) {
         return printAllWith(post -> post.printWithUser(printingTime));
     }
@@ -39,9 +38,9 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
             .collect(toList());
     }
 
-    public PostsOutput mergeWith(PostsOutput anotherOutput) {
+    public PostsOutput mergeWith(PostsOutput other) {
         List<Post> mergedPosts = new ArrayList<>(posts);
-        mergedPosts.addAll(anotherOutput.posts);
+        mergedPosts.addAll(other.posts);
         return new PostsOutput(mergedPosts);
     }
 }

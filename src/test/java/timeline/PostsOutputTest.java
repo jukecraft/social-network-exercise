@@ -55,7 +55,7 @@ public class PostsOutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintWithUserItPrintsThemWithTimestampsAndUsersSortedLatestFirst() {
-        Output output = anEmptyPostsOutput() //
+        PostsOutput output = anEmptyPostsOutput() //
             .withPost(A_POST) //
             .withPost(LATER_POST) //
             .create();
