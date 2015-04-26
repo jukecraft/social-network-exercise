@@ -17,8 +17,8 @@ public class CommandParameter extends SocialNetworkingValueObject {
         return commandParts[0];
     }
 
-    public boolean contains(String identifier) {
-        return commandWithoutUser.contains(identifier);
+    public boolean startsWith(String identifier) {
+        return commandWithoutUser.startsWith(identifier);
     }
 
     public String afterSeparator(String messageSeparator) {

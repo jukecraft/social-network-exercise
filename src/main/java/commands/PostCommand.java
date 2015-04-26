@@ -8,7 +8,7 @@ import timeline.Timelines;
 
 public class PostCommand implements Command {
 
-    private static final String POSTING_COMMAND = "->";
+    private static final String POSTING_COMMAND = " -> ";
 
     private Timelines timelines;
 
@@ -18,7 +18,7 @@ public class PostCommand implements Command {
 
     @Override
     public boolean isApplicable(CommandParameter command) {
-        return command.contains(POSTING_COMMAND);
+        return command.startsWith(POSTING_COMMAND);
     }
 
     @Override
