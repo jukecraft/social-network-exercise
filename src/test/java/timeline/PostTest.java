@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.SocialTimeBuilder.aTime;
+import static timeline.builder.UserBuilder.aUser;
 
 import java.util.List;
 
@@ -56,6 +57,22 @@ public class PostTest {
             .create());
 
         assertThat(printedTimestamp, is(MESSAGE_TEXT + " (10 minutes ago)"));
+    }
+
+    @Test
+    public void createdWithMessageAndOtherPostingTimeAndUserItPrintsTheUserTheMessageAndTheTimePassedSinceThen() {
+        User user = aUser().withName("name").create();
+        Post post = aPost() //
+            .withMessage(MESSAGE_TEXT) //
+            .withPostingTime(aTime()) //
+            .withUser(user) //
+            .create();
+
+        String printedTimestamp = post.printWithUser(aTime() //
+            .plusMinutes(10) //
+            .create());
+
+        assertThat(printedTimestamp, is(user + " - " + MESSAGE_TEXT + " (10 minutes ago)"));
     }
 
     @Test

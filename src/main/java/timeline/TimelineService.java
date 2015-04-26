@@ -25,7 +25,7 @@ public class TimelineService {
     }
 
     public void post(User author, Message message) {
-        timelines.post(author, new Post(message, clock.getLocalDateTime()));
+        timelines.post(author, new Post(message, clock.getLocalDateTime(), author));
     }
 
     public WallOutput collectWall(User wallUser) {

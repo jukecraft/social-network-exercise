@@ -38,7 +38,11 @@ public class TimelineServiceTest {
 
         timelineService.post(ALICE, MESSAGE);
 
-        Post expectedPost = aPost().withMessage(MESSAGE.toString()).withPostingTime(TIME).create();
+        Post expectedPost = aPost() //
+            .withMessage(MESSAGE.toString()) //
+            .withPostingTime(TIME) //
+            .withUser(ALICE) //
+            .create();
         verify(timelines).post(ALICE, expectedPost);
     }
 
