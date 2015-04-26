@@ -58,4 +58,14 @@ public class FollowCommandTest {
 
         verify(timelines).registerFollowing(ALICE, BOB);
     }
+
+    @Test
+    public void itRegisteresWithTimelinesThatBobIsFollowingAlice() {
+        command.executeCommand(BOB, aCommand() //
+            .withUser(USERNAME_BOB) //
+            .withCommand(" follows " + USERNAME_ALICE) //
+            .create(), TIME);
+
+        verify(timelines).registerFollowing(BOB, ALICE);
+    }
 }
