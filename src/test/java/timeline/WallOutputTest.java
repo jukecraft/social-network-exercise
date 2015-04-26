@@ -9,7 +9,6 @@ import static timeline.builder.PostBuilder.aPost;
 import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
-import static timeline.builder.WallOutputBuilder.aWallOutput;
 import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
 
 import java.time.LocalDateTime;
@@ -56,7 +55,7 @@ public class WallOutputTest {
             .withPost(ALICES_SECOND_POST) //
             .create();
 
-        WallOutput output = aWallOutput() //
+        WallOutput output = anEmptyWallOutput() //
             .withTimeline(ALICE, alicesTimeline) //
             .create();
 
