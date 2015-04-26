@@ -2,8 +2,6 @@ package timeline;
 
 import java.util.HashMap;
 
-import time.SocialTime;
-
 import commands.User;
 
 public class Timelines {
@@ -15,8 +13,8 @@ public class Timelines {
         timelines.put(author, timeline);
     }
 
-    public Output printTimeline(User user, SocialTime time) {
-        return get(user).printTimeline(time);
+    public Output collectPosts(User user) {
+        return get(user).collectPosts();
     }
 
     private Timeline get(User user) {

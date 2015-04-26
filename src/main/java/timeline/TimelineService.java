@@ -1,7 +1,5 @@
 package timeline;
 
-import time.SocialTime;
-
 import commands.User;
 
 public class TimelineService {
@@ -15,8 +13,8 @@ public class TimelineService {
         timelines.post(user, post);
     }
 
-    public Output printTimeline(User user, SocialTime time) {
-        return timelines.printTimeline(user, time);
+    public Output collectPosts(User user) {
+        return timelines.collectPosts(user);
     }
 
     public void registerFollowing(User follower, User follows) {

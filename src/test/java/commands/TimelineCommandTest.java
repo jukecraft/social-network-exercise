@@ -27,7 +27,7 @@ public class TimelineCommandTest {
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
-        when(timelines.printTimeline(ALICE, TIME)).thenReturn(new Output());
+        when(timelines.collectPosts(ALICE)).thenReturn(new Output());
 
         Output output = command.executeCommand(ALICE, TIMELINE_COMMAND, TIME);
 
@@ -36,7 +36,7 @@ public class TimelineCommandTest {
 
     @Test
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
-        when(timelines.printTimeline(ALICE, TIME)).thenReturn(OUTPUT);
+        when(timelines.collectPosts(ALICE)).thenReturn(OUTPUT);
 
         Output output = command.executeCommand(ALICE, TIMELINE_COMMAND, TIME);
 

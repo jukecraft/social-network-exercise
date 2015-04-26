@@ -26,7 +26,7 @@ public class TimelineTest {
 
     @Test
     public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
-        Output output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.collectPosts();
 
         assertThat(output, is(anEmptyOutput().create()));
     }
@@ -35,7 +35,7 @@ public class TimelineTest {
     public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
         timeline.addPost(A_POST);
 
-        Output output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.collectPosts();
 
         assertThat(output, is(anEmptyOutput() //
             .withPost(A_POST) //
@@ -47,7 +47,7 @@ public class TimelineTest {
         timeline.addPost(A_POST);
         timeline.addPost(LATER_POST);
 
-        Output output = timeline.printTimeline(PRINTING_TIME);
+        Output output = timeline.collectPosts();
 
         assertThat(output, is(anEmptyOutput() //
             .withPost(A_POST) //

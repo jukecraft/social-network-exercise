@@ -34,9 +34,9 @@ public class TimelineServiceTest {
 
     @Test
     public void itDelegatesPrintTimelineToTimelines() {
-        when(timelines.printTimeline(USER, TIME)).thenReturn(OUTPUT);
+        when(timelines.collectPosts(USER)).thenReturn(OUTPUT);
 
-        Output actualOutput = timelineService.printTimeline(USER, TIME);
+        Output actualOutput = timelineService.collectPosts(USER);
 
         assertThat(actualOutput, is(OUTPUT));
     }

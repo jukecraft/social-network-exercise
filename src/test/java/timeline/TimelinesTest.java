@@ -24,7 +24,7 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {
-        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyOutput().create()));
     }
@@ -33,7 +33,7 @@ public class TimelinesTest {
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
         timelines.post(ALICE, A_POST);
 
-        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyOutput() //
             .withPost(A_POST) //
@@ -45,7 +45,7 @@ public class TimelinesTest {
         timelines.post(ALICE, A_POST);
         timelines.post(BOB, ANOTHER_POST);
 
-        Output alicesTimeline = timelines.printTimeline(ALICE, PRINTING_TIME);
+        Output alicesTimeline = timelines.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyOutput() //
             .withPost(A_POST) //

@@ -19,6 +19,6 @@ public class TimelineCommand implements Command {
 
     @Override
     public Output executeCommand(User user, CommandParameter command, SocialTime time) {
-        return timelines.printTimeline(user, time);
+        return timelines.collectPosts(user);
     }
 }
