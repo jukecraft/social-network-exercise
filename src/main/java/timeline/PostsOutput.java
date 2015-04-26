@@ -9,7 +9,7 @@ import time.SocialTime;
 
 import commons.SocialNetworkingValueObject;
 
-public class PostsOutput extends SocialNetworkingValueObject {
+public class PostsOutput extends SocialNetworkingValueObject implements Output {
 
     private List<Post> posts;
 
@@ -18,9 +18,10 @@ public class PostsOutput extends SocialNetworkingValueObject {
     }
 
     public PostsOutput() {
-        posts = new ArrayList<>();
+        this(new ArrayList<>());
     }
 
+    @Override
     public List<String> getOutput(SocialTime printingTime) {
         return posts.stream() //
             .sorted() //

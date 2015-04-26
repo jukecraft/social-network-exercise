@@ -32,7 +32,7 @@ public class PostsOutputTest {
 
     @Test
     public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
-        PostsOutput output = anEmptyPostsOutput().create();
+        Output output = anEmptyPostsOutput().create();
 
         List<String> printedTimeline = output.getOutput(PRINTING_TIME);
 
@@ -41,7 +41,7 @@ public class PostsOutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintTimelineItPrintsThemWithTimestampsSortedLatestFirst() {
-        PostsOutput output = anEmptyPostsOutput() //
+        Output output = anEmptyPostsOutput() //
             .withPost(A_POST) //
             .withPost(LATER_POST) //
             .create();

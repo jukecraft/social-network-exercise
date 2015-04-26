@@ -28,13 +28,13 @@ public class TimelineService {
         timelines.post(author, new Post(message, clock.getLocalDateTime()));
     }
 
-    public PostsOutput collectWall(User wallUser) {
+    public WallOutput collectWall(User wallUser) {
         List<User> relevantUsers = new ArrayList<User>(network.getFollowing(wallUser));
         relevantUsers.add(wallUser);
         return collectWallOutput(relevantUsers);
     }
 
-    private PostsOutput collectWallOutput(List<User> relevantUsers) {
+    private WallOutput collectWallOutput(List<User> relevantUsers) {
         WallOutput wallOutput = new WallOutput();
         relevantUsers.forEach(user -> wallOutput.addPosts(user, collectPosts(user)));
         return wallOutput;

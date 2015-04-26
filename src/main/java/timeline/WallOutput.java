@@ -8,7 +8,9 @@ import java.util.Map;
 
 import time.SocialTime;
 
-public class WallOutput extends PostsOutput {
+import commons.SocialNetworkingValueObject;
+
+public class WallOutput extends SocialNetworkingValueObject implements Output {
 
     private Map<User, PostsOutput> timelines = new HashMap<>();
 

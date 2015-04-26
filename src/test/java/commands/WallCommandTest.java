@@ -5,21 +5,21 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
-import static timeline.builder.PostsOutputBuilder.aPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
+import static timeline.builder.WallOutputBuilder.aWallOutput;
+import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
 
 import org.junit.Test;
 
-import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
+import timeline.WallOutput;
 
 public class WallCommandTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final CommandParameter WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();
-    private static final PostsOutput OUTPUT = aPostsOutput().create();
+    private static final WallOutput OUTPUT = aWallOutput().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
     private WallCommand command = new WallCommand(timelineService);
@@ -44,18 +44,18 @@ public class WallCommandTest {
 
     @Test
     public void itReturnsNoOutputIfTimelinesHasNoWallForTheGivenUser() {
-        when(timelineService.collectWall(ALICE)).thenReturn(new PostsOutput());
+        when(timelineService.collectWall(ALICE)).thenReturn(anEmptyWallOutput().create());
 
-        PostsOutput output = command.executeCommand(WALL_COMMAND);
+        WallOutput output = command.executeCommand(WALL_COMMAND);
 
-        assertThat(output, is(anEmptyPostsOutput().create()));
+        assertThat(output, is(anEmptyWallOutput().create()));
     }
 
     @Test
     public void itReturnsOutputIfTimelinesHasAWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(OUTPUT);
 
-        PostsOutput output = command.executeCommand(WALL_COMMAND);
+        WallOutput output = command.executeCommand(WALL_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }
