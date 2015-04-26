@@ -1,22 +1,19 @@
 package timeline;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class WallOutputBuilder {
-    private Map<User, Output> timelines = new HashMap<>();
+    private WallOutput output = new WallOutput();
 
-    public static WallOutputBuilder aWallOutput() {
+    public static WallOutputBuilder anEmptyWallOutput() {
         return new WallOutputBuilder();
     }
 
-    public WallOutputBuilder withTimeline(User user, Output timeline) {
-        timelines.put(user, timeline);
+    public WallOutputBuilder withTimeline(User user, Output posts) {
+        output.addPosts(user, posts);
         return this;
     }
 
     public WallOutput create() {
-        return new WallOutput(timelines);
+        return output;
     }
 
 }

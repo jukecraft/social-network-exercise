@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static timeline.WallOutputBuilder.aWallOutput;
+import static timeline.WallOutputBuilder.anEmptyWallOutput;
 import static timeline.builder.OutputBuilder.anEmptyOutput;
 import static timeline.builder.OutputBuilder.anOutput;
 import static timeline.builder.PostBuilder.aPost;
@@ -76,7 +76,7 @@ public class TimelineServiceTest {
 
         Output actualOutput = timelineService.collectWall(ALICE);
 
-        assertThat(actualOutput, is(aWallOutput() //
+        assertThat(actualOutput, is(anEmptyWallOutput() //
             .withTimeline(ALICE, alicesTimeline) //
             .withTimeline(BOB, bobsTimeline) //
             .create()));

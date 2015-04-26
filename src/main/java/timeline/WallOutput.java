@@ -1,14 +1,14 @@
 package timeline;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class WallOutput extends Output {
 
-    @SuppressWarnings("unused")
-    private Map<User, Output> timelines;
+    private Map<User, Output> timelines = new HashMap<>();
 
-    public WallOutput(Map<User, Output> timelines) {
-        this.timelines = timelines;
+    public void addPosts(User user, Output collectPosts) {
+        timelines.put(user, collectPosts);
     }
 
 }
