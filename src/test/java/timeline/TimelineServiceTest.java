@@ -22,21 +22,21 @@ public class TimelineServiceTest {
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anOutput().create();
 
+    private Timelines timelines = mock(Timelines.class);
+    private TimelineService timelineService = new TimelineService(timelines);
+
     @Test
     public void itDelegatesPostsToTimelines() {
-        Timelines timelines = mock(Timelines.class);
-
-        new TimelineService(timelines).post(USER, POST);
+        timelineService.post(USER, POST);
 
         verify(timelines).post(USER, POST);
     }
 
     @Test
     public void itDelegatesPrintTimelineToTimelines() {
-        Timelines timelines = mock(Timelines.class);
         when(timelines.printTimeline(USER, TIME)).thenReturn(OUTPUT);
 
-        Output actualOutput = new TimelineService(timelines).printTimeline(USER, TIME);
+        Output actualOutput = timelineService.printTimeline(USER, TIME);
 
         assertThat(actualOutput, is(OUTPUT));
     }
