@@ -7,7 +7,7 @@ import commons.SocialNetworkingValueObject;
 
 public class Post extends SocialNetworkingValueObject implements Comparable<Post> {
     private static final String POST_PRINT_FORMAT = "{0} ({1})";
-    private static final String POST_WITH_USER_PRINT_FORMAT = "{2} - " + POST_PRINT_FORMAT;
+    private static final String POST_WITH_USER_PRINT_FORMAT = "{0} - {1}";
 
     private final Message message;
     private final SocialTime postingTime;
@@ -24,7 +24,7 @@ public class Post extends SocialNetworkingValueObject implements Comparable<Post
     }
 
     public String printWithUser(SocialTime printingTime) {
-        return format(POST_WITH_USER_PRINT_FORMAT, message, postingTime.printTimestamp(printingTime), user);
+        return format(POST_WITH_USER_PRINT_FORMAT, user, printAt(printingTime));
     }
 
     @Override
