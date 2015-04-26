@@ -24,21 +24,12 @@ public class FollowCommandTest {
     private FollowCommand command = new FollowCommand(timelines);
 
     @Test
-    public void itIsApplicableIfCommandContainsFollows() {
+    public void itIsApplicableIfCommandStartsWithFollows() {
         CommandParameter commandParameter = aCommand().withCommand(" follows ").create();
 
         boolean isApplicable = command.isApplicable(commandParameter);
 
         assertThat(isApplicable, is(true));
-    }
-
-    @Test
-    public void itIsNotApplicableIfCommandDoesntContainFollows() {
-        CommandParameter commandParameter = aCommand().withCommand("").create();
-
-        boolean isApplicable = command.isApplicable(commandParameter);
-
-        assertThat(isApplicable, is(false));
     }
 
     @Test

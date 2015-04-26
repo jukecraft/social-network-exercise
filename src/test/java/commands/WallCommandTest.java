@@ -10,11 +10,20 @@ public class WallCommandTest {
     private WallCommand command = new WallCommand();
 
     @Test
-    public void itIsApplicableIfCommandContainsWall() {
+    public void itIsApplicableIfCommandStartsWithWall() {
         CommandParameter commandParameter = aCommand().withCommand(" wall ").create();
 
         boolean isApplicable = command.isApplicable(commandParameter);
 
         assertThat(isApplicable, is(true));
+    }
+
+    @Test
+    public void itIsNotApplicableIfCommandDoesntStartWithWall() {
+        CommandParameter commandParameter = aCommand().withCommand(" -> is a wall ").create();
+
+        boolean isApplicable = command.isApplicable(commandParameter);
+
+        assertThat(isApplicable, is(false));
     }
 }

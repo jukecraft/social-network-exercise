@@ -49,15 +49,6 @@ public class PostCommandTest {
     }
 
     @Test
-    public void itIsNotApplicableIfItDoesntContainAnArrow() {
-        CommandParameter commandParameter = aCommand().withCommand("").create();
-
-        boolean isApplicable = command.isApplicable(commandParameter);
-
-        assertThat(isApplicable, is(false));
-    }
-
-    @Test
     public void itIsNotApplicableIfItDoesntStartWithAnArrow() {
         CommandParameter commandParameter = aCommand().withCommand(" follows ->").create();
 
