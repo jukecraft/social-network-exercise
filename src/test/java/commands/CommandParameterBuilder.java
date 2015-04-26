@@ -10,8 +10,11 @@ public class CommandParameterBuilder {
     }
 
     public static CommandParameterBuilder aPostCommand() {
-        return new CommandParameterBuilder() //
-            .withMessage("I love the weather today!");
+        return aCommand().withMessage("I love the weather today!");
+    }
+
+    public static CommandParameterBuilder aFollowsCommand() {
+        return aCommand().withCommand(" follows Bob");
     }
 
     public CommandParameterBuilder withMessage(String messageText) {
