@@ -51,4 +51,13 @@ public class WallCommandTest {
         assertThat(output, is(anEmptyOutput().create()));
     }
 
+    @Test
+    public void itReturnsOutputIfTimelinesHasAWallForTheGivenUser() {
+        when(timelineService.collectWall(ALICE)).thenReturn(OUTPUT);
+
+        Output output = command.executeCommand(WALL_COMMAND);
+
+        assertThat(output, is(OUTPUT));
+    }
+
 }
