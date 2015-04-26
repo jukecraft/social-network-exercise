@@ -10,7 +10,7 @@ public class FollowCommandTest {
     private FollowCommand command = new FollowCommand();
 
     @Test
-    public void itIsApplicableIfItContainsFollows() {
+    public void itIsApplicableIfCommandContainsFollows() {
         CommandParameter commandParameter = aCommand().withCommand(" follows ").create();
 
         boolean isApplicable = command.isApplicable(commandParameter);
@@ -19,8 +19,17 @@ public class FollowCommandTest {
     }
 
     @Test
-    public void itIsNotApplicableIfItDoesntContainFollows() {
+    public void itIsNotApplicableIfCommandDoesntContainFollows() {
         CommandParameter commandParameter = aCommand().withCommand("").create();
+
+        boolean isApplicable = command.isApplicable(commandParameter);
+
+        assertThat(isApplicable, is(false));
+    }
+
+    @Test
+    public void itIsNotApplicableIfCommandDoesntStartWithFollows() {
+        CommandParameter commandParameter = aCommand().withCommand(" -> is as follows ").create();
 
         boolean isApplicable = command.isApplicable(commandParameter);
 
