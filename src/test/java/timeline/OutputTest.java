@@ -1,11 +1,11 @@
 package timeline;
 
 import static java.time.LocalDateTime.now;
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
@@ -32,7 +32,7 @@ public class OutputTest {
 
     @Test
     public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
-        Output output = new Output();
+        Output output = anEmptyOutput().create();
 
         List<String> printedTimeline = output.getOutput(PRINTING_TIME);
 
@@ -41,10 +41,14 @@ public class OutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintTimelineItPrintsThemWithTimestampsSortedLatestFirst() {
-        Output output = new Output(asList(A_POST, LATER_POST));
+        Output output = anEmptyOutput() //
+            .withPost(A_POST) //
+            .withPost(LATER_POST) //
+            .create();
 
         List<String> printedTimeline = output.getOutput(PRINTING_TIME);
 
         assertThat(printedTimeline, contains(LATER_MESSAGE + " (1 minute ago)", EARLIER_MESSAGE + " (5 minutes ago)"));
     }
+
 }

@@ -1,10 +1,11 @@
 package timeline;
 
-import static java.util.Arrays.asList;
 import static timeline.PostBuilder.aPost;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OutputBuilder {
-    private Output output = new Output();
 
     public static OutputBuilder anEmptyOutput() {
         return new OutputBuilder();
@@ -15,13 +16,15 @@ public class OutputBuilder {
             .withPost(aPost().create());
     }
 
+    private List<Post> posts = new ArrayList<>();
+
     public OutputBuilder withPost(Post post) {
-        output.add(new Output(asList(post)));
+        posts.add(post);
         return this;
     }
 
     public Output create() {
-        return output;
+        return new Output(posts);
     }
 
 }

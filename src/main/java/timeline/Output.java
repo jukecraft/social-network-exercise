@@ -21,10 +21,6 @@ public class Output extends SocialNetworkingValueObject {
         posts = new ArrayList<>();
     }
 
-    public void add(Output output) {
-        this.posts.addAll(output.posts);
-    }
-
     public List<String> getOutput(SocialTime printingTime) {
         return posts.stream() //
             .sorted() //
