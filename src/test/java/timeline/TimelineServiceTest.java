@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static timeline.WallOutputBuilder.aWallOutput;
 import static timeline.builder.OutputBuilder.anEmptyOutput;
 import static timeline.builder.OutputBuilder.anOutput;
 import static timeline.builder.PostBuilder.aPost;
@@ -60,27 +61,24 @@ public class TimelineServiceTest {
     @Test
     public void itCollectsTimelinesFromUserAndFollowingIntoAWall() {
         when(network.getFollowing(ALICE)).thenReturn(asList(BOB));
-        Post alicePost1 = aPost().withMessage("message1").create();
-        Post alicePost2 = aPost().withMessage("message2").create();
+
         Output alicesTimeline = anEmptyOutput() //
-            .withPost(alicePost1) //
-            .withPost(alicePost2) //
+            .withPost(aPost().withMessage("message1").create()) //
+            .withPost(aPost().withMessage("message2").create()) //
             .create();
         when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
-        Post bobPost1 = aPost().withMessage("message3").create();
-        Post bobPost2 = aPost().withMessage("message4").create();
+
         Output bobsTimeline = anEmptyOutput() //
-            .withPost(alicePost1) //
-            .withPost(alicePost2) //
+            .withPost(aPost().withMessage("message3").create()) //
+            .withPost(aPost().withMessage("message4").create()) //
             .create();
         when(timelines.collectPosts(BOB)).thenReturn(bobsTimeline);
 
         Output actualOutput = timelineService.collectWall(ALICE);
 
-        assertThat(actualOutput, is(anEmptyOutput() //
-            .withPost(alicePost1) //
-            .withPost(alicePost2) //
-            .withPost(bobPost1) //
-            .withPost(bobPost2)));
+        assertThat(actualOutput, is(aWallOutput() //
+            .withTimeline(ALICE, alicesTimeline) //
+            .withTimeline(BOB, bobsTimeline) //
+            .create()));
     }
 }
