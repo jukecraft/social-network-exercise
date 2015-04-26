@@ -5,9 +5,11 @@ import time.SocialTimeClock;
 public class TimelineService {
     private final Timelines timelines;
     private final SocialTimeClock clock;
+    private SocialNetwork network;
 
     public TimelineService(Timelines timelines, SocialNetwork network, SocialTimeClock clock) {
         this.timelines = timelines;
+        this.network = network;
         this.clock = clock;
     }
 
@@ -16,7 +18,7 @@ public class TimelineService {
     }
 
     public void registerFollowing(User follower, User follows) {
-        follower.follows(follows);
+        network.registerFollowing(follower, follows);
     }
 
     public void post(User author, Message message) {
