@@ -15,8 +15,9 @@ public class FollowCommand {
         return commandParameter.startsWith(" follows ");
     }
 
-    public void executeCommand(User alice, CommandParameter create, SocialTime time) {
-        timelines.registerFollowing(alice, new User(new CommandParameter("Bob")));
+    public void executeCommand(User alice, CommandParameter parameter, SocialTime time) {
+        User user = new User(new CommandParameter("Bob"));
+        timelines.registerFollowing(alice, user);
     }
 
 }
