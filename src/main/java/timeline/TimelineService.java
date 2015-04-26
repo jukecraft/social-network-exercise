@@ -6,7 +6,7 @@ public class TimelineService {
     private final Timelines timelines;
     private final SocialTimeClock clock;
 
-    public TimelineService(Timelines timelines, SocialTimeClock clock) {
+    public TimelineService(Timelines timelines, SocialNetwork network, SocialTimeClock clock) {
         this.timelines = timelines;
         this.clock = clock;
     }

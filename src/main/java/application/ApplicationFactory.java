@@ -6,6 +6,7 @@ import static java.util.Arrays.asList;
 import java.time.Clock;
 
 import time.SocialTimeClock;
+import timeline.SocialNetwork;
 import timeline.TimelineService;
 import timeline.Timelines;
 
@@ -24,22 +25,22 @@ public class ApplicationFactory {
         return new ApplicationFactory(systemDefaultZone());
     }
 
+    public ApplicationFactory withClock(SocialTimeClock clock) {
+        this.clock = clock;
+        timelineService = new TimelineService(new Timelines(), new SocialNetwork(), clock);
+        commands = new Commands(asList( //
+            new PostCommand(timelineService), //
+            new TimelineCommand(timelineService), //
+            new FollowCommand(timelineService)));
+        return this;
+    }
+
     public ApplicationFactory(Clock clock) {
         withClock(clock);
     }
 
     public ApplicationFactory withClock(Clock clock) {
         return withClock(new SocialTimeClock(clock));
-    }
-
-    public ApplicationFactory withClock(SocialTimeClock clock) {
-        this.clock = clock;
-        timelineService = new TimelineService(new Timelines(), clock);
-        commands = new Commands(asList( //
-            new PostCommand(timelineService), //
-            new TimelineCommand(timelineService), //
-            new FollowCommand(timelineService)));
-        return this;
     }
 
     public ApplicationFactory withCommands(Commands commands) {

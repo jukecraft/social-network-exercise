@@ -18,13 +18,16 @@ import time.SocialTimeClock;
 
 public class TimelineServiceTest {
     private static final User ALICE = aUser().withName("Alice").create();
+    private static final User BOB = aUser().withName("Bob").create();
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anOutput().create();
     private static final Message MESSAGE = new Message(aPostCommand().create());
 
     private Timelines timelines = mock(Timelines.class);
+    private SocialNetwork network = mock(SocialNetwork.class);
     private SocialTimeClock clock = mock(SocialTimeClock.class);
-    private TimelineService timelineService = new TimelineService(timelines, clock);
+
+    private TimelineService timelineService = new TimelineService(timelines, network, clock);
 
     @Test
     public void itDelegatesPostsToTimelinesIncludingTheCurrentTime() {
@@ -46,12 +49,10 @@ public class TimelineServiceTest {
     }
 
     @Test
-    public void itRegisteresANewFollowingWithAUser() {
-        User bob = mock(User.class);
+    public void itRegisteresANewFollowingInTheSocialNetwork() {
+        timelineService.registerFollowing(BOB, ALICE);
 
-        timelineService.registerFollowing(bob, ALICE);
-
-        verify(bob).follows(ALICE);
+        verify(network).registerFollowing(BOB, ALICE);
     }
 
 }
