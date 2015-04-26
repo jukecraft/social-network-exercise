@@ -14,6 +14,7 @@ import commands.Commands;
 import commands.FollowCommand;
 import commands.PostCommand;
 import commands.TimelineCommand;
+import commands.WallCommand;
 
 public class ApplicationFactory {
 
@@ -31,7 +32,9 @@ public class ApplicationFactory {
         commands = new Commands(asList( //
             new PostCommand(timelineService), //
             new TimelineCommand(timelineService), //
-            new FollowCommand(timelineService)));
+            new FollowCommand(timelineService), //
+            new WallCommand(timelineService) //
+            ));
         return this;
     }
 

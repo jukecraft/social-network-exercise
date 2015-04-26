@@ -2,6 +2,7 @@ package commands;
 
 import java.util.List;
 
+import timeline.Output;
 import timeline.PostsOutput;
 
 public class Commands {
@@ -11,7 +12,7 @@ public class Commands {
         this.commands = commands;
     }
 
-    public PostsOutput execute(CommandParameter commandParameter) {
+    public Output execute(CommandParameter commandParameter) {
         return commands.stream() //
             .filter(candidate -> candidate.isApplicable(commandParameter)) //
             .findFirst() //

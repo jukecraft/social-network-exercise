@@ -4,7 +4,7 @@ import timeline.TimelineService;
 import timeline.User;
 import timeline.WallOutput;
 
-public class WallCommand {
+public class WallCommand implements Command {
 
     private static final String WALL_IDENTIFIER = " wall";
     private TimelineService timelineService;

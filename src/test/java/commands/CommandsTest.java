@@ -14,6 +14,7 @@ import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import org.junit.Before;
 import org.junit.Test;
 
+import timeline.Output;
 import timeline.PostsOutput;
 
 public class CommandsTest {
@@ -46,7 +47,7 @@ public class CommandsTest {
     public void givenMultipleCommandsTheFirstApplicableIsExecutedAndTheResultIsCollected() {
         Commands commands = new Commands(asList(applicableCommand, applicableCommand));
 
-        PostsOutput output = commands.execute(COMMAND_PARAMETER);
+        Output output = commands.execute(COMMAND_PARAMETER);
 
         assertThat(output, is(OUTPUT));
     }
