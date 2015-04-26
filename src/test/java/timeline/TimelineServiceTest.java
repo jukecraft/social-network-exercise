@@ -12,7 +12,6 @@ import static timeline.PostBuilder.aPost;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import time.SocialTime;
 import time.SocialTimeClock;
@@ -47,11 +46,12 @@ public class TimelineServiceTest {
     }
 
     @Test
-    public void itDelegatesRegisterFollowingToSocialNetwork() {
-        User bob = Mockito.mock(User.class);
+    public void itRegisteresANewFollowingWithAUser() {
+        User bob = mock(User.class);
 
         timelineService.registerFollowing(bob, ALICE);
 
-        verify(bob).registerFollowing(ALICE);
+        verify(bob).follows(ALICE);
+
     }
 }
