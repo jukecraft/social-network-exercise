@@ -52,6 +52,15 @@ public class TimelineServiceTest {
         timelineService.registerFollowing(bob, ALICE);
 
         verify(bob).follows(ALICE);
+    }
+
+    @Test
+    public void itUpdatesTheUserInTimelines() {
+        User bob = aUser().create();
+
+        timelineService.registerFollowing(bob, ALICE);
+
+        verify(timelines).updateUser(bob);
 
     }
 }
