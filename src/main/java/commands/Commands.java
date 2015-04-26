@@ -14,14 +14,15 @@ public class Commands {
 
     public Output execute(String command, SocialTime time) {
         User user = new User(command);
-
         String commandWithoutUser = command.substring(user.lengthOfName());
+        return execute(time, user, commandWithoutUser);
+    }
 
-        Output output = new Output();
-        for (Command command2 : commands) {
-            if (command2.isApplicable(commandWithoutUser))
-                output.add(command2.executeCommand(user, commandWithoutUser, time));
-        }
-        return output;
+    private Output execute(SocialTime time, User user, String commandAsString) {
+        return commands.stream() //
+            .filter(candidate -> candidate.isApplicable(commandAsString)) //
+            .findFirst() //
+            .map(command -> command.executeCommand(user, commandAsString, time)) //
+            .orElse(new Output());
     }
 }

@@ -2,7 +2,7 @@ package commands;
 
 import static commands.UserBuilder.aUser;
 import static java.util.Arrays.asList;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -22,8 +22,7 @@ public class CommandsTest {
     private static final User EXPECTED_USER = aUser().withName(USERNAME).create();
     private static final String COMMAND = " test command";
     private static final SocialTime TIME = aTime().create();
-    private static final String OUTPUT1 = "output";
-    private static final String OUTPUT2 = "another output";
+    private static final Output OUTPUT = new Output(asList("output", "another output"));
 
     private Command applicableCommand = mock(Command.class);
     private Command notApplicableCommand = mock(Command.class);
@@ -32,13 +31,12 @@ public class CommandsTest {
     public void setUpCommands() {
         when(applicableCommand.isApplicable(COMMAND)).thenReturn(true);
         when(notApplicableCommand.isApplicable(COMMAND)).thenReturn(false);
-        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND, TIME)).thenReturn(
-            new Output(asList(OUTPUT1, OUTPUT2)));
+        when(applicableCommand.executeCommand(EXPECTED_USER, COMMAND, TIME)).thenReturn(OUTPUT);
     }
 
     @Test
-    public void givenMultipleCommandsWhenTheyAreExecutedThenOnlyTheApplicableAreExecutedWithTheExtractedUser() {
-        Commands commands = new Commands(asList(applicableCommand, notApplicableCommand));
+    public void givenMultipleCommandsTheFirstApplicableIsExecuted() {
+        Commands commands = new Commands(asList(notApplicableCommand, applicableCommand));
 
         commands.execute(USERNAME + COMMAND, TIME);
 
@@ -47,12 +45,12 @@ public class CommandsTest {
     }
 
     @Test
-    public void givenMultipleCommandsTheOutputIsCollected() {
+    public void givenMultipleCommandsTheFirstApplicableIsExecutedAndTheResultIsCollected() {
         Commands commands = new Commands(asList(applicableCommand, applicableCommand));
 
         Output output = commands.execute(USERNAME + COMMAND, TIME);
 
-        assertThat(output.getOutput(), contains(OUTPUT1, OUTPUT2, OUTPUT1, OUTPUT2));
+        assertThat(output, is(OUTPUT));
     }
 
 }
