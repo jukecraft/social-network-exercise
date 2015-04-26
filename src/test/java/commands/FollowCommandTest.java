@@ -8,17 +8,14 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static timeline.OutputBuilder.anEmptyOutput;
-import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
 
-import time.SocialTime;
 import timeline.Output;
 import timeline.TimelineService;
 import timeline.User;
 
 public class FollowCommandTest {
-    private static final SocialTime TIME = aTime().create();
     private static final String USERNAME_ALICE = "Alice";
     private static final User ALICE = aUser().withName(USERNAME_ALICE).create();
     private static final String USERNAME_BOB = "Bob";
@@ -55,20 +52,20 @@ public class FollowCommandTest {
 
     @Test
     public void itRegisteresWithTimelinesThatAliceIsFollowingBob() {
-        command.executeCommand(ALICE, aCommand() //
+        command.executeCommand(aCommand() //
             .withUser(USERNAME_ALICE) //
             .withCommand(" follows " + USERNAME_BOB) //
-            .create(), TIME);
+            .create());
 
         verify(timelines).registerFollowing(ALICE, BOB);
     }
 
     @Test
     public void itRegisteresWithTimelinesThatBobIsFollowingAlice() {
-        command.executeCommand(BOB, aCommand() //
+        command.executeCommand(aCommand() //
             .withUser(USERNAME_BOB) //
             .withCommand(" follows " + USERNAME_ALICE) //
-            .create(), TIME);
+            .create());
 
         verify(timelines).registerFollowing(BOB, ALICE);
     }
@@ -77,7 +74,7 @@ public class FollowCommandTest {
     public void itReturnsNoOutput() {
         CommandParameter commandParameter = aFollowsCommand().create();
 
-        Output output = command.executeCommand(ALICE, commandParameter, TIME);
+        Output output = command.executeCommand(commandParameter);
 
         assertThat(output, is(anEmptyOutput().create()));
     }

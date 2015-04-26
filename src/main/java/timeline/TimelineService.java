@@ -17,7 +17,6 @@ public class TimelineService {
 
     public void registerFollowing(User follower, User follows) {
         follower.follows(follows);
-        timelines.updateUser(follower);
     }
 
     public void post(User author, Message message) {

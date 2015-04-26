@@ -14,7 +14,6 @@ public class User extends SocialNetworkingValueObject {
 
     public void follows(User follows) {
         // TODO Auto-generated method stub
-
     }
 
 }

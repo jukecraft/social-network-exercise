@@ -19,9 +19,4 @@ public class Timelines {
         return timelines.getOrDefault(user, new Timeline());
     }
 
-    public void updateUser(User follower) {
-        // TODO Auto-generated method stub
-
-    }
-
 }
