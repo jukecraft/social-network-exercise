@@ -1,26 +1,18 @@
 package timeline;
 
-import java.util.HashMap;
-
 import time.SocialTime;
 
 import commands.User;
 
 public class TimelineService {
-    private HashMap<User, Timeline> timelines = new HashMap<>();
+    private Timelines timelines = new Timelines();
 
     public void post(User user, Post post) {
-        Timeline timeline = findTimeline(user);
-        timeline.addPost(post);
-        timelines.put(user, timeline);
-    }
-
-    private Timeline findTimeline(User user) {
-        return timelines.getOrDefault(user, new Timeline());
+        timelines.post(user, post);
     }
 
     public Output printTimeline(User user, SocialTime time) {
-        return findTimeline(user).printTimeline(time);
+        return timelines.printTimeline(user, time);
     }
 
     public void registerFollowing(User follower, User follows) {
