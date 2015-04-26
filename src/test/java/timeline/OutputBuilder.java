@@ -9,13 +9,18 @@ public class OutputBuilder {
         return new OutputBuilder();
     }
 
-    public Output create() {
-        return output;
+    public static OutputBuilder anOutput() {
+        return new OutputBuilder() //
+            .withLine("");
     }
 
     public OutputBuilder withLine(String line) {
         output.add(new Output(asList(line)));
         return this;
+    }
+
+    public Output create() {
+        return output;
     }
 
 }

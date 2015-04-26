@@ -7,6 +7,7 @@ import java.time.Clock;
 
 import time.SocialTimeClock;
 import timeline.TimelineService;
+import timeline.Timelines;
 
 import commands.Commands;
 import commands.PostCommand;
@@ -15,8 +16,8 @@ import commands.TimelineCommand;
 public class ApplicationFactory {
 
     private SocialTimeClock clock = new SocialTimeClock(systemDefaultZone());
-    private TimelineService timelines = new TimelineService();
-    private Commands commands = new Commands(asList(new PostCommand(timelines), new TimelineCommand(timelines)));
+    private TimelineService timelineService = new TimelineService(new Timelines());
+    private Commands commands = new Commands(asList(new PostCommand(timelineService), new TimelineCommand(timelineService)));
 
     public static ApplicationFactory standardConfiguration() {
         return new ApplicationFactory();
