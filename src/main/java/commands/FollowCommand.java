@@ -5,8 +5,10 @@ import timeline.Timelines;
 
 public class FollowCommand {
 
+    private Timelines timelines;
+
     public FollowCommand(Timelines timelines) {
-        // TODO Auto-generated constructor stub
+        this.timelines = timelines;
     }
 
     public boolean isApplicable(CommandParameter commandParameter) {
@@ -14,8 +16,7 @@ public class FollowCommand {
     }
 
     public void executeCommand(User alice, CommandParameter create, SocialTime time) {
-        // TODO Auto-generated method stub
-
+        timelines.registerFollowing(alice, new User(new CommandParameter("Bob")));
     }
 
 }
