@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandParameterBuilder.aCommand;
+
 public class UserBuilder {
     private String name = "userName";
 
@@ -13,6 +15,6 @@ public class UserBuilder {
     }
 
     public User create() {
-        return new User(new CommandParameter(name));
+        return new User(aCommand().withUser(name).create());
     }
 }

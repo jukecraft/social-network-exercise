@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 import time.SocialTime;
 
-import commands.CommandParameter;
+import commands.CommandParameterBuilder;
 
 public class PostBuilder {
 
@@ -36,7 +36,7 @@ public class PostBuilder {
     }
 
     public Post create() {
-        return new Post(new Message(new CommandParameter("Alice -> " + messageText)), timestamp);
+        return new Post(new Message(CommandParameterBuilder.aCommand().withMessage(messageText).create()), timestamp);
     }
 
 }

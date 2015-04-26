@@ -1,5 +1,7 @@
 package commands;
 
+import static commands.CommandParameterBuilder.aCommand;
+import static commands.CommandParameterBuilder.aPostCommand;
 import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -12,6 +14,7 @@ import static timeline.SocialTimeBuilder.aTime;
 import org.junit.Test;
 
 import time.SocialTime;
+import timeline.Output;
 import timeline.Post;
 import timeline.Timelines;
 
@@ -23,7 +26,7 @@ public class PostCommandTest {
 
     @Test
     public void itCreatesANewPostInTheTimelinesFromTheGivenMessageUserAndTime() {
-        command.executeCommand(ALICE, new CommandParameter("Alice -> I love the weather today"), TIME);
+        command.executeCommand(ALICE, aCommand().withCommand(" -> I love the weather today").create(), TIME);
 
         Post expectedPost = aPost() //
             .withMessage("I love the weather today") //
@@ -34,7 +37,7 @@ public class PostCommandTest {
 
     @Test
     public void itCreatesANewPostInTheTimelinesFromTheGivenDifferentMessageUserAndTime() {
-        command.executeCommand(ALICE, new CommandParameter("Alice -> Good game though."), TIME);
+        command.executeCommand(ALICE, aCommand().withCommand(" -> Good game though.").create(), TIME);
 
         Post expectedPost = aPost() //
             .withMessage("Good game though.") //
@@ -45,17 +48,28 @@ public class PostCommandTest {
 
     @Test
     public void itIsApplicableIfItContainsAnArrow() {
-        assertThat(command.isApplicable(new CommandParameter("Alice -> Good game though.")), is(true));
+        CommandParameter commandParameter = aCommand().withCommand(" -> ").create();
+
+        boolean isApplicable = command.isApplicable(commandParameter);
+
+        assertThat(isApplicable, is(true));
     }
 
     @Test
     public void itIsNotApplicableIfItDoesntContainAnArrow() {
-        assertThat(command.isApplicable(new CommandParameter("Alice")), is(false));
+        CommandParameter commandParameter = aCommand().withCommand("").create();
+
+        boolean isApplicable = command.isApplicable(commandParameter);
+
+        assertThat(isApplicable, is(false));
     }
 
     @Test
     public void itReturnsNoOutput() {
-        assertThat(command.executeCommand(ALICE, new CommandParameter("Alice -> I love the weather today"), TIME),
-            is(anEmptyOutput().create()));
+        CommandParameter commandParameter = aPostCommand().create();
+
+        Output output = command.executeCommand(ALICE, commandParameter, TIME);
+
+        assertThat(output, is(anEmptyOutput().create()));
     }
 }

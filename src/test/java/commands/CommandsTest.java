@@ -1,5 +1,6 @@
 package commands;
 
+import static commands.CommandParameterBuilder.aPostCommand;
 import static commands.UserBuilder.aUser;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
@@ -21,8 +22,7 @@ import timeline.Output;
 public class CommandsTest {
     private static final String USERNAME = "Alice";
     private static final User EXPECTED_USER = aUser().withName(USERNAME).create();
-    private static final CommandParameter COMMAND_PARAMETER = new CommandParameter(USERNAME
-        + " -> I love the weather today!");
+    private static final CommandParameter COMMAND_PARAMETER = aPostCommand().withUser(USERNAME).create();
     private static final SocialTime TIME = aTime().create();
     private static final Output OUTPUT = anEmptyOutput().create();
 
