@@ -65,4 +65,18 @@ public class PostsOutputTest {
         assertThat(printedTimeline,
             contains(LATER_POST.printWithUser(PRINTING_TIME), A_POST.printWithUser(PRINTING_TIME)));
     }
+
+    @Test
+    public void givenAnotherPostOutputItCanMergeThePosts() {
+        PostsOutput output = anEmptyPostsOutput() //
+            .withPost(A_POST) //
+            .create();
+        PostsOutput anotherOutput = anEmptyPostsOutput() //
+            .withPost(LATER_POST) //
+            .create();
+
+        Output merged = output.mergeWith(anotherOutput);
+
+        assertThat(merged, is(anEmptyPostsOutput().withPost(A_POST).withPost(LATER_POST).create()));
+    }
 }

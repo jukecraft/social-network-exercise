@@ -38,4 +38,9 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
             .map(printingOption) //
             .collect(toList());
     }
+
+    public Output mergeWith(PostsOutput anotherOutput) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
