@@ -1,6 +1,7 @@
 package commands;
 
 import time.SocialTime;
+import timeline.Output;
 import timeline.Timelines;
 
 public class FollowCommand {
@@ -16,10 +17,11 @@ public class FollowCommand {
         return commandParameter.startsWith(COMMAND_IDENTIFIER);
     }
 
-    public void executeCommand(User alice, CommandParameter parameter, SocialTime time) {
+    public Output executeCommand(User alice, CommandParameter parameter, SocialTime time) {
         CommandParameter secondUserParameter = new CommandParameter(parameter.afterSeparator(COMMAND_IDENTIFIER));
         User user = new User(secondUserParameter);
         timelines.registerFollowing(alice, user);
+        return new Output();
     }
 
 }

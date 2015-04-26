@@ -1,16 +1,19 @@
 package commands;
 
 import static commands.CommandParameterBuilder.aCommand;
+import static commands.CommandParameterBuilder.aFollowsCommand;
 import static commands.UserBuilder.aUser;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static timeline.OutputBuilder.anEmptyOutput;
 import static timeline.SocialTimeBuilder.aTime;
 
 import org.junit.Test;
 
 import time.SocialTime;
+import timeline.Output;
 import timeline.Timelines;
 
 public class FollowCommandTest {
@@ -67,5 +70,14 @@ public class FollowCommandTest {
             .create(), TIME);
 
         verify(timelines).registerFollowing(BOB, ALICE);
+    }
+
+    @Test
+    public void itReturnsNoOutput() {
+        CommandParameter commandParameter = aFollowsCommand().create();
+
+        Output output = command.executeCommand(ALICE, commandParameter, TIME);
+
+        assertThat(output, is(anEmptyOutput().create()));
     }
 }
