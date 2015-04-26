@@ -4,8 +4,11 @@ import java.util.Map;
 
 public class WallOutput extends Output {
 
+    @SuppressWarnings("unused")
+    private Map<User, Output> timelines;
+
     public WallOutput(Map<User, Output> timelines) {
-        // TODO Auto-generated constructor stub
+        this.timelines = timelines;
     }
 
 }

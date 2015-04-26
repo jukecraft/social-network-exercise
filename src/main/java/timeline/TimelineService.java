@@ -1,5 +1,9 @@
 package timeline;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import time.SocialTimeClock;
 
 public class TimelineService {
@@ -26,7 +30,13 @@ public class TimelineService {
     }
 
     public Output collectWall(User alice) {
-        // TODO Auto-generated method stub
-        return null;
+        List<User> following = network.getFollowing(alice);
+
+        Map<User, Output> relevantPosts = new HashMap<>();
+
+        following.forEach(user -> relevantPosts.put(user, collectPosts(user)));
+        relevantPosts.put(alice, collectPosts(alice));
+
+        return new WallOutput(relevantPosts);
     }
 }
