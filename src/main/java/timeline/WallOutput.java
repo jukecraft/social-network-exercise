@@ -15,8 +15,8 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
 
     private Map<User, PostsOutput> timelines = new HashMap<>();
 
-    public void addPosts(User user, PostsOutput collectPosts) {
-        timelines.put(user, collectPosts);
+    public void addPosts(User user, PostsOutput posts) {
+        timelines.put(user, posts);
     }
 
     @Override
