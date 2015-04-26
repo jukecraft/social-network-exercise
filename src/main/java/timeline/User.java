@@ -12,4 +12,9 @@ public class User extends SocialNetworkingValueObject {
         this.name = commandParameter.getUser();
     }
 
+    public void registerFollowing(User follows) {
+        // TODO Auto-generated method stub
+
+    }
+
 }
