@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class StartAppIntegrationTest {
+    private static final String[] IRRELEVANT_PARAMETERS = null;
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
 
@@ -21,7 +22,7 @@ public class StartAppIntegrationTest {
         ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
         setOut(new PrintStream(actualOutput));
 
-        StartApp.main();
+        StartApp.main(IRRELEVANT_PARAMETERS);
 
         assertThat(actualOutput.toString(), containsString("Welcome to my social network application"));
     }
@@ -35,7 +36,7 @@ public class StartAppIntegrationTest {
         ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
         setOut(new PrintStream(actualOutput));
 
-        StartApp.main();
+        StartApp.main(IRRELEVANT_PARAMETERS);
 
         assertThat(actualOutput.toString(), containsString("I love the weather today ("));
     }
