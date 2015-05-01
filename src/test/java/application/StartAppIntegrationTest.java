@@ -8,6 +8,7 @@ import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emp
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
@@ -28,6 +29,7 @@ public class StartAppIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {
         String firstPost = "Alice -> I love the weather today";
         String timelineCommand = "Alice";
