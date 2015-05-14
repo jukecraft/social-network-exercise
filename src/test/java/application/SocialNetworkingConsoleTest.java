@@ -1,39 +1,37 @@
 package application;
 
-import static java.lang.System.setOut;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 
 public class SocialNetworkingConsoleTest {
-
     private static final String OUTPUT = "I love the weather today";
     private static final String ANOTHER_OUTPUT = "Damn! We lost!";
+    private static final String LINE_SEPERATOR = System.getProperty("line.separator");
+
+    @Rule
+    public final StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
 
     @Test
     public void givenAStringItPrintsThatStringToSystemOut() {
-        ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
-        setOut(new PrintStream(actualOutput));
         SocialNetworkingConsole console = new SocialNetworkingConsole();
 
         console.print(OUTPUT);
 
-        assertThat(actualOutput.toString(), is(OUTPUT));
+        assertThat(log.getLog(), is(OUTPUT));
     }
 
     @Test
     public void givenMultipleStringsItPrintsThemLineByLineToSystemOut() {
-        ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
-        setOut(new PrintStream(actualOutput));
         SocialNetworkingConsole console = new SocialNetworkingConsole();
 
         console.print(asList(OUTPUT, ANOTHER_OUTPUT));
 
-        assertThat(actualOutput.toString(), is(OUTPUT + ANOTHER_OUTPUT));
+        assertThat(log.getLog(), is(OUTPUT + LINE_SEPERATOR + ANOTHER_OUTPUT + LINE_SEPERATOR));
     }
 }
