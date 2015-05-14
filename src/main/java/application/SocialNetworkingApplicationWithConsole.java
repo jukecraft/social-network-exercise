@@ -15,7 +15,7 @@ public class SocialNetworkingApplicationWithConsole {
     public void start() {
         console.print("Welcome to my social network application");
         Optional<String> command = console.getNextCommand();
-        if (command.isPresent()) {
+        if (command.isPresent() && command.get().length() > 0) {
             application.accept(command.get());
         }
     }
