@@ -65,4 +65,8 @@ public class ApplicationFactory {
         return clock;
     }
 
+    public SocialNetworkingConsole getConsole() {
+        return console;
+    }
+
 }

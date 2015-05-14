@@ -2,11 +2,14 @@ package application;
 
 public class SocialNetworkingApplicationWithConsole {
 
+    private SocialNetworkingConsole console;
+
     public SocialNetworkingApplicationWithConsole(ApplicationFactory applicationFactory) {
+        console = applicationFactory.getConsole();
     }
 
     public void start() {
-        System.out.print("Welcome to my social network application");
+        console.print("Welcome to my social network application");
     }
 
 }
