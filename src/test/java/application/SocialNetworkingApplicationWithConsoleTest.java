@@ -8,10 +8,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
 public class SocialNetworkingApplicationWithConsoleTest {
+    private static final Optional<String> EMPTY_COMMAND = of("");
     private static final String A_COMMAND = "Alice -> I love the weather today";
+    private static final String ANOTHER_COMMAND = "Alice";
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
     private SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
@@ -22,7 +26,8 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {
-        when(console.getNextCommand()).thenReturn(empty());
+        when(console.getNextCommand()) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
@@ -31,7 +36,9 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
-        when(console.getNextCommand()).thenReturn(of(A_COMMAND));
+        when(console.getNextCommand()) //
+            .thenReturn(of(A_COMMAND)) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
@@ -40,7 +47,9 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
-        when(console.getNextCommand()).thenReturn(empty());
+        when(console.getNextCommand()) //
+            .thenReturn(empty()) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
@@ -49,10 +58,12 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
-        when(console.getNextCommand()).thenReturn(of(""));
+        when(console.getNextCommand()) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
         verifyZeroInteractions(application);
     }
+
 }
