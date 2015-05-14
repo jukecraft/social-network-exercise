@@ -1,6 +1,7 @@
 package application;
 
 import static application.ApplicationFactory.standardConfiguration;
+import static java.lang.System.getProperty;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -10,7 +11,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class SocialNetworkingApplicationWithConsoleTest {
-    private static final String LINE_SEPERATOR = System.getProperty("line.separator");
+    private static final String A_COMMAND = "Alice -> I love the weather today";
+    private static final String LINE_SEPERATOR = getProperty("line.separator");
 
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
@@ -28,14 +30,14 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
-        String command = "Alice -> I love the weather today";
         SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
         SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
             standardConfiguration().withApplication(application));
-        input.provideText(command + LINE_SEPERATOR);
+        input.provideText(A_COMMAND + LINE_SEPERATOR);
 
         applicationWithConsole.start();
 
-        verify(application).accept("Alice -> I love the weather today");
+        verify(application).accept(A_COMMAND);
     }
+
 }
