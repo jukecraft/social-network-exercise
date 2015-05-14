@@ -5,6 +5,7 @@ import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -37,4 +38,21 @@ public class SocialNetworkingApplicationWithConsoleTest {
         verify(application).accept(A_COMMAND);
     }
 
+    @Test
+    public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
+        when(console.getNextCommand()).thenReturn(empty());
+
+        applicationWithConsole.start();
+
+        verifyZeroInteractions(application);
+    }
+
+    @Test
+    public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
+        when(console.getNextCommand()).thenReturn(of(""));
+
+        applicationWithConsole.start();
+
+        verifyZeroInteractions(application);
+    }
 }
