@@ -25,28 +25,23 @@ public class ApplicationFactory {
     private SocialNetworkingApplication application;
 
     public static ApplicationFactory standardConfiguration() {
-        return new ApplicationFactory(systemDefaultZone()).withConsole(new SocialNetworkingConsole());
+        return new ApplicationFactory().withClock(systemDefaultZone()).withConsole(new SocialNetworkingConsole());
     }
 
-    public ApplicationFactory withClock(SocialTimeClock clock) {
-        this.clock = clock;
-        timelineService = new TimelineService(new Timelines(), new SocialNetwork(), clock);
+    private ApplicationFactory() {
+    }
+
+    public ApplicationFactory withClock(Clock clock) {
+        this.clock = new SocialTimeClock(clock);
+        timelineService = new TimelineService(new Timelines(), new SocialNetwork(), this.clock);
         commands = new Commands(asList( //
             new PostCommand(timelineService), //
             new TimelineCommand(timelineService), //
             new FollowCommand(timelineService), //
             new WallCommand(timelineService) //
             ));
-        application = new SocialNetworkingApplication(this);
+        application = new SocialNetworkingApplication(this.clock, commands);
         return this;
-    }
-
-    public ApplicationFactory(Clock clock) {
-        withClock(clock);
-    }
-
-    public ApplicationFactory withClock(Clock clock) {
-        return withClock(new SocialTimeClock(clock));
     }
 
     public ApplicationFactory withCommands(Commands commands) {

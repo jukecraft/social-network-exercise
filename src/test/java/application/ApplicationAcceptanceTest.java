@@ -28,8 +28,8 @@ public class ApplicationAcceptanceTest {
 
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-
-        application = new SocialNetworkingApplication(standardConfiguration().withClock(clock));
+        ApplicationFactory applicationFactory = standardConfiguration().withClock(clock);
+        application = new SocialNetworkingApplication(applicationFactory.getClock(), applicationFactory.getCommands());
     }
 
     @Test

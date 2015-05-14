@@ -5,6 +5,7 @@ import java.util.List;
 import time.SocialTimeClock;
 import timeline.Output;
 import timeline.PostsOutput;
+
 import commands.CommandParameter;
 import commands.Commands;
 
@@ -14,9 +15,9 @@ public class SocialNetworkingApplication {
     private SocialTimeClock clock;
     private Commands commands;
 
-    public SocialNetworkingApplication(ApplicationFactory factory) {
-        this.clock = factory.getClock();
-        commands = factory.getCommands();
+    public SocialNetworkingApplication(SocialTimeClock clock, Commands commands) {
+        this.clock = clock;
+        this.commands = commands;
     }
 
     public void accept(String command) {

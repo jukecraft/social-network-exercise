@@ -1,6 +1,5 @@
 package application;
 
-import static application.ApplicationFactory.standardConfiguration;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -14,6 +13,7 @@ import org.junit.Test;
 import time.SocialTime;
 import time.SocialTimeClock;
 import timeline.PostsOutput;
+
 import commands.CommandParameter;
 import commands.Commands;
 
@@ -29,9 +29,7 @@ public class SocialNetworkingApplicationTest {
         SocialTimeClock clock = mock(SocialTimeClock.class);
         when(clock.getLocalDateTime()).thenReturn(TIME);
         commands = mock(Commands.class);
-        socialNetworkingApplication = new SocialNetworkingApplication(standardConfiguration() //
-            .withClock(clock) //
-            .withCommands(commands));
+        socialNetworkingApplication = new SocialNetworkingApplication(clock, commands);
     }
 
     @Test
