@@ -10,13 +10,14 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class SocialNetworkingApplicationWithConsoleTest {
+    private static final String LINE_SEPERATOR = System.getProperty("line.separator");
+
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
 
     @Test
     public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {
         SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
-
         SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
             standardConfiguration().withConsole(console));
 
@@ -31,9 +32,9 @@ public class SocialNetworkingApplicationWithConsoleTest {
         SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
         SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
             standardConfiguration().withApplication(application));
-        applicationWithConsole.start();
+        input.provideText(command + LINE_SEPERATOR);
 
-        input.provideText(command);
+        applicationWithConsole.start();
 
         verify(application).accept("Alice -> I love the weather today");
     }

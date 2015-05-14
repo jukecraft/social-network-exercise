@@ -37,6 +37,7 @@ public class ApplicationFactory {
             new FollowCommand(timelineService), //
             new WallCommand(timelineService) //
             ));
+        application = new SocialNetworkingApplication(this);
         return this;
     }
 
@@ -73,6 +74,10 @@ public class ApplicationFactory {
     public ApplicationFactory withApplication(SocialNetworkingApplication application) {
         this.application = application;
         return this;
+    }
+
+    public SocialNetworkingApplication getApplication() {
+        return application;
     }
 
 }
