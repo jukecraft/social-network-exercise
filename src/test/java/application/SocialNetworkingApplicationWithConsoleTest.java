@@ -1,27 +1,27 @@
 package application;
 
 import static application.ApplicationFactory.standardConfiguration;
-import static java.lang.System.getProperty;
-import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 public class SocialNetworkingApplicationWithConsoleTest {
     private static final String A_COMMAND = "Alice -> I love the weather today";
-    private static final String LINE_SEPERATOR = getProperty("line.separator");
 
-    @Rule
-    public TextFromStandardInputStream input = emptyStandardInputStream();
+    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
+    private SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
+    private SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
+        standardConfiguration() //
+            .withApplication(application) //
+            .withConsole(console));
 
     @Test
     public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {
-        SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
-        SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
-            standardConfiguration().withConsole(console));
+        when(console.getNextCommand()).thenReturn(empty());
 
         applicationWithConsole.start();
 
@@ -30,10 +30,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     @Test
     public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
-        SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
-        SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
-            standardConfiguration().withApplication(application));
-        input.provideText(A_COMMAND + LINE_SEPERATOR);
+        when(console.getNextCommand()).thenReturn(of(A_COMMAND));
 
         applicationWithConsole.start();
 

@@ -1,6 +1,6 @@
 package application;
 
-import java.util.Scanner;
+import java.util.Optional;
 
 public class SocialNetworkingApplicationWithConsole {
 
@@ -14,14 +14,9 @@ public class SocialNetworkingApplicationWithConsole {
 
     public void start() {
         console.print("Welcome to my social network application");
-        Scanner scanner = new Scanner(System.in);
-        try {
-            if (scanner.hasNext()) {
-                application.accept(scanner.nextLine());
-            }
-        } finally {
-            scanner.close();
+        Optional<String> command = console.getNextCommand();
+        if (command.isPresent()) {
+            application.accept(command.get());
         }
     }
-
 }
