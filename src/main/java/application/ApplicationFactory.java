@@ -22,6 +22,7 @@ public class ApplicationFactory {
     private TimelineService timelineService;
     private Commands commands;
     private SocialNetworkingConsole console;
+    private SocialNetworkingApplication application;
 
     public static ApplicationFactory standardConfiguration() {
         return new ApplicationFactory(systemDefaultZone()).withConsole(new SocialNetworkingConsole());
@@ -67,6 +68,11 @@ public class ApplicationFactory {
 
     public SocialNetworkingConsole getConsole() {
         return console;
+    }
+
+    public ApplicationFactory withApplication(SocialNetworkingApplication application) {
+        this.application = application;
+        return this;
     }
 
 }
