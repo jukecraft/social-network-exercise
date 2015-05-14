@@ -9,6 +9,6 @@ public class SocialNetworkingConsole {
     }
 
     public void print(List<String> output) {
-      
+        output.forEach(line -> System.out.println(line));
     }
 }
