@@ -5,13 +5,16 @@ import timeline.Output;
 
 public class ConsoleOutputObserver {
 
+    private SocialNetworkingConsole console;
+    private SocialTimeClock clock;
+
     public ConsoleOutputObserver(SocialNetworkingConsole console, SocialTimeClock clock) {
-        // TODO Auto-generated constructor stub
+        this.console = console;
+        this.clock = clock;
     }
 
     public void update(Output output) {
-        // TODO Auto-generated method stub
-
+        console.print(output.print(clock.getLocalDateTime()));
     }
 
 }
