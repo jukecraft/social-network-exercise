@@ -1,5 +1,7 @@
 package application;
 
+import static java.lang.System.lineSeparator;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
@@ -10,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
+import org.junit.rules.Timeout;
 
 public class StartAppIntegrationTest {
     private static final String[] IRRELEVANT_PARAMETERS = null;
@@ -17,10 +20,14 @@ public class StartAppIntegrationTest {
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
     @Rule
-    public final StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
+    public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
+    @Rule
+    public Timeout timeout = new Timeout(1, SECONDS);
 
     @Test
     public void whenIStartTheAppItGreetsTheUser() {
+        input.provideText("" + lineSeparator());
+
         StartApp.main(IRRELEVANT_PARAMETERS);
 
         assertThat(log.getLog(), containsString("Welcome to my social network application"));
@@ -31,7 +38,7 @@ public class StartAppIntegrationTest {
     public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {
         String firstPost = "Alice -> I love the weather today";
         String timelineCommand = "Alice";
-        input.provideText(firstPost, timelineCommand);
+        input.provideText(firstPost, timelineCommand, "" + lineSeparator());
 
         StartApp.main(IRRELEVANT_PARAMETERS);
 

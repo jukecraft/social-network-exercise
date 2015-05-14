@@ -20,7 +20,7 @@ public class SocialNetworkingConsoleTest {
     private static final String A_COMMAND = "Alice -> I love the weather today";
 
     @Rule
-    public final StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
+    public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
 
