@@ -1,10 +1,13 @@
 package application;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class SocialNetworkingConsole {
-
     public void print(String output) {
         System.out.print(output);
     }
@@ -14,7 +17,10 @@ public class SocialNetworkingConsole {
     }
 
     public Optional<String> getNextCommand() {
-        // TODO Auto-generated method stub
-        return null;
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        if (scanner.hasNextLine())
+            return of(scanner.nextLine());
+        return empty();
     }
 }
