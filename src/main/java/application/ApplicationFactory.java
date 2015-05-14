@@ -21,9 +21,10 @@ public class ApplicationFactory {
     private SocialTimeClock clock;
     private TimelineService timelineService;
     private Commands commands;
+    private SocialNetworkingConsole console;
 
     public static ApplicationFactory standardConfiguration() {
-        return new ApplicationFactory(systemDefaultZone());
+        return new ApplicationFactory(systemDefaultZone()).withConsole(new SocialNetworkingConsole());
     }
 
     public ApplicationFactory withClock(SocialTimeClock clock) {
@@ -48,6 +49,11 @@ public class ApplicationFactory {
 
     public ApplicationFactory withCommands(Commands commands) {
         this.commands = commands;
+        return this;
+    }
+
+    public ApplicationFactory withConsole(SocialNetworkingConsole console) {
+        this.console = console;
         return this;
     }
 
