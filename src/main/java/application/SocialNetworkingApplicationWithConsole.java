@@ -14,8 +14,12 @@ public class SocialNetworkingApplicationWithConsole {
 
     public void start() {
         console.print("Welcome to my social network application");
-        Optional<String> command = console.getNextCommand();
-        if (command.isPresent() && command.get().length() > 0) {
+        while (true) {
+            Optional<String> command = console.getNextCommand();
+            if (!command.isPresent())
+                continue;
+            if (command.get().length() == 0)
+                return;
             application.accept(command.get());
         }
     }

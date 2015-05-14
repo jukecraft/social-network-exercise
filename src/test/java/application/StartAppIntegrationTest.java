@@ -1,11 +1,12 @@
 package application;
 
 import static java.lang.System.lineSeparator;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
+
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -21,8 +22,9 @@ public class StartAppIntegrationTest {
     public TextFromStandardInputStream input = emptyStandardInputStream();
     @Rule
     public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
+
     @Rule
-    public Timeout timeout = new Timeout(1, SECONDS);
+    public Timeout timeout = new Timeout(5, TimeUnit.SECONDS);
 
     @Test
     public void whenIStartTheAppItGreetsTheUser() {
@@ -38,7 +40,7 @@ public class StartAppIntegrationTest {
     public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {
         String firstPost = "Alice -> I love the weather today";
         String timelineCommand = "Alice";
-        input.provideText(firstPost, timelineCommand, "" + lineSeparator());
+        input.provideText(firstPost + lineSeparator(), timelineCommand + lineSeparator(), "" + lineSeparator());
 
         StartApp.main(IRRELEVANT_PARAMETERS);
 
