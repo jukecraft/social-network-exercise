@@ -10,6 +10,7 @@ It was build using Java 8 and Maven. Running
 will produce a fresh executable jar (see below).
 
 Usage:
+
 1. **Run** the application from the command line via 
 ```java -jar social-network-exercise-jar-with-dependencies.jar```
 
