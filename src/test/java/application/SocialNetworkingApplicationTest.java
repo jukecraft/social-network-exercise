@@ -1,5 +1,6 @@
 package application;
 
+import static commands.CommandParameterBuilder.aCommand;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,7 +16,7 @@ import commands.CommandParameter;
 import commands.Commands;
 
 public class SocialNetworkingApplicationTest {
-    private static final String COMMAND = "Alice -> I love the weather today";
+    private static final CommandParameter COMMAND = aCommand().create();
     private static final SocialTime TIME = aTime().create();
 
     private SocialNetworkingApplication socialNetworkingApplication;
@@ -33,6 +34,6 @@ public class SocialNetworkingApplicationTest {
     public void whenTheApplicationAcceptsACommandThatCommandIsRoutedToCommands() {
         socialNetworkingApplication.accept(COMMAND);
 
-        verify(commands).execute(new CommandParameter(COMMAND));
+        verify(commands).execute(COMMAND);
     }
 }

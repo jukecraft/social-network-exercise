@@ -1,10 +1,8 @@
 package application;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
-
-import java.util.Optional;
 import java.util.Scanner;
+
+import commands.CommandParameter;
 
 public class SocialNetworkingConsole {
     public void print(String output) {
@@ -15,12 +13,12 @@ public class SocialNetworkingConsole {
         output.forEach(line -> System.out.println(line));
     }
 
-    public Optional<String> getNextCommand() {
+    public CommandParameter getNextCommand() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextLine())
-            return of(scanner.nextLine());
-        return empty();
+            return new CommandParameter(scanner.nextLine());
+        return CommandParameter.NOTHING;
     }
 
 }

@@ -11,8 +11,8 @@ public class SocialNetworkingApplication {
         this.commands = commands;
     }
 
-    public void accept(String command) {
-        commands.execute(new CommandParameter(command));
+    public void accept(CommandParameter command) {
+        commands.execute(command);
     }
 
 }

@@ -6,12 +6,12 @@ import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
-import java.util.Optional;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
+
+import commands.CommandParameter;
 
 public class SocialNetworkingConsoleTest {
     private static final String OUTPUT = "I love the weather today";
@@ -47,8 +47,8 @@ public class SocialNetworkingConsoleTest {
         SocialNetworkingConsole console = new SocialNetworkingConsole();
         input.provideText(A_COMMAND);
 
-        Optional<String> command = console.getNextCommand();
+        CommandParameter command = console.getNextCommand();
 
-        assertThat(command.get(), is(A_COMMAND));
+        assertThat(command, is(new CommandParameter(A_COMMAND)));
     }
 }

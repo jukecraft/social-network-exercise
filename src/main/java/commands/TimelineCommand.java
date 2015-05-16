@@ -14,7 +14,7 @@ public class TimelineCommand implements CommandWithOutput {
 
     @Override
     public boolean isApplicable(CommandParameter command) {
-        return command.isEmpty();
+        return command.isEmptyWithoutUser();
     }
 
     @Override

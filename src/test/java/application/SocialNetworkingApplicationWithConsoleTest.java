@@ -1,24 +1,23 @@
 package application;
 
 import static application.ApplicationFactory.standardConfiguration;
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
+import commands.CommandParameter;
+
 public class SocialNetworkingApplicationWithConsoleTest {
-    private static final Optional<String> EMPTY_COMMAND = of("");
-    private static final String A_COMMAND = "Alice -> I love the weather today";
-    private static final String ANOTHER_COMMAND = "Alice";
+    private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");
+    private static final CommandParameter A_COMMAND_PARAMETER = new CommandParameter(
+        "Alice -> I love the weather today");
+    private static final CommandParameter ANOTHER_COMMAND_PARAMETER = new CommandParameter("Alice");
 
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);
@@ -33,7 +32,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
     @Test
     public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {
         when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(EMPTY_COMMAND_PARAMETER);
 
         applicationWithConsole.start();
 
@@ -43,19 +42,19 @@ public class SocialNetworkingApplicationWithConsoleTest {
     @Test
     public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(of(A_COMMAND)) //
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(A_COMMAND_PARAMETER) //
+            .thenReturn(EMPTY_COMMAND_PARAMETER);
 
         applicationWithConsole.start();
 
-        verify(application).accept(A_COMMAND);
+        verify(application).accept(A_COMMAND_PARAMETER);
     }
 
     @Test
     public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(empty()) //
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(EMPTY_COMMAND_PARAMETER) //
+            .thenReturn(A_COMMAND_PARAMETER);
 
         applicationWithConsole.start();
 
@@ -65,7 +64,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
     @Test
     public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(EMPTY_COMMAND_PARAMETER);
 
         applicationWithConsole.start();
 
@@ -75,14 +74,14 @@ public class SocialNetworkingApplicationWithConsoleTest {
     @Test
     public void givenTwoInputsItRoutesBothToTheSocialNetworkingApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(of(A_COMMAND)) //
-            .thenReturn(of(ANOTHER_COMMAND)) //
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(A_COMMAND_PARAMETER)//
+            .thenReturn(ANOTHER_COMMAND_PARAMETER) //
+            .thenReturn(EMPTY_COMMAND_PARAMETER);
 
         applicationWithConsole.start();
 
-        verify(application).accept(A_COMMAND);
-        verify(application).accept(ANOTHER_COMMAND);
+        verify(application).accept(A_COMMAND_PARAMETER);
+        verify(application).accept(ANOTHER_COMMAND_PARAMETER);
     }
 
 }

@@ -3,10 +3,14 @@ package commands;
 import commons.SocialNetworkingValueObject;
 
 public class CommandParameter extends SocialNetworkingValueObject {
+    public static final CommandParameter NOTHING = new CommandParameter();
     private static final String COMMAND_SEPERATOR = " ";
 
-    private final String[] commandParts;
+    private String[] commandParts;
     private String commandWithoutUser;
+
+    private CommandParameter() {
+    }
 
     public CommandParameter(String command) {
         commandParts = command.split(COMMAND_SEPERATOR);
@@ -15,6 +19,10 @@ public class CommandParameter extends SocialNetworkingValueObject {
 
     public String getUser() {
         return commandParts[0];
+    }
+
+    public boolean isEmpty() {
+        return commandParts[0].length() == 0;
     }
 
     public boolean startsWith(String identifier) {
@@ -26,7 +34,7 @@ public class CommandParameter extends SocialNetworkingValueObject {
         return commandParts[1];
     }
 
-    public boolean isEmpty() {
+    public boolean isEmptyWithoutUser() {
         return commandWithoutUser.isEmpty();
     }
 }
