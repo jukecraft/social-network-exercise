@@ -39,4 +39,15 @@ public class ObservableCommandTest {
 
         verify(observer).update(OUTPUT);
     }
+
+    @Test
+    public void givenTwoRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserversWithTheOutput() {
+        CommandObserver anotherObserver = mock(CommandObserver.class);
+        observableCommand.registerObserver(anotherObserver);
+
+        observableCommand.executeCommand(PARAMETER);
+
+        verify(observer).update(OUTPUT);
+        verify(anotherObserver).update(OUTPUT);
+    }
 }
