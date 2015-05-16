@@ -20,7 +20,7 @@ import java.time.Instant;
 import org.junit.Before;
 import org.junit.Test;
 
-import commands.Commands;
+import command.Commands;
 
 public class ApplicationAcceptanceTest {
     private Instant instantReturnedByClock = now();

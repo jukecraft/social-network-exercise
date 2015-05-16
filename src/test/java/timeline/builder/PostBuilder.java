@@ -1,6 +1,6 @@
 package timeline.builder;
 
-import static commands.CommandParameterBuilder.aCommand;
+import static command.CommandParameterBuilder.aCommand;
 import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
 

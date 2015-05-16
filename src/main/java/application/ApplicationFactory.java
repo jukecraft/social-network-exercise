@@ -12,13 +12,13 @@ import timeline.SocialNetwork;
 import timeline.TimelineService;
 import timeline.Timelines;
 
-import commands.CommandWithOutput;
-import commands.Commands;
-import commands.FollowCommand;
-import commands.ObservableCommand;
-import commands.PostCommand;
-import commands.TimelineCommand;
-import commands.WallCommand;
+import command.CommandWithOutput;
+import command.Commands;
+import command.ObservableCommand;
+import command.available.FollowCommand;
+import command.available.PostCommand;
+import command.available.TimelineCommand;
+import command.available.WallCommand;
 
 public class ApplicationFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();

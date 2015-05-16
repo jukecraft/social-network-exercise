@@ -1,10 +1,12 @@
-package commands;
+package command.available;
 
 import io.CommandParameter;
 import time.SocialTimeClock;
 import timeline.Message;
 import timeline.TimelineService;
 import timeline.User;
+
+import command.Command;
 
 public class PostCommand implements Command {
     private static final String POSTING_COMMAND = " -> ";

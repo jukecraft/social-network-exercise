@@ -3,7 +3,7 @@ package application;
 import io.CommandParameter;
 import io.SocialNetworkingConsole;
 
-import commands.Commands;
+import command.Commands;
 
 public class SocialNetworkingApplication {
 

@@ -1,6 +1,6 @@
 package timeline;
 
-import static commands.CommandParameterBuilder.aCommand;
+import static command.CommandParameterBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import io.CommandParameter;

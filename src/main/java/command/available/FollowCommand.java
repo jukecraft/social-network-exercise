@@ -1,8 +1,10 @@
-package commands;
+package command.available;
 
 import io.CommandParameter;
 import timeline.TimelineService;
 import timeline.User;
+
+import command.Command;
 
 public class FollowCommand implements Command {
     private static final String COMMAND_IDENTIFIER = " follows ";

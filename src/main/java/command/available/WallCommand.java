@@ -1,9 +1,11 @@
-package commands;
+package command.available;
 
 import io.CommandParameter;
 import timeline.TimelineService;
 import timeline.User;
 import timeline.WallOutput;
+
+import command.CommandWithOutput;
 
 public class WallCommand implements CommandWithOutput {
 

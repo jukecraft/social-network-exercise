@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import commands.Commands;
+import command.Commands;
 
 public class SocialNetworkingApplicationTest {
     private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");

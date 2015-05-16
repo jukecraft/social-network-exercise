@@ -1,9 +1,11 @@
-package commands;
+package command.available;
 
 import io.CommandParameter;
 import timeline.Output;
 import timeline.TimelineService;
 import timeline.User;
+
+import command.CommandWithOutput;
 
 public class TimelineCommand implements CommandWithOutput {
 
