@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static timeline.builder.WallOutputBuilder.aWallOutput;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import timeline.Output;
@@ -15,14 +16,18 @@ public class ObservableCommandTest {
     private static final CommandParameter PARAMETER = aCommand().create();
     private static final Output OUTPUT = aWallOutput().create();
 
+    private Command command = mock(Command.class);
+    private ObservableCommand observableCommand = new ObservableCommand(command);
+    private CommandObserver observer = mock(CommandObserver.class);
+
+    @Before
+    public void setUp() {
+        when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
+        observableCommand.registerObserver(observer);
+    }
+
     @Test
     public void givenCreatedWithACommandWhenItIsExecutedThenItCallsTheGivenCommand() {
-        Command command = mock(Command.class);
-        when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
-        ObservableCommand observableCommand = new ObservableCommand(command);
-        CommandObserver observer = mock(CommandObserver.class);
-        observableCommand.registerObserver(observer);
-
         observableCommand.executeCommand(PARAMETER);
 
         verify(command).executeCommand(PARAMETER);
@@ -30,12 +35,6 @@ public class ObservableCommandTest {
 
     @Test
     public void givenRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserverWithTheOutput() {
-        Command command = mock(Command.class);
-        when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
-        ObservableCommand observableCommand = new ObservableCommand(command);
-        CommandObserver observer = mock(CommandObserver.class);
-        observableCommand.registerObserver(observer);
-
         observableCommand.executeCommand(PARAMETER);
 
         verify(observer).update(OUTPUT);
