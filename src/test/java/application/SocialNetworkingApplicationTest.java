@@ -4,6 +4,7 @@ import static io.CommandBuilder.aFollowsCommand;
 import static io.CommandBuilder.aPostCommand;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -83,4 +84,15 @@ public class SocialNetworkingApplicationTest {
         verify(console).printPrompt();
     }
 
+    @Test
+    public void whenRequestingAUserInputMultipleTimesItPrintsAPromptEveryTime() {
+        when(console.getNextCommand()) //
+            .thenReturn(A_COMMAND)//
+            .thenReturn(ANOTHER_COMMAND) //
+            .thenReturn(EMPTY_COMMAND);
+
+        applicationWithConsole.start();
+
+        verify(console, times(3)).printPrompt();
+    }
 }
