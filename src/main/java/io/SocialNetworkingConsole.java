@@ -16,4 +16,7 @@ public class SocialNetworkingConsole {
         return Command.NOTHING;
     }
 
+    public void printPrompt() {
+    }
+
 }

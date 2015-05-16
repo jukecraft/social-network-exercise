@@ -40,4 +40,13 @@ public class SocialNetworkingConsoleTest {
 
         assertThat(command, is(new Command(A_COMMAND)));
     }
+
+    @Test
+    public void whenPrintingAPromptItPutsAnArrowAndSpaceToTheConsole() {
+        SocialNetworkingConsole console = new SocialNetworkingConsole();
+
+        console.printPrompt();
+
+        assertThat(log.getLog(), is("> "));
+    }
 }
