@@ -21,14 +21,14 @@ will produce a fresh executable jar (see below).
 
 4. Use the following **commands** to interact with the application:
 
-**posting**:
-```<user name> -> <message>```
+  **posting**:
+  ```<user name> -> <message>```
 
-**reading**:
-```<user name>```
+  **reading**:
+  ```<user name>```
 
-**following**: 
-```<user name> follows <another user>```
+  **following**: 
+  ```<user name> follows <another user>```
 
-**wall**: 
-```<user name> wall```
+  **wall**: 
+  ```<user name> wall```
