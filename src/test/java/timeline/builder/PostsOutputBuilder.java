@@ -5,8 +5,8 @@ import static timeline.builder.PostBuilder.aPost;
 import java.util.ArrayList;
 import java.util.List;
 
-import timeline.PostsOutput;
 import timeline.Post;
+import timeline.PostsOutput;
 
 public class PostsOutputBuilder {
 

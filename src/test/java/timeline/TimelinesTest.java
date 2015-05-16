@@ -2,8 +2,8 @@ package timeline;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostBuilder.aPost;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
