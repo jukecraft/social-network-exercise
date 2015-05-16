@@ -15,8 +15,8 @@ public class SocialNetworkingApplication {
     }
 
     public void start() {
-        console.printPrompt();
         while (true) {
+            console.printPrompt();
             Command command = console.getNextCommand();
             if (command == Command.NOTHING)
                 continue;
