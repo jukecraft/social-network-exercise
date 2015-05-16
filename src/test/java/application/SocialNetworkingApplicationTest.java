@@ -73,4 +73,14 @@ public class SocialNetworkingApplicationTest {
         verify(actions).execute(ANOTHER_COMMAND);
     }
 
+    @Test
+    public void whenRequestingAUserInputItPrintsAPrompt() {
+        when(console.getNextCommand()) //
+            .thenReturn(EMPTY_COMMAND);
+
+        applicationWithConsole.start();
+
+        verify(console).printPrompt();
+    }
+
 }
