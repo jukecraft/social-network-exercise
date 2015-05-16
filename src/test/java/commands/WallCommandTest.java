@@ -11,6 +11,7 @@ import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
 
 import org.junit.Test;
 
+import timeline.Output;
 import timeline.TimelineService;
 import timeline.User;
 import timeline.WallOutput;
@@ -46,7 +47,7 @@ public class WallCommandTest {
     public void itReturnsNoOutputIfTimelinesHasNoWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(anEmptyWallOutput().create());
 
-        WallOutput output = command.executeCommand(WALL_COMMAND);
+        Output output = command.executeCommandWithOutput(WALL_COMMAND);
 
         assertThat(output, is(anEmptyWallOutput().create()));
     }
@@ -55,7 +56,7 @@ public class WallCommandTest {
     public void itReturnsOutputIfTimelinesHasAWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(OUTPUT);
 
-        WallOutput output = command.executeCommand(WALL_COMMAND);
+        WallOutput output = command.executeCommandWithOutput(WALL_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }

@@ -19,10 +19,9 @@ public class ObservableCommand implements Command {
     }
 
     @Override
-    public Output executeCommand(CommandParameter commandParameter) {
-        Output output = command.executeCommand(commandParameter);
+    public void executeCommand(CommandParameter commandParameter) {
+        Output output = command.executeCommandWithOutput(commandParameter);
         observers.stream().forEach(observer -> observer.update(output));
-        return output;
     }
 
     @Override

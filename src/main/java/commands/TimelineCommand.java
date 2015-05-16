@@ -1,6 +1,6 @@
 package commands;
 
-import timeline.PostsOutput;
+import timeline.Output;
 import timeline.TimelineService;
 import timeline.User;
 
@@ -18,7 +18,12 @@ public class TimelineCommand implements CommandWithOutput {
     }
 
     @Override
-    public PostsOutput executeCommand(CommandParameter command) {
-        return timelines.collectPosts(new User(command));
+    public void executeCommand(CommandParameter commandParameter) {
+        executeCommandWithOutput(commandParameter);
+    }
+
+    @Override
+    public Output executeCommandWithOutput(CommandParameter commandParameter) {
+        return timelines.collectPosts(new User(commandParameter));
     }
 }

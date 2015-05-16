@@ -5,12 +5,13 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.PostsOutputBuilder.aPostsOutput;
+import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
 
 import org.junit.Test;
 
+import timeline.Output;
 import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
@@ -28,7 +29,7 @@ public class TimelineCommandTest {
     public void itReturnsNoOutputIfTimelinesHasNoTimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
-        PostsOutput output = command.executeCommand(TIMELINE_COMMAND);
+        Output output = command.executeCommandWithOutput(TIMELINE_COMMAND);
 
         assertThat(output, is(anEmptyPostsOutput().create()));
     }
@@ -37,7 +38,7 @@ public class TimelineCommandTest {
     public void itReturnsOutputIfTimelinesHasATimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        PostsOutput output = command.executeCommand(TIMELINE_COMMAND);
+        Output output = command.executeCommandWithOutput(TIMELINE_COMMAND);
 
         assertThat(output, is(OUTPUT));
     }

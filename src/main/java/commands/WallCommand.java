@@ -19,7 +19,12 @@ public class WallCommand implements CommandWithOutput {
     }
 
     @Override
-    public WallOutput executeCommand(CommandParameter commandParameter) {
+    public void executeCommand(CommandParameter commandParameter) {
+        executeCommandWithOutput(commandParameter);
+    }
+
+    @Override
+    public WallOutput executeCommandWithOutput(CommandParameter commandParameter) {
         return timelineService.collectWall(new User(commandParameter));
     }
 

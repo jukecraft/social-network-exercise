@@ -24,7 +24,7 @@ public class ObservableCommandTest {
 
     @Before
     public void setUp() {
-        when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
+        when(command.executeCommandWithOutput(PARAMETER)).thenReturn(OUTPUT);
         observableCommand.registerObserver(observer);
     }
 
@@ -32,7 +32,7 @@ public class ObservableCommandTest {
     public void givenCreatedWithACommandWhenItIsExecutedThenItCallsTheGivenCommand() {
         observableCommand.executeCommand(PARAMETER);
 
-        verify(command).executeCommand(PARAMETER);
+        verify(command).executeCommandWithOutput(PARAMETER);
     }
 
     @Test
