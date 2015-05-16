@@ -50,4 +50,12 @@ public class ObservableCommandTest {
         verify(observer).update(OUTPUT);
         verify(anotherObserver).update(OUTPUT);
     }
+
+    @Test
+    public void givenCommandIsApplicableItIsApplicable() {
+        observableCommand.executeCommand(PARAMETER);
+
+        verify(observer).update(OUTPUT);
+    }
+
 }

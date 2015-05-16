@@ -24,4 +24,9 @@ public class ObservableCommand {
         observers.add(observer);
     }
 
+    public boolean isApplicable(CommandParameter parameter) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
