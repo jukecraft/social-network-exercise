@@ -18,7 +18,10 @@ public class ObservableCommandTest {
     @Test
     public void givenCreatedWithACommandWhenItIsExecutedThenItCallsTheGivenCommand() {
         Command command = mock(Command.class);
+        when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
         ObservableCommand observableCommand = new ObservableCommand(command);
+        CommandObserver observer = mock(CommandObserver.class);
+        observableCommand.registerObserver(observer);
 
         observableCommand.executeCommand(PARAMETER);
 
@@ -29,7 +32,7 @@ public class ObservableCommandTest {
     public void givenRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserverWithTheOutput() {
         Command command = mock(Command.class);
         when(command.executeCommand(PARAMETER)).thenReturn(OUTPUT);
-        ObservableCommand observableCommand = new ObservableCommand(mock(Command.class));
+        ObservableCommand observableCommand = new ObservableCommand(command);
         CommandObserver observer = mock(CommandObserver.class);
         observableCommand.registerObserver(observer);
 
