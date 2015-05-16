@@ -12,6 +12,7 @@ import timeline.Timelines;
 
 import commands.Commands;
 import commands.FollowCommand;
+import commands.ObservableCommand;
 import commands.PostCommand;
 import commands.TimelineCommand;
 import commands.WallCommand;
@@ -36,9 +37,9 @@ public class ApplicationFactory {
         timelineService = new TimelineService(new Timelines(), new SocialNetwork(), this.clock);
         commands = new Commands(asList( //
             new PostCommand(timelineService), //
-            new TimelineCommand(timelineService), //
+            new ObservableCommand(new TimelineCommand(timelineService)), //
             new FollowCommand(timelineService), //
-            new WallCommand(timelineService) //
+            new ObservableCommand(new WallCommand(timelineService)) //
             ));
         application = new SocialNetworkingApplication(this.clock, commands);
         return this;
