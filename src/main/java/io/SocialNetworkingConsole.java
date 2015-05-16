@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class SocialNetworkingConsole {
 
+    private static final String PROMPT = "> ";
+
     public void print(Iterable<? extends String> output) {
         output.forEach(line -> System.out.println(line));
     }
@@ -17,6 +19,7 @@ public class SocialNetworkingConsole {
     }
 
     public void printPrompt() {
+        System.out.print(PROMPT);
     }
 
 }
