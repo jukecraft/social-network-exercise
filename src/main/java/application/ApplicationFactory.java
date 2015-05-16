@@ -10,6 +10,7 @@ import timeline.SocialNetwork;
 import timeline.TimelineService;
 import timeline.Timelines;
 
+import commands.Command;
 import commands.Commands;
 import commands.FollowCommand;
 import commands.ObservableCommand;
@@ -22,11 +23,11 @@ public class ApplicationFactory {
     private SocialTimeClock clock;
     private TimelineService timelineService;
     private Commands commands;
-    private SocialNetworkingConsole console;
+    private SocialNetworkingConsole console = new SocialNetworkingConsole();
     private SocialNetworkingApplication application;
 
     public static ApplicationFactory standardConfiguration() {
-        return new ApplicationFactory().withClock(systemDefaultZone()).withConsole(new SocialNetworkingConsole());
+        return new ApplicationFactory().withClock(systemDefaultZone());
     }
 
     private ApplicationFactory() {
@@ -37,12 +38,17 @@ public class ApplicationFactory {
         timelineService = new TimelineService(new Timelines(), new SocialNetwork(), this.clock);
         commands = new Commands(asList( //
             new PostCommand(timelineService), //
-            new ObservableCommand(new TimelineCommand(timelineService)), //
+            createObservableCommand(new TimelineCommand(timelineService)), //
             new FollowCommand(timelineService), //
-            new ObservableCommand(new WallCommand(timelineService)) //
-            ));
+            createObservableCommand(new WallCommand(timelineService))));
         application = new SocialNetworkingApplication(this.clock, commands);
         return this;
+    }
+
+    private ObservableCommand createObservableCommand(Command command) {
+        ObservableCommand observableCommand = new ObservableCommand(command);
+        observableCommand.registerObserver(new ConsoleOutputObserver(console, clock));
+        return observableCommand;
     }
 
     public ApplicationFactory withCommands(Commands commands) {

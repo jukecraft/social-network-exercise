@@ -21,7 +21,6 @@ public class SocialNetworkingApplicationWithConsole {
             if (command.get().length() == 0)
                 return;
             application.accept(command.get());
-            console.print(application.getOutput());
         }
     }
 }

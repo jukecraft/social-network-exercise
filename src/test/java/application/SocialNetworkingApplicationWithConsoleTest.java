@@ -89,16 +89,4 @@ public class SocialNetworkingApplicationWithConsoleTest {
         verify(application).accept(ANOTHER_COMMAND);
     }
 
-    @Test
-    public void ifThereIsOutputFromTheApplicationItIsPrintedToTheConsole() {
-        when(console.getNextCommand()) //
-            .thenReturn(of(A_COMMAND)) //
-            .thenReturn(EMPTY_COMMAND);
-        when(application.getOutput()).thenReturn(OUTPUT_LINES);
-
-        applicationWithConsole.start();
-
-        verify(console).print(OUTPUT_LINES);
-    }
-
 }
