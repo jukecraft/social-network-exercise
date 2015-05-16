@@ -32,6 +32,7 @@ public class StartAppIntegrationTest {
 
         StartApp.main(IRRELEVANT_PARAMETERS);
 
+        assertThat(log.getLog(), containsString("> "));
         assertThat(log.getLog(), containsString("I love the weather today ("));
     }
 
