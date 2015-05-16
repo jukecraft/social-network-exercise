@@ -19,42 +19,11 @@ import commands.TimelineCommand;
 import commands.WallCommand;
 
 public class ApplicationFactory {
-
-    private SocialTimeClock clock;
-    private TimelineService timelineService;
-    private Commands commands;
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
-
-    public static ApplicationFactory standardConfiguration() {
-        return new ApplicationFactory().withClock(systemDefaultZone());
-    }
-
-    public SocialNetworkingApplication create() {
-        return new SocialNetworkingApplication(commands, console);
-    }
-
-    private ApplicationFactory() {
-    }
+    private SocialTimeClock clock = new SocialTimeClock(systemDefaultZone());
 
     public ApplicationFactory withClock(Clock clock) {
         this.clock = new SocialTimeClock(clock);
-        timelineService = new TimelineService(new Timelines(), new SocialNetwork());
-        commands = new Commands(asList( //
-            new PostCommand(timelineService, this.clock), //
-            createObservableCommand(new TimelineCommand(timelineService)), //
-            new FollowCommand(timelineService), //
-            createObservableCommand(new WallCommand(timelineService))));
-        return this;
-    }
-
-    private ObservableCommand createObservableCommand(CommandWithOutput command) {
-        ObservableCommand observableCommand = new ObservableCommand(command);
-        observableCommand.registerObserver(new ConsoleCommandObserver(console, clock));
-        return observableCommand;
-    }
-
-    public ApplicationFactory withCommands(Commands commands) {
-        this.commands = commands;
         return this;
     }
 
@@ -63,12 +32,24 @@ public class ApplicationFactory {
         return this;
     }
 
-    public Commands getCommands() {
-        return commands;
+    public SocialNetworkingApplication create() {
+        return new SocialNetworkingApplication(getCommands(), console);
     }
 
-    public SocialNetworkingConsole getConsole() {
-        return console;
+    public Commands getCommands() {
+        TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
+
+        return new Commands(asList( //
+            new PostCommand(timelineService, this.clock), //
+            createObservableCommand(new TimelineCommand(timelineService)), //
+            new FollowCommand(timelineService), //
+            createObservableCommand(new WallCommand(timelineService))));
+    }
+
+    private ObservableCommand createObservableCommand(CommandWithOutput command) {
+        ObservableCommand observableCommand = new ObservableCommand(command);
+        observableCommand.registerObserver(new ConsoleCommandObserver(console, clock));
+        return observableCommand;
     }
 
 }

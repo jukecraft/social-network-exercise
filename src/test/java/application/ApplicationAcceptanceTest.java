@@ -1,6 +1,5 @@
 package application;
 
-import static application.ApplicationFactory.standardConfiguration;
 import static java.time.Duration.ofMinutes;
 import static java.time.Duration.ofSeconds;
 import static java.time.Instant.now;
@@ -33,7 +32,7 @@ public class ApplicationAcceptanceTest {
 
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        commands = standardConfiguration().withConsole(console).withClock(clock).getCommands();
+        commands = new ApplicationFactory().withConsole(console).withClock(clock).getCommands();
     }
 
     @Test
