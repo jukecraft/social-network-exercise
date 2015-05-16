@@ -12,7 +12,7 @@ import posts.output.WallOutput;
 
 public class TimelineService {
     private final Timelines timelines;
-    private SocialNetwork network;
+    private final SocialNetwork network;
 
     public TimelineService(Timelines timelines, SocialNetwork network) {
         this.timelines = timelines;
