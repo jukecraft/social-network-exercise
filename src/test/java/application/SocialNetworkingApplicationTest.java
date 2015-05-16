@@ -5,12 +5,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
+import io.CommandParameter;
+import io.SocialNetworkingConsole;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import commands.CommandParameter;
 import commands.Commands;
 
 public class SocialNetworkingApplicationTest {

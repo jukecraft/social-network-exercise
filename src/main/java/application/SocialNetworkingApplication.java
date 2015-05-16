@@ -1,6 +1,8 @@
 package application;
 
-import commands.CommandParameter;
+import io.CommandParameter;
+import io.SocialNetworkingConsole;
+
 import commands.Commands;
 
 public class SocialNetworkingApplication {

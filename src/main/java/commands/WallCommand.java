@@ -1,5 +1,6 @@
 package commands;
 
+import io.CommandParameter;
 import timeline.TimelineService;
 import timeline.User;
 import timeline.WallOutput;

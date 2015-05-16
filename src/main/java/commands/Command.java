@@ -1,5 +1,7 @@
 package commands;
 
+import io.CommandParameter;
+
 
 public interface Command {
     boolean isApplicable(CommandParameter commandParameter);

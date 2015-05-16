@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
+import io.CommandParameter;
 
 import org.junit.Before;
 import org.junit.Test;

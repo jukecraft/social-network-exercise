@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import static timeline.builder.PostsOutputBuilder.aPostsOutput;
 import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
 import static timeline.builder.UserBuilder.aUser;
+import io.CommandParameter;
 
 import org.junit.Test;
 

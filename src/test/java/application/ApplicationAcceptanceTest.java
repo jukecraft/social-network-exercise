@@ -11,6 +11,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
+import io.CommandParameter;
+import io.SocialNetworkingConsole;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -18,7 +20,6 @@ import java.time.Instant;
 import org.junit.Before;
 import org.junit.Test;
 
-import commands.CommandParameter;
 import commands.Commands;
 
 public class ApplicationAcceptanceTest {

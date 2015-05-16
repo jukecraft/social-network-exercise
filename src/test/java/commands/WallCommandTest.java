@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import static timeline.builder.UserBuilder.aUser;
 import static timeline.builder.WallOutputBuilder.aWallOutput;
 import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
+import io.CommandParameter;
 
 import org.junit.Test;
 

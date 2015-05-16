@@ -1,6 +1,7 @@
 package timeline;
 
-import commands.CommandParameter;
+import io.CommandParameter;
+
 import commons.SocialNetworkingValueObject;
 
 public class Message extends SocialNetworkingValueObject {

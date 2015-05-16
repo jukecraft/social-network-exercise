@@ -2,6 +2,8 @@ package application;
 
 import static java.time.Clock.systemDefaultZone;
 import static java.util.Arrays.asList;
+import io.ConsoleCommandObserver;
+import io.SocialNetworkingConsole;
 
 import java.time.Clock;
 

@@ -1,5 +1,7 @@
 package commands;
 
+import io.CommandParameter;
+
 import java.util.List;
 
 public class Commands {

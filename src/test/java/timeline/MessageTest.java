@@ -2,10 +2,9 @@ package timeline;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import io.CommandParameter;
 
 import org.junit.Test;
-
-import commands.CommandParameter;
 
 public class MessageTest {
 

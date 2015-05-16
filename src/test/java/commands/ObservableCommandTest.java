@@ -7,12 +7,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static timeline.builder.WallOutputBuilder.aWallOutput;
+import io.CommandObserver;
+import io.CommandParameter;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import timeline.Output;
-import application.CommandObserver;
 
 public class ObservableCommandTest {
     private static final CommandParameter PARAMETER = aCommand().create();

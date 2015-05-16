@@ -1,5 +1,6 @@
 package commands;
 
+import io.CommandParameter;
 import time.SocialTimeClock;
 import timeline.Message;
 import timeline.TimelineService;

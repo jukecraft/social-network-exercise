@@ -1,5 +1,6 @@
 package commands;
 
+import io.CommandParameter;
 import timeline.Output;
 
 public interface CommandWithOutput extends Command {

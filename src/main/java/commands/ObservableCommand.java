@@ -1,10 +1,12 @@
 package commands;
 
+import io.CommandObserver;
+import io.CommandParameter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import timeline.Output;
-import application.CommandObserver;
 
 public class ObservableCommand implements Command {
     private CommandWithOutput command;
