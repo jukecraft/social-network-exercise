@@ -4,7 +4,7 @@ import io.Command;
 import network.TimelineService;
 import posts.User;
 import posts.output.Output;
-import actipon.output.ActionWithOutput;
+import action.output.ActionWithOutput;
 
 public class TimelineAction implements ActionWithOutput {
 

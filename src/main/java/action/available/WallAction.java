@@ -4,7 +4,7 @@ import io.Command;
 import network.TimelineService;
 import posts.User;
 import posts.output.WallOutput;
-import actipon.output.ActionWithOutput;
+import action.output.ActionWithOutput;
 
 public class WallAction implements ActionWithOutput {
 

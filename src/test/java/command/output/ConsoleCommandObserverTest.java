@@ -15,8 +15,8 @@ import org.junit.Test;
 import posts.SocialTime;
 import posts.output.Output;
 import time.SocialNetworkingClock;
-import actipon.output.ActionObserver;
-import actipon.output.ConsoleObserver;
+import action.output.ActionObserver;
+import action.output.ConsoleObserver;
 
 public class ConsoleCommandObserverTest {
     private static final SocialTime TIME = aTime().create();

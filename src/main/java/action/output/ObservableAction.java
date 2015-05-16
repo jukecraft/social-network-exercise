@@ -1,4 +1,4 @@
-package actipon.output;
+package action.output;
 
 import io.Command;
 

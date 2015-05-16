@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import posts.output.Output;
-import actipon.output.ActionObserver;
-import actipon.output.ActionWithOutput;
-import actipon.output.ObservableAction;
+import action.output.ActionObserver;
+import action.output.ActionWithOutput;
+import action.output.ObservableAction;
 
 public class ObservableCommandTest {
     private static final Command PARAMETER = aCommand().create();

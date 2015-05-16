@@ -15,8 +15,8 @@ import action.available.FollowAction;
 import action.available.PostAction;
 import action.available.TimelineAction;
 import action.available.WallAction;
-import actipon.output.ConsoleObserver;
-import actipon.output.ObservableAction;
+import action.output.ConsoleObserver;
+import action.output.ObservableAction;
 
 public class ApplicationFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
