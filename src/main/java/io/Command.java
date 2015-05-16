@@ -2,17 +2,18 @@ package io;
 
 import commons.SocialNetworkingValueObject;
 
-public class CommandParameter extends SocialNetworkingValueObject {
-    public static final CommandParameter NOTHING = new CommandParameter();
+public class Command extends SocialNetworkingValueObject {
+    public static final Command NOTHING = new Command();
+
     private static final String COMMAND_SEPERATOR = " ";
 
     private String[] commandParts;
     private String commandWithoutUser;
 
-    private CommandParameter() {
+    private Command() {
     }
 
-    public CommandParameter(String command) {
+    public Command(String command) {
         commandParts = command.split(COMMAND_SEPERATOR);
         commandWithoutUser = command.substring(getUser().length());
     }

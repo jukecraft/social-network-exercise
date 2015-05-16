@@ -1,4 +1,4 @@
-package command;
+package action;
 
 import static java.time.Duration.ofMinutes;
 import static java.time.Duration.ofSeconds;
@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
-import io.CommandParameter;
+import io.Command;
 import io.SocialNetworkingConsole;
 
 import java.time.Clock;
@@ -21,12 +21,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import application.ApplicationFactory;
-import command.Commands;
 
 public class ApplicationAcceptanceTest {
     private Instant instantReturnedByClock = now();
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
-    private Commands commands;
+    private Actions actions;
 
     @Before
     public void setUpApplication() {
@@ -34,7 +33,11 @@ public class ApplicationAcceptanceTest {
 
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        commands = new ApplicationFactory().withConsole(console).withClock(clock).getCommands();
+
+        actions = new ApplicationFactory() //
+            .withConsole(console) //
+            .withClock(clock) //
+            .getActions();
     }
 
     @Test
@@ -81,6 +84,6 @@ public class ApplicationAcceptanceTest {
     }
 
     private void execute(String command) {
-        commands.execute(new CommandParameter(command));
+        actions.execute(new Command(command));
     }
 }

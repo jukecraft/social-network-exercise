@@ -6,8 +6,8 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 public class SocialNetworkingValueObject {
 
     @Override
-    public boolean equals(Object arg0) {
-        return reflectionEquals(this, arg0);
+    public boolean equals(Object other) {
+        return reflectionEquals(this, other);
     }
 
     @Override

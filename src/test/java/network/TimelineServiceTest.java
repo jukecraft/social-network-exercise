@@ -1,6 +1,6 @@
 package network;
 
-import static io.CommandParameterBuilder.aPostCommand;
+import static io.CommandBuilder.aPostCommand;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

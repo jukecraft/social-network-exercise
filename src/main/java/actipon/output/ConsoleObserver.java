@@ -1,15 +1,15 @@
-package command.output;
+package actipon.output;
 
 import io.SocialNetworkingConsole;
 import posts.output.Output;
 import time.SocialNetworkingClock;
 
-public class ConsoleCommandObserver implements CommandObserver {
+public class ConsoleObserver implements ActionObserver {
 
     private SocialNetworkingConsole console;
     private SocialNetworkingClock clock;
 
-    public ConsoleCommandObserver(SocialNetworkingConsole console, SocialNetworkingClock clock) {
+    public ConsoleObserver(SocialNetworkingConsole console, SocialNetworkingClock clock) {
         this.console = console;
         this.clock = clock;
     }

@@ -88,14 +88,14 @@ public class WallOutputTest {
             .withPost(ALICES_EARLIEST_POST) //
             .withPost(ALICES_LATER_POST) //
             .create();
-        PostsOutput charliesTimeline = anEmptyPostsOutput() //
+        PostsOutput bobsTimeline = anEmptyPostsOutput() //
             .withPost(BOBS_EARLIER_POST) //
             .withPost(BOBS_LATEST_POST) //
             .create();
 
         WallOutput output = anEmptyWallOutput() //
             .withTimeline(ALICE, alicesTimeline) //
-            .withTimeline(BOB, charliesTimeline) //
+            .withTimeline(BOB, bobsTimeline) //
             .create();
 
         List<String> printedTimeline = output.print(PRINTING_TIME);

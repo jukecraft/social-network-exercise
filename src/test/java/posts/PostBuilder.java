@@ -1,6 +1,6 @@
 package posts;
 
-import static io.CommandParameterBuilder.aCommand;
+import static io.CommandBuilder.aCommand;
 import static posts.SocialTimeBuilder.aTime;
 import static posts.UserBuilder.aUser;
 

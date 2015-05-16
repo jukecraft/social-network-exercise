@@ -32,12 +32,12 @@ public class SocialNetworkingConsoleTest {
     }
 
     @Test
-    public void givenAUserInputItReadsTheInputFromTheConsole() {
+    public void givenAUserInputItReadsTheInputFromTheConsoleIntoACommand() {
         SocialNetworkingConsole console = new SocialNetworkingConsole();
         input.provideText(A_COMMAND);
 
-        CommandParameter command = console.getNextCommand();
+        Command command = console.getNextCommand();
 
-        assertThat(command, is(new CommandParameter(A_COMMAND)));
+        assertThat(command, is(new Command(A_COMMAND)));
     }
 }

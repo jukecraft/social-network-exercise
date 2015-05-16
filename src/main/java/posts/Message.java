@@ -1,6 +1,6 @@
 package posts;
 
-import io.CommandParameter;
+import io.Command;
 
 import commons.SocialNetworkingValueObject;
 
@@ -9,7 +9,7 @@ public class Message extends SocialNetworkingValueObject {
 
     private final String message;
 
-    public Message(CommandParameter command) {
+    public Message(Command command) {
         this.message = command.afterIdentifier(MESSAGE_SEPARATOR);
     }
 

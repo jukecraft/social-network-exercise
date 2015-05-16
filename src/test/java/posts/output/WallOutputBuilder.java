@@ -3,8 +3,6 @@ package posts.output;
 import static posts.UserBuilder.aUser;
 import static posts.output.PostsOutputBuilder.aPostsOutput;
 import posts.User;
-import posts.output.PostsOutput;
-import posts.output.WallOutput;
 
 public class WallOutputBuilder {
     private WallOutput output = new WallOutput();

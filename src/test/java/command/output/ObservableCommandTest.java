@@ -1,76 +1,79 @@
 package command.output;
 
-import static io.CommandParameterBuilder.aCommand;
+import static io.CommandBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.output.WallOutputBuilder.aWallOutput;
-import io.CommandParameter;
+import io.Command;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import posts.output.Output;
+import actipon.output.ActionObserver;
+import actipon.output.ActionWithOutput;
+import actipon.output.ObservableAction;
 
 public class ObservableCommandTest {
-    private static final CommandParameter PARAMETER = aCommand().create();
+    private static final Command PARAMETER = aCommand().create();
     private static final Output OUTPUT = aWallOutput().create();
 
-    private CommandWithOutput command = mock(CommandWithOutput.class);
-    private CommandObserver observer = mock(CommandObserver.class);
+    private ActionWithOutput actionWithOutput = mock(ActionWithOutput.class);
+    private ActionObserver observer = mock(ActionObserver.class);
 
     @Before
     public void setUp() {
-        when(command.executeCommandWithOutput(PARAMETER)).thenReturn(OUTPUT);
+        when(actionWithOutput.executeWithOutput(PARAMETER)).thenReturn(OUTPUT);
     }
 
     @Test
-    public void givenCreatedWithACommandWhenItIsExecutedThenItCallsTheGivenCommand() {
-        ObservableCommand observableCommand = new ObservableCommand(command);
+    public void givenCreatedWithAnActionWhenItIsExecutedThenItCallsTheAction() {
+        ObservableAction action = new ObservableAction(actionWithOutput);
 
-        observableCommand.executeCommand(PARAMETER);
+        action.execute(PARAMETER);
 
-        verify(command).executeCommandWithOutput(PARAMETER);
+        verify(actionWithOutput).executeWithOutput(PARAMETER);
     }
 
     @Test
     public void givenRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserverWithTheOutput() {
-        ObservableCommand observableCommand = new ObservableCommand(command) //
+        ObservableAction action = new ObservableAction(actionWithOutput) //
             .withObserver(observer);
 
-        observableCommand.executeCommand(PARAMETER);
+        action.execute(PARAMETER);
 
         verify(observer).update(OUTPUT);
     }
 
     @Test
     public void givenTwoRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserversWithTheOutput() {
-        CommandObserver anotherObserver = mock(CommandObserver.class);
-        ObservableCommand observableCommand = new ObservableCommand(command) //
+        ActionObserver anotherObserver = mock(ActionObserver.class);
+        ObservableAction action = new ObservableAction(actionWithOutput) //
             .withObserver(observer) //
             .withObserver(anotherObserver);
 
-        observableCommand.executeCommand(PARAMETER);
+        action.execute(PARAMETER);
 
         verify(observer).update(OUTPUT);
         verify(anotherObserver).update(OUTPUT);
     }
 
     @Test
-    public void givenCommandIsApplicableItIsApplicable() {
-        ObservableCommand observableCommand = new ObservableCommand(command);
-        when(command.isApplicable(PARAMETER)).thenReturn(true);
+    public void givenActionIsExecutableItIsExecutable() {
+        ObservableAction action = new ObservableAction(actionWithOutput);
+        when(actionWithOutput.isExecutable(PARAMETER)).thenReturn(true);
 
-        assertThat(observableCommand.isApplicable(PARAMETER), is(true));
+        assertThat(action.isExecutable(PARAMETER), is(true));
     }
 
     @Test
-    public void givenCommandIsNotApplicableItIsNotApplicable() {
-        ObservableCommand observableCommand = new ObservableCommand(command);
-        when(command.isApplicable(PARAMETER)).thenReturn(false);
+    public void givenActionIsNotExecutableItIsNotExecutable() {
+        ObservableAction action = new ObservableAction(actionWithOutput);
+        when(actionWithOutput.isExecutable(PARAMETER)).thenReturn(false);
 
-        assertThat(observableCommand.isApplicable(PARAMETER), is(false));
+        assertThat(action.isExecutable(PARAMETER), is(false));
     }
 }

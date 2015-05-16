@@ -1,17 +1,18 @@
 package command.available;
 
-import static io.CommandParameterBuilder.aCommand;
+import static io.CommandBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static posts.UserBuilder.aUser;
-import io.CommandParameter;
+import io.Command;
 import network.TimelineService;
 
 import org.junit.Test;
 
 import posts.User;
+import action.available.FollowAction;
 
 public class FollowCommandTest {
     private static final String USERNAME_ALICE = "Alice";
@@ -20,29 +21,29 @@ public class FollowCommandTest {
     private static final User BOB = aUser().withName(USERNAME_BOB).create();
 
     private TimelineService timelineService = mock(TimelineService.class);
-    private FollowCommand command = new FollowCommand(timelineService);
+    private FollowAction action = new FollowAction(timelineService);
 
     @Test
-    public void itIsApplicableIfCommandStartsWithFollows() {
-        CommandParameter commandParameter = aCommand().withCommand(" follows ").create();
+    public void itIsExecutableIfCommandStartsWithFollows() {
+        Command command = aCommand().withCommand(" follows ").create();
 
-        boolean isApplicable = command.isApplicable(commandParameter);
+        boolean isExecutable = action.isExecutable(command);
 
-        assertThat(isApplicable, is(true));
+        assertThat(isExecutable, is(true));
     }
 
     @Test
-    public void itIsNotApplicableIfCommandDoesntStartWithFollows() {
-        CommandParameter commandParameter = aCommand().withCommand(" -> is as follows ").create();
+    public void itIsNotExecutableIfCommandDoesntStartWithFollows() {
+        Command command = aCommand().withCommand(" -> is as follows ").create();
 
-        boolean isApplicable = command.isApplicable(commandParameter);
+        boolean isExecutable = action.isExecutable(command);
 
-        assertThat(isApplicable, is(false));
+        assertThat(isExecutable, is(false));
     }
 
     @Test
     public void itRegisteresWithTimelinesThatAliceIsFollowingBob() {
-        command.executeCommand(aCommand() //
+        action.execute(aCommand() //
             .withUser(USERNAME_ALICE) //
             .withCommand(" follows " + USERNAME_BOB) //
             .create());
@@ -52,7 +53,7 @@ public class FollowCommandTest {
 
     @Test
     public void itRegisteresWithTimelinesThatBobIsFollowingAlice() {
-        command.executeCommand(aCommand() //
+        action.execute(aCommand() //
             .withUser(USERNAME_BOB) //
             .withCommand(" follows " + USERNAME_ALICE) //
             .create());

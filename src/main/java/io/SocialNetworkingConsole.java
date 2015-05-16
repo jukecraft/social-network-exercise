@@ -8,12 +8,12 @@ public class SocialNetworkingConsole {
         output.forEach(line -> System.out.println(line));
     }
 
-    public CommandParameter getNextCommand() {
+    public Command getNextCommand() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextLine())
-            return new CommandParameter(scanner.nextLine());
-        return CommandParameter.NOTHING;
+            return new Command(scanner.nextLine());
+        return Command.NOTHING;
     }
 
 }

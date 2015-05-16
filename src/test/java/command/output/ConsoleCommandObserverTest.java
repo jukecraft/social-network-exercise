@@ -15,6 +15,8 @@ import org.junit.Test;
 import posts.SocialTime;
 import posts.output.Output;
 import time.SocialNetworkingClock;
+import actipon.output.ActionObserver;
+import actipon.output.ConsoleObserver;
 
 public class ConsoleCommandObserverTest {
     private static final SocialTime TIME = aTime().create();
@@ -24,20 +26,20 @@ public class ConsoleCommandObserverTest {
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Output output = mock(Output.class);
 
-    private CommandObserver outputObserver;
+    private ActionObserver consoleObserver;
 
     @Before
     public void setUpApplication() {
         SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
         when(clock.getLocalDateTime()).thenReturn(TIME);
-        outputObserver = new ConsoleCommandObserver(console, clock);
+        consoleObserver = new ConsoleObserver(console, clock);
     }
 
     @Test
-    public void givenTheCommandsReturnAnOutputWhenTheApplicationAcceptsACommandThatOutputIsReturned() {
+    public void whenTheObserverIsUpdatedWithAnOutputTheConsolePrintsTheOutput() {
         when(output.print(TIME)).thenReturn(LINES);
 
-        outputObserver.update(output);
+        consoleObserver.update(output);
 
         verify(console).print(LINES);
     }

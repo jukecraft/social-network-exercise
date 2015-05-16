@@ -1,12 +1,11 @@
 package application;
 
 import static java.lang.System.lineSeparator;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
-
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class StartAppIntegrationTest {
     public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
 
     @Rule
-    public Timeout timeout = new Timeout(1, TimeUnit.SECONDS);
+    public Timeout timeout = new Timeout(1, SECONDS);
 
     @Test
     public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {

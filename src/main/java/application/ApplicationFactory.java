@@ -10,14 +10,13 @@ import network.SocialNetwork;
 import network.TimelineService;
 import network.Timelines;
 import time.SocialNetworkingClock;
-
-import command.Commands;
-import command.available.FollowCommand;
-import command.available.PostCommand;
-import command.available.TimelineCommand;
-import command.available.WallCommand;
-import command.output.ConsoleCommandObserver;
-import command.output.ObservableCommand;
+import action.Actions;
+import action.available.FollowAction;
+import action.available.PostAction;
+import action.available.TimelineAction;
+import action.available.WallAction;
+import actipon.output.ConsoleObserver;
+import actipon.output.ObservableAction;
 
 public class ApplicationFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
@@ -34,19 +33,19 @@ public class ApplicationFactory {
     }
 
     public SocialNetworkingApplication create() {
-        return new SocialNetworkingApplication(getCommands(), console);
+        return new SocialNetworkingApplication(getActions(), console);
     }
 
-    public Commands getCommands() {
+    public Actions getActions() {
         TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
-        ConsoleCommandObserver observer = new ConsoleCommandObserver(console, clock);
+        ConsoleObserver observer = new ConsoleObserver(console, clock);
 
-        return new Commands(asList( //
-            new PostCommand(timelineService, clock), //
-            new ObservableCommand(new TimelineCommand(timelineService)) //
+        return new Actions(asList( //
+            new PostAction(timelineService, clock), //
+            new ObservableAction(new TimelineAction(timelineService)) //
                 .withObserver(observer), //
-            new FollowCommand(timelineService), //
-            new ObservableCommand(new WallCommand(timelineService)) //
+            new FollowAction(timelineService), //
+            new ObservableAction(new WallAction(timelineService)) //
                 .withObserver(observer)));
     }
 

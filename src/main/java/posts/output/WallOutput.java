@@ -20,7 +20,8 @@ public class WallOutput extends SocialNetworkingValueObject implements Output {
     @Override
     public List<String> print(SocialTime printingTime) {
         PostsOutput mergedPosts = timelines.values().stream() //
-            .reduce((output1, output2) -> output1.mergeWith(output2)).orElse(new PostsOutput());
+            .reduce((output1, output2) -> output1.mergeWith(output2)) //
+            .orElse(new PostsOutput());
         return mergedPosts.printWithUser(printingTime);
     }
 

@@ -1,8 +1,8 @@
-package command.output;
+package actipon.output;
 
 import posts.output.Output;
 
-public interface CommandObserver {
+public interface ActionObserver {
 
     void update(Output output);
 

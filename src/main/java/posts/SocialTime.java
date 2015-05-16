@@ -22,7 +22,7 @@ public class SocialTime extends SocialNetworkingValueObject implements Comparabl
     }
 
     public String printTimestamp(SocialTime timeOfPrinting) {
-        Duration timePassed = between(this.timestamp, timeOfPrinting.timestamp);
+        Duration timePassed = between(timestamp, timeOfPrinting.timestamp);
         if (timePassed.getSeconds() >= 60)
             return printTimestamp(timePassed.toMinutes());
         return printTimestampFromSeconds(timePassed.getSeconds());

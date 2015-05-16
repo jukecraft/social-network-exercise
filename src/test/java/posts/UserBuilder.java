@@ -1,6 +1,6 @@
 package posts;
 
-import static io.CommandParameterBuilder.aCommand;
+import static io.CommandBuilder.aCommand;
 
 public class UserBuilder {
     private String name = "userName";

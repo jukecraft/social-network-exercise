@@ -27,7 +27,7 @@ public class SocialNetworkTest {
     }
 
     @Test
-    public void givenOneRegisteredFollowingWhenAskedForTheFollowingThenItReturnsThatFollowers() {
+    public void givenOneRegisteredFollowingWhenAskedForTheFollowingThenItReturnsThem() {
         SocialNetwork socialNetwork = new SocialNetwork();
         socialNetwork.registerFollowing(ALICE, BOB);
 

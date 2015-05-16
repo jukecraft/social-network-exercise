@@ -1,76 +1,76 @@
 package application;
 
-import static io.CommandParameterBuilder.aFollowsCommand;
-import static io.CommandParameterBuilder.aPostCommand;
+import static io.CommandBuilder.aFollowsCommand;
+import static io.CommandBuilder.aPostCommand;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
-import io.CommandParameter;
+import io.Command;
 import io.SocialNetworkingConsole;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
 
-import command.Commands;
+import action.Actions;
 
 public class SocialNetworkingApplicationTest {
-    private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");
-    private static final CommandParameter A_COMMAND_PARAMETER = aPostCommand().create();
-    private static final CommandParameter ANOTHER_COMMAND_PARAMETER = aFollowsCommand().create();
+    private static final Command EMPTY_COMMAND = new Command("");
+    private static final Command A_COMMAND = aPostCommand().create();
+    private static final Command ANOTHER_COMMAND = aFollowsCommand().create();
 
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);
 
-    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
-    private Commands commands = mock(Commands.class);
-    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(commands, console);
+    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
+    private Actions actions = mock(Actions.class);
+    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(actions, console);
 
     @Test
-    public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
+    public void givenAnCommandItExecutesThatCommandWithActions() {
         when(console.getNextCommand()) //
-            .thenReturn(A_COMMAND_PARAMETER) //
-            .thenReturn(EMPTY_COMMAND_PARAMETER);
+            .thenReturn(A_COMMAND) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
-        verify(commands).execute(A_COMMAND_PARAMETER);
+        verify(actions).execute(A_COMMAND);
     }
 
     @Test
     public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND_PARAMETER) //
-            .thenReturn(A_COMMAND_PARAMETER);
+            .thenReturn(EMPTY_COMMAND) //
+            .thenReturn(A_COMMAND);
 
         applicationWithConsole.start();
 
-        verifyZeroInteractions(commands);
+        verifyZeroInteractions(actions);
     }
 
     @Test
     public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND_PARAMETER);
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
-        verifyZeroInteractions(commands);
+        verifyZeroInteractions(actions);
     }
 
     @Test
     public void givenTwoInputsItRoutesBothToTheSocialNetworkingApplication() {
         when(console.getNextCommand()) //
-            .thenReturn(A_COMMAND_PARAMETER)//
-            .thenReturn(ANOTHER_COMMAND_PARAMETER) //
-            .thenReturn(EMPTY_COMMAND_PARAMETER);
+            .thenReturn(A_COMMAND)//
+            .thenReturn(ANOTHER_COMMAND) //
+            .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
 
-        verify(commands).execute(A_COMMAND_PARAMETER);
-        verify(commands).execute(ANOTHER_COMMAND_PARAMETER);
+        verify(actions).execute(A_COMMAND);
+        verify(actions).execute(ANOTHER_COMMAND);
     }
 
 }

@@ -13,8 +13,8 @@ public class Timeline {
         return new PostsOutput(posts);
     }
 
-    public void addPost(Post create) {
-        posts.add(create);
+    public void addPost(Post post) {
+        posts.add(post);
     }
 
 }

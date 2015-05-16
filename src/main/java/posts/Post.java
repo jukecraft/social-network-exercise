@@ -28,7 +28,7 @@ public class Post extends SocialNetworkingValueObject implements Comparable<Post
 
     @Override
     public int compareTo(Post other) {
-        return this.postingTime.compareTo(other.postingTime);
+        return postingTime.compareTo(other.postingTime);
     }
 
 }

@@ -1,6 +1,6 @@
 package command.available;
 
-import static io.CommandParameterBuilder.aCommand;
+import static io.CommandBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.SocialTimeBuilder.aTime;
 import static posts.UserBuilder.aUserNamedAlice;
-import io.CommandParameter;
+import io.Command;
 import network.TimelineService;
 
 import org.junit.Before;
@@ -18,6 +18,7 @@ import posts.Message;
 import posts.SocialTime;
 import posts.User;
 import time.SocialNetworkingClock;
+import action.available.PostAction;
 
 public class PostCommandTest {
     private static final User ALICE = aUserNamedAlice();
@@ -25,7 +26,7 @@ public class PostCommandTest {
 
     private TimelineService timelineService = mock(TimelineService.class);
     private SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
-    private PostCommand command = new PostCommand(timelineService, clock);
+    private PostAction action = new PostAction(timelineService, clock);
 
     @Before
     public void setUp() {
@@ -33,39 +34,39 @@ public class PostCommandTest {
     }
 
     @Test
-    public void itPostANewMessageInTheTimelinesForTheGivenUser() {
-        CommandParameter commandParameter = aCommand().withCommand(" -> I love the weather today").create();
+    public void itPostsANewMessageInTheTimelinesForTheGivenUser() {
+        Command command = aCommand().withCommand(" -> I love the weather today").create();
 
-        command.executeCommand(commandParameter);
+        action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message(commandParameter), TIME);
+        verify(timelineService).post(ALICE, new Message(command), TIME);
     }
 
     @Test
-    public void itPostADifferentNewMessageInTheTimelinesForTheGivenUser() {
-        CommandParameter commandParameter = aCommand().withCommand(" -> Good game though.").create();
+    public void itPostsADifferentNewMessageInTheTimelinesForTheGivenUser() {
+        Command command = aCommand().withCommand(" -> Good game though.").create();
 
-        command.executeCommand(commandParameter);
+        action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message(commandParameter), TIME);
+        verify(timelineService).post(ALICE, new Message(command), TIME);
     }
 
     @Test
-    public void itIsApplicableIfItStartsWithAnArrow() {
-        CommandParameter commandParameter = aCommand().withCommand(" -> ").create();
+    public void itIsExecutableIfCommandStartsWithAnArrow() {
+        Command command = aCommand().withCommand(" -> ").create();
 
-        boolean isApplicable = command.isApplicable(commandParameter);
+        boolean isExecutable = action.isExecutable(command);
 
-        assertThat(isApplicable, is(true));
+        assertThat(isExecutable, is(true));
     }
 
     @Test
-    public void itIsNotApplicableIfItDoesntStartWithAnArrow() {
-        CommandParameter commandParameter = aCommand().withCommand(" follows ->").create();
+    public void itIsNotExecutableIfCommandDoesntStartWithAnArrow() {
+        Command command = aCommand().withCommand(" follows ->").create();
 
-        boolean isApplicable = command.isApplicable(commandParameter);
+        boolean isExecutable = action.isExecutable(command);
 
-        assertThat(isApplicable, is(false));
+        assertThat(isExecutable, is(false));
     }
 
 }

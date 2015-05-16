@@ -1,28 +1,27 @@
 package application;
 
-import io.CommandParameter;
+import io.Command;
 import io.SocialNetworkingConsole;
-
-import command.Commands;
+import action.Actions;
 
 public class SocialNetworkingApplication {
 
     private SocialNetworkingConsole console;
-    private Commands commands;
+    private Actions actions;
 
-    public SocialNetworkingApplication(Commands commands, SocialNetworkingConsole console) {
-        this.commands = commands;
+    public SocialNetworkingApplication(Actions actions, SocialNetworkingConsole console) {
+        this.actions = actions;
         this.console = console;
     }
 
     public void start() {
         while (true) {
-            CommandParameter command = console.getNextCommand();
-            if (command == CommandParameter.NOTHING)
+            Command command = console.getNextCommand();
+            if (command == Command.NOTHING)
                 continue;
             if (command.isEmpty())
                 return;
-            commands.execute(command);
+            actions.execute(command);
         }
     }
 }
