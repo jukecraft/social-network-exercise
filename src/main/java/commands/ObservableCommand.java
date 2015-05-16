@@ -25,7 +25,7 @@ public class ObservableCommand {
     }
 
     public boolean isApplicable(CommandParameter parameter) {
-        return true;
+        return command.isApplicable(parameter);
     }
 
 }
