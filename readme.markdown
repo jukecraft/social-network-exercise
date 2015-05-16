@@ -1,10 +1,12 @@
 Social Network Exercise
 =======
 
-This is an exercise where I implement a simple social network. See the specification.txt for details on the requested features.
+This is an exercise where I implement a simple social network.
+See the specification.txt for details on the requested features.
+It was build using Java 8 and Maven. Running *mvn install* will produce a fresh executable jar (see below).
 
 Usage:
-1. **Run** the application from the main in StartApp.java
+1. **Run** the application from the command line via *java -jar social-network-exercise-jar-with-dependencies.jar*
 2. Use an empty line to **quit** the application
 3. Use the following **commands** to interact with the application:
  * **posting**: *<user name> -> <message>*
