@@ -26,7 +26,7 @@ public class ObservableCommand {
 
     public boolean isApplicable(CommandParameter parameter) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
 }
