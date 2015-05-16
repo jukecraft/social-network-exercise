@@ -47,7 +47,7 @@ public class ApplicationFactory {
 
     private ObservableCommand createObservableCommand(CommandWithOutput command) {
         ObservableCommand observableCommand = new ObservableCommand(command);
-        observableCommand.registerObserver(new ConsoleOutputObserver(console, clock));
+        observableCommand.registerObserver(new ConsoleCommandObserver(console, clock));
         return observableCommand;
     }
 

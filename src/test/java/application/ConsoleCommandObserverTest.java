@@ -15,7 +15,7 @@ import time.SocialTime;
 import time.SocialTimeClock;
 import timeline.Output;
 
-public class ConsoleOutputObserverTest {
+public class ConsoleCommandObserverTest {
     private static final SocialTime TIME = aTime().create();
     private static final List<String> LINES = asList("Good game though. (1 minute ago)",
         "Damn! We lost! (2 minutes ago)");
@@ -29,7 +29,7 @@ public class ConsoleOutputObserverTest {
     public void setUpApplication() {
         SocialTimeClock clock = mock(SocialTimeClock.class);
         when(clock.getLocalDateTime()).thenReturn(TIME);
-        outputObserver = new ConsoleOutputObserver(console, clock);
+        outputObserver = new ConsoleCommandObserver(console, clock);
     }
 
     @Test

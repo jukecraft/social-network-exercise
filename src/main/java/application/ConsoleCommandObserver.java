@@ -3,12 +3,12 @@ package application;
 import time.SocialTimeClock;
 import timeline.Output;
 
-public class ConsoleOutputObserver implements CommandObserver {
+public class ConsoleCommandObserver implements CommandObserver {
 
     private SocialNetworkingConsole console;
     private SocialTimeClock clock;
 
-    public ConsoleOutputObserver(SocialNetworkingConsole console, SocialTimeClock clock) {
+    public ConsoleCommandObserver(SocialNetworkingConsole console, SocialTimeClock clock) {
         this.console = console;
         this.clock = clock;
     }
