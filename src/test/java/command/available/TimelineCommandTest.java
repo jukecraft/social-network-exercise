@@ -1,21 +1,21 @@
 package command.available;
 
-import static command.CommandParameterBuilder.aCommand;
+import static io.CommandParameterBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static timeline.builder.PostsOutputBuilder.aPostsOutput;
-import static timeline.builder.PostsOutputBuilder.anEmptyPostsOutput;
-import static timeline.builder.UserBuilder.aUser;
+import static posts.UserBuilder.aUser;
+import static posts.output.PostsOutputBuilder.aPostsOutput;
+import static posts.output.PostsOutputBuilder.anEmptyPostsOutput;
 import io.CommandParameter;
+import network.TimelineService;
 
 import org.junit.Test;
 
-import timeline.Output;
-import timeline.PostsOutput;
-import timeline.TimelineService;
-import timeline.User;
+import posts.User;
+import posts.output.Output;
+import posts.output.PostsOutput;
 
 public class TimelineCommandTest {
     private static final String USERNAME = "Alice";

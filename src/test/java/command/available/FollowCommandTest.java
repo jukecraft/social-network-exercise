@@ -1,17 +1,17 @@
 package command.available;
 
-import static command.CommandParameterBuilder.aCommand;
+import static io.CommandParameterBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static timeline.builder.UserBuilder.aUser;
+import static posts.UserBuilder.aUser;
 import io.CommandParameter;
+import network.TimelineService;
 
 import org.junit.Test;
 
-import timeline.TimelineService;
-import timeline.User;
+import posts.User;
 
 public class FollowCommandTest {
     private static final String USERNAME_ALICE = "Alice";

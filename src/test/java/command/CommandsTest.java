@@ -1,6 +1,6 @@
 package command;
 
-import static command.CommandParameterBuilder.aPostCommand;
+import static io.CommandParameterBuilder.aPostCommand;
 import static java.util.Arrays.asList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;

@@ -1,8 +1,8 @@
 package command.available;
 
 import io.CommandParameter;
-import timeline.TimelineService;
-import timeline.User;
+import network.TimelineService;
+import posts.User;
 
 import command.Command;
 

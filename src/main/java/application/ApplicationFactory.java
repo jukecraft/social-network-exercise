@@ -2,23 +2,23 @@ package application;
 
 import static java.time.Clock.systemDefaultZone;
 import static java.util.Arrays.asList;
-import io.ConsoleCommandObserver;
 import io.SocialNetworkingConsole;
 
 import java.time.Clock;
 
+import network.SocialNetwork;
+import network.TimelineService;
+import network.Timelines;
 import time.SocialTimeClock;
-import timeline.SocialNetwork;
-import timeline.TimelineService;
-import timeline.Timelines;
 
-import command.CommandWithOutput;
 import command.Commands;
-import command.ObservableCommand;
 import command.available.FollowCommand;
 import command.available.PostCommand;
 import command.available.TimelineCommand;
 import command.available.WallCommand;
+import command.output.CommandWithOutput;
+import command.output.ConsoleCommandObserver;
+import command.output.ObservableCommand;
 
 public class ApplicationFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();

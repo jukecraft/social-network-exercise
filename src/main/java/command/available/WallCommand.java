@@ -1,11 +1,11 @@
 package command.available;
 
 import io.CommandParameter;
-import timeline.TimelineService;
-import timeline.User;
-import timeline.WallOutput;
+import network.TimelineService;
+import posts.User;
+import posts.output.WallOutput;
 
-import command.CommandWithOutput;
+import command.output.CommandWithOutput;
 
 public class WallCommand implements CommandWithOutput {
 

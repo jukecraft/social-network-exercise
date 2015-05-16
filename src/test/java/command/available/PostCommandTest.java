@@ -1,23 +1,23 @@
 package command.available;
 
-import static command.CommandParameterBuilder.aCommand;
+import static io.CommandParameterBuilder.aCommand;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static timeline.builder.SocialTimeBuilder.aTime;
-import static timeline.builder.UserBuilder.aUser;
+import static posts.SocialTimeBuilder.aTime;
+import static posts.UserBuilder.aUser;
 import io.CommandParameter;
+import network.TimelineService;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import time.SocialTime;
+import posts.Message;
+import posts.SocialTime;
+import posts.User;
 import time.SocialTimeClock;
-import timeline.Message;
-import timeline.TimelineService;
-import timeline.User;
 
 public class PostCommandTest {
     private static final User ALICE = aUser().withName("Alice").create();

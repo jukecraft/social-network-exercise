@@ -4,6 +4,8 @@ import static java.time.LocalDateTime.now;
 
 import java.time.Clock;
 
+import posts.SocialTime;
+
 public class SocialTimeClock {
 
     private Clock clock;

@@ -1,10 +1,10 @@
 package command.available;
 
 import io.CommandParameter;
+import network.TimelineService;
+import posts.Message;
+import posts.User;
 import time.SocialTimeClock;
-import timeline.Message;
-import timeline.TimelineService;
-import timeline.User;
 
 import command.Command;
 
