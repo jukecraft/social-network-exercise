@@ -23,16 +23,7 @@ public class StartAppIntegrationTest {
     public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
 
     @Rule
-    public Timeout timeout = new Timeout(5, TimeUnit.SECONDS);
-
-    @Test
-    public void whenIStartTheAppItGreetsTheUser() {
-        input.provideText("" + lineSeparator());
-
-        StartApp.main(IRRELEVANT_PARAMETERS);
-
-        assertThat(log.getLog(), containsString("Welcome to my social network application"));
-    }
+    public Timeout timeout = new Timeout(1, TimeUnit.SECONDS);
 
     @Test
     public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {
