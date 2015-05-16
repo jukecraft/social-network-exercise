@@ -11,12 +11,15 @@ will produce a fresh executable jar (see below).
 
 Usage:
 
-1. **Run** the application from the command line via 
+1. Make sure you have **access to Java 8** or higher with
+```java -version```
+
+2. **Run** the application from the command line via 
 ```java -jar social-network-exercise-jar-with-dependencies.jar```
 
-2. Use an empty line to **quit** the application
+3. Use an empty line to **quit** the application
 
-3. Use the following **commands** to interact with the application:
+4. Use the following **commands** to interact with the application:
 
 **posting**:
 ```<user name> -> <message>```
