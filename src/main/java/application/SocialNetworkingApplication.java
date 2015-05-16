@@ -16,7 +16,6 @@ public class SocialNetworkingApplication {
     }
 
     public void start() {
-        console.print("Welcome to my social network application");
         while (true) {
             CommandParameter command = console.getNextCommand();
             if (command == CommandParameter.NOTHING)

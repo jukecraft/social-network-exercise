@@ -29,16 +29,6 @@ public class SocialNetworkingApplicationTest {
     private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(commands, console);
 
     @Test
-    public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {
-        when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND_PARAMETER);
-
-        applicationWithConsole.start();
-
-        verify(console).print("Welcome to my social network application");
-    }
-
-    @Test
     public void givenAnInputItRoutesThatInputToTheSocialNetworkingApplication() {
         when(console.getNextCommand()) //
             .thenReturn(A_COMMAND_PARAMETER) //

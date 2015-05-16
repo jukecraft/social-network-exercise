@@ -23,15 +23,6 @@ public class SocialNetworkingConsoleTest {
     public TextFromStandardInputStream input = emptyStandardInputStream();
 
     @Test
-    public void givenAStringItPrintsThatStringToSystemOut() {
-        SocialNetworkingConsole console = new SocialNetworkingConsole();
-
-        console.print(OUTPUT);
-
-        assertThat(log.getLog(), is(OUTPUT));
-    }
-
-    @Test
     public void givenMultipleStringsItPrintsThemLineByLineToSystemOut() {
         SocialNetworkingConsole console = new SocialNetworkingConsole();
 

@@ -3,9 +3,6 @@ package io;
 import java.util.Scanner;
 
 public class SocialNetworkingConsole {
-    public void print(String output) {
-        System.out.print(output);
-    }
 
     public void print(Iterable<? extends String> output) {
         output.forEach(line -> System.out.println(line));
