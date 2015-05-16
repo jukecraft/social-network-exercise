@@ -1,6 +1,8 @@
 package commands;
 
 import static commands.CommandParameterBuilder.aCommand;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -53,9 +55,15 @@ public class ObservableCommandTest {
 
     @Test
     public void givenCommandIsApplicableItIsApplicable() {
-        observableCommand.executeCommand(PARAMETER);
+        when(command.isApplicable(PARAMETER)).thenReturn(true);
 
-        verify(observer).update(OUTPUT);
+        assertThat(observableCommand.isApplicable(PARAMETER), is(true));
     }
 
+    @Test
+    public void givenCommandIsNotApplicableItIsNotApplicable() {
+        when(command.isApplicable(PARAMETER)).thenReturn(false);
+
+        assertThat(observableCommand.isApplicable(PARAMETER), is(false));
+    }
 }
