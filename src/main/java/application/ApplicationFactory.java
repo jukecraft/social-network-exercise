@@ -41,7 +41,7 @@ public class ApplicationFactory {
             createObservableCommand(new TimelineCommand(timelineService)), //
             new FollowCommand(timelineService), //
             createObservableCommand(new WallCommand(timelineService))));
-        application = new SocialNetworkingApplication(this.clock, commands);
+        application = new SocialNetworkingApplication(commands);
         return this;
     }
 

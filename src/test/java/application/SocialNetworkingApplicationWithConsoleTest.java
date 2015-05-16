@@ -1,7 +1,6 @@
 package application;
 
 import static application.ApplicationFactory.standardConfiguration;
-import static java.util.Arrays.asList;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -10,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.Rule;
@@ -21,8 +19,6 @@ public class SocialNetworkingApplicationWithConsoleTest {
     private static final Optional<String> EMPTY_COMMAND = of("");
     private static final String A_COMMAND = "Alice -> I love the weather today";
     private static final String ANOTHER_COMMAND = "Alice";
-    private static final List<String> OUTPUT_LINES = asList("Good game though. (1 minute ago)",
-        "Damn! We lost! (2 minutes ago)");
 
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);

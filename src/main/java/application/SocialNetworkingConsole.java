@@ -3,7 +3,6 @@ package application;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -12,7 +11,7 @@ public class SocialNetworkingConsole {
         System.out.print(output);
     }
 
-    public void print(List<String> output) {
+    public void print(Iterable<? extends String> output) {
         output.forEach(line -> System.out.println(line));
     }
 
@@ -23,4 +22,5 @@ public class SocialNetworkingConsole {
             return of(scanner.nextLine());
         return empty();
     }
+
 }

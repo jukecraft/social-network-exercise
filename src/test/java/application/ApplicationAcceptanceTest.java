@@ -6,10 +6,11 @@ import static java.time.Duration.ofSeconds;
 import static java.time.Instant.now;
 import static java.time.ZoneId.systemDefault;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import java.time.Clock;
@@ -21,6 +22,7 @@ import org.junit.Test;
 public class ApplicationAcceptanceTest {
     private SocialNetworkingApplication application;
     private Instant instantReturnedByClock = now();
+    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
 
     @Before
     public void setUpApplication() {
@@ -28,8 +30,8 @@ public class ApplicationAcceptanceTest {
 
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        ApplicationFactory applicationFactory = standardConfiguration().withClock(clock);
-        application = new SocialNetworkingApplication(applicationFactory.getClock(), applicationFactory.getCommands());
+        ApplicationFactory applicationFactory = standardConfiguration().withConsole(console).withClock(clock);
+        application = new SocialNetworkingApplication(applicationFactory.getCommands());
     }
 
     @Test
@@ -43,34 +45,35 @@ public class ApplicationAcceptanceTest {
         application.accept("Charlie -> I'm in New York today! Anyone want to have a coffee?");
         instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(2));
 
-        assertThat(application.getOutput(), is(empty()));
+        verifyZeroInteractions(console);
 
         application.accept("Alice");
-        assertThat(application.getOutput(), contains("I love the weather today (5 minutes ago)"));
+        verify(console).print(argThat(contains( //
+            "I love the weather today (5 minutes ago)")));
 
         application.accept("Bob");
-        assertThat(application.getOutput(), contains( //
+        verify(console).print(argThat(contains( //
             "Good game though. (1 minute ago)", //
-            "Damn! We lost! (2 minutes ago)"));
+            "Damn! We lost! (2 minutes ago)")));
 
         application.accept("Charlie follows Alice");
-        assertThat(application.getOutput(), is(empty()));
+        verifyNoMoreInteractions(console);
 
         application.accept("Charlie wall Charlie");
-        assertThat(application.getOutput(), contains( //
+        verify(console).print(argThat(contains( //
             "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)", //
-            "Alice - I love the weather today (5 minutes ago)"));
+            "Alice - I love the weather today (5 minutes ago)")));
 
         application.accept("Charlie follows Bob");
-        assertThat(application.getOutput(), is(empty()));
+        verifyNoMoreInteractions(console);
 
         instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(13));
 
         application.accept("Charlie wall Charlie");
-        assertThat(application.getOutput(), contains( //
+        verify(console).print(argThat(contains( //
             "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)", //
             "Bob - Good game though. (1 minute ago)", //
             "Bob - Damn! We lost! (2 minutes ago)", //
-            "Alice - I love the weather today (5 minutes ago)"));
+            "Alice - I love the weather today (5 minutes ago)")));
     }
 }
