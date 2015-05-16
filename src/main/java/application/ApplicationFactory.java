@@ -24,7 +24,6 @@ public class ApplicationFactory {
     private TimelineService timelineService;
     private Commands commands;
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
-    private SocialNetworkingApplication application;
 
     public static ApplicationFactory standardConfiguration() {
         return new ApplicationFactory().withClock(systemDefaultZone());
@@ -41,7 +40,6 @@ public class ApplicationFactory {
             createObservableCommand(new TimelineCommand(timelineService)), //
             new FollowCommand(timelineService), //
             createObservableCommand(new WallCommand(timelineService))));
-        application = new SocialNetworkingApplication(commands);
         return this;
     }
 
@@ -71,15 +69,6 @@ public class ApplicationFactory {
 
     public SocialNetworkingConsole getConsole() {
         return console;
-    }
-
-    public ApplicationFactory withApplication(SocialNetworkingApplication application) {
-        this.application = application;
-        return this;
-    }
-
-    public SocialNetworkingApplication getApplication() {
-        return application;
     }
 
 }

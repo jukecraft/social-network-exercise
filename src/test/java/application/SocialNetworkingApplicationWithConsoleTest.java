@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.rules.Timeout;
 
 import commands.CommandParameter;
+import commands.Commands;
 
 public class SocialNetworkingApplicationWithConsoleTest {
     private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");
@@ -23,10 +24,10 @@ public class SocialNetworkingApplicationWithConsoleTest {
     public Timeout timeout = new Timeout(1, SECONDS);
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
-    private SocialNetworkingApplication application = mock(SocialNetworkingApplication.class);
+    private Commands commands = mock(Commands.class);
     private SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
         standardConfiguration() //
-            .withApplication(application) //
+            .withCommands(commands) //
             .withConsole(console));
 
     @Test
@@ -47,7 +48,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
         applicationWithConsole.start();
 
-        verify(application).accept(A_COMMAND_PARAMETER);
+        verify(commands).execute(A_COMMAND_PARAMETER);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
         applicationWithConsole.start();
 
-        verifyZeroInteractions(application);
+        verifyZeroInteractions(commands);
     }
 
     @Test
@@ -68,7 +69,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
         applicationWithConsole.start();
 
-        verifyZeroInteractions(application);
+        verifyZeroInteractions(commands);
     }
 
     @Test
@@ -80,8 +81,8 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
         applicationWithConsole.start();
 
-        verify(application).accept(A_COMMAND_PARAMETER);
-        verify(application).accept(ANOTHER_COMMAND_PARAMETER);
+        verify(commands).execute(A_COMMAND_PARAMETER);
+        verify(commands).execute(ANOTHER_COMMAND_PARAMETER);
     }
 
 }

@@ -20,11 +20,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import commands.CommandParameter;
+import commands.Commands;
 
 public class ApplicationAcceptanceTest {
-    private SocialNetworkingApplication application;
     private Instant instantReturnedByClock = now();
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
+    private Commands commands;
 
     @Before
     public void setUpApplication() {
@@ -32,46 +33,45 @@ public class ApplicationAcceptanceTest {
 
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
-        ApplicationFactory applicationFactory = standardConfiguration().withConsole(console).withClock(clock);
-        application = new SocialNetworkingApplication(applicationFactory.getCommands());
+        commands = standardConfiguration().withConsole(console).withClock(clock).getCommands();
     }
 
     @Test
     public void usersCanPublishMessagesReadTheirTimelineFollowOthersAndViewTheirWall() {
-        accept("Alice -> I love the weather today");
+        execute("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
-        accept("Bob -> Damn! We lost!");
+        execute("Bob -> Damn! We lost!");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-        accept("Bob -> Good game though.");
+        execute("Bob -> Good game though.");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(1));
-        accept("Charlie -> I'm in New York today! Anyone want to have a coffee?");
+        execute("Charlie -> I'm in New York today! Anyone want to have a coffee?");
         instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(2));
 
         verifyZeroInteractions(console);
 
-        accept("Alice");
+        execute("Alice");
         verify(console).print(argThat(contains( //
             "I love the weather today (5 minutes ago)")));
 
-        accept("Bob");
+        execute("Bob");
         verify(console).print(argThat(contains( //
             "Good game though. (1 minute ago)", //
             "Damn! We lost! (2 minutes ago)")));
 
-        accept("Charlie follows Alice");
+        execute("Charlie follows Alice");
         verifyNoMoreInteractions(console);
 
-        accept("Charlie wall Charlie");
+        execute("Charlie wall Charlie");
         verify(console).print(argThat(contains( //
             "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)", //
             "Alice - I love the weather today (5 minutes ago)")));
 
-        accept("Charlie follows Bob");
+        execute("Charlie follows Bob");
         verifyNoMoreInteractions(console);
 
         instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(13));
 
-        accept("Charlie wall Charlie");
+        execute("Charlie wall Charlie");
         verify(console).print(argThat(contains( //
             "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)", //
             "Bob - Good game though. (1 minute ago)", //
@@ -79,7 +79,7 @@ public class ApplicationAcceptanceTest {
             "Alice - I love the weather today (5 minutes ago)")));
     }
 
-    private void accept(String command) {
-        application.accept(new CommandParameter(command));
+    private void execute(String command) {
+        commands.execute(new CommandParameter(command));
     }
 }

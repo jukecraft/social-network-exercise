@@ -1,15 +1,16 @@
 package application;
 
 import commands.CommandParameter;
+import commands.Commands;
 
 public class SocialNetworkingApplicationWithConsole {
 
     private SocialNetworkingConsole console;
-    private SocialNetworkingApplication application;
+    private Commands commands;
 
     public SocialNetworkingApplicationWithConsole(ApplicationFactory applicationFactory) {
         console = applicationFactory.getConsole();
-        application = applicationFactory.getApplication();
+        commands = applicationFactory.getCommands();
     }
 
     public void start() {
@@ -20,7 +21,7 @@ public class SocialNetworkingApplicationWithConsole {
                 continue;
             if (command.isEmpty())
                 return;
-            application.accept(command);
+            commands.execute(command);
         }
     }
 }
