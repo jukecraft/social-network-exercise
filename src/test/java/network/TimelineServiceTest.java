@@ -9,7 +9,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.PostBuilder.aPost;
 import static posts.SocialTimeBuilder.aTime;
-import static posts.UserBuilder.aUser;
+import static posts.UserBuilder.aUserNamedAlice;
+import static posts.UserBuilder.aUserNamedBob;
 import static posts.output.PostsOutputBuilder.aPostsOutput;
 import static posts.output.PostsOutputBuilder.anEmptyPostsOutput;
 import static posts.output.WallOutputBuilder.anEmptyWallOutput;
@@ -24,8 +25,8 @@ import posts.output.PostsOutput;
 import posts.output.WallOutput;
 
 public class TimelineServiceTest {
-    private static final User ALICE = aUser().withName("Alice").create();
-    private static final User BOB = aUser().withName("Bob").create();
+    private static final User ALICE = aUserNamedAlice();
+    private static final User BOB = aUserNamedBob();
     private static final SocialTime TIME = aTime().create();
     private static final PostsOutput OUTPUT = aPostsOutput().create();
     private static final Message MESSAGE = new Message(aPostCommand().create());

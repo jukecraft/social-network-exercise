@@ -4,7 +4,8 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static posts.UserBuilder.aUser;
+import static posts.UserBuilder.aUserNamedAlice;
+import static posts.UserBuilder.aUserNamedBob;
 
 import java.util.List;
 
@@ -13,14 +14,14 @@ import org.junit.Test;
 import posts.User;
 
 public class SocialNetworkTest {
-    private static final User ALICE = aUser().withName("Alice").create();
-    private static final User BOB = aUser().withName("Bob").create();;
+    private static final User ALICE = aUserNamedAlice();
+    private static final User BOB = aUserNamedBob();
 
     @Test
     public void givenFollowingWhenAskedForTheFollowingThenItReturnsNoFollowers() {
         SocialNetwork socialNetwork = new SocialNetwork();
 
-        List<User> following = socialNetwork.getFollowing(aUser().create());
+        List<User> following = socialNetwork.getFollowing(ALICE);
 
         assertThat(following, is(empty()));
     }

@@ -7,7 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.SocialTimeBuilder.aTime;
-import static posts.UserBuilder.aUser;
+import static posts.UserBuilder.aUserNamedAlice;
 import io.CommandParameter;
 import network.TimelineService;
 
@@ -20,7 +20,7 @@ import posts.User;
 import time.SocialTimeClock;
 
 public class PostCommandTest {
-    private static final User ALICE = aUser().withName("Alice").create();
+    private static final User ALICE = aUserNamedAlice();
     private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);

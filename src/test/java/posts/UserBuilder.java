@@ -17,4 +17,12 @@ public class UserBuilder {
     public User create() {
         return new User(aCommand().withUser(name).create());
     }
+
+    public static User aUserNamedAlice() {
+        return aUser().withName("Alice").create();
+    }
+
+    public static User aUserNamedBob() {
+        return aUser().withName("Bob").create();
+    }
 }

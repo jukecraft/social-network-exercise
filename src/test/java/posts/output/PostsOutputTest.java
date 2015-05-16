@@ -6,8 +6,9 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static posts.PostBuilder.aPost;
+import static posts.PostBuilder.aUserNamedAlice;
+import static posts.PostBuilder.aUserNamedBob;
 import static posts.SocialTimeBuilder.aTime;
-import static posts.UserBuilder.aUser;
 import static posts.output.PostsOutputBuilder.anEmptyPostsOutput;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,9 @@ import org.junit.Test;
 
 import posts.Post;
 import posts.SocialTime;
+import posts.UserBuilder;
+import posts.UserBuilder.aUserNamedAlice;
+import posts.UserBuilder.aUserNamedBob;
 
 public class PostsOutputTest {
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
@@ -24,13 +28,13 @@ public class PostsOutputTest {
     private static final Post A_POST = aPost() //
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5)) //
         .withMessage("earlier message") //
-        .withUser(aUser().withName("Alice").create()) //
+        .withUser(UserBuilder.aUserNamedAlice()) //
         .create();
 
     private static final Post LATER_POST = aPost() //
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1)) //
         .withMessage("later message") //
-        .withUser(aUser().withName("Bob").create()) //
+        .withUser(UserBuilder.aUserNamedBob()) //
         .create();
 
     @Test
