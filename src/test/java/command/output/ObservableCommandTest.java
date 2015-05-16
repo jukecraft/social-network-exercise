@@ -19,17 +19,17 @@ public class ObservableCommandTest {
     private static final Output OUTPUT = aWallOutput().create();
 
     private CommandWithOutput command = mock(CommandWithOutput.class);
-    private ObservableCommand observableCommand = new ObservableCommand(command);
     private CommandObserver observer = mock(CommandObserver.class);
 
     @Before
     public void setUp() {
         when(command.executeCommandWithOutput(PARAMETER)).thenReturn(OUTPUT);
-        observableCommand.registerObserver(observer);
     }
 
     @Test
     public void givenCreatedWithACommandWhenItIsExecutedThenItCallsTheGivenCommand() {
+        ObservableCommand observableCommand = new ObservableCommand(command);
+
         observableCommand.executeCommand(PARAMETER);
 
         verify(command).executeCommandWithOutput(PARAMETER);
@@ -37,6 +37,9 @@ public class ObservableCommandTest {
 
     @Test
     public void givenRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserverWithTheOutput() {
+        ObservableCommand observableCommand = new ObservableCommand(command) //
+            .withObserver(observer);
+
         observableCommand.executeCommand(PARAMETER);
 
         verify(observer).update(OUTPUT);
@@ -45,7 +48,9 @@ public class ObservableCommandTest {
     @Test
     public void givenTwoRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserversWithTheOutput() {
         CommandObserver anotherObserver = mock(CommandObserver.class);
-        observableCommand.registerObserver(anotherObserver);
+        ObservableCommand observableCommand = new ObservableCommand(command) //
+            .withObserver(observer) //
+            .withObserver(anotherObserver);
 
         observableCommand.executeCommand(PARAMETER);
 
@@ -55,6 +60,7 @@ public class ObservableCommandTest {
 
     @Test
     public void givenCommandIsApplicableItIsApplicable() {
+        ObservableCommand observableCommand = new ObservableCommand(command);
         when(command.isApplicable(PARAMETER)).thenReturn(true);
 
         assertThat(observableCommand.isApplicable(PARAMETER), is(true));
@@ -62,6 +68,7 @@ public class ObservableCommandTest {
 
     @Test
     public void givenCommandIsNotApplicableItIsNotApplicable() {
+        ObservableCommand observableCommand = new ObservableCommand(command);
         when(command.isApplicable(PARAMETER)).thenReturn(false);
 
         assertThat(observableCommand.isApplicable(PARAMETER), is(false));

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import posts.SocialTime;
 import posts.output.Output;
-import time.SocialTimeClock;
+import time.SocialNetworkingClock;
 
 public class ConsoleCommandObserverTest {
     private static final SocialTime TIME = aTime().create();
@@ -28,7 +28,7 @@ public class ConsoleCommandObserverTest {
 
     @Before
     public void setUpApplication() {
-        SocialTimeClock clock = mock(SocialTimeClock.class);
+        SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
         when(clock.getLocalDateTime()).thenReturn(TIME);
         outputObserver = new ConsoleCommandObserver(console, clock);
     }

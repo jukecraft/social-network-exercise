@@ -17,14 +17,14 @@ import org.junit.Test;
 import posts.Message;
 import posts.SocialTime;
 import posts.User;
-import time.SocialTimeClock;
+import time.SocialNetworkingClock;
 
 public class PostCommandTest {
     private static final User ALICE = aUserNamedAlice();
     private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
-    private SocialTimeClock clock = mock(SocialTimeClock.class);
+    private SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
     private PostCommand command = new PostCommand(timelineService, clock);
 
     @Before

@@ -2,14 +2,14 @@ package command.output;
 
 import io.SocialNetworkingConsole;
 import posts.output.Output;
-import time.SocialTimeClock;
+import time.SocialNetworkingClock;
 
 public class ConsoleCommandObserver implements CommandObserver {
 
     private SocialNetworkingConsole console;
-    private SocialTimeClock clock;
+    private SocialNetworkingClock clock;
 
-    public ConsoleCommandObserver(SocialNetworkingConsole console, SocialTimeClock clock) {
+    public ConsoleCommandObserver(SocialNetworkingConsole console, SocialNetworkingClock clock) {
         this.console = console;
         this.clock = clock;
     }

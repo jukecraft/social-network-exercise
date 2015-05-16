@@ -6,11 +6,11 @@ import java.time.Clock;
 
 import posts.SocialTime;
 
-public class SocialTimeClock {
+public class SocialNetworkingClock {
 
     private Clock clock;
 
-    public SocialTimeClock(Clock clock) {
+    public SocialNetworkingClock(Clock clock) {
         this.clock = clock;
     }
 

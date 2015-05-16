@@ -17,8 +17,9 @@ public class ObservableCommand implements Command {
         this.command = command;
     }
 
-    public void registerObserver(CommandObserver observer) {
+    public ObservableCommand withObserver(CommandObserver observer) {
         observers.add(observer);
+        return this;
     }
 
     @Override

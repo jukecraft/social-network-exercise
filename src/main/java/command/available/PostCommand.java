@@ -4,7 +4,7 @@ import io.CommandParameter;
 import network.TimelineService;
 import posts.Message;
 import posts.User;
-import time.SocialTimeClock;
+import time.SocialNetworkingClock;
 
 import command.Command;
 
@@ -12,9 +12,9 @@ public class PostCommand implements Command {
     private static final String POSTING_COMMAND = " -> ";
 
     private TimelineService timelines;
-    private SocialTimeClock clock;
+    private SocialNetworkingClock clock;
 
-    public PostCommand(TimelineService timelines, SocialTimeClock clock) {
+    public PostCommand(TimelineService timelines, SocialNetworkingClock clock) {
         this.timelines = timelines;
         this.clock = clock;
     }
