@@ -9,7 +9,7 @@ It was build using Java 8 and Maven. Running
 ```mvn install```
 will produce a fresh executable jar (see below).
 
-Usage:
+##Usage:
 
 1. Make sure you have **access to Java 8** or higher with
 ```java -version```
