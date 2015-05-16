@@ -1,8 +1,5 @@
 package network;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import posts.Message;
 import posts.Post;
 import posts.SocialTime;
@@ -32,14 +29,7 @@ public class TimelineService {
     }
 
     public WallOutput collectWall(User wallUser) {
-        List<User> relevantUsers = new ArrayList<User>(network.getFollowing(wallUser));
-        relevantUsers.add(wallUser);
-        return collectWallOutput(relevantUsers);
+        return network.collectWallOutput(timelines, wallUser);
     }
 
-    private WallOutput collectWallOutput(List<User> relevantUsers) {
-        WallOutput wallOutput = new WallOutput();
-        relevantUsers.forEach(user -> wallOutput.addPosts(user, collectPosts(user)));
-        return wallOutput;
-    }
 }

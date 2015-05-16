@@ -1,23 +1,26 @@
 package network;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import posts.User;
+import posts.output.WallOutput;
 
 public class SocialNetwork {
-    private Map<User, List<User>> network = new HashMap<>();
+    private Map<User, Following> network = new HashMap<>();
 
     public void registerFollowing(User follower, User following) {
-        List<User> followingForUser = getFollowing(follower);
-        followingForUser.add(following);
+        Following followingForUser = getFollowing(follower);
+        followingForUser.addFollowing(following);
         network.put(follower, followingForUser);
     }
 
-    public List<User> getFollowing(User user) {
-        return network.getOrDefault(user, new ArrayList<>());
+    private Following getFollowing(User user) {
+        return network.getOrDefault(user, new Following());
+    }
+
+    public WallOutput collectWallOutput(Timelines timelines, User wallUser) {
+        return getFollowing(wallUser).collectWallOutput(timelines, wallUser);
     }
 
 }

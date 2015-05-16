@@ -1,21 +1,17 @@
 package network;
 
 import static io.CommandBuilder.aPostCommand;
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.PostBuilder.aPost;
-import static posts.PostBuilder.anotherPost;
-import static posts.PostBuilder.onePost;
 import static posts.SocialTimeBuilder.aTime;
 import static posts.UserBuilder.aUserNamedAlice;
 import static posts.UserBuilder.aUserNamedBob;
 import static posts.output.PostsOutputBuilder.aPostsOutput;
-import static posts.output.PostsOutputBuilder.anEmptyPostsOutput;
-import static posts.output.WallOutputBuilder.anEmptyWallOutput;
+import static posts.output.WallOutputBuilder.aWallOutput;
 
 import org.junit.Test;
 
@@ -68,25 +64,11 @@ public class TimelineServiceTest {
 
     @Test
     public void itCollectsTimelinesFromUserAndFollowingIntoAWall() {
-        when(network.getFollowing(ALICE)).thenReturn(asList(BOB));
-
-        PostsOutput alicesTimeline = anEmptyPostsOutput() //
-            .withPost(onePost()) //
-            .withPost(anotherPost()) //
-            .create();
-        when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
-
-        PostsOutput bobsTimeline = anEmptyPostsOutput() //
-            .withPost(aPost().withMessage("message3").create()) //
-            .withPost(aPost().withMessage("message4").create()) //
-            .create();
-        when(timelines.collectPosts(BOB)).thenReturn(bobsTimeline);
+        WallOutput wallOutput = aWallOutput().create();
+        when(network.collectWallOutput(timelines, ALICE)).thenReturn(wallOutput);
 
         WallOutput actualOutput = timelineService.collectWall(ALICE);
 
-        assertThat(actualOutput, is(anEmptyWallOutput() //
-            .withTimeline(ALICE, alicesTimeline) //
-            .withTimeline(BOB, bobsTimeline) //
-            .create()));
+        assertThat(actualOutput, is(wallOutput));
     }
 }
