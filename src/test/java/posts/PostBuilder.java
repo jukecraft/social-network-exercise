@@ -43,4 +43,12 @@ public class PostBuilder {
         return new Post(user, new Message(aCommand().withMessage(messageText).create()), timestamp);
     }
 
+    public static Post onePost() {
+        return aPost().withMessage("one post").create();
+    }
+
+    public static Post anotherPost() {
+        return aPost().withMessage("another post").create();
+    }
+
 }

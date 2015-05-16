@@ -1,5 +1,7 @@
 package application;
 
+import static io.CommandParameterBuilder.aFollowsCommand;
+import static io.CommandParameterBuilder.aPostCommand;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -16,9 +18,8 @@ import command.Commands;
 
 public class SocialNetworkingApplicationTest {
     private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");
-    private static final CommandParameter A_COMMAND_PARAMETER = new CommandParameter(
-        "Alice -> I love the weather today");
-    private static final CommandParameter ANOTHER_COMMAND_PARAMETER = new CommandParameter("Alice");
+    private static final CommandParameter A_COMMAND_PARAMETER = aPostCommand().create();
+    private static final CommandParameter ANOTHER_COMMAND_PARAMETER = aFollowsCommand().create();
 
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);

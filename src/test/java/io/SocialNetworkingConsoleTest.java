@@ -1,5 +1,6 @@
 package io;
 
+import static java.lang.System.lineSeparator;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -14,7 +15,6 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 public class SocialNetworkingConsoleTest {
     private static final String OUTPUT = "I love the weather today";
     private static final String ANOTHER_OUTPUT = "Damn! We lost!";
-    private static final String LINE_SEPERATOR = System.getProperty("line.separator");
     private static final String A_COMMAND = "Alice -> I love the weather today";
 
     @Rule
@@ -37,7 +37,7 @@ public class SocialNetworkingConsoleTest {
 
         console.print(asList(OUTPUT, ANOTHER_OUTPUT));
 
-        assertThat(log.getLog(), is(OUTPUT + LINE_SEPERATOR + ANOTHER_OUTPUT + LINE_SEPERATOR));
+        assertThat(log.getLog(), is(OUTPUT + lineSeparator() + ANOTHER_OUTPUT + lineSeparator()));
     }
 
     @Test

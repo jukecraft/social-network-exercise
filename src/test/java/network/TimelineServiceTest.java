@@ -8,6 +8,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static posts.PostBuilder.aPost;
+import static posts.PostBuilder.anotherPost;
+import static posts.PostBuilder.onePost;
 import static posts.SocialTimeBuilder.aTime;
 import static posts.UserBuilder.aUserNamedAlice;
 import static posts.UserBuilder.aUserNamedBob;
@@ -69,8 +71,8 @@ public class TimelineServiceTest {
         when(network.getFollowing(ALICE)).thenReturn(asList(BOB));
 
         PostsOutput alicesTimeline = anEmptyPostsOutput() //
-            .withPost(aPost().withMessage("message1").create()) //
-            .withPost(aPost().withMessage("message2").create()) //
+            .withPost(onePost()) //
+            .withPost(anotherPost()) //
             .create();
         when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
 

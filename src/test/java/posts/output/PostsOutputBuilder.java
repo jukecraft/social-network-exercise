@@ -1,12 +1,11 @@
 package posts.output;
 
-import static posts.PostBuilder.aPost;
+import static posts.PostBuilder.onePost;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import posts.Post;
-import posts.output.PostsOutput;
 
 public class PostsOutputBuilder {
 
@@ -16,7 +15,7 @@ public class PostsOutputBuilder {
 
     public static PostsOutputBuilder aPostsOutput() {
         return new PostsOutputBuilder() //
-            .withPost(aPost().create());
+            .withPost(onePost());
     }
 
     private List<Post> posts = new ArrayList<>();

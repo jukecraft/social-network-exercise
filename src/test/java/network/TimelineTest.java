@@ -14,11 +14,9 @@ import posts.output.PostsOutput;
 public class TimelineTest {
     private static final Post A_POST = aPost() //
         .withPostingTime(now()) //
-        .withMessage("message1") //
         .create();
     private static final Post LATER_POST = aPost() //
         .withPostingTime(now().plusYears(1)) //
-        .withMessage("message2") //
         .create();
 
     private Timeline timeline = new Timeline();
