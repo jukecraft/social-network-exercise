@@ -3,12 +3,12 @@ package application;
 import commands.CommandParameter;
 import commands.Commands;
 
-public class SocialNetworkingApplicationWithConsole {
+public class SocialNetworkingApplication {
 
     private SocialNetworkingConsole console;
     private Commands commands;
 
-    public SocialNetworkingApplicationWithConsole(ApplicationFactory applicationFactory) {
+    public SocialNetworkingApplication(ApplicationFactory applicationFactory) {
         console = applicationFactory.getConsole();
         commands = applicationFactory.getCommands();
     }

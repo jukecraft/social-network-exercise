@@ -14,7 +14,7 @@ import org.junit.rules.Timeout;
 import commands.CommandParameter;
 import commands.Commands;
 
-public class SocialNetworkingApplicationWithConsoleTest {
+public class SocialNetworkingApplicationTest {
     private static final CommandParameter EMPTY_COMMAND_PARAMETER = new CommandParameter("");
     private static final CommandParameter A_COMMAND_PARAMETER = new CommandParameter(
         "Alice -> I love the weather today");
@@ -25,7 +25,7 @@ public class SocialNetworkingApplicationWithConsoleTest {
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
     private Commands commands = mock(Commands.class);
-    private SocialNetworkingApplicationWithConsole applicationWithConsole = new SocialNetworkingApplicationWithConsole(
+    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(
         standardConfiguration() //
             .withCommands(commands) //
             .withConsole(console));
