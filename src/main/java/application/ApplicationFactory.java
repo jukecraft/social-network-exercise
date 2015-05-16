@@ -10,7 +10,7 @@ import timeline.SocialNetwork;
 import timeline.TimelineService;
 import timeline.Timelines;
 
-import commands.Command;
+import commands.CommandWithOutput;
 import commands.Commands;
 import commands.FollowCommand;
 import commands.ObservableCommand;
@@ -45,7 +45,7 @@ public class ApplicationFactory {
         return this;
     }
 
-    private ObservableCommand createObservableCommand(Command command) {
+    private ObservableCommand createObservableCommand(CommandWithOutput command) {
         ObservableCommand observableCommand = new ObservableCommand(command);
         observableCommand.registerObserver(new ConsoleOutputObserver(console, clock));
         return observableCommand;

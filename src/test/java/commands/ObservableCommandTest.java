@@ -18,7 +18,7 @@ public class ObservableCommandTest {
     private static final CommandParameter PARAMETER = aCommand().create();
     private static final Output OUTPUT = aWallOutput().create();
 
-    private Command command = mock(Command.class);
+    private CommandWithOutput command = mock(CommandWithOutput.class);
     private ObservableCommand observableCommand = new ObservableCommand(command);
     private CommandObserver observer = mock(CommandObserver.class);
 

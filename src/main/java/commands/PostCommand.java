@@ -15,13 +15,13 @@ public class PostCommand implements Command {
     }
 
     @Override
-    public boolean isApplicable(CommandParameter command) {
-        return command.startsWith(POSTING_COMMAND);
+    public boolean isApplicable(CommandParameter commandParameter) {
+        return commandParameter.startsWith(POSTING_COMMAND);
     }
 
     @Override
-    public PostsOutput executeCommand(CommandParameter command) {
-        timelines.post(new User(command), new Message(command));
+    public PostsOutput executeCommand(CommandParameter commandParameter) {
+        timelines.post(new User(commandParameter), new Message(commandParameter));
         return new PostsOutput();
     }
 }

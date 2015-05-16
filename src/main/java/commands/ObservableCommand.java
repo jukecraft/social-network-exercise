@@ -7,10 +7,10 @@ import timeline.Output;
 import application.CommandObserver;
 
 public class ObservableCommand implements Command {
-    private Command command;
+    private CommandWithOutput command;
     private List<CommandObserver> observers = new ArrayList<>();
 
-    public ObservableCommand(Command command) {
+    public ObservableCommand(CommandWithOutput command) {
         this.command = command;
     }
 

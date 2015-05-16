@@ -4,7 +4,7 @@ import timeline.PostsOutput;
 import timeline.TimelineService;
 import timeline.User;
 
-public class TimelineCommand implements Command {
+public class TimelineCommand implements CommandWithOutput {
 
     private TimelineService timelines;
 
