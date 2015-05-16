@@ -23,7 +23,7 @@ public class ConsoleOutputObserverTest {
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Output output = mock(Output.class);
 
-    private ConsoleOutputObserver outputObserver;
+    private CommandObserver outputObserver;
 
     @Before
     public void setUpApplication() {

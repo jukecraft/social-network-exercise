@@ -3,7 +3,7 @@ package application;
 import time.SocialTimeClock;
 import timeline.Output;
 
-public class ConsoleOutputObserver {
+public class ConsoleOutputObserver implements CommandObserver {
 
     private SocialNetworkingConsole console;
     private SocialTimeClock clock;
@@ -13,6 +13,7 @@ public class ConsoleOutputObserver {
         this.clock = clock;
     }
 
+    @Override
     public void update(Output output) {
         console.print(output.print(clock.getLocalDateTime()));
     }
