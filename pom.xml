@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>franziskas</groupId>
 	<artifactId>social-network-exercise</artifactId>
-	<version>1</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 	<build>
 		<plugins>
