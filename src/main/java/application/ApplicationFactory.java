@@ -34,9 +34,9 @@ public class ApplicationFactory {
 
     public ApplicationFactory withClock(Clock clock) {
         this.clock = new SocialTimeClock(clock);
-        timelineService = new TimelineService(new Timelines(), new SocialNetwork(), this.clock);
+        timelineService = new TimelineService(new Timelines(), new SocialNetwork());
         commands = new Commands(asList( //
-            new PostCommand(timelineService), //
+            new PostCommand(timelineService, this.clock), //
             createObservableCommand(new TimelineCommand(timelineService)), //
             new FollowCommand(timelineService), //
             createObservableCommand(new WallCommand(timelineService))));

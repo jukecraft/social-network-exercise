@@ -45,7 +45,7 @@ public class PostBuilder {
     }
 
     public Post create() {
-        return new Post(new Message(aCommand().withMessage(messageText).create()), timestamp, user);
+        return new Post(user, new Message(aCommand().withMessage(messageText).create()), timestamp);
     }
 
 }

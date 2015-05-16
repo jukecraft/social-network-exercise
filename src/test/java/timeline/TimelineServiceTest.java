@@ -17,7 +17,6 @@ import static timeline.builder.WallOutputBuilder.anEmptyWallOutput;
 import org.junit.Test;
 
 import time.SocialTime;
-import time.SocialTimeClock;
 
 public class TimelineServiceTest {
     private static final User ALICE = aUser().withName("Alice").create();
@@ -28,15 +27,12 @@ public class TimelineServiceTest {
 
     private Timelines timelines = mock(Timelines.class);
     private SocialNetwork network = mock(SocialNetwork.class);
-    private SocialTimeClock clock = mock(SocialTimeClock.class);
 
-    private TimelineService timelineService = new TimelineService(timelines, network, clock);
+    private TimelineService timelineService = new TimelineService(timelines, network);
 
     @Test
     public void itDelegatesPostsToTimelinesIncludingTheCurrentTime() {
-        when(clock.getLocalDateTime()).thenReturn(TIME);
-
-        timelineService.post(ALICE, MESSAGE);
+        timelineService.post(ALICE, MESSAGE, TIME);
 
         Post expectedPost = aPost() //
             .withMessage(MESSAGE.toString()) //

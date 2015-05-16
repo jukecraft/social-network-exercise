@@ -5,19 +5,31 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static timeline.builder.SocialTimeBuilder.aTime;
 import static timeline.builder.UserBuilder.aUser;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import time.SocialTime;
+import time.SocialTimeClock;
 import timeline.Message;
 import timeline.TimelineService;
 import timeline.User;
 
 public class PostCommandTest {
     private static final User ALICE = aUser().withName("Alice").create();
+    private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
-    private PostCommand command = new PostCommand(timelineService);
+    private SocialTimeClock clock = mock(SocialTimeClock.class);
+    private PostCommand command = new PostCommand(timelineService, clock);
+
+    @Before
+    public void setUp() {
+        when(clock.getLocalDateTime()).thenReturn(TIME);
+    }
 
     @Test
     public void itPostANewMessageInTheTimelinesForTheGivenUser() {
@@ -25,7 +37,7 @@ public class PostCommandTest {
 
         command.executeCommand(commandParameter);
 
-        verify(timelineService).post(ALICE, new Message(commandParameter));
+        verify(timelineService).post(ALICE, new Message(commandParameter), TIME);
     }
 
     @Test
@@ -34,7 +46,7 @@ public class PostCommandTest {
 
         command.executeCommand(commandParameter);
 
-        verify(timelineService).post(ALICE, new Message(commandParameter));
+        verify(timelineService).post(ALICE, new Message(commandParameter), TIME);
     }
 
     @Test

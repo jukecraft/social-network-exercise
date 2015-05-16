@@ -3,17 +3,15 @@ package timeline;
 import java.util.ArrayList;
 import java.util.List;
 
-import time.SocialTimeClock;
+import time.SocialTime;
 
 public class TimelineService {
     private final Timelines timelines;
-    private final SocialTimeClock clock;
     private SocialNetwork network;
 
-    public TimelineService(Timelines timelines, SocialNetwork network, SocialTimeClock clock) {
+    public TimelineService(Timelines timelines, SocialNetwork network) {
         this.timelines = timelines;
         this.network = network;
-        this.clock = clock;
     }
 
     public PostsOutput collectPosts(User user) {
@@ -24,8 +22,8 @@ public class TimelineService {
         network.registerFollowing(follower, follows);
     }
 
-    public void post(User author, Message message) {
-        timelines.post(author, new Post(message, clock.getLocalDateTime(), author));
+    public void post(User author, Message message, SocialTime timestamp) {
+        timelines.post(author, new Post(author, message, timestamp));
     }
 
     public WallOutput collectWall(User wallUser) {

@@ -13,7 +13,7 @@ public class Post extends SocialNetworkingValueObject implements Comparable<Post
     private final SocialTime postingTime;
     private User user;
 
-    public Post(Message message, SocialTime postingTime, User user) {
+    public Post(User user, Message message, SocialTime postingTime) {
         this.message = message;
         this.postingTime = postingTime;
         this.user = user;

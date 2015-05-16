@@ -1,5 +1,6 @@
 package commands;
 
+import time.SocialTimeClock;
 import timeline.Message;
 import timeline.TimelineService;
 import timeline.User;
@@ -8,9 +9,11 @@ public class PostCommand implements Command {
     private static final String POSTING_COMMAND = " -> ";
 
     private TimelineService timelines;
+    private SocialTimeClock clock;
 
-    public PostCommand(TimelineService timelines) {
+    public PostCommand(TimelineService timelines, SocialTimeClock clock) {
         this.timelines = timelines;
+        this.clock = clock;
     }
 
     @Override
@@ -20,6 +23,6 @@ public class PostCommand implements Command {
 
     @Override
     public void executeCommand(CommandParameter commandParameter) {
-        timelines.post(new User(commandParameter), new Message(commandParameter));
+        timelines.post(new User(commandParameter), new Message(commandParameter), clock.getLocalDateTime());
     }
 }
