@@ -29,6 +29,10 @@ public class ApplicationFactory {
         return new ApplicationFactory().withClock(systemDefaultZone());
     }
 
+    public SocialNetworkingApplication create() {
+        return new SocialNetworkingApplication(commands, console);
+    }
+
     private ApplicationFactory() {
     }
 
@@ -61,10 +65,6 @@ public class ApplicationFactory {
 
     public Commands getCommands() {
         return commands;
-    }
-
-    public SocialTimeClock getClock() {
-        return clock;
     }
 
     public SocialNetworkingConsole getConsole() {

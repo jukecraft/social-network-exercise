@@ -1,6 +1,5 @@
 package application;
 
-import static application.ApplicationFactory.standardConfiguration;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -25,10 +24,7 @@ public class SocialNetworkingApplicationTest {
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);;
     private Commands commands = mock(Commands.class);
-    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(
-        standardConfiguration() //
-            .withCommands(commands) //
-            .withConsole(console));
+    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(commands, console);
 
     @Test
     public void givenTheApplicationWasStartedAWelcomeMessageIsShown() {

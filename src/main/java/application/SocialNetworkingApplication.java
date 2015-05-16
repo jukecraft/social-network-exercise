@@ -8,9 +8,9 @@ public class SocialNetworkingApplication {
     private SocialNetworkingConsole console;
     private Commands commands;
 
-    public SocialNetworkingApplication(ApplicationFactory applicationFactory) {
-        console = applicationFactory.getConsole();
-        commands = applicationFactory.getCommands();
+    public SocialNetworkingApplication(Commands commands, SocialNetworkingConsole console) {
+        this.commands = commands;
+        this.console = console;
     }
 
     public void start() {
