@@ -22,18 +22,40 @@ public class TwitterConsoleFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
     private SocialNetworkingClock clock = new SocialNetworkingClock(systemDefaultZone());
 
-    public TwitterConsoleFactory withClock(Clock clock) {
-        this.clock = new SocialNetworkingClock(clock);
-        return this;
+    public static TwitterConsole createTwitterConsole() {
+        return new TwitterConsoleFactory().create();
     }
 
-    public TwitterConsoleFactory withConsole(SocialNetworkingConsole console) {
-        this.console = console;
-        return this;
+    public static TwitterConsoleFactory createTwitterConsoleFactoryWith(Clock clock, SocialNetworkingConsole console) {
+        return new TwitterConsoleFactory(new SocialNetworkingClock(clock), console);
+    }
+
+    public static TwitterConsoleFactory createTwitterConsoleFactoryWithClock(Clock clock) {
+        return new TwitterConsoleFactory(new SocialNetworkingClock(clock));
+    }
+
+    public static TwitterConsoleFactory createTwitterConsoleFactoryWithConsole(SocialNetworkingConsole console) {
+        return new TwitterConsoleFactory(console);
     }
 
     public TwitterConsole create() {
         return new TwitterConsole(getActions(), console);
+    }
+
+    private TwitterConsoleFactory() {
+    }
+
+    private TwitterConsoleFactory(SocialNetworkingClock clock, SocialNetworkingConsole console) {
+        this.clock = clock;
+        this.console = console;
+    }
+
+    private TwitterConsoleFactory(SocialNetworkingClock clock) {
+        this.clock = clock;
+    }
+
+    private TwitterConsoleFactory(SocialNetworkingConsole console) {
+        this.console = console;
     }
 
     public Actions getActions() {

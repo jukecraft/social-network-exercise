@@ -33,9 +33,7 @@ public class ApplicationAcceptanceTest {
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
 
-        actions = new TwitterConsoleFactory() //
-            .withConsole(console) //
-            .withClock(clock) //
+        actions = TwitterConsoleFactory.createTwitterConsoleFactoryWith(clock, console) //
             .getActions();
     }
 
