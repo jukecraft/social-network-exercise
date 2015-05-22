@@ -25,7 +25,7 @@ public class Command {
     }
 
     public boolean isEmpty() {
-        return commandParts[0].length() == 0;
+        return getFirstParameter().length() == 0;
     }
 
     public boolean startsWith(String identifier) {

@@ -1,5 +1,7 @@
 package org.twitterconsole.application;
 
+import java.util.Optional;
+
 import org.twitterconsole.action.Actions;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
@@ -16,13 +18,22 @@ public class TwitterConsole {
 
     public void start() {
         while (true) {
-            console.printPrompt();
-            Command command = console.getNextCommand();
-            if (command == Command.NOTHING)
-                continue;
-            if (command.isEmpty())
-                return;
-            actions.execute(command);
+            Optional<Command> optionalCommand = askForUserInput();
+            handleUserInput(optionalCommand);
         }
     }
+
+    private Optional<Command> askForUserInput() {
+        console.printPrompt();
+        return console.getNextCommand();
+    }
+
+    private void handleUserInput(Optional<Command> optionalCommand) {
+        optionalCommand.ifPresent(command -> {
+            if (command.isEmpty())
+                System.exit(0);
+            actions.execute(command);
+        });
+    }
+
 }

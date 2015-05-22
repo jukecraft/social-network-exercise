@@ -1,5 +1,9 @@
 package org.twitterconsole.io;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SocialNetworkingConsole {
@@ -10,12 +14,12 @@ public class SocialNetworkingConsole {
         output.forEach(line -> System.out.println(line));
     }
 
-    public Command getNextCommand() {
+    public Optional<Command> getNextCommand() {
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextLine())
-            return new Command(scanner.nextLine());
-        return Command.NOTHING;
+            return of(new Command(scanner.nextLine()));
+        return empty();
     }
 
     public void printPrompt() {

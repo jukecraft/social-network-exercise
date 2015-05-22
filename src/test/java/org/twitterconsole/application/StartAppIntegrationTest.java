@@ -9,6 +9,7 @@ import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emp
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import org.junit.rules.Timeout;
@@ -21,7 +22,8 @@ public class StartAppIntegrationTest {
     public TextFromStandardInputStream input = emptyStandardInputStream();
     @Rule
     public StandardOutputStreamLog log = new StandardOutputStreamLog(LOG_ONLY);
-
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);
 
@@ -31,6 +33,7 @@ public class StartAppIntegrationTest {
         String timelineCommand = "Alice";
         input.provideText(firstPost + lineSeparator(), timelineCommand + lineSeparator(), "" + lineSeparator());
 
+        exit.expectSystemExit();
         StartTwitterConsole.main(IRRELEVANT_PARAMETERS);
 
         assertThat(log.getLog(), containsString("> "));

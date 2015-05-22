@@ -7,6 +7,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.contrib.java.lang.system.LogMode.LOG_ONLY;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
+import java.util.Optional;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
@@ -36,9 +38,9 @@ public class SocialNetworkingConsoleTest {
         SocialNetworkingConsole console = new SocialNetworkingConsole();
         input.provideText(A_COMMAND);
 
-        Command command = console.getNextCommand();
+        Optional<Command> command = console.getNextCommand();
 
-        assertThat(command, is(new Command(A_COMMAND)));
+        assertThat(command.get(), is(new Command(A_COMMAND)));
     }
 
     @Test

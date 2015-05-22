@@ -1,5 +1,6 @@
 package org.twitterconsole.application;
 
+import static java.util.Optional.of;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -11,6 +12,7 @@ import static org.twitterconsole.io.CommandBuilder.aPostCommand;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import org.junit.rules.Timeout;
 import org.twitterconsole.action.Actions;
 import org.twitterconsole.io.Command;
@@ -23,6 +25,8 @@ public class TwitterConsoleTest {
 
     @Rule
     public Timeout timeout = new Timeout(1, SECONDS);
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Actions actions = mock(Actions.class);
@@ -31,9 +35,10 @@ public class TwitterConsoleTest {
     @Test
     public void givenAnCommandItExecutesThatCommandWithActions() {
         when(console.getNextCommand())
-            .thenReturn(A_COMMAND)
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(of(A_COMMAND))
+            .thenReturn(of(EMPTY_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verify(actions).execute(A_COMMAND);
@@ -42,9 +47,10 @@ public class TwitterConsoleTest {
     @Test
     public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand())
-            .thenReturn(EMPTY_COMMAND)
-            .thenReturn(A_COMMAND);
+            .thenReturn(of(EMPTY_COMMAND))
+            .thenReturn(of(A_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verifyZeroInteractions(actions);
@@ -53,8 +59,9 @@ public class TwitterConsoleTest {
     @Test
     public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
         when(console.getNextCommand())
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(of(EMPTY_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verifyZeroInteractions(actions);
@@ -63,10 +70,11 @@ public class TwitterConsoleTest {
     @Test
     public void givenTwoInputsItRoutesBothToTheSocialNetworkingApplication() {
         when(console.getNextCommand())
-            .thenReturn(A_COMMAND)
-            .thenReturn(ANOTHER_COMMAND)
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(of(A_COMMAND))
+            .thenReturn(of(ANOTHER_COMMAND))
+            .thenReturn(of(EMPTY_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verify(actions).execute(A_COMMAND);
@@ -76,8 +84,9 @@ public class TwitterConsoleTest {
     @Test
     public void whenRequestingAUserInputItPrintsAPrompt() {
         when(console.getNextCommand())
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(of(EMPTY_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verify(console).printPrompt();
@@ -86,10 +95,11 @@ public class TwitterConsoleTest {
     @Test
     public void whenRequestingAUserInputMultipleTimesItPrintsAPromptEveryTime() {
         when(console.getNextCommand())
-            .thenReturn(A_COMMAND)
-            .thenReturn(ANOTHER_COMMAND)
-            .thenReturn(EMPTY_COMMAND);
+            .thenReturn(of(A_COMMAND))
+            .thenReturn(of(ANOTHER_COMMAND))
+            .thenReturn(of(EMPTY_COMMAND));
 
+        exit.expectSystemExit();
         applicationWithConsole.start();
 
         verify(console, times(3)).printPrompt();
