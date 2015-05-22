@@ -15,13 +15,13 @@ public class FollowAction implements Action {
     }
 
     @Override
-    public boolean isExecutable(Command command) {
-        return command.startsWith(FOLLOW_IDENTIFIER);
+    public void execute(Command command) {
+        if (isExecutable(command))
+            timelineService.registerFollowing(new User(command), extractSecondUser(command));
     }
 
-    @Override
-    public void execute(Command command) {
-        timelineService.registerFollowing(new User(command), extractSecondUser(command));
+    private boolean isExecutable(Command command) {
+        return command.startsWith(FOLLOW_IDENTIFIER);
     }
 
     private User extractSecondUser(Command command) {

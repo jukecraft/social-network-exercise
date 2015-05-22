@@ -29,6 +29,8 @@ public class Command {
     }
 
     public boolean startsWith(String identifier) {
+        if (hasOnlyOneParameter())
+            return false;
         return commandAfterFirstParameter.startsWith(identifier);
     }
 

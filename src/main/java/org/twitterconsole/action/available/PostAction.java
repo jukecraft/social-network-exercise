@@ -19,12 +19,12 @@ public class PostAction implements Action {
     }
 
     @Override
-    public boolean isExecutable(Command command) {
-        return command.startsWith(POST_IDENTIFIER);
+    public void execute(Command command) {
+        if (isExecutable(command))
+            timelineService.post(new User(command), new Message(command), clock.getLocalDateTime());
     }
 
-    @Override
-    public void execute(Command command) {
-        timelineService.post(new User(command), new Message(command), clock.getLocalDateTime());
+    private boolean isExecutable(Command command) {
+        return command.startsWith(POST_IDENTIFIER);
     }
 }

@@ -1,9 +1,9 @@
 package org.twitterconsole.action.available;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
 import static org.twitterconsole.posts.UserBuilder.aUser;
 
@@ -22,21 +22,21 @@ public class FollowCommandTest {
     private FollowAction action = new FollowAction(timelineService);
 
     @Test
-    public void itIsExecutableIfCommandStartsWithFollows() {
-        Command command = aCommand().withCommand(" follows ").create();
+    public void executesIfCommandStartsWithFollows() {
+        Command command = aCommand().withCommand(" follows Bob").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(true));
+        verify(timelineService).registerFollowing(any(User.class), any(User.class));
     }
 
     @Test
-    public void itIsNotExecutableIfCommandDoesntStartWithFollows() {
+    public void doesntExecuteIfCommandDoesntStartWithFollows() {
         Command command = aCommand().withCommand(" -> is as follows ").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(false));
+        verifyZeroInteractions(timelineService);
     }
 
     @Test

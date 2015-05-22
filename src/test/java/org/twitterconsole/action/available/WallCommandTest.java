@@ -2,7 +2,10 @@ package org.twitterconsole.action.available;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
 import static org.twitterconsole.posts.UserBuilder.aUser;
@@ -27,27 +30,30 @@ public class WallCommandTest {
 
     @Test
     public void itIsExecutableIfCommandStartsWithWall() {
+        when(timelineService.collectWall(any(User.class))).thenReturn(anEmptyWallOutput().create());
+
         Command command = aCommand().withCommand(" wall").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(true));
+        verify(timelineService).collectWall(any(User.class));
+
     }
 
     @Test
     public void itIsNotExecutableIfCommandDoesntStartWithWall() {
         Command command = aCommand().withCommand(" -> is a wall").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(false));
+        verifyZeroInteractions(timelineService);
     }
 
     @Test
     public void itReturnsNoOutputIfTimelineServiceHasNoWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(anEmptyWallOutput().create());
 
-        Output output = action.executeWithOutput(WALL_COMMAND);
+        Output output = action.executeWithOutput(WALL_COMMAND).get();
 
         assertThat(output, is(anEmptyWallOutput().create()));
     }
@@ -56,7 +62,7 @@ public class WallCommandTest {
     public void itReturnsOutputIfTimelineServiceHasAWallForTheGivenUser() {
         when(timelineService.collectWall(ALICE)).thenReturn(OUTPUT);
 
-        WallOutput output = action.executeWithOutput(WALL_COMMAND);
+        Output output = action.executeWithOutput(WALL_COMMAND).get();
 
         assertThat(output, is(OUTPUT));
     }

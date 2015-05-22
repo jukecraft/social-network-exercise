@@ -2,7 +2,10 @@ package org.twitterconsole.action.available;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
 import static org.twitterconsole.posts.UserBuilder.aUser;
@@ -29,7 +32,7 @@ public class TimelineCommandTest {
     public void itReturnsNoOutputIfTimelineServiceHasNoTimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
-        Output output = action.executeWithOutput(TIMELINE_COMMAND);
+        Output output = action.executeWithOutput(TIMELINE_COMMAND).get();
 
         assertThat(output, is(anEmptyPostsOutput().create()));
     }
@@ -38,22 +41,28 @@ public class TimelineCommandTest {
     public void itReturnsOutputIfTimelineServiceHasATimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        Output output = action.executeWithOutput(TIMELINE_COMMAND);
+        Output output = action.executeWithOutput(TIMELINE_COMMAND).get();
 
         assertThat(output, is(OUTPUT));
     }
 
     @Test
-    public void itIsExecutableIfItTheCommandIsEmpty() {
-        assertThat(action.isExecutable(TIMELINE_COMMAND), is(true));
+    public void executesIfItTheCommandIsEmpty() {
+        when(timelineService.collectPosts(any(User.class))).thenReturn(new PostsOutput());
+
+        action.execute(TIMELINE_COMMAND);
+
+        verify(timelineService).collectPosts(any(User.class));
     }
 
     @Test
-    public void itIsNotExecutableIfTheCommandIsNotEmpty() {
+    public void doesntExecuteIfTheCommandIsNotEmpty() {
         Command command = aCommand()
             .withCommand(" -> ")
             .create();
 
-        assertThat(action.isExecutable(command), is(false));
+        action.execute(command);
+
+        verifyZeroInteractions(timelineService);
     }
 }

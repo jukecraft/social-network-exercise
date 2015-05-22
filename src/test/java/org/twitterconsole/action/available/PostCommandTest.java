@@ -1,9 +1,9 @@
 package org.twitterconsole.action.available;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
 import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
@@ -50,21 +50,21 @@ public class PostCommandTest {
     }
 
     @Test
-    public void itIsExecutableIfCommandStartsWithAnArrow() {
-        Command command = aCommand().withCommand(" -> ").create();
+    public void executesIfCommandStartsWithAnArrow() {
+        Command command = aCommand().withCommand(" -> Bob").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(true));
+        verify(timelineService).post(any(User.class), any(Message.class), any(SocialTime.class));
     }
 
     @Test
-    public void itIsNotExecutableIfCommandDoesntStartWithAnArrow() {
+    public void doesntExecuteIfCommandDoesntStartWithAnArrow() {
         Command command = aCommand().withCommand(" follows ->").create();
 
-        boolean isExecutable = action.isExecutable(command);
+        action.execute(command);
 
-        assertThat(isExecutable, is(false));
+        verifyZeroInteractions(timelineService);
     }
 
 }

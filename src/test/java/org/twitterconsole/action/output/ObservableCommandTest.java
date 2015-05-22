@@ -1,7 +1,6 @@
 package org.twitterconsole.action.output;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static java.util.Optional.of;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,7 +21,7 @@ public class ObservableCommandTest {
 
     @Before
     public void setUp() {
-        when(actionWithOutput.executeWithOutput(PARAMETER)).thenReturn(OUTPUT);
+        when(actionWithOutput.executeWithOutput(PARAMETER)).thenReturn(of(OUTPUT));
     }
 
     @Test
@@ -57,19 +56,4 @@ public class ObservableCommandTest {
         verify(anotherObserver).update(OUTPUT);
     }
 
-    @Test
-    public void givenActionIsExecutableItIsExecutable() {
-        ObservableAction action = new ObservableAction(actionWithOutput);
-        when(actionWithOutput.isExecutable(PARAMETER)).thenReturn(true);
-
-        assertThat(action.isExecutable(PARAMETER), is(true));
-    }
-
-    @Test
-    public void givenActionIsNotExecutableItIsNotExecutable() {
-        ObservableAction action = new ObservableAction(actionWithOutput);
-        when(actionWithOutput.isExecutable(PARAMETER)).thenReturn(false);
-
-        assertThat(action.isExecutable(PARAMETER), is(false));
-    }
 }
