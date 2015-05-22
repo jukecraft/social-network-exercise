@@ -17,7 +17,7 @@ import java.time.Instant;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.twitterconsole.application.TwitterFactory;
+import org.twitterconsole.application.TwitterConsoleFactory;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
 
@@ -33,7 +33,7 @@ public class ApplicationAcceptanceTest {
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
 
-        actions = new TwitterFactory() //
+        actions = new TwitterConsoleFactory() //
             .withConsole(console) //
             .withClock(clock) //
             .getActions();

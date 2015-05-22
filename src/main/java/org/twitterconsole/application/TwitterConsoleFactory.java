@@ -18,22 +18,22 @@ import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.network.Timelines;
 import org.twitterconsole.time.SocialNetworkingClock;
 
-public class TwitterFactory {
+public class TwitterConsoleFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
     private SocialNetworkingClock clock = new SocialNetworkingClock(systemDefaultZone());
 
-    public TwitterFactory withClock(Clock clock) {
+    public TwitterConsoleFactory withClock(Clock clock) {
         this.clock = new SocialNetworkingClock(clock);
         return this;
     }
 
-    public TwitterFactory withConsole(SocialNetworkingConsole console) {
+    public TwitterConsoleFactory withConsole(SocialNetworkingConsole console) {
         this.console = console;
         return this;
     }
 
-    public Twitter create() {
-        return new Twitter(getActions(), console);
+    public TwitterConsole create() {
+        return new TwitterConsole(getActions(), console);
     }
 
     public Actions getActions() {

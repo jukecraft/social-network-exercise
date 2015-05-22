@@ -16,7 +16,7 @@ import org.twitterconsole.action.Actions;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
 
-public class TwitterTest {
+public class TwitterConsoleTest {
     private static final Command EMPTY_COMMAND = new Command("");
     private static final Command A_COMMAND = aPostCommand().create();
     private static final Command ANOTHER_COMMAND = aFollowsCommand().create();
@@ -26,7 +26,7 @@ public class TwitterTest {
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Actions actions = mock(Actions.class);
-    private Twitter applicationWithConsole = new Twitter(actions, console);
+    private TwitterConsole applicationWithConsole = new TwitterConsole(actions, console);
 
     @Test
     public void givenAnCommandItExecutesThatCommandWithActions() {

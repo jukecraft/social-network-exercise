@@ -4,12 +4,12 @@ import org.twitterconsole.action.Actions;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
 
-public class Twitter {
+public class TwitterConsole {
 
     private SocialNetworkingConsole console;
     private Actions actions;
 
-    public Twitter(Actions actions, SocialNetworkingConsole console) {
+    public TwitterConsole(Actions actions, SocialNetworkingConsole console) {
         this.actions = actions;
         this.console = console;
     }
