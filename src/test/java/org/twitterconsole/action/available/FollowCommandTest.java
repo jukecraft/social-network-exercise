@@ -41,9 +41,9 @@ public class FollowCommandTest {
 
     @Test
     public void itRegisteresWithTimelinesThatAliceIsFollowingBob() {
-        action.execute(aCommand() //
-            .withUser(USERNAME_ALICE) //
-            .withCommand(" follows " + USERNAME_BOB) //
+        action.execute(aCommand()
+            .withUser(USERNAME_ALICE)
+            .withCommand(" follows " + USERNAME_BOB)
             .create());
 
         verify(timelineService).registerFollowing(ALICE, BOB);
@@ -51,9 +51,9 @@ public class FollowCommandTest {
 
     @Test
     public void itRegisteresWithTimelinesThatBobIsFollowingAlice() {
-        action.execute(aCommand() //
-            .withUser(USERNAME_BOB) //
-            .withCommand(" follows " + USERNAME_ALICE) //
+        action.execute(aCommand()
+            .withUser(USERNAME_BOB)
+            .withCommand(" follows " + USERNAME_ALICE)
             .create());
 
         verify(timelineService).registerFollowing(BOB, ALICE);

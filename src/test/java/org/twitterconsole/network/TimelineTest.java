@@ -11,11 +11,11 @@ import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.output.PostsOutput;
 
 public class TimelineTest {
-    private static final Post A_POST = aPost() //
-        .withPostingTime(now()) //
+    private static final Post A_POST = aPost()
+        .withPostingTime(now())
         .create();
-    private static final Post LATER_POST = aPost() //
-        .withPostingTime(now().plusYears(1)) //
+    private static final Post LATER_POST = aPost()
+        .withPostingTime(now().plusYears(1))
         .create();
 
     private Timeline timeline = new Timeline();
@@ -33,8 +33,8 @@ public class TimelineTest {
 
         PostsOutput output = timeline.collectPosts();
 
-        assertThat(output, is(anEmptyPostsOutput() //
-            .withPost(A_POST) //
+        assertThat(output, is(anEmptyPostsOutput()
+            .withPost(A_POST)
             .create()));
     }
 
@@ -45,9 +45,9 @@ public class TimelineTest {
 
         PostsOutput output = timeline.collectPosts();
 
-        assertThat(output, is(anEmptyPostsOutput() //
-            .withPost(A_POST) //
-            .withPost(LATER_POST) //
+        assertThat(output, is(anEmptyPostsOutput()
+            .withPost(A_POST)
+            .withPost(LATER_POST)
             .create()));
     }
 }

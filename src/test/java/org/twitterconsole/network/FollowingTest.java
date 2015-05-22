@@ -27,21 +27,21 @@ public class FollowingTest {
         Following following = new Following();
         following.addFollowing(BOB);
 
-        PostsOutput alicesTimeline = anEmptyPostsOutput() //
-            .withPost(onePost()) //
+        PostsOutput alicesTimeline = anEmptyPostsOutput()
+            .withPost(onePost())
             .create();
         when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
 
-        PostsOutput bobsTimeline = anEmptyPostsOutput() //
-            .withPost(anotherPost()) //
+        PostsOutput bobsTimeline = anEmptyPostsOutput()
+            .withPost(anotherPost())
             .create();
         when(timelines.collectPosts(BOB)).thenReturn(bobsTimeline);
 
         WallOutput actualOutput = following.collectWallOutput(timelines, ALICE);
 
-        assertThat(actualOutput, is(anEmptyWallOutput() //
-            .withTimeline(ALICE, alicesTimeline) //
-            .withTimeline(BOB, bobsTimeline) //
+        assertThat(actualOutput, is(anEmptyWallOutput()
+            .withTimeline(ALICE, alicesTimeline)
+            .withTimeline(BOB, bobsTimeline)
             .create()));
     }
 }

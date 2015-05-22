@@ -21,14 +21,14 @@ import org.twitterconsole.posts.SocialTime;
 public class PostsOutputTest {
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
     private static final SocialTime PRINTING_TIME = aTime().withTimestamp(PRINTING_TIMESTAMP).create();
-    private static final Post A_POST = aPost() //
-        .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5)) //
-        .withUser(aUserNamedAlice()) //
+    private static final Post A_POST = aPost()
+        .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5))
+        .withUser(aUserNamedAlice())
         .create();
 
-    private static final Post LATER_POST = aPost() //
-        .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1)) //
-        .withUser(aUserNamedBob()) //
+    private static final Post LATER_POST = aPost()
+        .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1))
+        .withUser(aUserNamedBob())
         .create();
 
     @Test
@@ -42,9 +42,9 @@ public class PostsOutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintTimelineItPrintsThemWithTimestampsSortedLatestFirst() {
-        Output output = anEmptyPostsOutput() //
-            .withPost(A_POST) //
-            .withPost(LATER_POST) //
+        Output output = anEmptyPostsOutput()
+            .withPost(A_POST)
+            .withPost(LATER_POST)
             .create();
 
         List<String> printedTimeline = output.print(PRINTING_TIME);
@@ -54,9 +54,9 @@ public class PostsOutputTest {
 
     @Test
     public void givenTwoPostsWhenAskedToPrintWithUserItPrintsThemWithTimestampsAndUsersSortedLatestFirst() {
-        PostsOutput output = anEmptyPostsOutput() //
-            .withPost(A_POST) //
-            .withPost(LATER_POST) //
+        PostsOutput output = anEmptyPostsOutput()
+            .withPost(A_POST)
+            .withPost(LATER_POST)
             .create();
 
         List<String> printedTimeline = output.printWithUser(PRINTING_TIME);
@@ -67,11 +67,11 @@ public class PostsOutputTest {
 
     @Test
     public void givenAnotherPostOutputItCanMergeThePosts() {
-        PostsOutput output = anEmptyPostsOutput() //
-            .withPost(A_POST) //
+        PostsOutput output = anEmptyPostsOutput()
+            .withPost(A_POST)
             .create();
-        PostsOutput anotherOutput = anEmptyPostsOutput() //
-            .withPost(LATER_POST) //
+        PostsOutput anotherOutput = anEmptyPostsOutput()
+            .withPost(LATER_POST)
             .create();
 
         Output merged = output.mergeWith(anotherOutput);

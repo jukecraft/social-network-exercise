@@ -30,8 +30,8 @@ public class TwitterConsoleTest {
 
     @Test
     public void givenAnCommandItExecutesThatCommandWithActions() {
-        when(console.getNextCommand()) //
-            .thenReturn(A_COMMAND) //
+        when(console.getNextCommand())
+            .thenReturn(A_COMMAND)
             .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
@@ -41,8 +41,8 @@ public class TwitterConsoleTest {
 
     @Test
     public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
-        when(console.getNextCommand()) //
-            .thenReturn(EMPTY_COMMAND) //
+        when(console.getNextCommand())
+            .thenReturn(EMPTY_COMMAND)
             .thenReturn(A_COMMAND);
 
         applicationWithConsole.start();
@@ -52,7 +52,7 @@ public class TwitterConsoleTest {
 
     @Test
     public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
-        when(console.getNextCommand()) //
+        when(console.getNextCommand())
             .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
@@ -62,9 +62,9 @@ public class TwitterConsoleTest {
 
     @Test
     public void givenTwoInputsItRoutesBothToTheSocialNetworkingApplication() {
-        when(console.getNextCommand()) //
-            .thenReturn(A_COMMAND)//
-            .thenReturn(ANOTHER_COMMAND) //
+        when(console.getNextCommand())
+            .thenReturn(A_COMMAND)
+            .thenReturn(ANOTHER_COMMAND)
             .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
@@ -75,7 +75,7 @@ public class TwitterConsoleTest {
 
     @Test
     public void whenRequestingAUserInputItPrintsAPrompt() {
-        when(console.getNextCommand()) //
+        when(console.getNextCommand())
             .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();
@@ -85,9 +85,9 @@ public class TwitterConsoleTest {
 
     @Test
     public void whenRequestingAUserInputMultipleTimesItPrintsAPromptEveryTime() {
-        when(console.getNextCommand()) //
-            .thenReturn(A_COMMAND)//
-            .thenReturn(ANOTHER_COMMAND) //
+        when(console.getNextCommand())
+            .thenReturn(A_COMMAND)
+            .thenReturn(ANOTHER_COMMAND)
             .thenReturn(EMPTY_COMMAND);
 
         applicationWithConsole.start();

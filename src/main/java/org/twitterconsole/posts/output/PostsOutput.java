@@ -32,9 +32,9 @@ public class PostsOutput extends SocialNetworkingValueObject implements Output {
     }
 
     private List<String> printAllWith(Function<Post, String> printingOption) {
-        return posts.stream() //
-            .sorted() //
-            .map(printingOption) //
+        return posts.stream()
+            .sorted()
+            .map(printingOption)
             .collect(toList());
     }
 

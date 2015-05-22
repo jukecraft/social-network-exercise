@@ -36,7 +36,7 @@ public class ObservableCommandTest {
 
     @Test
     public void givenRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserverWithTheOutput() {
-        ObservableAction action = new ObservableAction(actionWithOutput) //
+        ObservableAction action = new ObservableAction(actionWithOutput)
             .withObserver(observer);
 
         action.execute(PARAMETER);
@@ -47,8 +47,8 @@ public class ObservableCommandTest {
     @Test
     public void givenTwoRegisteredObserversWhenItIsExecutedThenItNotifiesTheObserversWithTheOutput() {
         ActionObserver anotherObserver = mock(ActionObserver.class);
-        ObservableAction action = new ObservableAction(actionWithOutput) //
-            .withObserver(observer) //
+        ObservableAction action = new ObservableAction(actionWithOutput)
+            .withObserver(observer)
             .withObserver(anotherObserver);
 
         action.execute(PARAMETER);

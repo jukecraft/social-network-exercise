@@ -50,20 +50,20 @@ public class ApplicationAcceptanceTest {
         verifyZeroInteractions(console);
 
         execute("Alice");
-        verify(console).print(argThat(contains( //
+        verify(console).print(argThat(contains(
             "I love the weather today (5 minutes ago)")));
 
         execute("Bob");
-        verify(console).print(argThat(contains( //
-            "Good game though. (1 minute ago)", //
+        verify(console).print(argThat(contains(
+            "Good game though. (1 minute ago)",
             "Damn! We lost! (2 minutes ago)")));
 
         execute("Charlie follows Alice");
         verifyNoMoreInteractions(console);
 
         execute("Charlie wall Charlie");
-        verify(console).print(argThat(contains( //
-            "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)", //
+        verify(console).print(argThat(contains(
+            "Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)",
             "Alice - I love the weather today (5 minutes ago)")));
 
         execute("Charlie follows Bob");
@@ -72,10 +72,10 @@ public class ApplicationAcceptanceTest {
         instantReturnedByClock = instantReturnedByClock.plus(ofSeconds(13));
 
         execute("Charlie wall Charlie");
-        verify(console).print(argThat(contains( //
-            "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)", //
-            "Bob - Good game though. (1 minute ago)", //
-            "Bob - Damn! We lost! (2 minutes ago)", //
+        verify(console).print(argThat(contains(
+            "Charlie - I'm in New York today! Anyone want to have a coffee? (15 seconds ago)",
+            "Bob - Good game though. (1 minute ago)",
+            "Bob - Damn! We lost! (2 minutes ago)",
             "Alice - I love the weather today (5 minutes ago)")));
     }
 

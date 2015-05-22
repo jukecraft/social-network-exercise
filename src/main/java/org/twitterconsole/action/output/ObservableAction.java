@@ -23,7 +23,7 @@ public class ObservableAction implements Action {
     @Override
     public void execute(Command command) {
         Output output = action.executeWithOutput(command);
-        observers.stream() //
+        observers.stream()
             .forEach(observer -> observer.update(output));
     }
 

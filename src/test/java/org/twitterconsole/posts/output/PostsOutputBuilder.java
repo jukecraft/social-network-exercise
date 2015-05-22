@@ -14,7 +14,7 @@ public class PostsOutputBuilder {
     }
 
     public static PostsOutputBuilder aPostsOutput() {
-        return new PostsOutputBuilder() //
+        return new PostsOutputBuilder()
             .withPost(onePost());
     }
 

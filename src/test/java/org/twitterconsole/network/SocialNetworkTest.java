@@ -36,8 +36,8 @@ public class SocialNetworkTest {
     public void givenNoFollowingWhenAskedForTheWallOutputThenItReturnsOnlyAlicesPosts() {
         WallOutput wall = socialNetwork.collectWallOutput(timelines, ALICE);
 
-        assertThat(wall, is(anEmptyWallOutput() //
-            .withTimeline(ALICE, ALICES_POSTS) //
+        assertThat(wall, is(anEmptyWallOutput()
+            .withTimeline(ALICE, ALICES_POSTS)
             .create()));
     }
 
@@ -47,9 +47,9 @@ public class SocialNetworkTest {
 
         WallOutput wall = socialNetwork.collectWallOutput(timelines, ALICE);
 
-        assertThat(wall, is(anEmptyWallOutput() //
-            .withTimeline(ALICE, ALICES_POSTS) //
-            .withTimeline(BOB, BOBS_POSTS) //
+        assertThat(wall, is(anEmptyWallOutput()
+            .withTimeline(ALICE, ALICES_POSTS)
+            .withTimeline(BOB, BOBS_POSTS)
             .create()));
     }
 }

@@ -17,14 +17,14 @@ public class SocialTimeTest {
 
     @Before
     public void setUp() {
-        originalSocialTime = aTime() //
+        originalSocialTime = aTime()
             .create();
     }
 
     @Test
     public void createdWithTimestampItPrintsDifferenceToGivenTimestamp() {
-        SocialTime timeOfPrinting = aTime() //
-            .plusMinutes(5) //
+        SocialTime timeOfPrinting = aTime()
+            .plusMinutes(5)
             .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
@@ -34,8 +34,8 @@ public class SocialTimeTest {
 
     @Test
     public void createdWithSixtySecondsTimestampItPrintsADifferenceOfOneMinuteToGivenTimestamp() {
-        SocialTime timeOfPrinting = aTime() //
-            .plusSeconds(60) //
+        SocialTime timeOfPrinting = aTime()
+            .plusSeconds(60)
             .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
@@ -45,8 +45,8 @@ public class SocialTimeTest {
 
     @Test
     public void createdWithSecondsTimestampItPrintsDifferenceToGivenTimestamp() {
-        SocialTime timeOfPrinting = aTime() //
-            .plusSeconds(15) //
+        SocialTime timeOfPrinting = aTime()
+            .plusSeconds(15)
             .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);
@@ -56,8 +56,8 @@ public class SocialTimeTest {
 
     @Test
     public void createdWith1SecondTimestampItPrintsDifferenceToGivenTimestamp() {
-        SocialTime timeOfPrinting = aTime() //
-            .plusSeconds(1) //
+        SocialTime timeOfPrinting = aTime()
+            .plusSeconds(1)
             .create();
 
         String printedTimestamp = originalSocialTime.printTimestamp(timeOfPrinting);

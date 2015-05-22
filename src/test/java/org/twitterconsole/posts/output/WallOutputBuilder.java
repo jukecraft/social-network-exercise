@@ -13,8 +13,8 @@ public class WallOutputBuilder {
     }
 
     public static WallOutputBuilder aWallOutput() {
-        return new WallOutputBuilder() //
-            .withTimeline(aUser().create(), aPostsOutput() //
+        return new WallOutputBuilder()
+            .withTimeline(aUser().create(), aPostsOutput()
                 .create());
     }
 

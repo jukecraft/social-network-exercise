@@ -32,7 +32,7 @@ public class ActionsTest {
         commands.execute(COMMAND);
 
         verify(executableCommand).execute(COMMAND);
-        verify(notExecutableCommand, never()) //
+        verify(notExecutableCommand, never())
             .execute(any(Command.class));
     }
 

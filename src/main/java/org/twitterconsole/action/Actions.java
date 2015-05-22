@@ -12,9 +12,9 @@ public class Actions {
     }
 
     public void execute(Command command) {
-        actions.stream() //
-            .filter(candidate -> candidate.isExecutable(command)) //
-            .findFirst() //
+        actions.stream()
+            .filter(candidate -> candidate.isExecutable(command))
+            .findFirst()
             .ifPresent(action -> action.execute(command));
     }
 }

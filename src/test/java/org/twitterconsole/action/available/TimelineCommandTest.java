@@ -50,8 +50,8 @@ public class TimelineCommandTest {
 
     @Test
     public void itIsNotExecutableIfTheCommandIsNotEmpty() {
-        Command command = aCommand() //
-            .withCommand(" -> ") //
+        Command command = aCommand()
+            .withCommand(" -> ")
             .create();
 
         assertThat(action.isExecutable(command), is(false));

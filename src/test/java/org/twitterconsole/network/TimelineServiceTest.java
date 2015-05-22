@@ -37,10 +37,10 @@ public class TimelineServiceTest {
     public void itDelegatesPostsToTimelinesIncludingTheCurrentTime() {
         timelineService.post(ALICE, MESSAGE, TIME);
 
-        Post expectedPost = aPost() //
-            .withMessage(MESSAGE.toString()) //
-            .withPostingTime(TIME) //
-            .withUser(ALICE) //
+        Post expectedPost = aPost()
+            .withMessage(MESSAGE.toString())
+            .withPostingTime(TIME)
+            .withUser(ALICE)
             .create();
         verify(timelines).post(ALICE, expectedPost);
     }

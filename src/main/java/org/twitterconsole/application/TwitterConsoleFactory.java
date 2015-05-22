@@ -36,12 +36,12 @@ public final class TwitterConsoleFactory {
         TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
         ConsoleObserver observer = new ConsoleObserver(console, clock);
 
-        return new Actions(asList( //
-            new PostAction(timelineService, clock), //
-            new ObservableAction(new TimelineAction(timelineService)) //
-                .withObserver(observer), //
-            new FollowAction(timelineService), //
-            new ObservableAction(new WallAction(timelineService)) //
+        return new Actions(asList(
+            new PostAction(timelineService, clock),
+            new ObservableAction(new TimelineAction(timelineService))
+                .withObserver(observer),
+            new FollowAction(timelineService),
+            new ObservableAction(new WallAction(timelineService))
                 .withObserver(observer)));
     }
 }

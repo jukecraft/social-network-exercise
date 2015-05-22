@@ -19,13 +19,13 @@ public class PostTest {
 
     @Test
     public void createdWithFilledMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = aPost() //
-            .withMessage(MESSAGE_TEXT) //
-            .withPostingTime(aTime()) //
+        Post post = aPost()
+            .withMessage(MESSAGE_TEXT)
+            .withPostingTime(aTime())
             .create();
 
-        String printedTimestamp = post.printAt(aTime() //
-            .plusMinutes(5) //
+        String printedTimestamp = post.printAt(aTime()
+            .plusMinutes(5)
             .create());
 
         assertThat(printedTimestamp, is(MESSAGE_TEXT + " (5 minutes ago)"));
@@ -33,13 +33,13 @@ public class PostTest {
 
     @Test
     public void createdWithOtherMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = aPost() //
-            .withMessage(ANOTHER_MESSAGE_TEXT) //
-            .withPostingTime(aTime()) //
+        Post post = aPost()
+            .withMessage(ANOTHER_MESSAGE_TEXT)
+            .withPostingTime(aTime())
             .create();
 
-        String printedTimestamp = post.printAt(aTime() //
-            .plusMinutes(5) //
+        String printedTimestamp = post.printAt(aTime()
+            .plusMinutes(5)
             .create());
 
         assertThat(printedTimestamp, is(ANOTHER_MESSAGE_TEXT + " (5 minutes ago)"));
@@ -47,13 +47,13 @@ public class PostTest {
 
     @Test
     public void createdWithMessageAndOtherPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
-        Post post = aPost() //
-            .withMessage(MESSAGE_TEXT) //
-            .withPostingTime(aTime()) //
+        Post post = aPost()
+            .withMessage(MESSAGE_TEXT)
+            .withPostingTime(aTime())
             .create();
 
-        String printedTimestamp = post.printAt(aTime() //
-            .plusMinutes(10) //
+        String printedTimestamp = post.printAt(aTime()
+            .plusMinutes(10)
             .create());
 
         assertThat(printedTimestamp, is(MESSAGE_TEXT + " (10 minutes ago)"));
@@ -62,14 +62,14 @@ public class PostTest {
     @Test
     public void createdWithMessageAndOtherPostingTimeAndUserItPrintsTheUserTheMessageAndTheTimePassedSinceThen() {
         User user = aUser().withName("name").create();
-        Post post = aPost() //
-            .withMessage(MESSAGE_TEXT) //
-            .withPostingTime(aTime()) //
-            .withUser(user) //
+        Post post = aPost()
+            .withMessage(MESSAGE_TEXT)
+            .withPostingTime(aTime())
+            .withUser(user)
             .create();
 
-        String printedTimestamp = post.printWithUser(aTime() //
-            .plusMinutes(10) //
+        String printedTimestamp = post.printWithUser(aTime()
+            .plusMinutes(10)
             .create());
 
         assertThat(printedTimestamp, is(user + " - " + MESSAGE_TEXT + " (10 minutes ago)"));
@@ -77,11 +77,11 @@ public class PostTest {
 
     @Test
     public void twoPostsAreSortedByPostingTimeLatestFirst() {
-        Post post = aPost() //
-            .withPostingTime(aTime()) //
+        Post post = aPost()
+            .withPostingTime(aTime())
             .create();
-        Post laterPost = aPost() //
-            .withPostingTime(aTime().plusMinutes(1)) //
+        Post laterPost = aPost()
+            .withPostingTime(aTime().plusMinutes(1))
             .create();
 
         List<Post> posts = asList(post, laterPost);

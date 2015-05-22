@@ -34,8 +34,8 @@ public class TimelinesTest {
 
         PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
-        assertThat(alicesTimeline, is(anEmptyPostsOutput() //
-            .withPost(A_POST) //
+        assertThat(alicesTimeline, is(anEmptyPostsOutput()
+            .withPost(A_POST)
             .create()));
     }
 
@@ -46,8 +46,8 @@ public class TimelinesTest {
 
         PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
-        assertThat(alicesTimeline, is(anEmptyPostsOutput() //
-            .withPost(A_POST) //
+        assertThat(alicesTimeline, is(anEmptyPostsOutput()
+            .withPost(A_POST)
             .create()));
     }
 
