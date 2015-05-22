@@ -10,7 +10,7 @@ public class User {
     private final String name;
 
     public User(Command command) {
-        this.name = command.getUser();
+        this.name = command.getFirstParameter();
     }
 
     @Override

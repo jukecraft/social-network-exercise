@@ -16,7 +16,7 @@ public class TimelineAction implements ActionWithOutput {
 
     @Override
     public boolean isExecutable(Command command) {
-        return command.isEmptyWithoutUser();
+        return command.hasOnlyOneParameter();
     }
 
     @Override

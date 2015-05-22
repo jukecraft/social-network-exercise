@@ -10,17 +10,17 @@ public class Command {
     private static final String COMMAND_SEPERATOR = " ";
 
     private String[] commandParts;
-    private String commandWithoutUser;
+    private String commandAfterFirstParameter;
 
     private Command() {
     }
 
     public Command(String command) {
         commandParts = command.split(COMMAND_SEPERATOR);
-        commandWithoutUser = command.substring(getUser().length());
+        commandAfterFirstParameter = command.substring(getFirstParameter().length());
     }
 
-    public String getUser() {
+    public String getFirstParameter() {
         return commandParts[0];
     }
 
@@ -29,16 +29,16 @@ public class Command {
     }
 
     public boolean startsWith(String identifier) {
-        return commandWithoutUser.startsWith(identifier);
+        return commandAfterFirstParameter.startsWith(identifier);
     }
 
     public String afterIdentifier(String identifier) {
-        String[] commandParts = commandWithoutUser.split(identifier);
+        String[] commandParts = commandAfterFirstParameter.split(identifier);
         return commandParts[1];
     }
 
-    public boolean isEmptyWithoutUser() {
-        return commandWithoutUser.isEmpty();
+    public boolean hasOnlyOneParameter() {
+        return commandAfterFirstParameter.isEmpty();
     }
 
     @Override
