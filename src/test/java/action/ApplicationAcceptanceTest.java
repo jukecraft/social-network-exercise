@@ -20,7 +20,7 @@ import java.time.Instant;
 import org.junit.Before;
 import org.junit.Test;
 
-import application.ApplicationFactory;
+import application.TwitterFactory;
 
 public class ApplicationAcceptanceTest {
     private Instant instantReturnedByClock = now();
@@ -34,7 +34,7 @@ public class ApplicationAcceptanceTest {
         when(clock.getZone()).thenReturn(systemDefault());
         when(clock.instant()).thenAnswer(x -> instantReturnedByClock);
 
-        actions = new ApplicationFactory() //
+        actions = new TwitterFactory() //
             .withConsole(console) //
             .withClock(clock) //
             .getActions();

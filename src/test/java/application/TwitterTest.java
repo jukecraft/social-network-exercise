@@ -17,7 +17,7 @@ import org.junit.rules.Timeout;
 
 import action.Actions;
 
-public class SocialNetworkingApplicationTest {
+public class TwitterTest {
     private static final Command EMPTY_COMMAND = new Command("");
     private static final Command A_COMMAND = aPostCommand().create();
     private static final Command ANOTHER_COMMAND = aFollowsCommand().create();
@@ -27,7 +27,7 @@ public class SocialNetworkingApplicationTest {
 
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Actions actions = mock(Actions.class);
-    private SocialNetworkingApplication applicationWithConsole = new SocialNetworkingApplication(actions, console);
+    private Twitter applicationWithConsole = new Twitter(actions, console);
 
     @Test
     public void givenAnCommandItExecutesThatCommandWithActions() {

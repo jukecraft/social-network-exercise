@@ -30,7 +30,7 @@ public class StartAppIntegrationTest {
         String timelineCommand = "Alice";
         input.provideText(firstPost + lineSeparator(), timelineCommand + lineSeparator(), "" + lineSeparator());
 
-        StartApp.main(IRRELEVANT_PARAMETERS);
+        StartTwitterConsole.main(IRRELEVANT_PARAMETERS);
 
         assertThat(log.getLog(), containsString("> "));
         assertThat(log.getLog(), containsString("I love the weather today ("));

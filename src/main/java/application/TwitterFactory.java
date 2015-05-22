@@ -18,22 +18,22 @@ import action.available.WallAction;
 import action.output.ConsoleObserver;
 import action.output.ObservableAction;
 
-public class ApplicationFactory {
+public class TwitterFactory {
     private SocialNetworkingConsole console = new SocialNetworkingConsole();
     private SocialNetworkingClock clock = new SocialNetworkingClock(systemDefaultZone());
 
-    public ApplicationFactory withClock(Clock clock) {
+    public TwitterFactory withClock(Clock clock) {
         this.clock = new SocialNetworkingClock(clock);
         return this;
     }
 
-    public ApplicationFactory withConsole(SocialNetworkingConsole console) {
+    public TwitterFactory withConsole(SocialNetworkingConsole console) {
         this.console = console;
         return this;
     }
 
-    public SocialNetworkingApplication create() {
-        return new SocialNetworkingApplication(getActions(), console);
+    public Twitter create() {
+        return new Twitter(getActions(), console);
     }
 
     public Actions getActions() {

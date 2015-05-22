@@ -4,12 +4,12 @@ import io.Command;
 import io.SocialNetworkingConsole;
 import action.Actions;
 
-public class SocialNetworkingApplication {
+public class Twitter {
 
     private SocialNetworkingConsole console;
     private Actions actions;
 
-    public SocialNetworkingApplication(Actions actions, SocialNetworkingConsole console) {
+    public Twitter(Actions actions, SocialNetworkingConsole console) {
         this.actions = actions;
         this.console = console;
     }
