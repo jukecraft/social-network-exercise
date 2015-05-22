@@ -1,4 +1,7 @@
-package org.twitterconsole.application;
+package org.twitterconsole;
+
+import org.twitterconsole.application.TwitterConsole;
+import org.twitterconsole.application.TwitterConsoleFactory;
 
 
 public class StartTwitterConsole {

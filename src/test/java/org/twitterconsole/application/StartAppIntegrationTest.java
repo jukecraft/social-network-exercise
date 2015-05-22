@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import org.junit.rules.Timeout;
+import org.twitterconsole.StartTwitterConsole;
 
 public class StartAppIntegrationTest {
     private static final String[] IRRELEVANT_PARAMETERS = null;
