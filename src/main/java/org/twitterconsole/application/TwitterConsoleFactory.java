@@ -18,47 +18,21 @@ import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.network.Timelines;
 import org.twitterconsole.time.SocialNetworkingClock;
 
-public class TwitterConsoleFactory {
-    private SocialNetworkingConsole console = new SocialNetworkingConsole();
-    private SocialNetworkingClock clock = new SocialNetworkingClock(systemDefaultZone());
-
-    public static TwitterConsole createTwitterConsole() {
-        return new TwitterConsoleFactory().create();
-    }
-
-    public static TwitterConsoleFactory createTwitterConsoleFactoryWith(Clock clock, SocialNetworkingConsole console) {
-        return new TwitterConsoleFactory(new SocialNetworkingClock(clock), console);
-    }
-
-    public static TwitterConsoleFactory createTwitterConsoleFactoryWithClock(Clock clock) {
-        return new TwitterConsoleFactory(new SocialNetworkingClock(clock));
-    }
-
-    public static TwitterConsoleFactory createTwitterConsoleFactoryWithConsole(SocialNetworkingConsole console) {
-        return new TwitterConsoleFactory(console);
-    }
-
-    public TwitterConsole create() {
-        return new TwitterConsole(getActions(), console);
-    }
-
+public final class TwitterConsoleFactory {
     private TwitterConsoleFactory() {
     }
 
-    private TwitterConsoleFactory(SocialNetworkingClock clock, SocialNetworkingConsole console) {
-        this.clock = clock;
-        this.console = console;
+    public static TwitterConsole createTwitterConsole() {
+        SocialNetworkingConsole console = new SocialNetworkingConsole();
+        Actions actions = createStandardActions(systemDefaultZone(), console);
+        return new TwitterConsole(actions, console);
     }
 
-    private TwitterConsoleFactory(SocialNetworkingClock clock) {
-        this.clock = clock;
+    public static Actions createStandardActions(Clock clock, SocialNetworkingConsole console) {
+        return getActions(new SocialNetworkingClock(clock), console);
     }
 
-    private TwitterConsoleFactory(SocialNetworkingConsole console) {
-        this.console = console;
-    }
-
-    public Actions getActions() {
+    private static Actions getActions(SocialNetworkingClock clock, SocialNetworkingConsole console) {
         TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
         ConsoleObserver observer = new ConsoleObserver(console, clock);
 
@@ -70,5 +44,4 @@ public class TwitterConsoleFactory {
             new ObservableAction(new WallAction(timelineService)) //
                 .withObserver(observer)));
     }
-
 }
