@@ -1,10 +1,11 @@
 package org.twitterconsole.posts;
 
 import static java.text.MessageFormat.format;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
-import org.twitterconsole.commons.SocialNetworkingValueObject;
-
-public class Post extends SocialNetworkingValueObject implements Comparable<Post> {
+public class Post implements Comparable<Post> {
     private static final String POST_PRINT_FORMAT = "{0} ({1})";
     private static final String POST_WITH_USER_PRINT_FORMAT = "{0} - {1}";
 
@@ -29,6 +30,21 @@ public class Post extends SocialNetworkingValueObject implements Comparable<Post
     @Override
     public int compareTo(Post other) {
         return postingTime.compareTo(other.postingTime);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return reflectionEquals(this, other);
+    }
+
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return reflectionToString(this);
     }
 
 }

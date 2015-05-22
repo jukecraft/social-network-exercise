@@ -1,8 +1,10 @@
 package org.twitterconsole.io;
 
-import org.twitterconsole.commons.SocialNetworkingValueObject;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
-public class Command extends SocialNetworkingValueObject {
+public class Command {
     public static final Command NOTHING = new Command();
 
     private static final String COMMAND_SEPERATOR = " ";
@@ -37,5 +39,20 @@ public class Command extends SocialNetworkingValueObject {
 
     public boolean isEmptyWithoutUser() {
         return commandWithoutUser.isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return reflectionEquals(this, other);
+    }
+
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(this);
+    }
+
+    @Override
+    public String toString() {
+        return reflectionToString(this);
     }
 }

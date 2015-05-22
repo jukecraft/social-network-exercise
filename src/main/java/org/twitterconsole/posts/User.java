@@ -1,9 +1,11 @@
 package org.twitterconsole.posts;
 
-import org.twitterconsole.commons.SocialNetworkingValueObject;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+
 import org.twitterconsole.io.Command;
 
-public class User extends SocialNetworkingValueObject {
+public class User {
 
     private final String name;
 
@@ -14,6 +16,16 @@ public class User extends SocialNetworkingValueObject {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return reflectionEquals(this, other);
+    }
+
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(this);
     }
 
 }
