@@ -1,8 +1,6 @@
 package org.twitterconsole.network;
 
-import org.twitterconsole.posts.Message;
 import org.twitterconsole.posts.Post;
-import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 import org.twitterconsole.posts.output.WallOutput;
@@ -24,12 +22,13 @@ public class TimelineService {
         network.registerFollowing(follower, follows);
     }
 
-    public void post(User author, Message message, SocialTime timestamp) {
-        timelines.post(author, new Post(author, message, timestamp));
-    }
-
     public WallOutput collectWall(User wallUser) {
         return network.collectWallOutput(timelines, wallUser);
+    }
+
+    public void post(User author, Post post) {
+        timelines.post(author, post);
+
     }
 
 }

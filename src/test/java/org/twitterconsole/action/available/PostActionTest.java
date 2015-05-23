@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.posts.Message;
+import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.time.SocialNetworkingClock;
@@ -37,7 +38,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message("I love the weather today"), TIME);
+        verify(timelineService).post(ALICE, new Post(ALICE, new Message("I love the weather today"), TIME));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message("Good game though."), TIME);
+        verify(timelineService).post(ALICE, new Post(ALICE, new Message("Good game though."), TIME));
     }
 
     @Test
@@ -55,7 +56,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(timelineService).post(any(User.class), any(Message.class), any(SocialTime.class));
+        verify(timelineService).post(any(User.class), any(Post.class));
     }
 
     @Test

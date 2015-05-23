@@ -33,15 +33,16 @@ public class TimelineServiceTest {
     private TimelineService timelineService = new TimelineService(timelines, network);
 
     @Test
-    public void itDelegatesPostsToTimelinesIncludingTheCurrentTime() {
-        timelineService.post(ALICE, MESSAGE, TIME);
-
-        Post expectedPost = aPost()
+    public void itDelegatesPostsToTimelines() {
+        Post post = aPost()
             .withMessage(MESSAGE.toString())
             .withPostingTime(TIME)
             .withUser(ALICE)
             .create();
-        verify(timelines).post(ALICE, expectedPost);
+
+        timelineService.post(ALICE, post);
+
+        verify(timelines).post(ALICE, post);
     }
 
     @Test

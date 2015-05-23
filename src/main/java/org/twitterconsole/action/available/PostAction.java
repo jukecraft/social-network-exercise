@@ -4,6 +4,7 @@ import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.posts.Message;
+import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.time.SocialNetworkingClock;
 
@@ -22,7 +23,8 @@ public class PostAction implements Action {
     public void execute(Command command) {
         if (isExecutable(command)) {
             String message = command.afterIdentifier(POST_IDENTIFIER);
-            timelineService.post(new User(command), new Message(message), clock.getLocalDateTime());
+            User author = new User(command);
+            timelineService.post(author, new Post(author, new Message(message), clock.getLocalDateTime()));
         }
     }
 
