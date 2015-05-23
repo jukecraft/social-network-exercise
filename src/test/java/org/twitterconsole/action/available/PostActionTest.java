@@ -18,7 +18,7 @@ import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.time.SocialNetworkingClock;
 
-public class PostCommandTest {
+public class PostActionTest {
     private static final User ALICE = aUserNamedAlice();
     private static final SocialTime TIME = aTime().create();
 

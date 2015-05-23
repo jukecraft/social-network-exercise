@@ -19,7 +19,7 @@ import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.Output;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class WallCommandTest {
+public class WallActionTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();

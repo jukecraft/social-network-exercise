@@ -19,7 +19,7 @@ import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.Output;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class TimelineCommandTest {
+public class TimelineActionTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();

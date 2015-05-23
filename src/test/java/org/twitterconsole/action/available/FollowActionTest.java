@@ -12,7 +12,7 @@ import org.twitterconsole.io.Command;
 import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.posts.User;
 
-public class FollowCommandTest {
+public class FollowActionTest {
     private static final String USERNAME_ALICE = "Alice";
     private static final User ALICE = aUser().withName(USERNAME_ALICE).create();
     private static final String USERNAME_BOB = "Bob";
