@@ -20,8 +20,10 @@ public class PostAction implements Action {
 
     @Override
     public void execute(Command command) {
-        if (isExecutable(command))
-            timelineService.post(new User(command), new Message(command), clock.getLocalDateTime());
+        if (isExecutable(command)) {
+            String message = command.afterIdentifier(POST_IDENTIFIER);
+            timelineService.post(new User(command), new Message(message), clock.getLocalDateTime());
+        }
     }
 
     private boolean isExecutable(Command command) {

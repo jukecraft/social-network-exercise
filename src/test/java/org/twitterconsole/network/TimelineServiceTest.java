@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.twitterconsole.io.CommandBuilder.aPostCommand;
 import static org.twitterconsole.posts.PostBuilder.aPost;
 import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
 import static org.twitterconsole.posts.UserBuilder.aUserNamedAlice;
@@ -26,7 +25,7 @@ public class TimelineServiceTest {
     private static final User BOB = aUserNamedBob();
     private static final SocialTime TIME = aTime().create();
     private static final PostsOutput OUTPUT = aPostsOutput().create();
-    private static final Message MESSAGE = new Message(aPostCommand().create());
+    private static final Message MESSAGE = new Message("message");
 
     private Timelines timelines = mock(Timelines.class);
     private SocialNetwork network = mock(SocialNetwork.class);

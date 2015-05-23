@@ -1,6 +1,5 @@
 package org.twitterconsole.posts;
 
-import static org.twitterconsole.io.CommandBuilder.aCommand;
 import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
 import static org.twitterconsole.posts.UserBuilder.aUser;
 
@@ -40,7 +39,7 @@ public class PostBuilder {
     }
 
     public Post create() {
-        return new Post(user, new Message(aCommand().withMessage(messageText).create()), timestamp);
+        return new Post(user, new Message(messageText), timestamp);
     }
 
     public static Post onePost() {

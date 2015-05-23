@@ -37,7 +37,7 @@ public class PostCommandTest {
 
         action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message(command), TIME);
+        verify(timelineService).post(ALICE, new Message("I love the weather today"), TIME);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class PostCommandTest {
 
         action.execute(command);
 
-        verify(timelineService).post(ALICE, new Message(command), TIME);
+        verify(timelineService).post(ALICE, new Message("Good game though."), TIME);
     }
 
     @Test
