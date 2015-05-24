@@ -11,12 +11,12 @@ public class Post implements Comparable<Post> {
 
     private final Message message;
     private final SocialTime postingTime;
-    private User user;
+    private User author;
 
-    public Post(User user, Message message, SocialTime postingTime) {
+    public Post(User author, Message message, SocialTime postingTime) {
         this.message = message;
         this.postingTime = postingTime;
-        this.user = user;
+        this.author = author;
     }
 
     public String printAt(SocialTime printingTime) {
@@ -24,7 +24,11 @@ public class Post implements Comparable<Post> {
     }
 
     public String printWithUser(SocialTime printingTime) {
-        return format(POST_WITH_USER_PRINT_FORMAT, user, printAt(printingTime));
+        return format(POST_WITH_USER_PRINT_FORMAT, author, printAt(printingTime));
+    }
+
+    public User getAuthor() {
+        return author;
     }
 
     @Override

@@ -9,7 +9,8 @@ import org.twitterconsole.posts.output.PostsOutput;
 public class Timelines {
     public HashMap<User, Timeline> timelines = new HashMap<User, Timeline>();
 
-    public void post(User author, Post post) {
+    public void post(Post post) {
+        User author = post.getAuthor();
         Timeline timeline = get(author);
         timeline.addPost(post);
         timelines.put(author, timeline);

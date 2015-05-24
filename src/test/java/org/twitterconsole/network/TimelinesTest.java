@@ -2,8 +2,7 @@ package org.twitterconsole.network;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.twitterconsole.posts.PostBuilder.anotherPost;
-import static org.twitterconsole.posts.PostBuilder.onePost;
+import static org.twitterconsole.posts.PostBuilder.aPost;
 import static org.twitterconsole.posts.UserBuilder.aUserNamedAlice;
 import static org.twitterconsole.posts.UserBuilder.aUserNamedBob;
 import static org.twitterconsole.posts.output.PostsOutputBuilder.anEmptyPostsOutput;
@@ -15,9 +14,8 @@ import org.twitterconsole.posts.output.PostsOutput;
 
 public class TimelinesTest {
     private static final User ALICE = aUserNamedAlice();
-    private static final User BOB = aUserNamedBob();
-    private static final Post A_POST = onePost();
-    private static final Post ANOTHER_POST = anotherPost();
+    private static final Post A_POST_FROM_ALICE = aPost().withAuthor(ALICE).create();
+    private static final Post A_POST_FROM_BOB = aPost().withAuthor(aUserNamedBob()).create();
 
     private Timelines timelines = new Timelines();
 
@@ -30,24 +28,24 @@ public class TimelinesTest {
 
     @Test
     public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
-        timelines.post(ALICE, A_POST);
+        timelines.post(A_POST_FROM_ALICE);
 
         PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyPostsOutput()
-            .withPost(A_POST)
+            .withPost(A_POST_FROM_ALICE)
             .create()));
     }
 
     @Test
     public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
-        timelines.post(ALICE, A_POST);
-        timelines.post(BOB, ANOTHER_POST);
+        timelines.post(A_POST_FROM_ALICE);
+        timelines.post(A_POST_FROM_BOB);
 
         PostsOutput alicesTimeline = timelines.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyPostsOutput()
-            .withPost(A_POST)
+            .withPost(A_POST_FROM_ALICE)
             .create()));
     }
 

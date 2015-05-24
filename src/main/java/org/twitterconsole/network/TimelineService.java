@@ -27,7 +27,7 @@ public class TimelineService {
     }
 
     public void post(User author, Post post) {
-        timelines.post(author, post);
+        timelines.post(post);
 
     }
 

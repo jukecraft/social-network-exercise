@@ -32,12 +32,12 @@ public class WallOutputTest {
     private static final Post ALICES_EARLIEST_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5))
         .withMessage(EARLIEST_MESSAGE)
-        .withUser(ALICE)
+        .withAuthor(ALICE)
         .create();
     private static final Post ALICES_LATER_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1))
         .withMessage(LATER_MESSAGE)
-        .withUser(ALICE)
+        .withAuthor(ALICE)
         .create();
 
     private static final User BOB = aUserNamedBob();
@@ -46,12 +46,12 @@ public class WallOutputTest {
     private static final Post BOBS_EARLIER_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(2))
         .withMessage(EARLIER_MESSAGE)
-        .withUser(BOB)
+        .withAuthor(BOB)
         .create();
     private static final Post BOBS_LATEST_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusSeconds(15))
         .withMessage(LATEST_MESSAGE)
-        .withUser(BOB)
+        .withAuthor(BOB)
         .create();
 
     @Test

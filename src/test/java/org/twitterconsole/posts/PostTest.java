@@ -65,7 +65,7 @@ public class PostTest {
         Post post = aPost()
             .withMessage(MESSAGE_TEXT)
             .withPostingTime(aTime())
-            .withUser(user)
+            .withAuthor(user)
             .create();
 
         String printedTimestamp = post.printWithUser(aTime()

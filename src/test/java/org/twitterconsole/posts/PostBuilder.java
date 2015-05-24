@@ -33,7 +33,7 @@ public class PostBuilder {
         return withPostingTime(aTime().withTimestamp(timestamp));
     }
 
-    public PostBuilder withUser(User user) {
+    public PostBuilder withAuthor(User user) {
         this.user = user;
         return this;
     }

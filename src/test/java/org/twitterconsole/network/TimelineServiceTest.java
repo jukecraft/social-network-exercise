@@ -37,12 +37,12 @@ public class TimelineServiceTest {
         Post post = aPost()
             .withMessage(MESSAGE.toString())
             .withPostingTime(TIME)
-            .withUser(ALICE)
+            .withAuthor(ALICE)
             .create();
 
         timelineService.post(ALICE, post);
 
-        verify(timelines).post(ALICE, post);
+        verify(timelines).post(post);
     }
 
     @Test

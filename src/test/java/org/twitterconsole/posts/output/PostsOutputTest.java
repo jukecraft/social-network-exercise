@@ -23,12 +23,12 @@ public class PostsOutputTest {
     private static final SocialTime PRINTING_TIME = aTime().withTimestamp(PRINTING_TIMESTAMP).create();
     private static final Post A_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(5))
-        .withUser(aUserNamedAlice())
+        .withAuthor(aUserNamedAlice())
         .create();
 
     private static final Post LATER_POST = aPost()
         .withPostingTime(PRINTING_TIMESTAMP.minusMinutes(1))
-        .withUser(aUserNamedBob())
+        .withAuthor(aUserNamedBob())
         .create();
 
     @Test
