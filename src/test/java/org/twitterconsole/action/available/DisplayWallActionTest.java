@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
-import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
 import static org.twitterconsole.posts.UserBuilder.aUser;
 import static org.twitterconsole.posts.output.WallOutputBuilder.aWallOutput;
 import static org.twitterconsole.posts.output.WallOutputBuilder.anEmptyWallOutput;
@@ -14,7 +13,6 @@ import static org.twitterconsole.posts.output.WallOutputBuilder.anEmptyWallOutpu
 import org.junit.Test;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.network.TimelineService;
-import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
 
@@ -23,7 +21,6 @@ public class DisplayWallActionTest {
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();
     private static final WallOutput OUTPUT = aWallOutput().create();
-    private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
     private ConsoleWithClock consoleWithClock = mock(ConsoleWithClock.class);

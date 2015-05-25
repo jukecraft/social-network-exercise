@@ -12,12 +12,12 @@ import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class TimelinesTest {
+public class UsersPostsTest {
     private static final User ALICE = aUserNamedAlice();
     private static final Post A_POST_FROM_ALICE = aPost().withAuthor(ALICE).create();
     private static final Post A_POST_FROM_BOB = aPost().withAuthor(aUserNamedBob()).create();
 
-    private Timelines timelines = new Timelines();
+    private UsersPosts timelines = new UsersPosts();
 
     @Test
     public void givenEmptyTimelinesNoPostsAreReturned() {

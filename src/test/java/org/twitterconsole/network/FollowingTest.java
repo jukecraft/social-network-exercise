@@ -20,7 +20,7 @@ public class FollowingTest {
     private static final User ALICE = aUserNamedAlice();
     private static final User BOB = aUserNamedBob();
 
-    private Timelines timelines = mock(Timelines.class);
+    private UsersPosts timelines = mock(UsersPosts.class);
 
     @Test
     public void itCollectsTimelinesFromUserAndFollowingIntoAWall() {

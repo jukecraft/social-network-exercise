@@ -9,7 +9,6 @@ import static org.twitterconsole.posts.PostBuilder.aPost;
 import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
 import static org.twitterconsole.posts.UserBuilder.aUserNamedAlice;
 import static org.twitterconsole.posts.UserBuilder.aUserNamedBob;
-import static org.twitterconsole.posts.output.PostsOutputBuilder.aPostsOutput;
 import static org.twitterconsole.posts.output.WallOutputBuilder.aWallOutput;
 
 import org.junit.Test;
@@ -17,17 +16,15 @@ import org.twitterconsole.posts.Message;
 import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
-import org.twitterconsole.posts.output.PostsOutput;
 import org.twitterconsole.posts.output.WallOutput;
 
 public class TimelineServiceTest {
     private static final User ALICE = aUserNamedAlice();
     private static final User BOB = aUserNamedBob();
     private static final SocialTime TIME = aTime().create();
-    private static final PostsOutput OUTPUT = aPostsOutput().create();
     private static final Message MESSAGE = new Message("message");
 
-    private Timelines timelines = mock(Timelines.class);
+    private UsersPosts timelines = mock(UsersPosts.class);
     private SocialNetwork network = mock(SocialNetwork.class);
 
     private TimelineService timelineService = new TimelineService(timelines, network);
@@ -43,15 +40,6 @@ public class TimelineServiceTest {
         timelineService.post(ALICE, post);
 
         verify(timelines).post(post);
-    }
-
-    @Test
-    public void itDelegatesPrintTimelineToTimelines() {
-        when(timelines.collectPosts(ALICE)).thenReturn(OUTPUT);
-
-        PostsOutput actualOutput = timelineService.collectPosts(ALICE);
-
-        assertThat(actualOutput, is(OUTPUT));
     }
 
     @Test

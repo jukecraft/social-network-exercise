@@ -19,7 +19,7 @@ public class SocialNetwork {
         return network.getOrDefault(user, new Following());
     }
 
-    public WallOutput collectWallOutput(Timelines timelines, User wallUser) {
+    public WallOutput collectWallOutput(UsersPosts timelines, User wallUser) {
         return getFollowing(wallUser).collectWallOutput(timelines, wallUser);
     }
 

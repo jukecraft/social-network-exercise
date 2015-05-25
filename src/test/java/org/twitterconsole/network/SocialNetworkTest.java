@@ -23,7 +23,7 @@ public class SocialNetworkTest {
     private static final PostsOutput ALICES_POSTS = aPostsOutput().withPost(onePost()).create();
     private static final PostsOutput BOBS_POSTS = aPostsOutput().withPost(anotherPost()).create();
 
-    private Timelines timelines = mock(Timelines.class);
+    private UsersPosts timelines = mock(UsersPosts.class);
     private SocialNetwork socialNetwork = new SocialNetwork();
 
     @Before

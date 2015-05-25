@@ -2,17 +2,17 @@ package org.twitterconsole.action.available;
 
 import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.TimelineService;
+import org.twitterconsole.network.UsersPosts;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
 public class DisplayTimelineAction implements Action {
 
-    private TimelineService timelineService;
+    private UsersPosts usersPosts;
     private ConsoleWithClock consoleWithClock;
 
-    public DisplayTimelineAction(TimelineService timelineService, ConsoleWithClock consoleWithClock) {
-        this.timelineService = timelineService;
+    public DisplayTimelineAction(UsersPosts usersPosts, ConsoleWithClock consoleWithClock) {
+        this.usersPosts = usersPosts;
         this.consoleWithClock = consoleWithClock;
     }
 
@@ -27,7 +27,7 @@ public class DisplayTimelineAction implements Action {
     }
 
     private void printTimeline(Command command) {
-        PostsOutput output = timelineService.collectPosts(new User(command));
+        PostsOutput output = usersPosts.collectPosts(new User(command));
         consoleWithClock.print(output);
     }
 

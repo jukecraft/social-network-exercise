@@ -14,7 +14,7 @@ import org.twitterconsole.action.available.PostAction;
 import org.twitterconsole.io.SocialNetworkingConsole;
 import org.twitterconsole.network.SocialNetwork;
 import org.twitterconsole.network.TimelineService;
-import org.twitterconsole.network.Timelines;
+import org.twitterconsole.network.UsersPosts;
 import org.twitterconsole.time.SocialNetworkingClock;
 
 public final class TwitterConsoleFactory {
@@ -32,13 +32,14 @@ public final class TwitterConsoleFactory {
     }
 
     private static Actions getActions(SocialNetworkingClock clock, SocialNetworkingConsole console) {
-        TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
+        UsersPosts usersPosts = new UsersPosts();
+        TimelineService timelineService = new TimelineService(usersPosts, new SocialNetwork());
 
         ConsoleWithClock consoleWithClock = new ConsoleWithClock(console, clock);
 
         return new Actions(asList(
             new PostAction(timelineService, clock),
-            new DisplayTimelineAction(timelineService, consoleWithClock),
+            new DisplayTimelineAction(usersPosts, consoleWithClock),
             new FollowAction(timelineService),
             new DisplayWallAction(timelineService, consoleWithClock)));
     }
