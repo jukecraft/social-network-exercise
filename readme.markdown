@@ -9,7 +9,7 @@ It was build using Java 8 and Maven. Running
 ```mvn install```
 will produce a fresh executable jar (see below).
 
-Usage:
+##Usage:
 
 1. Make sure you have **access to Java 8** or higher with
 ```java -version```
@@ -21,14 +21,14 @@ Usage:
 
 4. Use the following **commands** to interact with the application:
 
-**posting**:
-```<user name> -> <message>```
+  **posting**:
+  ```<user name> -> <message>```
 
-**reading**:
-```<user name>```
+  **reading**:
+  ```<user name>```
 
-**following**: 
-```<user name> follows <another user>```
+  **following**: 
+  ```<user name> follows <another user>```
 
-**wall**: 
-```<user name> wall```
+  **wall**: 
+  ```<user name> wall```
