@@ -11,15 +11,12 @@ import static org.twitterconsole.posts.UserBuilder.aUser;
 import static org.twitterconsole.posts.output.WallOutputBuilder.aWallOutput;
 import static org.twitterconsole.posts.output.WallOutputBuilder.anEmptyWallOutput;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.io.SocialNetworkingConsole;
 import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
-import org.twitterconsole.time.SocialNetworkingClock;
 
 public class DisplayWallActionTest {
     private static final String USERNAME = "Alice";
@@ -29,15 +26,9 @@ public class DisplayWallActionTest {
     private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
-    private SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
-    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
+    private ConsoleWithClock consoleWithClock = mock(ConsoleWithClock.class);
 
-    private DisplayWallAction action = new DisplayWallAction(timelineService, console, clock);
-
-    @Before
-    public void setUp() {
-        when(clock.getLocalDateTime()).thenReturn(TIME);
-    }
+    private DisplayWallAction action = new DisplayWallAction(timelineService, consoleWithClock);
 
     @Test
     public void itIsExecutableIfCommandStartsWithWall() {
@@ -66,7 +57,7 @@ public class DisplayWallActionTest {
 
         action.execute(WALL_COMMAND);
 
-        verify(console).print(anEmptyWallOutput().create().print(TIME));
+        verify(consoleWithClock).print(anEmptyWallOutput().create());
     }
 
     @Test
@@ -75,7 +66,7 @@ public class DisplayWallActionTest {
 
         action.execute(WALL_COMMAND);
 
-        verify(console).print(OUTPUT.print(TIME));
+        verify(consoleWithClock).print(OUTPUT);
     }
 
 }

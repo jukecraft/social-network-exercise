@@ -1,26 +1,19 @@
 package org.twitterconsole.action.available;
 
-import java.util.List;
-
 import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.io.SocialNetworkingConsole;
 import org.twitterconsole.network.TimelineService;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
-import org.twitterconsole.time.SocialNetworkingClock;
 
 public class DisplayTimelineAction implements Action {
 
     private TimelineService timelineService;
-    private SocialNetworkingConsole console;
-    private SocialNetworkingClock clock;
+    private ConsoleWithClock consoleWithClock;
 
-    public DisplayTimelineAction(TimelineService timelineService, SocialNetworkingClock clock,
-        SocialNetworkingConsole console) {
+    public DisplayTimelineAction(TimelineService timelineService, ConsoleWithClock consoleWithClock) {
         this.timelineService = timelineService;
-        this.console = console;
-        this.clock = clock;
+        this.consoleWithClock = consoleWithClock;
     }
 
     @Override
@@ -34,9 +27,8 @@ public class DisplayTimelineAction implements Action {
     }
 
     private void printTimeline(Command command) {
-        PostsOutput postsOutput = timelineService.collectPosts(new User(command));
-        List<String> output = postsOutput.print(clock.getLocalDateTime());
-        console.print(output);
+        PostsOutput output = timelineService.collectPosts(new User(command));
+        consoleWithClock.print(output);
     }
 
 }
