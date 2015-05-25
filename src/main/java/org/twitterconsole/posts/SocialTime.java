@@ -8,6 +8,8 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.twitterconsole.io.SocialNetworkDuration;
+
 public class SocialTime implements Comparable<SocialTime> {
 
     private final LocalDateTime timestamp;

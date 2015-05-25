@@ -1,4 +1,4 @@
-package org.twitterconsole.posts;
+package org.twitterconsole.io;
 
 import static java.text.MessageFormat.format;
 
