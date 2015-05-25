@@ -12,7 +12,7 @@ import static org.twitterconsole.posts.output.PostsOutputBuilder.anEmptyPostsOut
 
 import org.junit.Test;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
@@ -22,14 +22,14 @@ public class DisplayTimelineActionTest {
     private static final Command TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
     private static final PostsOutput OUTPUT = aPostsOutput().create();
 
-    private UsersPosts usersPosts = mock(UsersPosts.class);
+    private PostRepository postRepository = mock(PostRepository.class);
     private ConsoleWithClock consoleWithClock = mock(ConsoleWithClock.class);
 
-    private DisplayTimelineAction action = new DisplayTimelineAction(usersPosts, consoleWithClock);
+    private DisplayTimelineAction action = new DisplayTimelineAction(postRepository, consoleWithClock);
 
     @Test
     public void itReturnsNoOutputIfTimelineServiceHasNoTimelineForTheGivenUser() {
-        when(usersPosts.collectPosts(ALICE)).thenReturn(new PostsOutput());
+        when(postRepository.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
         action.execute(TIMELINE_COMMAND);
 
@@ -38,7 +38,7 @@ public class DisplayTimelineActionTest {
 
     @Test
     public void itReturnsOutputIfTimelineServiceHasATimelineForTheGivenUser() {
-        when(usersPosts.collectPosts(ALICE)).thenReturn(OUTPUT);
+        when(postRepository.collectPosts(ALICE)).thenReturn(OUTPUT);
 
         action.execute(TIMELINE_COMMAND);
 
@@ -47,11 +47,11 @@ public class DisplayTimelineActionTest {
 
     @Test
     public void executesIfItTheCommandIsEmpty() {
-        when(usersPosts.collectPosts(any(User.class))).thenReturn(new PostsOutput());
+        when(postRepository.collectPosts(any(User.class))).thenReturn(new PostsOutput());
 
         action.execute(TIMELINE_COMMAND);
 
-        verify(usersPosts).collectPosts(any(User.class));
+        verify(postRepository).collectPosts(any(User.class));
     }
 
     @Test
@@ -62,6 +62,6 @@ public class DisplayTimelineActionTest {
 
         action.execute(command);
 
-        verifyZeroInteractions(usersPosts);
+        verifyZeroInteractions(postRepository);
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class SocialNetwork {
+public class UserRepository {
     private Map<User, Following> network = new HashMap<>();
 
     public void registerFollowing(User follower, User following) {
@@ -19,7 +19,7 @@ public class SocialNetwork {
         return network.getOrDefault(user, new Following());
     }
 
-    public WallOutput collectWallOutput(UsersPosts timelines, User wallUser) {
+    public WallOutput collectWallOutput(PostRepository timelines, User wallUser) {
         return getFollowing(wallUser).collectWallOutput(timelines, wallUser);
     }
 

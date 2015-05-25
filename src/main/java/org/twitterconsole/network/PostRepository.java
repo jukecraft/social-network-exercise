@@ -6,7 +6,7 @@ import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class UsersPosts {
+public class PostRepository {
     public HashMap<User, Timeline> timelines = new HashMap<User, Timeline>();
 
     public void post(Post post) {

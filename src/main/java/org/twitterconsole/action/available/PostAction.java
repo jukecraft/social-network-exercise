@@ -2,7 +2,7 @@ package org.twitterconsole.action.available;
 
 import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.Message;
 import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.User;
@@ -12,10 +12,10 @@ public class PostAction implements Action {
     private static final String POST_IDENTIFIER = " -> ";
 
     private SocialNetworkingClock clock;
-    private UsersPosts usersPosts;
+    private PostRepository postRepository;
 
-    public PostAction(UsersPosts usersPosts, SocialNetworkingClock clock) {
-        this.usersPosts = usersPosts;
+    public PostAction(PostRepository postRepository, SocialNetworkingClock clock) {
+        this.postRepository = postRepository;
         this.clock = clock;
     }
 
@@ -23,7 +23,7 @@ public class PostAction implements Action {
     public void execute(Command command) {
         if (isExecutable(command)) {
             Post post = createPost(command);
-            usersPosts.post(post);
+            postRepository.post(post);
         }
     }
 

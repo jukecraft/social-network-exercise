@@ -2,8 +2,8 @@ package org.twitterconsole.action.available;
 
 import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.SocialNetwork;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.UserRepository;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
 
@@ -11,12 +11,12 @@ public class DisplayWallAction implements Action {
     private static final String WALL_IDENTIFIER = " wall";
 
     private ConsoleWithClock consoleWithClock;
-    private UsersPosts usersPosts;
-    private SocialNetwork network;
+    private PostRepository postRepository;
+    private UserRepository userRepository;
 
-    public DisplayWallAction(UsersPosts usersPosts, SocialNetwork network, ConsoleWithClock consoleWithClock) {
-        this.usersPosts = usersPosts;
-        this.network = network;
+    public DisplayWallAction(PostRepository postRepository, UserRepository userRepository, ConsoleWithClock consoleWithClock) {
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
         this.consoleWithClock = consoleWithClock;
     }
 
@@ -37,7 +37,7 @@ public class DisplayWallAction implements Action {
     }
 
     private WallOutput collectWall(User user) {
-        return network.collectWallOutput(usersPosts, user);
+        return userRepository.collectWallOutput(postRepository, user);
     }
 
 }

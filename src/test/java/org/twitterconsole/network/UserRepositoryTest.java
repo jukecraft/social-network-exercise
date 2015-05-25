@@ -17,24 +17,24 @@ import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class SocialNetworkTest {
+public class UserRepositoryTest {
     private static final User ALICE = aUserNamedAlice();
     private static final User BOB = aUserNamedBob();
     private static final PostsOutput ALICES_POSTS = aPostsOutput().withPost(onePost()).create();
     private static final PostsOutput BOBS_POSTS = aPostsOutput().withPost(anotherPost()).create();
 
-    private UsersPosts timelines = mock(UsersPosts.class);
-    private SocialNetwork socialNetwork = new SocialNetwork();
+    private PostRepository postRepository = mock(PostRepository.class);
+    private UserRepository userRepository = new UserRepository();
 
     @Before
     public void setUp() {
-        when(timelines.collectPosts(ALICE)).thenReturn(ALICES_POSTS);
-        when(timelines.collectPosts(BOB)).thenReturn(BOBS_POSTS);
+        when(postRepository.collectPosts(ALICE)).thenReturn(ALICES_POSTS);
+        when(postRepository.collectPosts(BOB)).thenReturn(BOBS_POSTS);
     }
 
     @Test
     public void givenNoFollowingWhenAskedForTheWallOutputThenItReturnsOnlyAlicesPosts() {
-        WallOutput wall = socialNetwork.collectWallOutput(timelines, ALICE);
+        WallOutput wall = userRepository.collectWallOutput(postRepository, ALICE);
 
         assertThat(wall, is(anEmptyWallOutput()
             .withTimeline(ALICE, ALICES_POSTS)
@@ -43,9 +43,9 @@ public class SocialNetworkTest {
 
     @Test
     public void givenAliceFollowsBobWhenAskedForTheWallOutputThenItReturnsBothUsersPosts() {
-        socialNetwork.registerFollowing(ALICE, BOB);
+        userRepository.registerFollowing(ALICE, BOB);
 
-        WallOutput wall = socialNetwork.collectWallOutput(timelines, ALICE);
+        WallOutput wall = userRepository.collectWallOutput(postRepository, ALICE);
 
         assertThat(wall, is(anEmptyWallOutput()
             .withTimeline(ALICE, ALICES_POSTS)

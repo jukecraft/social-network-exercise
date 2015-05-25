@@ -17,13 +17,13 @@ public class Following {
         following.add(user);
     }
 
-    public WallOutput collectWallOutput(UsersPosts timelines, User wallUser) {
+    public WallOutput collectWallOutput(PostRepository timelines, User wallUser) {
         ArrayList<User> relevantUsers = new ArrayList<>(following);
         relevantUsers.add(wallUser);
         return collectWalls(timelines, relevantUsers);
     }
 
-    private WallOutput collectWalls(UsersPosts timelines, ArrayList<User> relevantUsers) {
+    private WallOutput collectWalls(PostRepository timelines, ArrayList<User> relevantUsers) {
         WallOutput wallOutput = new WallOutput();
         relevantUsers.forEach(user -> wallOutput.addPosts(user, timelines.collectPosts(user)));
         return wallOutput;

@@ -12,7 +12,7 @@ import static org.twitterconsole.posts.UserBuilder.aUserNamedAlice;
 import org.junit.Before;
 import org.junit.Test;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.Message;
 import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.SocialTime;
@@ -23,9 +23,9 @@ public class PostActionTest {
     private static final User ALICE = aUserNamedAlice();
     private static final SocialTime TIME = aTime().create();
 
-    private UsersPosts usersPosts = mock(UsersPosts.class);
+    private PostRepository postRepository = mock(PostRepository.class);
     private SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
-    private PostAction action = new PostAction(usersPosts, clock);
+    private PostAction action = new PostAction(postRepository, clock);
 
     @Before
     public void setUp() {
@@ -38,7 +38,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(usersPosts).post(new Post(ALICE, new Message("I love the weather today"), TIME));
+        verify(postRepository).post(new Post(ALICE, new Message("I love the weather today"), TIME));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(usersPosts).post(new Post(ALICE, new Message("Good game though."), TIME));
+        verify(postRepository).post(new Post(ALICE, new Message("Good game though."), TIME));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verify(usersPosts).post(any(Post.class));
+        verify(postRepository).post(any(Post.class));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PostActionTest {
 
         action.execute(command);
 
-        verifyZeroInteractions(usersPosts);
+        verifyZeroInteractions(postRepository);
     }
 
 }

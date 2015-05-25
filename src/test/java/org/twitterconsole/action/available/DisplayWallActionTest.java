@@ -13,8 +13,8 @@ import static org.twitterconsole.posts.output.WallOutputBuilder.anEmptyWallOutpu
 
 import org.junit.Test;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.SocialNetwork;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.UserRepository;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
 
@@ -24,22 +24,22 @@ public class DisplayWallActionTest {
     private static final Command WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();
     private static final WallOutput OUTPUT = aWallOutput().create();
 
-    private UsersPosts usersPosts = mock(UsersPosts.class);
-    private SocialNetwork network = mock(SocialNetwork.class);
+    private PostRepository postRepository = mock(PostRepository.class);
+    private UserRepository userRepository = mock(UserRepository.class);
     private ConsoleWithClock consoleWithClock = mock(ConsoleWithClock.class);
 
-    private DisplayWallAction action = new DisplayWallAction(usersPosts, network, consoleWithClock);
+    private DisplayWallAction action = new DisplayWallAction(postRepository, userRepository, consoleWithClock);
 
     @Test
     public void itIsExecutableIfCommandStartsWithWall() {
-        when(network.collectWallOutput(eq(usersPosts), any(User.class)))
+        when(userRepository.collectWallOutput(eq(postRepository), any(User.class)))
             .thenReturn(anEmptyWallOutput().create());
 
         Command command = aCommand().withCommand(" wall").create();
 
         action.execute(command);
 
-        verify(network).collectWallOutput(eq(usersPosts), any(User.class));
+        verify(userRepository).collectWallOutput(eq(postRepository), any(User.class));
     }
 
     @Test
@@ -48,12 +48,12 @@ public class DisplayWallActionTest {
 
         action.execute(command);
 
-        verifyZeroInteractions(network);
+        verifyZeroInteractions(userRepository);
     }
 
     @Test
     public void itReturnsNoOutputIfTimelineServiceHasNoWallForTheGivenUser() {
-        when(network.collectWallOutput(usersPosts, ALICE))
+        when(userRepository.collectWallOutput(postRepository, ALICE))
             .thenReturn(anEmptyWallOutput().create());
 
         action.execute(WALL_COMMAND);
@@ -63,7 +63,7 @@ public class DisplayWallActionTest {
 
     @Test
     public void itReturnsOutputIfTimelineServiceHasAWallForTheGivenUser() {
-        when(network.collectWallOutput(usersPosts, ALICE))
+        when(userRepository.collectWallOutput(postRepository, ALICE))
             .thenReturn(OUTPUT);
 
         action.execute(WALL_COMMAND);

@@ -12,8 +12,8 @@ import org.twitterconsole.action.available.DisplayWallAction;
 import org.twitterconsole.action.available.FollowAction;
 import org.twitterconsole.action.available.PostAction;
 import org.twitterconsole.io.SocialNetworkingConsole;
-import org.twitterconsole.network.SocialNetwork;
-import org.twitterconsole.network.UsersPosts;
+import org.twitterconsole.network.UserRepository;
+import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.time.SocialNetworkingClock;
 
 public final class TwitterConsoleFactory {
@@ -31,14 +31,14 @@ public final class TwitterConsoleFactory {
     }
 
     private static Actions getActions(SocialNetworkingClock clock, SocialNetworkingConsole console) {
-        UsersPosts usersPosts = new UsersPosts();
-        SocialNetwork network = new SocialNetwork();
+        PostRepository postRepository = new PostRepository();
+        UserRepository userRepository = new UserRepository();
         ConsoleWithClock consoleWithClock = new ConsoleWithClock(console, clock);
 
         return new Actions(asList(
-            new PostAction(usersPosts, clock),
-            new DisplayTimelineAction(usersPosts, consoleWithClock),
-            new FollowAction(network),
-            new DisplayWallAction(usersPosts, network, consoleWithClock)));
+            new PostAction(postRepository, clock),
+            new DisplayTimelineAction(postRepository, consoleWithClock),
+            new FollowAction(userRepository),
+            new DisplayWallAction(postRepository, userRepository, consoleWithClock)));
     }
 }
