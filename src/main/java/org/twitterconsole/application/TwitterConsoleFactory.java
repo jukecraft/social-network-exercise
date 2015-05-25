@@ -6,12 +6,10 @@ import static java.util.Arrays.asList;
 import java.time.Clock;
 
 import org.twitterconsole.action.Actions;
+import org.twitterconsole.action.available.DisplayTimelineAction;
+import org.twitterconsole.action.available.DisplayWallAction;
 import org.twitterconsole.action.available.FollowAction;
 import org.twitterconsole.action.available.PostAction;
-import org.twitterconsole.action.available.TimelineAction;
-import org.twitterconsole.action.available.WallAction;
-import org.twitterconsole.action.output.ConsoleObserver;
-import org.twitterconsole.action.output.ObservableAction;
 import org.twitterconsole.io.SocialNetworkingConsole;
 import org.twitterconsole.network.SocialNetwork;
 import org.twitterconsole.network.TimelineService;
@@ -34,14 +32,11 @@ public final class TwitterConsoleFactory {
 
     private static Actions getActions(SocialNetworkingClock clock, SocialNetworkingConsole console) {
         TimelineService timelineService = new TimelineService(new Timelines(), new SocialNetwork());
-        ConsoleObserver observer = new ConsoleObserver(console, clock);
 
         return new Actions(asList(
             new PostAction(timelineService, clock),
-            new ObservableAction(new TimelineAction(timelineService))
-                .withObserver(observer),
+            new DisplayTimelineAction(timelineService, clock, console),
             new FollowAction(timelineService),
-            new ObservableAction(new WallAction(timelineService))
-                .withObserver(observer)));
+            new DisplayWallAction(timelineService, console, clock)));
     }
 }

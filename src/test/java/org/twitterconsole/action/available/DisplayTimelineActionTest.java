@@ -1,49 +1,60 @@
 package org.twitterconsole.action.available;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.twitterconsole.io.CommandBuilder.aCommand;
+import static org.twitterconsole.posts.SocialTimeBuilder.aTime;
 import static org.twitterconsole.posts.UserBuilder.aUser;
 import static org.twitterconsole.posts.output.PostsOutputBuilder.aPostsOutput;
 import static org.twitterconsole.posts.output.PostsOutputBuilder.anEmptyPostsOutput;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.twitterconsole.io.Command;
+import org.twitterconsole.io.SocialNetworkingConsole;
 import org.twitterconsole.network.TimelineService;
+import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
-import org.twitterconsole.posts.output.Output;
 import org.twitterconsole.posts.output.PostsOutput;
+import org.twitterconsole.time.SocialNetworkingClock;
 
-public class TimelineActionTest {
+public class DisplayTimelineActionTest {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
     private static final PostsOutput OUTPUT = aPostsOutput().create();
+    private static final SocialTime TIME = aTime().create();
 
     private TimelineService timelineService = mock(TimelineService.class);
-    private TimelineAction action = new TimelineAction(timelineService);
+    private SocialNetworkingClock clock = mock(SocialNetworkingClock.class);
+    private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
+
+    private DisplayTimelineAction action = new DisplayTimelineAction(timelineService, clock, console);
+
+    @Before
+    public void setUp() {
+        when(clock.getLocalDateTime()).thenReturn(TIME);
+    }
 
     @Test
     public void itReturnsNoOutputIfTimelineServiceHasNoTimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
-        Output output = action.executeWithOutput(TIMELINE_COMMAND).get();
+        action.execute(TIMELINE_COMMAND);
 
-        assertThat(output, is(anEmptyPostsOutput().create()));
+        verify(console).print(anEmptyPostsOutput().create().print(TIME));
     }
 
     @Test
     public void itReturnsOutputIfTimelineServiceHasATimelineForTheGivenUser() {
         when(timelineService.collectPosts(ALICE)).thenReturn(OUTPUT);
 
-        Output output = action.executeWithOutput(TIMELINE_COMMAND).get();
+        action.execute(TIMELINE_COMMAND);
 
-        assertThat(output, is(OUTPUT));
+        verify(console).print(OUTPUT.print(TIME));
     }
 
     @Test
