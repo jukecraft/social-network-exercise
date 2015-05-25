@@ -2,22 +2,22 @@ package org.twitterconsole.action.available;
 
 import org.twitterconsole.action.Action;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.TimelineService;
+import org.twitterconsole.network.SocialNetwork;
 import org.twitterconsole.posts.User;
 
 public class FollowAction implements Action {
     private static final String FOLLOW_IDENTIFIER = " follows ";
 
-    private TimelineService timelineService;
+    private SocialNetwork network;
 
-    public FollowAction(TimelineService timelineService) {
-        this.timelineService = timelineService;
+    public FollowAction(SocialNetwork network) {
+        this.network = network;
     }
 
     @Override
     public void execute(Command command) {
         if (isExecutable(command))
-            timelineService.registerFollowing(new User(command), extractSecondUser(command));
+            network.registerFollowing(new User(command), extractSecondUser(command));
     }
 
     private boolean isExecutable(Command command) {

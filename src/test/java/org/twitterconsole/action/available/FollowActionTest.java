@@ -9,7 +9,7 @@ import static org.twitterconsole.posts.UserBuilder.aUser;
 
 import org.junit.Test;
 import org.twitterconsole.io.Command;
-import org.twitterconsole.network.TimelineService;
+import org.twitterconsole.network.SocialNetwork;
 import org.twitterconsole.posts.User;
 
 public class FollowActionTest {
@@ -18,8 +18,8 @@ public class FollowActionTest {
     private static final String USERNAME_BOB = "Bob";
     private static final User BOB = aUser().withName(USERNAME_BOB).create();
 
-    private TimelineService timelineService = mock(TimelineService.class);
-    private FollowAction action = new FollowAction(timelineService);
+    private SocialNetwork network = mock(SocialNetwork.class);
+    private FollowAction action = new FollowAction(network);
 
     @Test
     public void executesIfCommandStartsWithFollows() {
@@ -27,7 +27,7 @@ public class FollowActionTest {
 
         action.execute(command);
 
-        verify(timelineService).registerFollowing(any(User.class), any(User.class));
+        verify(network).registerFollowing(any(User.class), any(User.class));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class FollowActionTest {
 
         action.execute(command);
 
-        verifyZeroInteractions(timelineService);
+        verifyZeroInteractions(network);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class FollowActionTest {
             .withCommand(" follows " + USERNAME_BOB)
             .create());
 
-        verify(timelineService).registerFollowing(ALICE, BOB);
+        verify(network).registerFollowing(ALICE, BOB);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class FollowActionTest {
             .withCommand(" follows " + USERNAME_ALICE)
             .create());
 
-        verify(timelineService).registerFollowing(BOB, ALICE);
+        verify(network).registerFollowing(BOB, ALICE);
     }
 
 }
