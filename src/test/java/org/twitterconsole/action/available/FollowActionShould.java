@@ -12,7 +12,7 @@ import org.twitterconsole.io.Command;
 import org.twitterconsole.network.UserRepository;
 import org.twitterconsole.posts.User;
 
-public class FollowActionTest {
+public class FollowActionShould {
     private static final String USERNAME_ALICE = "Alice";
     private static final User ALICE = aUser().withName(USERNAME_ALICE).create();
     private static final String USERNAME_BOB = "Bob";
@@ -22,7 +22,7 @@ public class FollowActionTest {
     private FollowAction action = new FollowAction(userRepository);
 
     @Test
-    public void executesIfCommandStartsWithFollows() {
+    public void executeIfCommandStartsWithFollows() {
         Command command = aCommand().withCommand(" follows Bob").create();
 
         action.execute(command);
@@ -31,7 +31,7 @@ public class FollowActionTest {
     }
 
     @Test
-    public void doesntExecuteIfCommandDoesntStartWithFollows() {
+    public void noExecuteIfCommandDoesntStartWithFollows() {
         Command command = aCommand().withCommand(" -> is as follows ").create();
 
         action.execute(command);
@@ -40,7 +40,7 @@ public class FollowActionTest {
     }
 
     @Test
-    public void itRegisteresWithTimelinesThatAliceIsFollowingBob() {
+    public void registerThatAliceIsFollowingBob() {
         action.execute(aCommand()
             .withUser(USERNAME_ALICE)
             .withCommand(" follows " + USERNAME_BOB)
@@ -50,7 +50,7 @@ public class FollowActionTest {
     }
 
     @Test
-    public void itRegisteresWithTimelinesThatBobIsFollowingAlice() {
+    public void registerThatBobIsFollowingAlice() {
         action.execute(aCommand()
             .withUser(USERNAME_BOB)
             .withCommand(" follows " + USERNAME_ALICE)

@@ -13,12 +13,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class PostTest {
+public class PostShould {
     private static final String MESSAGE_TEXT = "I love the weather today";
     private static final String ANOTHER_MESSAGE_TEXT = "Damn! We lost!";
 
     @Test
-    public void createdWithFilledMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
+    public void printToAMessageAndTheTimePassedSincePosting() {
         Post post = aPost()
             .withMessage(MESSAGE_TEXT)
             .withPostingTime(aTime())
@@ -32,7 +32,7 @@ public class PostTest {
     }
 
     @Test
-    public void createdWithOtherMessageAndPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
+    public void printAnotherMessage() {
         Post post = aPost()
             .withMessage(ANOTHER_MESSAGE_TEXT)
             .withPostingTime(aTime())
@@ -46,7 +46,7 @@ public class PostTest {
     }
 
     @Test
-    public void createdWithMessageAndOtherPostingTimeItPrintsThatMessageAndTheTimePassedSinceThen() {
+    public void printAnotherPostingTime() {
         Post post = aPost()
             .withMessage(MESSAGE_TEXT)
             .withPostingTime(aTime())
@@ -60,7 +60,7 @@ public class PostTest {
     }
 
     @Test
-    public void createdWithMessageAndOtherPostingTimeAndUserItPrintsTheUserTheMessageAndTheTimePassedSinceThen() {
+    public void printAnotherMessageAndPostingTime() {
         User user = aUser().withName("name").create();
         Post post = aPost()
             .withMessage(MESSAGE_TEXT)
@@ -76,7 +76,7 @@ public class PostTest {
     }
 
     @Test
-    public void twoPostsAreSortedByPostingTimeLatestFirst() {
+    public void beSortedLatestFirst() {
         Post post = aPost()
             .withPostingTime(aTime())
             .create();

@@ -33,7 +33,7 @@ public class PostActionTest {
     }
 
     @Test
-    public void itPostsANewMessageInTheTimelinesForTheGivenUser() {
+    public void postANewMessageForTheGivenUser() {
         Command command = aCommand().withCommand(" -> I love the weather today").create();
 
         action.execute(command);
@@ -42,7 +42,7 @@ public class PostActionTest {
     }
 
     @Test
-    public void itPostsADifferentNewMessageInTheTimelinesForTheGivenUser() {
+    public void postADifferentNewMessageForTheGivenUser() {
         Command command = aCommand().withCommand(" -> Good game though.").create();
 
         action.execute(command);
@@ -51,7 +51,7 @@ public class PostActionTest {
     }
 
     @Test
-    public void executesIfCommandStartsWithAnArrow() {
+    public void executeIfCommandStartsWithAnArrow() {
         Command command = aCommand().withCommand(" -> Bob").create();
 
         action.execute(command);
@@ -60,7 +60,7 @@ public class PostActionTest {
     }
 
     @Test
-    public void doesntExecuteIfCommandDoesntStartWithAnArrow() {
+    public void notExecuteIfCommandDoesntStartWithAnArrow() {
         Command command = aCommand().withCommand(" follows ->").create();
 
         action.execute(command);

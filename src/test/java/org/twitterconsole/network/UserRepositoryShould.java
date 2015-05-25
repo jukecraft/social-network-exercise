@@ -17,7 +17,7 @@ import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class UserRepositoryTest {
+public class UserRepositoryShould {
     private static final User ALICE = aUserNamedAlice();
     private static final User BOB = aUserNamedBob();
     private static final PostsOutput ALICES_POSTS = aPostsOutput().withPost(onePost()).create();
@@ -33,7 +33,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void givenNoFollowingWhenAskedForTheWallOutputThenItReturnsOnlyAlicesPosts() {
+    public void returnUsersOwnPosts() {
         WallOutput wall = userRepository.collectWallOutput(postRepository, ALICE);
 
         assertThat(wall, is(anEmptyWallOutput()
@@ -42,7 +42,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void givenAliceFollowsBobWhenAskedForTheWallOutputThenItReturnsBothUsersPosts() {
+    public void returnPostsOfUserAndOfOthersTheyAreFollowing() {
         userRepository.registerFollowing(ALICE, BOB);
 
         WallOutput wall = userRepository.collectWallOutput(postRepository, ALICE);

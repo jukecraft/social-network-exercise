@@ -18,7 +18,7 @@ import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class DisplayWallActionTest {
+public class DisplayWallActionShould {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command WALL_COMMAND = aCommand().withCommand(" wall").withUser(USERNAME).create();
@@ -31,7 +31,7 @@ public class DisplayWallActionTest {
     private DisplayWallAction action = new DisplayWallAction(postRepository, userRepository, consoleWithClock);
 
     @Test
-    public void itIsExecutableIfCommandStartsWithWall() {
+    public void executeIfCommandStartsWithWall() {
         when(userRepository.collectWallOutput(eq(postRepository), any(User.class)))
             .thenReturn(anEmptyWallOutput().create());
 
@@ -43,7 +43,7 @@ public class DisplayWallActionTest {
     }
 
     @Test
-    public void itIsNotExecutableIfCommandDoesntStartWithWall() {
+    public void notExecuteIfCommandDoesntStartWithWall() {
         Command command = aCommand().withCommand(" -> is a wall").create();
 
         action.execute(command);
@@ -52,7 +52,7 @@ public class DisplayWallActionTest {
     }
 
     @Test
-    public void itReturnsNoOutputIfTimelineServiceHasNoWallForTheGivenUser() {
+    public void returnNoOutputIfThereIsNoWallForTheGivenUser() {
         when(userRepository.collectWallOutput(postRepository, ALICE))
             .thenReturn(anEmptyWallOutput().create());
 
@@ -62,7 +62,7 @@ public class DisplayWallActionTest {
     }
 
     @Test
-    public void itReturnsOutputIfTimelineServiceHasAWallForTheGivenUser() {
+    public void returnOutputOfWallForTheGivenUser() {
         when(userRepository.collectWallOutput(postRepository, ALICE))
             .thenReturn(OUTPUT);
 

@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.SocialTime;
 
-public class PostsOutputTest {
+public class PostsOutputShould {
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
     private static final SocialTime PRINTING_TIME = aTime().withTimestamp(PRINTING_TIMESTAMP).create();
     private static final Post A_POST = aPost()
@@ -32,7 +32,7 @@ public class PostsOutputTest {
         .create();
 
     @Test
-    public void givenNoPostsWhenAskedToPrintTimelineItPrintsNothing() {
+    public void printNothingIfEmpty() {
         Output output = anEmptyPostsOutput().create();
 
         List<String> printedTimeline = output.print(PRINTING_TIME);
@@ -41,7 +41,7 @@ public class PostsOutputTest {
     }
 
     @Test
-    public void givenTwoPostsWhenAskedToPrintTimelineItPrintsThemWithTimestampsSortedLatestFirst() {
+    public void printPosts() {
         Output output = anEmptyPostsOutput()
             .withPost(A_POST)
             .withPost(LATER_POST)
@@ -53,7 +53,7 @@ public class PostsOutputTest {
     }
 
     @Test
-    public void givenTwoPostsWhenAskedToPrintWithUserItPrintsThemWithTimestampsAndUsersSortedLatestFirst() {
+    public void printPostsWithUser() {
         PostsOutput output = anEmptyPostsOutput()
             .withPost(A_POST)
             .withPost(LATER_POST)
@@ -66,7 +66,7 @@ public class PostsOutputTest {
     }
 
     @Test
-    public void givenAnotherPostOutputItCanMergeThePosts() {
+    public void mergeWithAnotherOutput() {
         PostsOutput output = anEmptyPostsOutput()
             .withPost(A_POST)
             .create();

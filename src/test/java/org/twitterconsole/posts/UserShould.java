@@ -7,9 +7,9 @@ import static org.twitterconsole.io.CommandBuilder.aCommand;
 import org.junit.Test;
 import org.twitterconsole.io.Command;
 
-public class UserTest {
+public class UserShould {
     @Test
-    public void createdWithCommandParametersItPrintsToTheUserName() {
+    public void printToTheUsersName() {
         Command parameter = aCommand().withUser("Alice").create();
 
         User user = new User(parameter);

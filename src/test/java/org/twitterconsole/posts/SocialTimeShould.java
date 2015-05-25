@@ -12,7 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SocialTimeTest {
+public class SocialTimeShould {
     private SocialTime originalSocialTime;
 
     @Before
@@ -22,7 +22,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void createdWithTimestampItPrintsDifferenceToGivenTimestamp() {
+    public void printDifferenceToGivenTimestamp() {
         SocialTime timeOfPrinting = aTime()
             .plusMinutes(5)
             .create();
@@ -33,7 +33,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void createdWithSixtySecondsTimestampItPrintsADifferenceOfOneMinuteToGivenTimestamp() {
+    public void printOneMinuteDifference() {
         SocialTime timeOfPrinting = aTime()
             .plusSeconds(60)
             .create();
@@ -44,7 +44,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void createdWithSecondsTimestampItPrintsDifferenceToGivenTimestamp() {
+    public void printFifteenSecondDifference() {
         SocialTime timeOfPrinting = aTime()
             .plusSeconds(15)
             .create();
@@ -55,7 +55,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void createdWith1SecondTimestampItPrintsDifferenceToGivenTimestamp() {
+    public void printOneSecondDifference() {
         SocialTime timeOfPrinting = aTime()
             .plusSeconds(1)
             .create();
@@ -66,7 +66,7 @@ public class SocialTimeTest {
     }
 
     @Test
-    public void itIsSortedByTimestampLatestFirst() {
+    public void beSortedLatestFirst() {
         SocialTime time = aTime().create();
         SocialTime laterTime = aTime().plusMinutes(1).create();
         List<SocialTime> times = asList(time, laterTime);

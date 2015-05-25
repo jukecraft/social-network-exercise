@@ -16,7 +16,7 @@ import org.twitterconsole.network.PostRepository;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class DisplayTimelineActionTest {
+public class DisplayTimelineActionShould {
     private static final String USERNAME = "Alice";
     private static final User ALICE = aUser().withName(USERNAME).create();
     private static final Command TIMELINE_COMMAND = aCommand().withUser(USERNAME).create();
@@ -28,7 +28,7 @@ public class DisplayTimelineActionTest {
     private DisplayTimelineAction action = new DisplayTimelineAction(postRepository, consoleWithClock);
 
     @Test
-    public void itReturnsNoOutputIfTimelineServiceHasNoTimelineForTheGivenUser() {
+    public void returnNoOutputIfThereAreNoPostsForTheGivenUser() {
         when(postRepository.collectPosts(ALICE)).thenReturn(new PostsOutput());
 
         action.execute(TIMELINE_COMMAND);
@@ -37,7 +37,7 @@ public class DisplayTimelineActionTest {
     }
 
     @Test
-    public void itReturnsOutputIfTimelineServiceHasATimelineForTheGivenUser() {
+    public void returnOutputWithPostsForTheGivenUser() {
         when(postRepository.collectPosts(ALICE)).thenReturn(OUTPUT);
 
         action.execute(TIMELINE_COMMAND);
@@ -46,7 +46,7 @@ public class DisplayTimelineActionTest {
     }
 
     @Test
-    public void executesIfItTheCommandIsEmpty() {
+    public void executeIfTheCommandIsEmpty() {
         when(postRepository.collectPosts(any(User.class))).thenReturn(new PostsOutput());
 
         action.execute(TIMELINE_COMMAND);
@@ -55,7 +55,7 @@ public class DisplayTimelineActionTest {
     }
 
     @Test
-    public void doesntExecuteIfTheCommandIsNotEmpty() {
+    public void notExecuteIfTheCommandIsNotEmpty() {
         Command command = aCommand()
             .withCommand(" -> ")
             .create();

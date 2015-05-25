@@ -20,7 +20,7 @@ import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.User;
 
-public class WallOutputTest {
+public class WallOutputShould {
 
     private static final String SEPERATOR = " - ";
     private static final LocalDateTime PRINTING_TIMESTAMP = now();
@@ -55,7 +55,7 @@ public class WallOutputTest {
         .create();
 
     @Test
-    public void givenNoPostsWhenAskedToPrintItPrintsNothing() {
+    public void notPrintAWallIfItIsEmpty() {
         WallOutput output = anEmptyWallOutput().create();
 
         List<String> printedTimeline = output.print(PRINTING_TIME);
@@ -64,7 +64,7 @@ public class WallOutputTest {
     }
 
     @Test
-    public void givenOneTimelinesWhenAskedToPrintItPrintsItWithTimestampsAndUsernameSortedLatestFirst() {
+    public void printWall() {
         PostsOutput alicesTimeline = anEmptyPostsOutput()
             .withPost(ALICES_EARLIEST_POST)
             .withPost(ALICES_LATER_POST)
@@ -82,7 +82,7 @@ public class WallOutputTest {
     }
 
     @Test
-    public void givenTwoTimelinesWhenAskedToPrintItPrintsThemWithTimestampsAndUsernameSortedLatestFirst() {
+    public void printMergedTimelines() {
         PostsOutput alicesTimeline = anEmptyPostsOutput()
             .withPost(ALICES_EARLIEST_POST)
             .withPost(ALICES_LATER_POST)

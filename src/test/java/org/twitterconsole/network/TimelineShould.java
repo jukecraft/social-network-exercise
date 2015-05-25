@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class TimelineTest {
+public class TimelineShould {
     private static final Post A_POST = aPost()
         .withPostingTime(now())
         .create();
@@ -21,14 +21,14 @@ public class TimelineTest {
     private Timeline timeline = new Timeline();
 
     @Test
-    public void givenAnEmptyListOfPostsWhenThePostsArePrintedItReturnsNoOutput() {
+    public void printNoOutputForAnEmptyListOfPosts() {
         PostsOutput output = timeline.collectPosts();
 
         assertThat(output, is(anEmptyPostsOutput().create()));
     }
 
     @Test
-    public void givenAListOfOnePostWhenThePostsArePrintedItReturnsOutputWithThatPost() {
+    public void printAPost() {
         timeline.addPost(A_POST);
 
         PostsOutput output = timeline.collectPosts();
@@ -39,7 +39,7 @@ public class TimelineTest {
     }
 
     @Test
-    public void givenAListOfPostsWhenThePostsArePrintedItReturnsOutputWithBothPosts() {
+    public void printMultiplePosts() {
         timeline.addPost(A_POST);
         timeline.addPost(LATER_POST);
 

@@ -21,7 +21,7 @@ import org.twitterconsole.application.TwitterConsoleFactory;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
 
-public class ApplicationAcceptanceTest {
+public class TwitterConsoleFeature {
     private Instant instantReturnedByClock = now();
     private SocialNetworkingConsole console = mock(SocialNetworkingConsole.class);
     private Actions actions;
@@ -37,7 +37,7 @@ public class ApplicationAcceptanceTest {
     }
 
     @Test
-    public void usersCanPublishMessagesReadTheirTimelineFollowOthersAndViewTheirWall() {
+    public void executesPostDisplayTimelineFollowAndDisplayWall() {
         execute("Alice -> I love the weather today");
         instantReturnedByClock = instantReturnedByClock.plus(ofMinutes(3));
         execute("Bob -> Damn! We lost!");

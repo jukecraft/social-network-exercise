@@ -16,28 +16,28 @@ import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 import org.twitterconsole.posts.output.WallOutput;
 
-public class FollowingTest {
+public class FollowingShould {
     private static final User ALICE = aUserNamedAlice();
     private static final User BOB = aUserNamedBob();
 
-    private PostRepository timelines = mock(PostRepository.class);
+    private PostRepository postRepository = mock(PostRepository.class);
 
     @Test
-    public void itCollectsTimelinesFromUserAndFollowingIntoAWall() {
+    public void collectAWallOutput() {
         Following following = new Following();
         following.addFollowing(BOB);
 
         PostsOutput alicesTimeline = anEmptyPostsOutput()
             .withPost(onePost())
             .create();
-        when(timelines.collectPosts(ALICE)).thenReturn(alicesTimeline);
+        when(postRepository.collectPosts(ALICE)).thenReturn(alicesTimeline);
 
         PostsOutput bobsTimeline = anEmptyPostsOutput()
             .withPost(anotherPost())
             .create();
-        when(timelines.collectPosts(BOB)).thenReturn(bobsTimeline);
+        when(postRepository.collectPosts(BOB)).thenReturn(bobsTimeline);
 
-        WallOutput actualOutput = following.collectWallOutput(timelines, ALICE);
+        WallOutput actualOutput = following.collectWallOutput(postRepository, ALICE);
 
         assertThat(actualOutput, is(anEmptyWallOutput()
             .withTimeline(ALICE, alicesTimeline)

@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-public class SocialNetworkingConsoleTest {
+public class SocialNetworkingConsoleShould {
     private static final String OUTPUT = "I love the weather today";
     private static final String ANOTHER_OUTPUT = "Damn! We lost!";
     private static final String A_COMMAND = "Alice -> I love the weather today";
@@ -24,18 +24,17 @@ public class SocialNetworkingConsoleTest {
     @Rule
     public TextFromStandardInputStream input = emptyStandardInputStream();
 
-    @Test
-    public void givenMultipleStringsItPrintsThemLineByLineToSystemOut() {
-        SocialNetworkingConsole console = new SocialNetworkingConsole();
+    private SocialNetworkingConsole console = new SocialNetworkingConsole();
 
+    @Test
+    public void printMultipleStringsToSystemOut() {
         console.print(asList(OUTPUT, ANOTHER_OUTPUT));
 
         assertThat(log.getLog(), is(OUTPUT + lineSeparator() + ANOTHER_OUTPUT + lineSeparator()));
     }
 
     @Test
-    public void givenAUserInputItReadsTheInputFromTheConsoleIntoACommand() {
-        SocialNetworkingConsole console = new SocialNetworkingConsole();
+    public void readInputFromTheConsole() {
         input.provideText(A_COMMAND);
 
         Optional<Command> command = console.getNextCommand();
@@ -44,9 +43,7 @@ public class SocialNetworkingConsoleTest {
     }
 
     @Test
-    public void whenPrintingAPromptItPutsAnArrowAndSpaceToTheConsole() {
-        SocialNetworkingConsole console = new SocialNetworkingConsole();
-
+    public void printAPromptToTheConsole() {
         console.printPrompt();
 
         assertThat(log.getLog(), is("> "));

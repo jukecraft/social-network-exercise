@@ -15,7 +15,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import org.junit.rules.Timeout;
 import org.twitterconsole.StartTwitterConsole;
 
-public class StartAppIntegrationTest {
+public class StartAppIntegrationFeature {
     private static final String[] IRRELEVANT_PARAMETERS = null;
 
     @Rule
@@ -28,7 +28,7 @@ public class StartAppIntegrationTest {
     public Timeout timeout = new Timeout(1, SECONDS);
 
     @Test
-    public void whenAUserPostsAndChecksTheirTimelineItPrintsThePost() {
+    public void displayUserTimeline() {
         String firstPost = "Alice -> I love the weather today";
         String timelineCommand = "Alice";
         input.provideText(firstPost + lineSeparator(), timelineCommand + lineSeparator(), "" + lineSeparator());

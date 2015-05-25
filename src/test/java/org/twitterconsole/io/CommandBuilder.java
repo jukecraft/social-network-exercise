@@ -1,7 +1,6 @@
 package org.twitterconsole.io;
 
 public class CommandBuilder {
-
     private String user = "Alice";
     private String command = "";
 

@@ -12,7 +12,7 @@ import org.twitterconsole.posts.Post;
 import org.twitterconsole.posts.User;
 import org.twitterconsole.posts.output.PostsOutput;
 
-public class PostRepositoryTest {
+public class PostRepositoryShould {
     private static final User ALICE = aUserNamedAlice();
     private static final Post A_POST_FROM_ALICE = aPost().withAuthor(ALICE).create();
     private static final Post A_POST_FROM_BOB = aPost().withAuthor(aUserNamedBob()).create();
@@ -20,14 +20,14 @@ public class PostRepositoryTest {
     private PostRepository postRepository = new PostRepository();
 
     @Test
-    public void givenEmptyTimelinesNoPostsAreReturned() {
+    public void returnAnEmptyOutputIfThereAreNoPosts() {
         PostsOutput alicesTimeline = postRepository.collectPosts(ALICE);
 
         assertThat(alicesTimeline, is(anEmptyPostsOutput().create()));
     }
 
     @Test
-    public void givenEmptyTimelinesWhenAlicePublishesAPostHerPostIsReturned() {
+    public void returnAlicesPosts() {
         postRepository.post(A_POST_FROM_ALICE);
 
         PostsOutput alicesTimeline = postRepository.collectPosts(ALICE);
@@ -38,7 +38,8 @@ public class PostRepositoryTest {
     }
 
     @Test
-    public void givenAliceAndBobPublishedPostsWhenAliceTimelineIsRequestedOnlyHerPostIsReturned() {
+    public void returnOnlyAlicesPostsIfThereArePostsFromAnotherUser
+        () {
         postRepository.post(A_POST_FROM_ALICE);
         postRepository.post(A_POST_FROM_BOB);
 

@@ -13,7 +13,7 @@ import org.twitterconsole.posts.SocialTime;
 import org.twitterconsole.posts.output.WallOutput;
 import org.twitterconsole.time.SocialNetworkingClock;
 
-public class ConsoleWithClockTest {
+public class ConsoleWithClockShould {
     private static final SocialTime TIME = aTime().create();
     private static final WallOutput OUTPUT = aWallOutput().create();
 
@@ -26,7 +26,7 @@ public class ConsoleWithClockTest {
     }
 
     @Test
-    public void itIsExecutableIfCommandStartsWithWall() {
+    public void printAnOutputToTheConsole() {
         ConsoleWithClock consoleWithClock = new ConsoleWithClock(console, clock);
 
         consoleWithClock.print(OUTPUT);

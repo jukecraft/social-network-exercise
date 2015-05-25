@@ -23,9 +23,9 @@ public class Following {
         return collectWalls(timelines, relevantUsers);
     }
 
-    private WallOutput collectWalls(PostRepository timelines, ArrayList<User> relevantUsers) {
+    private WallOutput collectWalls(PostRepository postRepository, ArrayList<User> relevantUsers) {
         WallOutput wallOutput = new WallOutput();
-        relevantUsers.forEach(user -> wallOutput.addPosts(user, timelines.collectPosts(user)));
+        relevantUsers.forEach(user -> wallOutput.addPosts(user, postRepository.collectPosts(user)));
         return wallOutput;
     }
 

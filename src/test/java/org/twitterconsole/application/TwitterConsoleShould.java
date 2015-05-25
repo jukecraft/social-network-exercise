@@ -18,7 +18,7 @@ import org.twitterconsole.action.Actions;
 import org.twitterconsole.io.Command;
 import org.twitterconsole.io.SocialNetworkingConsole;
 
-public class TwitterConsoleTest {
+public class TwitterConsoleShould {
     private static final Command EMPTY_COMMAND = new Command("");
     private static final Command A_COMMAND = aPostCommand().create();
     private static final Command ANOTHER_COMMAND = aFollowsCommand().create();
@@ -33,7 +33,7 @@ public class TwitterConsoleTest {
     private TwitterConsole applicationWithConsole = new TwitterConsole(actions, console);
 
     @Test
-    public void givenAnCommandItExecutesThatCommandWithActions() {
+    public void executeUserCommands() {
         when(console.getNextCommand())
             .thenReturn(of(A_COMMAND))
             .thenReturn(of(EMPTY_COMMAND));
@@ -45,7 +45,7 @@ public class TwitterConsoleTest {
     }
 
     @Test
-    public void givenAnEmptyCommandNothingHappensThereIsNoInteractionWithTheApplication() {
+    public void notReactToEmptyCommands() {
         when(console.getNextCommand())
             .thenReturn(of(EMPTY_COMMAND))
             .thenReturn(of(A_COMMAND));
@@ -57,7 +57,7 @@ public class TwitterConsoleTest {
     }
 
     @Test
-    public void givenAnCommandThatHasLengthZeroThereIsNoInteractionWithTheApplication() {
+    public void notReactToCommandsWithZeroCharacters() {
         when(console.getNextCommand())
             .thenReturn(of(EMPTY_COMMAND));
 
@@ -68,7 +68,7 @@ public class TwitterConsoleTest {
     }
 
     @Test
-    public void givenTwoInputsItRoutesBothToTheSocialNetworkingApplication() {
+    public void executeMultipleCommands() {
         when(console.getNextCommand())
             .thenReturn(of(A_COMMAND))
             .thenReturn(of(ANOTHER_COMMAND))
@@ -82,7 +82,7 @@ public class TwitterConsoleTest {
     }
 
     @Test
-    public void whenRequestingAUserInputItPrintsAPrompt() {
+    public void printAPrompt() {
         when(console.getNextCommand())
             .thenReturn(of(EMPTY_COMMAND));
 
@@ -93,7 +93,7 @@ public class TwitterConsoleTest {
     }
 
     @Test
-    public void whenRequestingAUserInputMultipleTimesItPrintsAPromptEveryTime() {
+    public void printAPromptWithEveryCommand() {
         when(console.getNextCommand())
             .thenReturn(of(A_COMMAND))
             .thenReturn(of(ANOTHER_COMMAND))
